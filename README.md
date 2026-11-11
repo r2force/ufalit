@@ -1,0 +1,2 @@
+# ufalit
+refactoring site static 
