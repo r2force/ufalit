@@ -4,3 +4,4 @@
 .poetry p{margin:0;line-height:1.65}.poetry p:has(b){margin-block:.9rem}.poetry p:empty{min-height:1em}
 .reading .reading-author{font-size:clamp(1.65rem,3vw,2.2rem);padding-top:1.3rem;border-top:1px solid var(--line);margin:2.5rem 0 1rem}.reading-index [data-external]::after{content:" ↗"}.reading-index .sp-accordion-inner{padding-bottom:.5rem}
 .dedications p{margin:.35rem 0;line-height:1.65}.dedications img{max-height:32rem;object-fit:contain}
+.audio-list{display:grid;gap:1rem}.audio-item{padding:1rem 1.25rem;background:#fff;border:1px solid var(--line)}.reading .audio-item h2{font:600 1.1rem/1.4 system-ui,sans-serif;margin:0 0 .7rem}.audio-item audio{display:block;width:100%;max-width:32rem;margin:.4rem 0}.audio-item a{font-size:.9rem}
