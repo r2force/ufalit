@@ -1,6 +1,6 @@
 source_url,discovered_from,section,kind,canonical_url,target_path,status,checked_at,evidence,notes
 https://ufalit.ufacsdb.ru/,seed,О проекте,article,,site/index.html,captured,,migration/evidence/2026-11-11/home.html.gz,"Pilot; article text compared, full content review pending"
-https://ufalit.ufacsdb.ru/index.php?Itemid=85&id=320&option=com_content&view=article,https://ufalit.ufacsdb.ru/,Персоналии,article,,,discovered,,,Проверить полный текст и библиографию
+https://ufalit.ufacsdb.ru/index.php?Itemid=85&id=320&option=com_content&view=article,https://ufalit.ufacsdb.ru/,Персоналии,article,,site/pages/personalities/index.html,captured,2026-11-12,migration/evidence/2026-11-12/personalities/REPORT.md,19 biographies compared; 98 images present; visual and browser review pending
 https://ufalit.ufacsdb.ru/index.php?Itemid=86&id=319&option=com_content&view=article,https://ufalit.ufacsdb.ru/,Памятные места,article,,,discovered,,,Проверить изображения и ссылки
 https://ufalit.ufacsdb.ru/index.php?Itemid=87&id=318&option=com_content&view=article,https://ufalit.ufacsdb.ru/,Читальный зал,article,,site/pages/reading/index.html,captured,,migration/evidence/2026-11-11/reading.html.gz,Index text preserved; four links remain on source site
 https://ufalit.ufacsdb.ru/index.php?Itemid=88&option=com_phocagallery&view=categories,https://ufalit.ufacsdb.ru/,Фотогалерея,category,,,discovered,,,Обойти все категории и пагинацию
