@@ -2,3 +2,4 @@
 .article-cover{float:left;max-width:min(40%,200px);height:auto;margin:.35rem 1.25rem .7rem 0}.article-illustration{max-width:100%;height:auto}.reading:after{content:"";display:block;clear:both}@media(max-width:420px){.article-cover{float:none;display:block;max-width:60%;margin:0 0 1rem}}
 .editions{width:100%;table-layout:fixed;text-align:center}.editions td{padding:.4rem}.article-edition{max-width:100%;height:auto;max-height:12rem;object-fit:contain}
 .poetry p{margin:0;line-height:1.65}.poetry p:has(b){margin-block:.9rem}.poetry p:empty{min-height:1em}
+.reading-author{font-size:clamp(1.65rem,3vw,2.2rem);padding-top:1.3rem;border-top:1px solid var(--line);margin:2.5rem 0 1rem}.reading-index [data-external]::after{content:" ↗"}.reading-index .sp-accordion-inner{padding-bottom:.5rem}
