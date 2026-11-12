@@ -1,0 +1,11 @@
+Source URL: https://ufalit.ufacsdb.ru/index.php?Itemid=88&id=9:2012-12-25-05-39-59&option=com_phocagallery&view=category
+Fetched: 2026-11-12T14:41:27Z
+HTTP status: 200
+MIME: text/html; charset=utf-8
+Bytes: 14552
+SHA-256: 54cfe02c9d2b9a36f73c2152291f62a13314779a5e8240d21bf74d2d0924c101
+Method: curl -sS -L --max-time 30; full response body preserved as source.html; response headers preserved with Set-Cookie removed.
+Prior snapshot: migration/evidence/2026-11-11/batch-2/gallery-9.html.gz; decompressed body SHA-256 243332d37e77aa7455d8e04e9ba23b267fad2e1aafebccc64ffb65d30a2cad29.
+Comparison: only date text in the global header and hidden form token differ. The content title, category links, labels and counts are unchanged.
+Pagination: none present. Photo/detail links and original-image links: none present on this category page. Two linked child categories found (IDs 35, 36); their contents require separate queue entries.
+Content text extracted from source: source-extract.txt. No image assets are embedded as content on this page.
