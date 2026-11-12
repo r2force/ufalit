@@ -1,0 +1,3 @@
+Fresh HTML: migration/evidence/2026-11-12/awards/source/awards.html
+HTTP 200; MIME text/html; bytes 78156; SHA-256 19d03407049bcbaaf10f4a38403cb98285fcfc8d6c64239ee6b3b3dba7e28600
+Captured 2026-11-12; source file contains invalid UTF-8 byte(s) in trailing legacy markup; parser used replacement only outside extracted article body.
