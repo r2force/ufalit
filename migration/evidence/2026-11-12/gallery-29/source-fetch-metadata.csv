@@ -1,0 +1,4 @@
+fetched_at_utc,http_status,mime,bytes,sha256,url,body_path,headers_path
+2026-11-12T08:27:17Z,200,text/html; charset=utf-8,16145,074a3c01a0815dbd49152c3ce2182b9b59961f522addc2808c373f93c8d00000,https://ufalit.ufacsdb.ru/index.php?Itemid=88&id=29:2012-12-30-07-32-57&option=com_phocagallery&view=category,source-current.html,source.headers
+2026-11-12T08:29:47Z,200,text/html; charset=utf-8,10089,f691135f0b211382e15863ac636b728ddde549adb5a62593082ae5fe0efbf47f,https://ufalit.ufacsdb.ru/index.php?option=com_phocagallery&view=detail&catid=29:2012-12-30-07-32-57&id=451:img15172843&tmpl=component&Itemid=88,451-detail.html,451-detail.headers
+2026-11-12T08:29:48Z,200,text/html; charset=utf-8,10079,5782d12095345f60e93aafac0721aa37b2a7ce8138c4c05de06fe33482ad3d75,https://ufalit.ufacsdb.ru/index.php?option=com_phocagallery&view=detail&catid=29:2012-12-30-07-32-57&id=452:img0711&tmpl=component&Itemid=88,452-detail.html,452-detail.headers
