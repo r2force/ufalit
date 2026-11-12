@@ -1,0 +1,6 @@
+Source response HTTP 200; response date 2026-11-11 19:48:40 UTC (downloaded 2026-11-12 local date).
+Source SHA-256: 8d5f60e6194e5dbc2d8c24e9c4d5c8da6061f49a0eba406f22becfc321e31bc6
+Method: parsed each accordion heading, paragraph, list item and subheading from the captured source and its target by stable ID; compared normalized text SHA-256. Normalization collapses whitespace and non-breaking spaces only.
+Result: 474/474 text blocks matched; 0 missing IDs or hash differences.
+Images: 193 inline placements in 19 sections plus one separately linked original map. All 194 image parity rows point to local files, with 193 distinct source asset URLs represented in assets.tsv; files have saved response headers, image MIME, byte size and SHA-256. Visual review of image identity, display and small-screen layout remains pending.
+Source HTML has a malformed legacy template footer byte sequence; the original response is preserved unmodified. Extracted page content was valid UTF-8 after normalizing source NBSP bytes for display.

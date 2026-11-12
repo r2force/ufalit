@@ -1,0 +1,9 @@
+HTTP/2 200 
+accept-ranges: bytes
+content-type: image/jpeg
+date: Wed, 11 Nov 2026 19:52:42 GMT
+etag: "883f3-6570b4b02dec0"
+last-modified: Mon, 20 Jul 2026 13:57:55 GMT
+server: Apache/2.4.25 (Debian)
+content-length: 558067
+
