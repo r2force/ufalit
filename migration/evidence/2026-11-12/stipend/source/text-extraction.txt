@@ -1,0 +1,15 @@
+Source URL: https://ufalit.ufacsdb.ru/index.php?Itemid=146&id=397&option=com_content&view=article
+Fetched: 2026-11-12 04:50:51 GMT (from HTTP Last-Modified/Date; server reports same timestamp)
+Source HTML: page.html
+Source HTML SHA-256: 0455217a2fc4afa577448d629222131ecef594e97b4f92f4054c084be0ecef0b
+
+H1:
+Стипендия имени Мустая Карима
+
+Image occurrence 1:
+Original URL: https://ufalit.ufacsdb.ru/images/konkurs/karim/image001.jpg
+Source dimensions: 250 × 200 (HTML attributes)
+Position: centered paragraph before body text
+
+Paragraph 1:
+В рамках мероприятий по увековечению памяти народного поэта Башкортостана Мустая Карима в 2006 году принято решение об учреждении стипендии его имени. Ежемесячная стипендия им. М. Карима будет вручаться двум лучшим студентам филологического факультета Башкирского государственного университета. Стипендиаты определяются путем открытого конкурсного отбора. А претендовать на нее смогут студенты 3-5 курсов, которые добились заметных успехов в учебе, проявили способности на литературном поприще, активно занимаются научно-исследовательской и общественной работой.
