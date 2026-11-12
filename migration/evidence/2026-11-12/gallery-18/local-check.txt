@@ -1,0 +1,10 @@
+Local page path check — 2026-11-12
+
+Target: site/pages/gallery-18/index.html
+Parsed local href/src references: 26
+Missing local href/src targets: 0
+Gallery files present: 8
+Photo detail records present: 8
+HTTP image downloads: 8, all HTTP 200 with image MIME, nonzero bytes, Content-Disposition filename matching the saved original filename.
+Visual identity and placement check: pending; image parity rows remain discovered.
+Browser render at wide/narrow viewports: not performed.
