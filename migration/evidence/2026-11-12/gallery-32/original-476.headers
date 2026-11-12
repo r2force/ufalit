@@ -1,0 +1,14 @@
+HTTP/2 200 
+cache-control: pre-check=0, post-check=0, max-age=0
+content-description: File Transfer
+content-disposition: attachment; filename="IMG_1035.jpg"
+content-transfer-encoding: binary
+content-type: image/jpeg
+date: Thu, 12 Nov 2026 09:14:33 GMT
+expires: Sat, 30 Dec 1990 07:07:07 GMT
+p3p: CP="NOI ADM DEV PSAi COM NAV OUR OTRo STP IND DEM"
+pragma: no-cache
+server: Apache/2.4.25 (Debian)
+set-cookie: 98424f77a30fada2c84f6328254acf14=f0f5781015726b5e4b5f76846805ebd6; path=/
+content-length: 39213
+
