@@ -1,0 +1,2 @@
+request_url,fetched_utc,http_status,content_type,bytes,sha256,evidence_path
+"https://ufalit.ufacsdb.ru/index.php?Itemid=88&id=26:2012-12-30-07-29-04&option=com_phocagallery&view=category",2026-11-12T08:11:29Z,200,"text/html; charset=utf-8",15268,c55bce156a848435f0b7b16704e208dee94c7613dccb133f5e4429021b6d311a,migration/evidence/2026-11-12/gallery-26/source-current.html
