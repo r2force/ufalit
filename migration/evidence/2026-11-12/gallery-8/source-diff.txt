@@ -1,0 +1,4 @@
+Prior snapshot gallery entries: 30
+Current live entries: 30
+Exact ordered listing/caption equality: True
+Pagination controls in current page: False
