@@ -8,7 +8,7 @@
 - Новая страница: `site/pages/stipend/index.html` (URL под GitHub Pages: `/ufalit/pages/stipend/`)
 - Сохранённое исходное HTML: `source/page.html`, HTTP 200, `text/html; charset=utf-8`, 11 970 байт, SHA-256 `0455217a2fc4afa577448d629222131ecef594e97b4f92f4054c084be0ecef0b`.
 - Новый файл изображения: `site/assets/stipend/image001.jpg`.
-- Доказательства и метаданные: `source/page.headers.txt`, `source/image.headers.txt`, `source/text-extraction.txt`, `asset-metadata.csv`, `content-parity-candidate.csv`.
+- Доказательства и метаданные: `source/page.headers.txt`, `image.headers.txt`, `source/text-extraction.txt`, `asset-metadata.csv`, `content-parity-candidate.csv`.
 
 ## Изображение
 
