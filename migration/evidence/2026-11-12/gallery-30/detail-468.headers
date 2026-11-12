@@ -1,0 +1,12 @@
+HTTP/2 200 
+cache-control: post-check=0, pre-check=0
+content-type: text/html; charset=utf-8
+date: Thu, 12 Nov 2026 09:01:03 GMT
+expires: Mon, 1 Jan 2001 00:00:00 GMT
+last-modified: Thu, 12 Nov 2026 09:01:03 GMT
+p3p: CP="NOI ADM DEV PSAi COM NAV OUR OTRo STP IND DEM"
+pragma: no-cache
+server: Apache/2.4.25 (Debian)
+set-cookie: 98424f77a30fada2c84f6328254acf14=d5ae1d54bf2d18087ff246a100f4ca4e; path=/
+vary: Accept-Encoding
+
