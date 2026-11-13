@@ -1,0 +1,9 @@
+HTTP/2 200 
+accept-ranges: bytes
+content-type: video/x-flv
+date: Fri, 13 Nov 2026 18:40:31 GMT
+etag: "6e4d07-6570b4cae1dc0"
+last-modified: Mon, 20 Jul 2026 13:58:23 GMT
+server: Apache/2.4.25 (Debian)
+content-length: 7228679
+
