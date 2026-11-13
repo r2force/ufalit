@@ -1,0 +1,1 @@
+Capture completed 2026-11-13. Category response headers: source.headers. Fresh body SHA-256: 9c766b9edf06fbf8cd432d188d169f3832f6cc9c2cfcd82db2966ae6d0a76f7f. Detail page responses and headers are recorded separately for IDs 600–619. Original response bodies are retained under site/assets/gallery/11/; metadata is in assets.tsv.
