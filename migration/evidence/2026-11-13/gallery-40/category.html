@@ -1,0 +1,592 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru-ru" lang="ru-ru" dir="ltr" >
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <meta name="robots" content="index, follow" />
+  <meta name="keywords" content="joomla, Joomla" />
+  <meta name="description" content="Joomla! - the dynamic portal engine and content management system" />
+  <meta name="generator" content="Joomla! 1.5 - Open Source Content Management" />
+  <title>Фотогалерея</title>
+  <link href="/templates/yoo_vox/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+  <link rel="stylesheet" href="/components/com_phocagallery/assets/phocagallery.css" type="text/css" />
+  <link rel="stylesheet" href="/media/system/css/modal.css" type="text/css" />
+  <script type="text/javascript" src="/media/system/js/mootools.js"></script>
+  <script type="text/javascript" src="/media/system/js/modal.js"></script>
+  <script type="text/javascript" src="/templates/yoo_vox/warp/libraries/jquery/jquery.js"></script>
+  <script type="text/javascript">
+
+		window.addEvent('domready', function() {
+
+			SqueezeBox.initialize({});
+
+			$$('a.modal-button').each(function(el) {
+				el.addEvent('click', function(e) {
+					new Event(e).stop();
+					SqueezeBox.fromElement(el);
+				});
+			});
+		});
+  </script>
+  <!--[if lt IE 8 ]>
+<link rel="stylesheet" href="/components/com_phocagallery/assets/phocagalleryieall.css" type="text/css" />
+<![endif]-->
+  <style type="text/css">
+ #phocagallery .phocaname {color: #b36b00 ;}
+ .phocagallery-box-file {background: #fcfcfc ; border:1px solid #e8e8e8;margin: 5px;padding: 15px; }
+ .phocagallery-box-file-first { background: url('/components/com_phocagallery/assets/images/shadow1.gif') 50% 50% no-repeat; }
+ .phocagallery-box-file:hover, .phocagallery-box-file.hover {border:1px solid #b36b00 ; background: #f5f5f5 ;}
+.bgPhocaClass{
+			background:#666666;
+			filter:alpha(opacity=70);
+			opacity: 0.7;
+			-moz-opacity:0.7;
+			z-index:1000;
+			}
+			.fgPhocaClass{
+			background:#f6f6f6;
+			filter:alpha(opacity=100);
+			opacity: 1;
+			-moz-opacity:1;
+			z-index:1000;
+			}
+			.fontPhocaClass{
+			color:#000000;
+			z-index:1001;
+			}
+			.capfontPhocaClass, .capfontclosePhocaClass{
+			color:#ffffff;
+			font-weight:bold;
+			z-index:1001;
+			} </style>
+<!--[if lt IE 8]>
+<style type="text/css">
+ .phocagallery-box-file-first { background: url('/components/com_phocagallery/assets/images/shadow1.gif') 0px 0px no-repeat; }
+ </style>
+<![endif]-->
+  <!--[if lt IE 7]>
+<style type="text/css">
+.phocagallery-box-file{
+ background-color: expression(isNaN(this.js)?(this.js=1, this.onmouseover=new Function("this.className+=' hover';"), 
+this.onmouseout=new Function("this.className=this.className.replace(' hover','');")):false););
+}
+ </style>
+<![endif]-->
+  <style type="text/css"> 
+ #sbox-window {background-color:#6b6b6b;padding:2px} 
+ #sbox-overlay {background-color:#000000;} 
+ </style>
+
+<link rel="stylesheet" href="/templates/yoo_vox/css/reset.css" type="text/css" />
+<link rel="stylesheet" href="/templates/yoo_vox/css/layout.css" type="text/css" />
+<link rel="stylesheet" href="/templates/yoo_vox/css/typography.css" type="text/css" />
+<link rel="stylesheet" href="/templates/yoo_vox/css/menus.css" type="text/css" />
+<link rel="stylesheet" href="/templates/yoo_vox/css/modules.css" type="text/css" />
+<link rel="stylesheet" href="/templates/yoo_vox/css/system.css" type="text/css" />
+<link rel="stylesheet" href="/templates/yoo_vox/css/extensions.css" type="text/css" />
+<link rel="stylesheet" href="/templates/yoo_vox/css/custom.css" type="text/css" />
+<script type="text/javascript" src="/templates/yoo_vox/warp/js/warp.js"></script>
+<script type="text/javascript" src="/templates/yoo_vox/warp/js/accordionmenu.js"></script>
+<script type="text/javascript" src="/templates/yoo_vox/warp/js/dropdownmenu.js"></script>
+<script type="text/javascript" src="/templates/yoo_vox/js/template.js"></script>
+<style type="text/css">body { min-width: 940px; }
+.wrapper { width: 940px; }
+#main-shift { margin-left: 255px; }
+#left { width: 239px; }
+#menu .dropdown { width: 250px; }
+#menu .columns2 { width: 500px; }
+#menu .columns3 { width: 750px; }
+#menu .columns4 { width: 1000px; }
+</style>
+<script type="text/javascript">var Warp = Warp || {}; Warp.Settings = { tplurl: '/templates/yoo_vox', color: 'default' };</script>
+<link rel="apple-touch-icon" href="/templates/yoo_vox/apple_touch_icon.png" />
+<!-- Yandex.Metrika counter --> <script type="text/javascript">     (function(m,e,t,r,i,k,a){         m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};         m[i].l=1*new Date();         for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}         k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)     })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=110934501', 'ym');      ym(110934501, 'init', {ssr:true, clickmap:true, referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true}); </script> <noscript><div><img src="https://mc.yandex.ru/watch/110934501" style="position:absolute; left:-9999px;" alt="" /></div></noscript> <!-- /Yandex.Metrika counter -->
+</head>
+
+<body id="page" class="yoopage column-left ">
+
+	
+	<div id="page-body">
+		<div class="wrapper">
+
+			<div id="header">
+
+				<div id="toolbar">
+				
+										<div id="date">
+						13.11.2026					</div>
+									
+										
+										
+				</div>
+
+							
+				<div id="headerbar">
+
+										
+										
+				</div>
+
+						
+				<div id="logo">
+					<div class="mainlabel">
+<img alt="Уфа литературная" src="/images/logo/ufaliteraturnaia.png" mce_src="/images/logo/ufaliteraturnaia.png" height="170" width="903"><br>
+</div>				</div>
+				
+				
+								<div id="banner">
+					<div style="text-align: left;" mce_style="text-align: left;" class="semiopacity">
+</div>
+<div style="text-align: center;" mce_style="text-align: center;" class="semiopacity">ПЕСНЯ РОДНОМУ ГОРОДУ</div>
+<div style="text-align: left;" mce_style="text-align: left;" class="semiopacity">Мне здесь любая улица знакома,<br>Я знаю каждый дом и поворот,<br>Мосты, причалы, заводи, паромы<br>И где какое дерево растет...<br>Вокруг садов чугунные ограды, <br>Как кружева, искусством тешат взор,<br>И каждому бутону сердце радо,<br>И восхищает каждый твой узор.</div><div style="text-align: right;" mce_style="text-align: right;" class="semiopacity">Назар Наджми</div>				</div>
+				
+			</div>
+			<!-- header end -->
+
+			<div class="top-t1">
+				<div class="top-t2">
+					<div class="top-t3"></div>
+				</div>
+			</div>
+
+			
+			<div class="top-b1">
+				<div class="top-b2">
+					<div class="top-b3">
+					
+										
+										
+					</div>
+				</div>
+			</div>
+
+			<div class="content-wrapper-t1">
+				<div class="content-wrapper-t2">
+					<div class="content-wrapper-t3"></div>
+				</div>
+			</div>
+
+			<div class="content-wrapper-1">
+				<div class="content-wrapper-2">
+
+					<div id="middle">
+						<div id="middle-expand">
+		
+							<div id="main">
+								<div id="main-shift">
+		
+											
+									<div id="mainmiddle">
+										<div id="mainmiddle-expand">
+										
+											<div id="content">
+												<div id="content-shift">
+		
+															
+													<div class="floatbox">
+														
+<!-- <div><a>www.phoca.cz - Begin Category -->
+<div class="componentheading">Фотогалерея</div>
+<div class="contentpane"><div class="contentdescription"><p><br mce_bogus="1"></p></div>
+</div><div id="phocagallery">
+<table><tr><td align="center" valign="middle" style="background: url('/components/com_phocagallery/assets/images/shadow3.gif') 50% 50% no-repeat;height:68px;width:68px;;text-align:center;"><a href="/index.php?option=com_phocagallery&amp;view=category&amp;id=39:2012-12-30-08-53-18&amp;Itemid=88"><img src="/components/com_phocagallery/assets/images/icon-up-images.gif" alt="Шафиков Газим Газизович" style="border:0" /></a></td><td><a href="/index.php?option=com_phocagallery&amp;view=category&amp;id=39:2012-12-30-08-53-18&amp;Itemid=88" class="category">Шафиков Газим Газизович</a>&nbsp;</td></tr></table><div class="phoca-hr"></div>
+
+<div class="phocagallery-box-file" style="height:218px; width:120px;"><div class="phocagallery-box-file-first" style="height:118px;width:118px;margin: auto"><div class="phocagallery-box-file-second"><div class="phocagallery-box-file-third"><a class="modal-button" title="DSC01277" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=749:dsc01277&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/images/phocagallery/shafikov/izLeeteraturnogomuzeia/thumbs/phoca_thumb_m_DSC01277.JPG" alt="DSC01277"  /></a></div></div></div>
+
+<div class="detail" style="margin-top:2px"> <a class="modal-button" title="Image Detail" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=749:dsc01277&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/components/com_phocagallery/assets/images/icon-view.gif" alt="Image Detail"  /></a> <a title="Image Download" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=749:dsc01277&amp;tmpl=component&amp;phocadownload=2&amp;Itemid=88" ><img src="/components/com_phocagallery/assets/images/icon-download.gif" alt="Image Download"  /></a></div>
+<div style="clear:both"></div>
+</div>
+
+<div class="phocagallery-box-file" style="height:218px; width:120px;"><div class="phocagallery-box-file-first" style="height:118px;width:118px;margin: auto"><div class="phocagallery-box-file-second"><div class="phocagallery-box-file-third"><a class="modal-button" title="DSC01278" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=750:dsc01278&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/images/phocagallery/shafikov/izLeeteraturnogomuzeia/thumbs/phoca_thumb_m_DSC01278.JPG" alt="DSC01278"  /></a></div></div></div>
+
+<div class="detail" style="margin-top:2px"> <a class="modal-button" title="Image Detail" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=750:dsc01278&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/components/com_phocagallery/assets/images/icon-view.gif" alt="Image Detail"  /></a> <a title="Image Download" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=750:dsc01278&amp;tmpl=component&amp;phocadownload=2&amp;Itemid=88" ><img src="/components/com_phocagallery/assets/images/icon-download.gif" alt="Image Download"  /></a></div>
+<div style="clear:both"></div>
+</div>
+
+<div class="phocagallery-box-file" style="height:218px; width:120px;"><div class="phocagallery-box-file-first" style="height:118px;width:118px;margin: auto"><div class="phocagallery-box-file-second"><div class="phocagallery-box-file-third"><a class="modal-button" title="DSC01279" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=751:dsc01279&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/images/phocagallery/shafikov/izLeeteraturnogomuzeia/thumbs/phoca_thumb_m_DSC01279.JPG" alt="DSC01279"  /></a></div></div></div>
+
+<div class="detail" style="margin-top:2px"> <a class="modal-button" title="Image Detail" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=751:dsc01279&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/components/com_phocagallery/assets/images/icon-view.gif" alt="Image Detail"  /></a> <a title="Image Download" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=751:dsc01279&amp;tmpl=component&amp;phocadownload=2&amp;Itemid=88" ><img src="/components/com_phocagallery/assets/images/icon-download.gif" alt="Image Download"  /></a></div>
+<div style="clear:both"></div>
+</div>
+
+<div class="phocagallery-box-file" style="height:218px; width:120px;"><div class="phocagallery-box-file-first" style="height:118px;width:118px;margin: auto"><div class="phocagallery-box-file-second"><div class="phocagallery-box-file-third"><a class="modal-button" title="DSC01280" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=752:dsc01280&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/images/phocagallery/shafikov/izLeeteraturnogomuzeia/thumbs/phoca_thumb_m_DSC01280.JPG" alt="DSC01280"  /></a></div></div></div>
+
+<div class="detail" style="margin-top:2px"> <a class="modal-button" title="Image Detail" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=752:dsc01280&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/components/com_phocagallery/assets/images/icon-view.gif" alt="Image Detail"  /></a> <a title="Image Download" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=752:dsc01280&amp;tmpl=component&amp;phocadownload=2&amp;Itemid=88" ><img src="/components/com_phocagallery/assets/images/icon-download.gif" alt="Image Download"  /></a></div>
+<div style="clear:both"></div>
+</div>
+
+<div class="phocagallery-box-file" style="height:218px; width:120px;"><div class="phocagallery-box-file-first" style="height:118px;width:118px;margin: auto"><div class="phocagallery-box-file-second"><div class="phocagallery-box-file-third"><a class="modal-button" title="DSC01281" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=753:dsc01281&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/images/phocagallery/shafikov/izLeeteraturnogomuzeia/thumbs/phoca_thumb_m_DSC01281.JPG" alt="DSC01281"  /></a></div></div></div>
+
+<div class="detail" style="margin-top:2px"> <a class="modal-button" title="Image Detail" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=753:dsc01281&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/components/com_phocagallery/assets/images/icon-view.gif" alt="Image Detail"  /></a> <a title="Image Download" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=753:dsc01281&amp;tmpl=component&amp;phocadownload=2&amp;Itemid=88" ><img src="/components/com_phocagallery/assets/images/icon-download.gif" alt="Image Download"  /></a></div>
+<div style="clear:both"></div>
+</div>
+
+<div class="phocagallery-box-file" style="height:218px; width:120px;"><div class="phocagallery-box-file-first" style="height:118px;width:118px;margin: auto"><div class="phocagallery-box-file-second"><div class="phocagallery-box-file-third"><a class="modal-button" title="DSC01282" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=754:dsc01282&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/images/phocagallery/shafikov/izLeeteraturnogomuzeia/thumbs/phoca_thumb_m_DSC01282.JPG" alt="DSC01282"  /></a></div></div></div>
+
+<div class="detail" style="margin-top:2px"> <a class="modal-button" title="Image Detail" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=754:dsc01282&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/components/com_phocagallery/assets/images/icon-view.gif" alt="Image Detail"  /></a> <a title="Image Download" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=754:dsc01282&amp;tmpl=component&amp;phocadownload=2&amp;Itemid=88" ><img src="/components/com_phocagallery/assets/images/icon-download.gif" alt="Image Download"  /></a></div>
+<div style="clear:both"></div>
+</div>
+
+<div class="phocagallery-box-file" style="height:218px; width:120px;"><div class="phocagallery-box-file-first" style="height:118px;width:118px;margin: auto"><div class="phocagallery-box-file-second"><div class="phocagallery-box-file-third"><a class="modal-button" title="DSC01283" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=755:dsc01283&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/images/phocagallery/shafikov/izLeeteraturnogomuzeia/thumbs/phoca_thumb_m_DSC01283.JPG" alt="DSC01283"  /></a></div></div></div>
+
+<div class="detail" style="margin-top:2px"> <a class="modal-button" title="Image Detail" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=755:dsc01283&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/components/com_phocagallery/assets/images/icon-view.gif" alt="Image Detail"  /></a> <a title="Image Download" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=755:dsc01283&amp;tmpl=component&amp;phocadownload=2&amp;Itemid=88" ><img src="/components/com_phocagallery/assets/images/icon-download.gif" alt="Image Download"  /></a></div>
+<div style="clear:both"></div>
+</div>
+
+<div class="phocagallery-box-file" style="height:218px; width:120px;"><div class="phocagallery-box-file-first" style="height:118px;width:118px;margin: auto"><div class="phocagallery-box-file-second"><div class="phocagallery-box-file-third"><a class="modal-button" title="DSC01284" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=756:dsc01284&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/images/phocagallery/shafikov/izLeeteraturnogomuzeia/thumbs/phoca_thumb_m_DSC01284.JPG" alt="DSC01284"  /></a></div></div></div>
+
+<div class="detail" style="margin-top:2px"> <a class="modal-button" title="Image Detail" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=756:dsc01284&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/components/com_phocagallery/assets/images/icon-view.gif" alt="Image Detail"  /></a> <a title="Image Download" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=756:dsc01284&amp;tmpl=component&amp;phocadownload=2&amp;Itemid=88" ><img src="/components/com_phocagallery/assets/images/icon-download.gif" alt="Image Download"  /></a></div>
+<div style="clear:both"></div>
+</div>
+
+<div class="phocagallery-box-file" style="height:218px; width:120px;"><div class="phocagallery-box-file-first" style="height:118px;width:118px;margin: auto"><div class="phocagallery-box-file-second"><div class="phocagallery-box-file-third"><a class="modal-button" title="DSC01285" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=757:dsc01285&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/images/phocagallery/shafikov/izLeeteraturnogomuzeia/thumbs/phoca_thumb_m_DSC01285.JPG" alt="DSC01285"  /></a></div></div></div>
+
+<div class="detail" style="margin-top:2px"> <a class="modal-button" title="Image Detail" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=757:dsc01285&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/components/com_phocagallery/assets/images/icon-view.gif" alt="Image Detail"  /></a> <a title="Image Download" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=757:dsc01285&amp;tmpl=component&amp;phocadownload=2&amp;Itemid=88" ><img src="/components/com_phocagallery/assets/images/icon-download.gif" alt="Image Download"  /></a></div>
+<div style="clear:both"></div>
+</div>
+
+<div class="phocagallery-box-file" style="height:218px; width:120px;"><div class="phocagallery-box-file-first" style="height:118px;width:118px;margin: auto"><div class="phocagallery-box-file-second"><div class="phocagallery-box-file-third"><a class="modal-button" title="DSC01286" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=758:dsc01286&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/images/phocagallery/shafikov/izLeeteraturnogomuzeia/thumbs/phoca_thumb_m_DSC01286.JPG" alt="DSC01286"  /></a></div></div></div>
+
+<div class="detail" style="margin-top:2px"> <a class="modal-button" title="Image Detail" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=758:dsc01286&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/components/com_phocagallery/assets/images/icon-view.gif" alt="Image Detail"  /></a> <a title="Image Download" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=758:dsc01286&amp;tmpl=component&amp;phocadownload=2&amp;Itemid=88" ><img src="/components/com_phocagallery/assets/images/icon-download.gif" alt="Image Download"  /></a></div>
+<div style="clear:both"></div>
+</div>
+
+<div class="phocagallery-box-file" style="height:218px; width:120px;"><div class="phocagallery-box-file-first" style="height:118px;width:118px;margin: auto"><div class="phocagallery-box-file-second"><div class="phocagallery-box-file-third"><a class="modal-button" title="DSC01287" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=759:dsc01287&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/images/phocagallery/shafikov/izLeeteraturnogomuzeia/thumbs/phoca_thumb_m_DSC01287.JPG" alt="DSC01287"  /></a></div></div></div>
+
+<div class="detail" style="margin-top:2px"> <a class="modal-button" title="Image Detail" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=759:dsc01287&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/components/com_phocagallery/assets/images/icon-view.gif" alt="Image Detail"  /></a> <a title="Image Download" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=759:dsc01287&amp;tmpl=component&amp;phocadownload=2&amp;Itemid=88" ><img src="/components/com_phocagallery/assets/images/icon-download.gif" alt="Image Download"  /></a></div>
+<div style="clear:both"></div>
+</div>
+
+<div class="phocagallery-box-file" style="height:218px; width:120px;"><div class="phocagallery-box-file-first" style="height:118px;width:118px;margin: auto"><div class="phocagallery-box-file-second"><div class="phocagallery-box-file-third"><a class="modal-button" title="DSC01288" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=760:dsc01288&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/images/phocagallery/shafikov/izLeeteraturnogomuzeia/thumbs/phoca_thumb_m_DSC01288.JPG" alt="DSC01288"  /></a></div></div></div>
+
+<div class="detail" style="margin-top:2px"> <a class="modal-button" title="Image Detail" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=760:dsc01288&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/components/com_phocagallery/assets/images/icon-view.gif" alt="Image Detail"  /></a> <a title="Image Download" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=760:dsc01288&amp;tmpl=component&amp;phocadownload=2&amp;Itemid=88" ><img src="/components/com_phocagallery/assets/images/icon-download.gif" alt="Image Download"  /></a></div>
+<div style="clear:both"></div>
+</div>
+
+<div class="phocagallery-box-file" style="height:218px; width:120px;"><div class="phocagallery-box-file-first" style="height:118px;width:118px;margin: auto"><div class="phocagallery-box-file-second"><div class="phocagallery-box-file-third"><a class="modal-button" title="DSC01289" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=761:dsc01289&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/images/phocagallery/shafikov/izLeeteraturnogomuzeia/thumbs/phoca_thumb_m_DSC01289.JPG" alt="DSC01289"  /></a></div></div></div>
+
+<div class="detail" style="margin-top:2px"> <a class="modal-button" title="Image Detail" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=761:dsc01289&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/components/com_phocagallery/assets/images/icon-view.gif" alt="Image Detail"  /></a> <a title="Image Download" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=761:dsc01289&amp;tmpl=component&amp;phocadownload=2&amp;Itemid=88" ><img src="/components/com_phocagallery/assets/images/icon-download.gif" alt="Image Download"  /></a></div>
+<div style="clear:both"></div>
+</div>
+
+<div class="phocagallery-box-file" style="height:218px; width:120px;"><div class="phocagallery-box-file-first" style="height:118px;width:118px;margin: auto"><div class="phocagallery-box-file-second"><div class="phocagallery-box-file-third"><a class="modal-button" title="DSC01290" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=762:dsc01290&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/images/phocagallery/shafikov/izLeeteraturnogomuzeia/thumbs/phoca_thumb_m_DSC01290.JPG" alt="DSC01290"  /></a></div></div></div>
+
+<div class="detail" style="margin-top:2px"> <a class="modal-button" title="Image Detail" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=762:dsc01290&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/components/com_phocagallery/assets/images/icon-view.gif" alt="Image Detail"  /></a> <a title="Image Download" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=762:dsc01290&amp;tmpl=component&amp;phocadownload=2&amp;Itemid=88" ><img src="/components/com_phocagallery/assets/images/icon-download.gif" alt="Image Download"  /></a></div>
+<div style="clear:both"></div>
+</div>
+
+<div class="phocagallery-box-file" style="height:218px; width:120px;"><div class="phocagallery-box-file-first" style="height:118px;width:118px;margin: auto"><div class="phocagallery-box-file-second"><div class="phocagallery-box-file-third"><a class="modal-button" title="DSC01291" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=763:dsc01291&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/images/phocagallery/shafikov/izLeeteraturnogomuzeia/thumbs/phoca_thumb_m_DSC01291.JPG" alt="DSC01291"  /></a></div></div></div>
+
+<div class="detail" style="margin-top:2px"> <a class="modal-button" title="Image Detail" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=763:dsc01291&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/components/com_phocagallery/assets/images/icon-view.gif" alt="Image Detail"  /></a> <a title="Image Download" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=763:dsc01291&amp;tmpl=component&amp;phocadownload=2&amp;Itemid=88" ><img src="/components/com_phocagallery/assets/images/icon-download.gif" alt="Image Download"  /></a></div>
+<div style="clear:both"></div>
+</div>
+
+<div class="phocagallery-box-file" style="height:218px; width:120px;"><div class="phocagallery-box-file-first" style="height:118px;width:118px;margin: auto"><div class="phocagallery-box-file-second"><div class="phocagallery-box-file-third"><a class="modal-button" title="DSC01292" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=764:dsc01292&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/images/phocagallery/shafikov/izLeeteraturnogomuzeia/thumbs/phoca_thumb_m_DSC01292.JPG" alt="DSC01292"  /></a></div></div></div>
+
+<div class="detail" style="margin-top:2px"> <a class="modal-button" title="Image Detail" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=764:dsc01292&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/components/com_phocagallery/assets/images/icon-view.gif" alt="Image Detail"  /></a> <a title="Image Download" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=764:dsc01292&amp;tmpl=component&amp;phocadownload=2&amp;Itemid=88" ><img src="/components/com_phocagallery/assets/images/icon-download.gif" alt="Image Download"  /></a></div>
+<div style="clear:both"></div>
+</div>
+
+<div class="phocagallery-box-file" style="height:218px; width:120px;"><div class="phocagallery-box-file-first" style="height:118px;width:118px;margin: auto"><div class="phocagallery-box-file-second"><div class="phocagallery-box-file-third"><a class="modal-button" title="DSC01293" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=765:dsc01293&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/images/phocagallery/shafikov/izLeeteraturnogomuzeia/thumbs/phoca_thumb_m_DSC01293.JPG" alt="DSC01293"  /></a></div></div></div>
+
+<div class="detail" style="margin-top:2px"> <a class="modal-button" title="Image Detail" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=765:dsc01293&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/components/com_phocagallery/assets/images/icon-view.gif" alt="Image Detail"  /></a> <a title="Image Download" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=765:dsc01293&amp;tmpl=component&amp;phocadownload=2&amp;Itemid=88" ><img src="/components/com_phocagallery/assets/images/icon-download.gif" alt="Image Download"  /></a></div>
+<div style="clear:both"></div>
+</div>
+
+<div class="phocagallery-box-file" style="height:218px; width:120px;"><div class="phocagallery-box-file-first" style="height:118px;width:118px;margin: auto"><div class="phocagallery-box-file-second"><div class="phocagallery-box-file-third"><a class="modal-button" title="DSC01294" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=766:dsc01294&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/images/phocagallery/shafikov/izLeeteraturnogomuzeia/thumbs/phoca_thumb_m_DSC01294.JPG" alt="DSC01294"  /></a></div></div></div>
+
+<div class="detail" style="margin-top:2px"> <a class="modal-button" title="Image Detail" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=766:dsc01294&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/components/com_phocagallery/assets/images/icon-view.gif" alt="Image Detail"  /></a> <a title="Image Download" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=766:dsc01294&amp;tmpl=component&amp;phocadownload=2&amp;Itemid=88" ><img src="/components/com_phocagallery/assets/images/icon-download.gif" alt="Image Download"  /></a></div>
+<div style="clear:both"></div>
+</div>
+
+<div class="phocagallery-box-file" style="height:218px; width:120px;"><div class="phocagallery-box-file-first" style="height:118px;width:118px;margin: auto"><div class="phocagallery-box-file-second"><div class="phocagallery-box-file-third"><a class="modal-button" title="DSC01295" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=767:dsc01295&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/images/phocagallery/shafikov/izLeeteraturnogomuzeia/thumbs/phoca_thumb_m_DSC01295.JPG" alt="DSC01295"  /></a></div></div></div>
+
+<div class="detail" style="margin-top:2px"> <a class="modal-button" title="Image Detail" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=767:dsc01295&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/components/com_phocagallery/assets/images/icon-view.gif" alt="Image Detail"  /></a> <a title="Image Download" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=767:dsc01295&amp;tmpl=component&amp;phocadownload=2&amp;Itemid=88" ><img src="/components/com_phocagallery/assets/images/icon-download.gif" alt="Image Download"  /></a></div>
+<div style="clear:both"></div>
+</div>
+
+<div class="phocagallery-box-file" style="height:218px; width:120px;"><div class="phocagallery-box-file-first" style="height:118px;width:118px;margin: auto"><div class="phocagallery-box-file-second"><div class="phocagallery-box-file-third"><a class="modal-button" title="DSC01296" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=768:dsc01296&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/images/phocagallery/shafikov/izLeeteraturnogomuzeia/thumbs/phoca_thumb_m_DSC01296.JPG" alt="DSC01296"  /></a></div></div></div>
+
+<div class="detail" style="margin-top:2px"> <a class="modal-button" title="Image Detail" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=768:dsc01296&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/components/com_phocagallery/assets/images/icon-view.gif" alt="Image Detail"  /></a> <a title="Image Download" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=768:dsc01296&amp;tmpl=component&amp;phocadownload=2&amp;Itemid=88" ><img src="/components/com_phocagallery/assets/images/icon-download.gif" alt="Image Download"  /></a></div>
+<div style="clear:both"></div>
+</div>
+
+<div class="phocagallery-box-file" style="height:218px; width:120px;"><div class="phocagallery-box-file-first" style="height:118px;width:118px;margin: auto"><div class="phocagallery-box-file-second"><div class="phocagallery-box-file-third"><a class="modal-button" title="DSC01297" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=769:dsc01297&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/images/phocagallery/shafikov/izLeeteraturnogomuzeia/thumbs/phoca_thumb_m_DSC01297.JPG" alt="DSC01297"  /></a></div></div></div>
+
+<div class="detail" style="margin-top:2px"> <a class="modal-button" title="Image Detail" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=769:dsc01297&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/components/com_phocagallery/assets/images/icon-view.gif" alt="Image Detail"  /></a> <a title="Image Download" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=769:dsc01297&amp;tmpl=component&amp;phocadownload=2&amp;Itemid=88" ><img src="/components/com_phocagallery/assets/images/icon-download.gif" alt="Image Download"  /></a></div>
+<div style="clear:both"></div>
+</div>
+
+<div class="phocagallery-box-file" style="height:218px; width:120px;"><div class="phocagallery-box-file-first" style="height:118px;width:118px;margin: auto"><div class="phocagallery-box-file-second"><div class="phocagallery-box-file-third"><a class="modal-button" title="DSC01298" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=770:dsc01298&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/images/phocagallery/shafikov/izLeeteraturnogomuzeia/thumbs/phoca_thumb_m_DSC01298.JPG" alt="DSC01298"  /></a></div></div></div>
+
+<div class="detail" style="margin-top:2px"> <a class="modal-button" title="Image Detail" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=770:dsc01298&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/components/com_phocagallery/assets/images/icon-view.gif" alt="Image Detail"  /></a> <a title="Image Download" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=770:dsc01298&amp;tmpl=component&amp;phocadownload=2&amp;Itemid=88" ><img src="/components/com_phocagallery/assets/images/icon-download.gif" alt="Image Download"  /></a></div>
+<div style="clear:both"></div>
+</div>
+
+<div class="phocagallery-box-file" style="height:218px; width:120px;"><div class="phocagallery-box-file-first" style="height:118px;width:118px;margin: auto"><div class="phocagallery-box-file-second"><div class="phocagallery-box-file-third"><a class="modal-button" title="DSC01299" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=771:dsc01299&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/images/phocagallery/shafikov/izLeeteraturnogomuzeia/thumbs/phoca_thumb_m_DSC01299.JPG" alt="DSC01299"  /></a></div></div></div>
+
+<div class="detail" style="margin-top:2px"> <a class="modal-button" title="Image Detail" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=771:dsc01299&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/components/com_phocagallery/assets/images/icon-view.gif" alt="Image Detail"  /></a> <a title="Image Download" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=771:dsc01299&amp;tmpl=component&amp;phocadownload=2&amp;Itemid=88" ><img src="/components/com_phocagallery/assets/images/icon-download.gif" alt="Image Download"  /></a></div>
+<div style="clear:both"></div>
+</div>
+
+<div class="phocagallery-box-file" style="height:218px; width:120px;"><div class="phocagallery-box-file-first" style="height:118px;width:118px;margin: auto"><div class="phocagallery-box-file-second"><div class="phocagallery-box-file-third"><a class="modal-button" title="DSC01300" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=772:dsc01300&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/images/phocagallery/shafikov/izLeeteraturnogomuzeia/thumbs/phoca_thumb_m_DSC01300.JPG" alt="DSC01300"  /></a></div></div></div>
+
+<div class="detail" style="margin-top:2px"> <a class="modal-button" title="Image Detail" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=772:dsc01300&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/components/com_phocagallery/assets/images/icon-view.gif" alt="Image Detail"  /></a> <a title="Image Download" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=772:dsc01300&amp;tmpl=component&amp;phocadownload=2&amp;Itemid=88" ><img src="/components/com_phocagallery/assets/images/icon-download.gif" alt="Image Download"  /></a></div>
+<div style="clear:both"></div>
+</div>
+
+<div class="phocagallery-box-file" style="height:218px; width:120px;"><div class="phocagallery-box-file-first" style="height:118px;width:118px;margin: auto"><div class="phocagallery-box-file-second"><div class="phocagallery-box-file-third"><a class="modal-button" title="DSC01301" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=773:dsc01301&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/images/phocagallery/shafikov/izLeeteraturnogomuzeia/thumbs/phoca_thumb_m_DSC01301.JPG" alt="DSC01301"  /></a></div></div></div>
+
+<div class="detail" style="margin-top:2px"> <a class="modal-button" title="Image Detail" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=773:dsc01301&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/components/com_phocagallery/assets/images/icon-view.gif" alt="Image Detail"  /></a> <a title="Image Download" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=773:dsc01301&amp;tmpl=component&amp;phocadownload=2&amp;Itemid=88" ><img src="/components/com_phocagallery/assets/images/icon-download.gif" alt="Image Download"  /></a></div>
+<div style="clear:both"></div>
+</div>
+
+<div class="phocagallery-box-file" style="height:218px; width:120px;"><div class="phocagallery-box-file-first" style="height:118px;width:118px;margin: auto"><div class="phocagallery-box-file-second"><div class="phocagallery-box-file-third"><a class="modal-button" title="DSC01302" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=774:dsc01302&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/images/phocagallery/shafikov/izLeeteraturnogomuzeia/thumbs/phoca_thumb_m_DSC01302.JPG" alt="DSC01302"  /></a></div></div></div>
+
+<div class="detail" style="margin-top:2px"> <a class="modal-button" title="Image Detail" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=774:dsc01302&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/components/com_phocagallery/assets/images/icon-view.gif" alt="Image Detail"  /></a> <a title="Image Download" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=774:dsc01302&amp;tmpl=component&amp;phocadownload=2&amp;Itemid=88" ><img src="/components/com_phocagallery/assets/images/icon-download.gif" alt="Image Download"  /></a></div>
+<div style="clear:both"></div>
+</div>
+
+<div class="phocagallery-box-file" style="height:218px; width:120px;"><div class="phocagallery-box-file-first" style="height:118px;width:118px;margin: auto"><div class="phocagallery-box-file-second"><div class="phocagallery-box-file-third"><a class="modal-button" title="DSC01303" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=775:dsc01303&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/images/phocagallery/shafikov/izLeeteraturnogomuzeia/thumbs/phoca_thumb_m_DSC01303.JPG" alt="DSC01303"  /></a></div></div></div>
+
+<div class="detail" style="margin-top:2px"> <a class="modal-button" title="Image Detail" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=775:dsc01303&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/components/com_phocagallery/assets/images/icon-view.gif" alt="Image Detail"  /></a> <a title="Image Download" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=775:dsc01303&amp;tmpl=component&amp;phocadownload=2&amp;Itemid=88" ><img src="/components/com_phocagallery/assets/images/icon-download.gif" alt="Image Download"  /></a></div>
+<div style="clear:both"></div>
+</div>
+
+<div class="phocagallery-box-file" style="height:218px; width:120px;"><div class="phocagallery-box-file-first" style="height:118px;width:118px;margin: auto"><div class="phocagallery-box-file-second"><div class="phocagallery-box-file-third"><a class="modal-button" title="DSC01304" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=776:dsc01304&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/images/phocagallery/shafikov/izLeeteraturnogomuzeia/thumbs/phoca_thumb_m_DSC01304.JPG" alt="DSC01304"  /></a></div></div></div>
+
+<div class="detail" style="margin-top:2px"> <a class="modal-button" title="Image Detail" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=776:dsc01304&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/components/com_phocagallery/assets/images/icon-view.gif" alt="Image Detail"  /></a> <a title="Image Download" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=776:dsc01304&amp;tmpl=component&amp;phocadownload=2&amp;Itemid=88" ><img src="/components/com_phocagallery/assets/images/icon-download.gif" alt="Image Download"  /></a></div>
+<div style="clear:both"></div>
+</div>
+
+<div class="phocagallery-box-file" style="height:218px; width:120px;"><div class="phocagallery-box-file-first" style="height:118px;width:118px;margin: auto"><div class="phocagallery-box-file-second"><div class="phocagallery-box-file-third"><a class="modal-button" title="DSC01305" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=777:dsc01305&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/images/phocagallery/shafikov/izLeeteraturnogomuzeia/thumbs/phoca_thumb_m_DSC01305.JPG" alt="DSC01305"  /></a></div></div></div>
+
+<div class="detail" style="margin-top:2px"> <a class="modal-button" title="Image Detail" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=777:dsc01305&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/components/com_phocagallery/assets/images/icon-view.gif" alt="Image Detail"  /></a> <a title="Image Download" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=777:dsc01305&amp;tmpl=component&amp;phocadownload=2&amp;Itemid=88" ><img src="/components/com_phocagallery/assets/images/icon-download.gif" alt="Image Download"  /></a></div>
+<div style="clear:both"></div>
+</div>
+
+<div class="phocagallery-box-file" style="height:218px; width:120px;"><div class="phocagallery-box-file-first" style="height:118px;width:118px;margin: auto"><div class="phocagallery-box-file-second"><div class="phocagallery-box-file-third"><a class="modal-button" title="DSC01306" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=778:dsc01306&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/images/phocagallery/shafikov/izLeeteraturnogomuzeia/thumbs/phoca_thumb_m_DSC01306.JPG" alt="DSC01306"  /></a></div></div></div>
+
+<div class="detail" style="margin-top:2px"> <a class="modal-button" title="Image Detail" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=778:dsc01306&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/components/com_phocagallery/assets/images/icon-view.gif" alt="Image Detail"  /></a> <a title="Image Download" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=778:dsc01306&amp;tmpl=component&amp;phocadownload=2&amp;Itemid=88" ><img src="/components/com_phocagallery/assets/images/icon-download.gif" alt="Image Download"  /></a></div>
+<div style="clear:both"></div>
+</div>
+
+<div class="phocagallery-box-file" style="height:218px; width:120px;"><div class="phocagallery-box-file-first" style="height:118px;width:118px;margin: auto"><div class="phocagallery-box-file-second"><div class="phocagallery-box-file-third"><a class="modal-button" title="DSC01307" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=779:dsc01307&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/images/phocagallery/shafikov/izLeeteraturnogomuzeia/thumbs/phoca_thumb_m_DSC01307.JPG" alt="DSC01307"  /></a></div></div></div>
+
+<div class="detail" style="margin-top:2px"> <a class="modal-button" title="Image Detail" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=779:dsc01307&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/components/com_phocagallery/assets/images/icon-view.gif" alt="Image Detail"  /></a> <a title="Image Download" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=779:dsc01307&amp;tmpl=component&amp;phocadownload=2&amp;Itemid=88" ><img src="/components/com_phocagallery/assets/images/icon-download.gif" alt="Image Download"  /></a></div>
+<div style="clear:both"></div>
+</div>
+
+<div class="phocagallery-box-file" style="height:218px; width:120px;"><div class="phocagallery-box-file-first" style="height:118px;width:118px;margin: auto"><div class="phocagallery-box-file-second"><div class="phocagallery-box-file-third"><a class="modal-button" title="DSC01308" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=780:dsc01308&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/images/phocagallery/shafikov/izLeeteraturnogomuzeia/thumbs/phoca_thumb_m_DSC01308.JPG" alt="DSC01308"  /></a></div></div></div>
+
+<div class="detail" style="margin-top:2px"> <a class="modal-button" title="Image Detail" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=780:dsc01308&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/components/com_phocagallery/assets/images/icon-view.gif" alt="Image Detail"  /></a> <a title="Image Download" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=780:dsc01308&amp;tmpl=component&amp;phocadownload=2&amp;Itemid=88" ><img src="/components/com_phocagallery/assets/images/icon-download.gif" alt="Image Download"  /></a></div>
+<div style="clear:both"></div>
+</div>
+
+<div class="phocagallery-box-file" style="height:218px; width:120px;"><div class="phocagallery-box-file-first" style="height:118px;width:118px;margin: auto"><div class="phocagallery-box-file-second"><div class="phocagallery-box-file-third"><a class="modal-button" title="DSC01309" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=781:dsc01309&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/images/phocagallery/shafikov/izLeeteraturnogomuzeia/thumbs/phoca_thumb_m_DSC01309.JPG" alt="DSC01309"  /></a></div></div></div>
+
+<div class="detail" style="margin-top:2px"> <a class="modal-button" title="Image Detail" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=781:dsc01309&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/components/com_phocagallery/assets/images/icon-view.gif" alt="Image Detail"  /></a> <a title="Image Download" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=781:dsc01309&amp;tmpl=component&amp;phocadownload=2&amp;Itemid=88" ><img src="/components/com_phocagallery/assets/images/icon-download.gif" alt="Image Download"  /></a></div>
+<div style="clear:both"></div>
+</div>
+
+<div class="phocagallery-box-file" style="height:218px; width:120px;"><div class="phocagallery-box-file-first" style="height:118px;width:118px;margin: auto"><div class="phocagallery-box-file-second"><div class="phocagallery-box-file-third"><a class="modal-button" title="DSC01310" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=782:dsc01310&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/images/phocagallery/shafikov/izLeeteraturnogomuzeia/thumbs/phoca_thumb_m_DSC01310.JPG" alt="DSC01310"  /></a></div></div></div>
+
+<div class="detail" style="margin-top:2px"> <a class="modal-button" title="Image Detail" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=782:dsc01310&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/components/com_phocagallery/assets/images/icon-view.gif" alt="Image Detail"  /></a> <a title="Image Download" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=782:dsc01310&amp;tmpl=component&amp;phocadownload=2&amp;Itemid=88" ><img src="/components/com_phocagallery/assets/images/icon-download.gif" alt="Image Download"  /></a></div>
+<div style="clear:both"></div>
+</div>
+
+<div class="phocagallery-box-file" style="height:218px; width:120px;"><div class="phocagallery-box-file-first" style="height:118px;width:118px;margin: auto"><div class="phocagallery-box-file-second"><div class="phocagallery-box-file-third"><a class="modal-button" title="DSC01311" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=783:dsc01311&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/images/phocagallery/shafikov/izLeeteraturnogomuzeia/thumbs/phoca_thumb_m_DSC01311.JPG" alt="DSC01311"  /></a></div></div></div>
+
+<div class="detail" style="margin-top:2px"> <a class="modal-button" title="Image Detail" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=783:dsc01311&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/components/com_phocagallery/assets/images/icon-view.gif" alt="Image Detail"  /></a> <a title="Image Download" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=783:dsc01311&amp;tmpl=component&amp;phocadownload=2&amp;Itemid=88" ><img src="/components/com_phocagallery/assets/images/icon-download.gif" alt="Image Download"  /></a></div>
+<div style="clear:both"></div>
+</div>
+
+<div class="phocagallery-box-file" style="height:218px; width:120px;"><div class="phocagallery-box-file-first" style="height:118px;width:118px;margin: auto"><div class="phocagallery-box-file-second"><div class="phocagallery-box-file-third"><a class="modal-button" title="DSC01312" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=784:dsc01312&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/images/phocagallery/shafikov/izLeeteraturnogomuzeia/thumbs/phoca_thumb_m_DSC01312.JPG" alt="DSC01312"  /></a></div></div></div>
+
+<div class="detail" style="margin-top:2px"> <a class="modal-button" title="Image Detail" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=784:dsc01312&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/components/com_phocagallery/assets/images/icon-view.gif" alt="Image Detail"  /></a> <a title="Image Download" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=784:dsc01312&amp;tmpl=component&amp;phocadownload=2&amp;Itemid=88" ><img src="/components/com_phocagallery/assets/images/icon-download.gif" alt="Image Download"  /></a></div>
+<div style="clear:both"></div>
+</div>
+
+<div class="phocagallery-box-file" style="height:218px; width:120px;"><div class="phocagallery-box-file-first" style="height:118px;width:118px;margin: auto"><div class="phocagallery-box-file-second"><div class="phocagallery-box-file-third"><a class="modal-button" title="DSC01313" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=785:dsc01313&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/images/phocagallery/shafikov/izLeeteraturnogomuzeia/thumbs/phoca_thumb_m_DSC01313.JPG" alt="DSC01313"  /></a></div></div></div>
+
+<div class="detail" style="margin-top:2px"> <a class="modal-button" title="Image Detail" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=785:dsc01313&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/components/com_phocagallery/assets/images/icon-view.gif" alt="Image Detail"  /></a> <a title="Image Download" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=785:dsc01313&amp;tmpl=component&amp;phocadownload=2&amp;Itemid=88" ><img src="/components/com_phocagallery/assets/images/icon-download.gif" alt="Image Download"  /></a></div>
+<div style="clear:both"></div>
+</div>
+
+<div class="phocagallery-box-file" style="height:218px; width:120px;"><div class="phocagallery-box-file-first" style="height:118px;width:118px;margin: auto"><div class="phocagallery-box-file-second"><div class="phocagallery-box-file-third"><a class="modal-button" title="DSC01314" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=786:dsc01314&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/images/phocagallery/shafikov/izLeeteraturnogomuzeia/thumbs/phoca_thumb_m_DSC01314.JPG" alt="DSC01314"  /></a></div></div></div>
+
+<div class="detail" style="margin-top:2px"> <a class="modal-button" title="Image Detail" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=786:dsc01314&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/components/com_phocagallery/assets/images/icon-view.gif" alt="Image Detail"  /></a> <a title="Image Download" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=786:dsc01314&amp;tmpl=component&amp;phocadownload=2&amp;Itemid=88" ><img src="/components/com_phocagallery/assets/images/icon-download.gif" alt="Image Download"  /></a></div>
+<div style="clear:both"></div>
+</div>
+
+<div class="phocagallery-box-file" style="height:218px; width:120px;"><div class="phocagallery-box-file-first" style="height:118px;width:118px;margin: auto"><div class="phocagallery-box-file-second"><div class="phocagallery-box-file-third"><a class="modal-button" title="DSC01315" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=787:dsc01315&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/images/phocagallery/shafikov/izLeeteraturnogomuzeia/thumbs/phoca_thumb_m_DSC01315.JPG" alt="DSC01315"  /></a></div></div></div>
+
+<div class="detail" style="margin-top:2px"> <a class="modal-button" title="Image Detail" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=787:dsc01315&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/components/com_phocagallery/assets/images/icon-view.gif" alt="Image Detail"  /></a> <a title="Image Download" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=787:dsc01315&amp;tmpl=component&amp;phocadownload=2&amp;Itemid=88" ><img src="/components/com_phocagallery/assets/images/icon-download.gif" alt="Image Download"  /></a></div>
+<div style="clear:both"></div>
+</div>
+
+<div class="phocagallery-box-file" style="height:218px; width:120px;"><div class="phocagallery-box-file-first" style="height:118px;width:118px;margin: auto"><div class="phocagallery-box-file-second"><div class="phocagallery-box-file-third"><a class="modal-button" title="DSC01316" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=788:dsc01316&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/images/phocagallery/shafikov/izLeeteraturnogomuzeia/thumbs/phoca_thumb_m_DSC01316.JPG" alt="DSC01316"  /></a></div></div></div>
+
+<div class="detail" style="margin-top:2px"> <a class="modal-button" title="Image Detail" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=788:dsc01316&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/components/com_phocagallery/assets/images/icon-view.gif" alt="Image Detail"  /></a> <a title="Image Download" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=788:dsc01316&amp;tmpl=component&amp;phocadownload=2&amp;Itemid=88" ><img src="/components/com_phocagallery/assets/images/icon-download.gif" alt="Image Download"  /></a></div>
+<div style="clear:both"></div>
+</div>
+
+<div class="phocagallery-box-file" style="height:218px; width:120px;"><div class="phocagallery-box-file-first" style="height:118px;width:118px;margin: auto"><div class="phocagallery-box-file-second"><div class="phocagallery-box-file-third"><a class="modal-button" title="DSC01317" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=789:dsc01317&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/images/phocagallery/shafikov/izLeeteraturnogomuzeia/thumbs/phoca_thumb_m_DSC01317.JPG" alt="DSC01317"  /></a></div></div></div>
+
+<div class="detail" style="margin-top:2px"> <a class="modal-button" title="Image Detail" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=789:dsc01317&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/components/com_phocagallery/assets/images/icon-view.gif" alt="Image Detail"  /></a> <a title="Image Download" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=789:dsc01317&amp;tmpl=component&amp;phocadownload=2&amp;Itemid=88" ><img src="/components/com_phocagallery/assets/images/icon-download.gif" alt="Image Download"  /></a></div>
+<div style="clear:both"></div>
+</div>
+
+<div class="phocagallery-box-file" style="height:218px; width:120px;"><div class="phocagallery-box-file-first" style="height:118px;width:118px;margin: auto"><div class="phocagallery-box-file-second"><div class="phocagallery-box-file-third"><a class="modal-button" title="DSC01318" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=790:dsc01318&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/images/phocagallery/shafikov/izLeeteraturnogomuzeia/thumbs/phoca_thumb_m_DSC01318.JPG" alt="DSC01318"  /></a></div></div></div>
+
+<div class="detail" style="margin-top:2px"> <a class="modal-button" title="Image Detail" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=790:dsc01318&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/components/com_phocagallery/assets/images/icon-view.gif" alt="Image Detail"  /></a> <a title="Image Download" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=790:dsc01318&amp;tmpl=component&amp;phocadownload=2&amp;Itemid=88" ><img src="/components/com_phocagallery/assets/images/icon-download.gif" alt="Image Download"  /></a></div>
+<div style="clear:both"></div>
+</div>
+
+<div class="phocagallery-box-file" style="height:218px; width:120px;"><div class="phocagallery-box-file-first" style="height:118px;width:118px;margin: auto"><div class="phocagallery-box-file-second"><div class="phocagallery-box-file-third"><a class="modal-button" title="DSC01319" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=791:dsc01319&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/images/phocagallery/shafikov/izLeeteraturnogomuzeia/thumbs/phoca_thumb_m_DSC01319.JPG" alt="DSC01319"  /></a></div></div></div>
+
+<div class="detail" style="margin-top:2px"> <a class="modal-button" title="Image Detail" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=791:dsc01319&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/components/com_phocagallery/assets/images/icon-view.gif" alt="Image Detail"  /></a> <a title="Image Download" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=791:dsc01319&amp;tmpl=component&amp;phocadownload=2&amp;Itemid=88" ><img src="/components/com_phocagallery/assets/images/icon-download.gif" alt="Image Download"  /></a></div>
+<div style="clear:both"></div>
+</div>
+
+<div class="phocagallery-box-file" style="height:218px; width:120px;"><div class="phocagallery-box-file-first" style="height:118px;width:118px;margin: auto"><div class="phocagallery-box-file-second"><div class="phocagallery-box-file-third"><a class="modal-button" title="DSC01320" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=792:dsc01320&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/images/phocagallery/shafikov/izLeeteraturnogomuzeia/thumbs/phoca_thumb_m_DSC01320.JPG" alt="DSC01320"  /></a></div></div></div>
+
+<div class="detail" style="margin-top:2px"> <a class="modal-button" title="Image Detail" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=792:dsc01320&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/components/com_phocagallery/assets/images/icon-view.gif" alt="Image Detail"  /></a> <a title="Image Download" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=792:dsc01320&amp;tmpl=component&amp;phocadownload=2&amp;Itemid=88" ><img src="/components/com_phocagallery/assets/images/icon-download.gif" alt="Image Download"  /></a></div>
+<div style="clear:both"></div>
+</div>
+
+<div class="phocagallery-box-file" style="height:218px; width:120px;"><div class="phocagallery-box-file-first" style="height:118px;width:118px;margin: auto"><div class="phocagallery-box-file-second"><div class="phocagallery-box-file-third"><a class="modal-button" title="DSC01321" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=793:dsc01321&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/images/phocagallery/shafikov/izLeeteraturnogomuzeia/thumbs/phoca_thumb_m_DSC01321.JPG" alt="DSC01321"  /></a></div></div></div>
+
+<div class="detail" style="margin-top:2px"> <a class="modal-button" title="Image Detail" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=793:dsc01321&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/components/com_phocagallery/assets/images/icon-view.gif" alt="Image Detail"  /></a> <a title="Image Download" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=793:dsc01321&amp;tmpl=component&amp;phocadownload=2&amp;Itemid=88" ><img src="/components/com_phocagallery/assets/images/icon-download.gif" alt="Image Download"  /></a></div>
+<div style="clear:both"></div>
+</div>
+
+<div class="phocagallery-box-file" style="height:218px; width:120px;"><div class="phocagallery-box-file-first" style="height:118px;width:118px;margin: auto"><div class="phocagallery-box-file-second"><div class="phocagallery-box-file-third"><a class="modal-button" title="DSC01322" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=794:dsc01322&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/images/phocagallery/shafikov/izLeeteraturnogomuzeia/thumbs/phoca_thumb_m_DSC01322.JPG" alt="DSC01322"  /></a></div></div></div>
+
+<div class="detail" style="margin-top:2px"> <a class="modal-button" title="Image Detail" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=794:dsc01322&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/components/com_phocagallery/assets/images/icon-view.gif" alt="Image Detail"  /></a> <a title="Image Download" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=794:dsc01322&amp;tmpl=component&amp;phocadownload=2&amp;Itemid=88" ><img src="/components/com_phocagallery/assets/images/icon-download.gif" alt="Image Download"  /></a></div>
+<div style="clear:both"></div>
+</div>
+
+<div class="phocagallery-box-file" style="height:218px; width:120px;"><div class="phocagallery-box-file-first" style="height:118px;width:118px;margin: auto"><div class="phocagallery-box-file-second"><div class="phocagallery-box-file-third"><a class="modal-button" title="DSC01323" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=795:dsc01323&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/images/phocagallery/shafikov/izLeeteraturnogomuzeia/thumbs/phoca_thumb_m_DSC01323.JPG" alt="DSC01323"  /></a></div></div></div>
+
+<div class="detail" style="margin-top:2px"> <a class="modal-button" title="Image Detail" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=795:dsc01323&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/components/com_phocagallery/assets/images/icon-view.gif" alt="Image Detail"  /></a> <a title="Image Download" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=795:dsc01323&amp;tmpl=component&amp;phocadownload=2&amp;Itemid=88" ><img src="/components/com_phocagallery/assets/images/icon-download.gif" alt="Image Download"  /></a></div>
+<div style="clear:both"></div>
+</div>
+
+<div class="phocagallery-box-file" style="height:218px; width:120px;"><div class="phocagallery-box-file-first" style="height:118px;width:118px;margin: auto"><div class="phocagallery-box-file-second"><div class="phocagallery-box-file-third"><a class="modal-button" title="DSC01324" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=796:dsc01324&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/images/phocagallery/shafikov/izLeeteraturnogomuzeia/thumbs/phoca_thumb_m_DSC01324.JPG" alt="DSC01324"  /></a></div></div></div>
+
+<div class="detail" style="margin-top:2px"> <a class="modal-button" title="Image Detail" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=796:dsc01324&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/components/com_phocagallery/assets/images/icon-view.gif" alt="Image Detail"  /></a> <a title="Image Download" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=796:dsc01324&amp;tmpl=component&amp;phocadownload=2&amp;Itemid=88" ><img src="/components/com_phocagallery/assets/images/icon-download.gif" alt="Image Download"  /></a></div>
+<div style="clear:both"></div>
+</div>
+
+<div class="phocagallery-box-file" style="height:218px; width:120px;"><div class="phocagallery-box-file-first" style="height:118px;width:118px;margin: auto"><div class="phocagallery-box-file-second"><div class="phocagallery-box-file-third"><a class="modal-button" title="DSC01325" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=797:dsc01325&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/images/phocagallery/shafikov/izLeeteraturnogomuzeia/thumbs/phoca_thumb_m_DSC01325.JPG" alt="DSC01325"  /></a></div></div></div>
+
+<div class="detail" style="margin-top:2px"> <a class="modal-button" title="Image Detail" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=797:dsc01325&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/components/com_phocagallery/assets/images/icon-view.gif" alt="Image Detail"  /></a> <a title="Image Download" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=797:dsc01325&amp;tmpl=component&amp;phocadownload=2&amp;Itemid=88" ><img src="/components/com_phocagallery/assets/images/icon-download.gif" alt="Image Download"  /></a></div>
+<div style="clear:both"></div>
+</div>
+
+<div class="phocagallery-box-file" style="height:218px; width:120px;"><div class="phocagallery-box-file-first" style="height:118px;width:118px;margin: auto"><div class="phocagallery-box-file-second"><div class="phocagallery-box-file-third"><a class="modal-button" title="DSC01326" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=798:dsc01326&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/images/phocagallery/shafikov/izLeeteraturnogomuzeia/thumbs/phoca_thumb_m_DSC01326.JPG" alt="DSC01326"  /></a></div></div></div>
+
+<div class="detail" style="margin-top:2px"> <a class="modal-button" title="Image Detail" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=798:dsc01326&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/components/com_phocagallery/assets/images/icon-view.gif" alt="Image Detail"  /></a> <a title="Image Download" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=798:dsc01326&amp;tmpl=component&amp;phocadownload=2&amp;Itemid=88" ><img src="/components/com_phocagallery/assets/images/icon-download.gif" alt="Image Download"  /></a></div>
+<div style="clear:both"></div>
+</div>
+
+<div class="phocagallery-box-file" style="height:218px; width:120px;"><div class="phocagallery-box-file-first" style="height:118px;width:118px;margin: auto"><div class="phocagallery-box-file-second"><div class="phocagallery-box-file-third"><a class="modal-button" title="DSC01327" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=799:dsc01327&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/images/phocagallery/shafikov/izLeeteraturnogomuzeia/thumbs/phoca_thumb_m_DSC01327.JPG" alt="DSC01327"  /></a></div></div></div>
+
+<div class="detail" style="margin-top:2px"> <a class="modal-button" title="Image Detail" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=799:dsc01327&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/components/com_phocagallery/assets/images/icon-view.gif" alt="Image Detail"  /></a> <a title="Image Download" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=799:dsc01327&amp;tmpl=component&amp;phocadownload=2&amp;Itemid=88" ><img src="/components/com_phocagallery/assets/images/icon-download.gif" alt="Image Download"  /></a></div>
+<div style="clear:both"></div>
+</div>
+
+<div class="phocagallery-box-file" style="height:218px; width:120px;"><div class="phocagallery-box-file-first" style="height:118px;width:118px;margin: auto"><div class="phocagallery-box-file-second"><div class="phocagallery-box-file-third"><a class="modal-button" title="DSC01328" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=800:dsc01328&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/images/phocagallery/shafikov/izLeeteraturnogomuzeia/thumbs/phoca_thumb_m_DSC01328.JPG" alt="DSC01328"  /></a></div></div></div>
+
+<div class="detail" style="margin-top:2px"> <a class="modal-button" title="Image Detail" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=800:dsc01328&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/components/com_phocagallery/assets/images/icon-view.gif" alt="Image Detail"  /></a> <a title="Image Download" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=800:dsc01328&amp;tmpl=component&amp;phocadownload=2&amp;Itemid=88" ><img src="/components/com_phocagallery/assets/images/icon-download.gif" alt="Image Download"  /></a></div>
+<div style="clear:both"></div>
+</div>
+
+<div class="phocagallery-box-file" style="height:218px; width:120px;"><div class="phocagallery-box-file-first" style="height:118px;width:118px;margin: auto"><div class="phocagallery-box-file-second"><div class="phocagallery-box-file-third"><a class="modal-button" title="DSC01329" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=801:dsc01329&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/images/phocagallery/shafikov/izLeeteraturnogomuzeia/thumbs/phoca_thumb_m_DSC01329.JPG" alt="DSC01329"  /></a></div></div></div>
+
+<div class="detail" style="margin-top:2px"> <a class="modal-button" title="Image Detail" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=801:dsc01329&amp;tmpl=component&amp;Itemid=88" rel="{handler: 'iframe', size: {x: 1024, y: 768}, overlayOpacity: 0.3}" ><img src="/components/com_phocagallery/assets/images/icon-view.gif" alt="Image Detail"  /></a> <a title="Image Download" href="/index.php?option=com_phocagallery&amp;view=detail&amp;catid=40:2012-12-30-08-53-37&amp;id=801:dsc01329&amp;tmpl=component&amp;phocadownload=2&amp;Itemid=88" ><img src="/components/com_phocagallery/assets/images/icon-download.gif" alt="Image Download"  /></a></div>
+<div style="clear:both"></div>
+</div><div style="clear:both"></div><div>&nbsp;</div><form action="http://ufalit.ufacsdb.ru/index.php?option=com_phocagallery&amp;view=category&amp;id=40:2012-12-30-08-53-37&amp;Itemid=88" method="post" name="adminForm">
+<div class="pgcenter"></div>
+<input type="hidden" name="controller" value="category" /><input type="hidden" name="3e41924c851e01393bb5240bcf8c86e3" value="1" /></form></div>
+<div>&nbsp;</div>
+<div>&nbsp;</div><!-- End Category </a></div> -->
+<div style="text-align: center; color:#d3d3d3;">Powered by <a href="http://www.phoca.cz" style="text-decoration: none;" target="_blank" title="Phoca.cz">Phoca</a> <a href="http://www.phoca.cz/phocagallery" style="text-decoration: none;" target="_blank" title="Phoca Gallery">Gallery</a></div>													</div>
+						
+																									
+												</div>
+											</div>
+											<!-- content end -->
+											
+																						
+																						
+										</div>
+									</div>
+									<!-- mainmiddle end -->
+		
+																	
+								</div>
+							</div>
+							
+														<div id="left">
+								<div class="module mod-sidebar mod-menu mod-menu-sidebar mod-rounded-grey  first last">
+
+		<h3 class="header"><span class="header-2"><span class="header-3">Содержание</span></span></h3>
+		
+		
+	<div class="box-t1">
+		<div class="box-t2"></div>
+	</div>
+	
+	<div class="box-1 deepest with-header">
+		<ul class="menu"><li class="level1 item1 first active current"><a href="http://ufalit.ufacsdb.ru/" class="level1 item1 first active current"><span class="bg">О проекте</span></a></li><li class="level1 item2"><a href="/index.php?option=com_content&amp;view=article&amp;id=320&amp;Itemid=85" class="level1 item2"><span class="bg">Персоналии</span></a></li><li class="level1 item3"><a href="/index.php?option=com_content&amp;view=article&amp;id=319&amp;Itemid=86" class="level1 item3"><span class="bg">Памятные места Уфы</span></a></li><li class="level1 item4"><a href="/index.php?option=com_content&amp;view=article&amp;id=318&amp;Itemid=87" class="level1 item4"><span class="bg">Читальный зал</span></a></li><li class="level1 item5"><a href="/index.php?option=com_phocagallery&amp;view=categories&amp;Itemid=88" class="level1 item5"><span class="bg">Фотогалерея</span></a></li><li class="level1 item6"><a href="/index.php?option=com_content&amp;view=category&amp;id=3&amp;Itemid=90" class="level1 item6"><span class="bg">Видеокопилка</span></a></li><li class="level1 item7"><a href="/index.php?option=com_content&amp;view=article&amp;id=317&amp;Itemid=148" class="level1 item7"><span class="bg">Конкурсы, премии, фонды, праздники</span></a></li><li class="level1 item8"><a href="/index.php?option=com_content&amp;view=article&amp;id=4&amp;Itemid=149" class="level1 item8"><span class="bg">Уфа в легендах и преданиях</span></a></li><li class="level1 item9 last"><a href="/index.php?option=com_content&amp;view=article&amp;id=287&amp;Itemid=114" class="level1 item9 last"><span class="bg">Выход</span></a></li></ul>	</div>
+
+	<div class="box-b1">
+		<div class="box-b2"></div>
+	</div>
+
+</div>							</div>
+														
+									
+						</div>
+					</div>
+					
+				</div>
+			</div>
+
+			<div class="content-wrapper-b1">
+				<div class="content-wrapper-b2">
+					<div class="content-wrapper-b3"></div>
+				</div>
+			</div>
+
+			<div class="bottom-t1">
+				<div class="bottom-t2">
+					<div class="bottom-t3"></div>
+				</div>
+			</div>
+
+			
+						<div id="footer">
+				<div class="bottom-2">
+					<div class="bottom-3">
+
+						<a class="anchor" href="#page"></a>
+						<div>&#169; 2026 Литературная карта. Все права защищены.</div>
+<div><a href="http://csdb.ufanet.ru">Центральная городская детская библиотека г. Уфы</a></div>										
+					</div>
+				</div>
+			</div>
+			<!-- footer end -->
+			
+			<div class="bottom-b1">
+				<div class="bottom-b2">
+					<div class="bottom-b3"></div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+        <div style="display:none"><a href="http://truetemplates.ru/datalife_engine_templates/datalife_engine_96_templates/" target="_blank" title="������� DLE 9.6">������� DLE 9.6</a>&nbsp<a href="http://promowebber.ru/datalife-engine/dle_templates/" target="_blank" title="DLE �������">DLE �������</a>&nbsp<a href="http://ucozshablony.ru/" target="_blank" title="������� UCOZ">������� UCOZ</a>&nbsp<a href="http://shablonijoomla.ru" target="_blank" title="������� joomla!">������� joomla!</a></div>
+</body>
+</html>
