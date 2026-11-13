@@ -1,0 +1,13 @@
+/* Styles moved from awards and reading index markup. */
+.awards{max-width:78ch}
+.awards .page-title{max-width:18ch}
+.award-section{border-top:1px solid var(--line,#d8ddd5);padding:1.25rem 0 2rem}
+.award-section>h2{font-family:Georgia,serif;font-weight:700;font-size:clamp(1.35rem,2.7vw,2rem);color:var(--ink,#23332c);margin:0 0 1.2rem}
+.award-copy{line-height:1.75}
+.award-copy p{margin:.8rem 0}
+.award-copy img{max-width:min(100%,42rem);height:auto;vertical-align:middle;margin:.5rem .75rem .5rem 0}
+.award-copy table{display:block;max-width:100%;overflow-x:auto;border:none}
+.award-copy td{padding:.25rem;vertical-align:top}
+.awards .sections-align-center,.reading-index .sections-align-center{text-align:center}
+.awards .sections-align-right{text-align:right}
+.reading-index .sections-align-left{text-align:left}
