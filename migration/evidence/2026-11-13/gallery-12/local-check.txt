@@ -1,0 +1,8 @@
+Gallery 12 local capture checks (2026-11-13)
+Category source response: HTTP 200, text/html; charset=utf-8, 38,911 bytes.
+18 detail HTML responses and 18 original downloads: every final response HTTP 200.
+All 18 originals: MIME image/jpeg, valid JPEG signature, nonzero bytes; output copies have identical SHA-256 to captured download bodies.
+Fetch manifest rows: 37 (category + 18 details + 18 originals); all status codes 200.
+Parity CSV: 56 content rows plus exact required 11-column header; 38 matched text entries and 18 discovered image entries.
+Local static references: 43; missing local paths: 0.
+Browser render/visual comparison: not completed; image rows intentionally remain discovered.
