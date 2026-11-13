@@ -1,0 +1,33 @@
+Capture date: 2026-11-13
+Source category: https://ufalit.ufacsdb.ru/index.php?Itemid=88&id=10:2012-12-25-05-40-09&option=com_phocagallery&view=category
+Requests: sequential curl GET, approximately 1 second between requests; full responses and headers saved.
+Category response HTTP 200, 26043 bytes, text/html; charset=utf-8.
+Details: IDs 591–599, all HTTP 200; each saved as detail-ID.html with response headers.
+ecced91d4ba24003648adc5c42bcf4a91033c207f1811757dff456e919c26b99  source.html  26043 bytes
+366965cc0e62e42bcaff98e8792ffe7cff94dbdc799a96908554a57a3d3f2b05  detail-591.html  10731 bytes
+f68db7ea22de9d4496c5029e9fefdead41dc260791ceb7ba4d4049a05aa8f61a  detail-592.html  10963 bytes
+8e1fd602b5a7bc7f0281277da94aaa7a22ad22176da1117ca9153dd620668653  detail-593.html  10974 bytes
+d2a25571012f47854fae20f961e43046b055fcd804e2f65e4f37879d096c9aba  detail-594.html  10978 bytes
+11bfc8141f22cfa3c8afdc3e112455e6a8ef38af5a186037841603f2eeda9d5d  detail-595.html  10937 bytes
+61c09c72584bec7affde9914966b0253be386229fb016dcc87946ce56b232a8d  detail-596.html  10951 bytes
+b9cc7d47041afae7d7e2fc95de55620453af2c0cc6c9b61ae32fb1c6c292e61c  detail-597.html  10956 bytes
+b64e1fa0f2fba3a39678460c8324e85c949346da8fcffbb28254ce31323fea7e  detail-598.html  10953 bytes
+8513dc1969bad930c90669da47d429bfd58d0158f177e648ac8386d6ae4d923e  detail-599.html  10757 bytes
+a9a7a04195bc0a0009d8484e2a59a11ff74de603fb7a36189734f5c584fa2679  detail-591.headers  436 bytes
+cf9a1c24165cc628eb683a78b7271a901e9483328c0a2a98ca9462a4493d60a6  detail-592.headers  436 bytes
+462c0603ba7ae6ef1d74aec3785c775b6369a90718b130d23eb231acd4450890  detail-593.headers  436 bytes
+f4f345cd44d6eca341b2239038c44714958973b2fd5aa07d196155ec5a994c99  detail-594.headers  436 bytes
+83b83e7e2609e1ceb07b2cd69d4b2d8a78f9f95ed8f037bad8a0688ee8b1796c  detail-595.headers  436 bytes
+f08c4a8572928aba0c7d370ad8d6fddaaf199fd4e070aa3f97d29929d9c7057a  detail-596.headers  436 bytes
+dc0804fe9b1c6252db54e01cf28c024c195efb57dc0bf7cb790879adb820d466  detail-597.headers  436 bytes
+90fb0d2dcfbbdd249bb6bab4053439ef0cbafecc6088b4b7e476be8fd283cd57  detail-598.headers  436 bytes
+4241c00f72f789fbab23e04a36a905f2c3968c07e592d21345f7cec767ca37ed  detail-599.headers  436 bytes
+2e534c2fe3b66cb10e44d23709c394912ca45d3a5dda864c1a0423ea5cc2d0b8  photo-591.headers  515 bytes
+4b93c3fc5c7d2c390d6ea31ca2038cbbdffb1327e87faf330eac6154dd3c41de  photo-592.headers  515 bytes
+e00a52896c81ea8678dd22115433df9d9d0594b9759c744718b9856b226f7198  photo-593.headers  515 bytes
+d0cc519de64967ebe9619fb7245d8cd5e322eb69e022aba37d51f0ae9aa69c00  photo-594.headers  515 bytes
+06b6ce216b4b73dbb5391a09528db5aa529d0271536f1629dde4fa35352194a4  photo-595.headers  515 bytes
+041633c71e556200811c9cbb1099dce7aec27ea93bcba2497c3f7a3fc805ad2d  photo-596.headers  514 bytes
+342b87c81a207985d677d64c7a4be2f3cd1e23bd9e15d03a67dd03b4daf7582f  photo-597.headers  514 bytes
+0b921741a58f99fcc156a131501d87c457520ddfd6147d6c36cd614928405d1d  photo-598.headers  514 bytes
+f51d0d3a49f141cd6b10d41af52dba6aa3910e629adf32dac2d79c2dacbeb24a  photo-599.headers  515 bytes
