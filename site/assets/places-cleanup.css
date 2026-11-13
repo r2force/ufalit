@@ -1,0 +1,8 @@
+/* Explicitly preserve the legacy borderless presentation without HTML border attributes. */
+.places-page table { border: none; }
+.places-page #places-image-015,
+.places-page #places-image-016,
+.places-page #places-image-093,
+.places-page #places-image-156,
+.places-page #places-image-158,
+.places-page #places-image-159 { border: none; }
