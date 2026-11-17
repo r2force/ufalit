@@ -6,7 +6,17 @@
 
 Публикация: только папка `site/` из ветки `main` через [GitHub Actions](.github/workflows/pages.yml). Все инструкции, лицензии, реестры, отчёты и доказательства проверок остаются в этом же репозитории вне папки сайта. Изменения `site/`, шаблона меню или скрипта генерации в `main` запускают публикацию автоматически. Прежняя ветка `gh-pages` сохранена как история первой публикации и больше не используется как источник.
 
-Главное меню редактируется в [templates/navigation.html](templates/navigation.html). GitHub Actions подставляет его в страницы перед публикацией. Для локального предпросмотра после редактирования шаблона запустите `python3 scripts/render_navigation.py` из корня репозитория.
+Главное меню редактируется в [templates/navigation.html](templates/navigation.html). В исходных страницах `site/` на его месте стоит `<template data-include="navigation"></template>`. GitHub Actions подставляет меню в HTML перед публикацией.
+
+Для локального предпросмотра из корня репозитория соберите сайт в новый каталог и запустите сервер.
+
+```sh
+preview_dir=$(mktemp -d)
+python3 scripts/render_navigation.py --output "$preview_dir/site"
+python3 -m http.server --bind 127.0.0.1 --directory "$preview_dir"
+```
+
+Предпросмотр доступен по адресу `http://localhost:8000/site/`.
 
 - [Инструкции агенту](AGENTS.md)
 - [Текущий статус](migration/STATUS.md)
