@@ -1,0 +1,87 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --ink: #142829;
+    --ink-deep: #0e2021;
+    --malachite: #173b3d;
+    --accent-teal: #245d60;
+    --paper: #f6f3ec;
+    --paper-warm: #efeae0;
+    --paper-card: #fcfaf5;
+    --wine: #8e2d36;
+    --wine-light: #a83c46;
+    --bronze: #b58347;
+    --line: #d6cfc1;
+    --line-subtle: #e5dfd3;
+
+    --font-display: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+    --font-reading: 'Literata', Georgia, Cambria, serif;
+    --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--paper);
+    color: var(--ink);
+  }
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-reading {
+  font-family: var(--font-reading);
+}
+
+.font-sans-ui {
+  font-family: var(--font-sans);
+}
+
+.font-mono-code {
+  font-family: var(--font-mono);
+}
+
+/* Ornamental wrought-iron pattern inspired by Nazar Najmi's epigraph:
+   "Вокруг садов чугунные ограды, Как кружева, искусством тешат взор..." */
+.ufa-lace-border {
+  background-image: radial-gradient(circle at 8px 8px, rgba(181, 131, 71, 0.25) 1.5px, transparent 1.5px),
+    radial-gradient(circle at 24px 8px, rgba(23, 59, 61, 0.2) 1.5px, transparent 1.5px);
+  background-size: 32px 16px;
+}
+
+/* Museum Passe-partout inner bevel */
+.passe-partout-frame {
+  box-shadow:
+    inset 0 0 0 1px rgba(20, 40, 41, 0.08),
+    inset 0 2px 6px rgba(20, 40, 41, 0.06),
+    0 10px 30px -10px rgba(20, 40, 41, 0.12);
+}
+
+/* 3D card tilt glare */
+.tilt-card {
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s ease;
+  will-change: transform;
+}
+
+/* Custom subtle scrollbars for filmstrip and code blocks */
+.custom-scrollbar::-webkit-scrollbar {
+  height: 6px;
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(20, 40, 41, 0.05);
+  border-radius: 9999px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(23, 59, 61, 0.28);
+  border-radius: 9999px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(142, 45, 54, 0.6);
+}
