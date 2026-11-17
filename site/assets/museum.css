@@ -370,11 +370,7 @@
   grid-template-columns: repeat(2, minmax(0, 1fr));
   grid-auto-rows: max-content;
   gap: .625rem;
-  max-block-size: 17.25rem;
-  overflow-y: auto;
-  padding: .125rem .25rem .125rem .125rem;
-  scrollbar-color: #819a9d66 transparent;
-  scrollbar-width: thin;
+  padding: .125rem;
 }
 .audio-studio.is-enhanced .audio-list .audio-item {
   margin: 0;
@@ -434,6 +430,7 @@
     grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
     column-gap: 2rem;
   }
+  .audio-deck { align-self: start; margin-block-start: 3.25rem; }
 }
 @media (max-width: 39.99rem) {
   .audio-link-hint, .audio-description { display: none; }
