@@ -1,3 +1,5 @@
+@import url("fonts/fonts.css");
+
 /* The museum theme is opt-in on pages included in the redesign. */
 .museum {
   --ink: #142829;
@@ -10,12 +12,14 @@
   --bronze: #b58347;
   --gold: #f3d9b1;
   --line: #d6cfc1;
-  --display: Georgia, "Times New Roman", serif;
-  --reading: Georgia, "Times New Roman", serif;
-  --ui: system-ui, -apple-system, "Segoe UI", sans-serif;
+  --display: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --reading: Literata, Georgia, "Times New Roman", serif;
+  --ui: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, monospace;
   --shadow: 0 12px 32px -22px #14282975;
   color: var(--ink);
   background: var(--paper);
+  font-family: var(--ui);
 }
 .museum [hidden] { display: none !important; }
 .museum :focus-visible { outline: 3px solid #a0572b; outline-offset: 3px; }
@@ -63,7 +67,7 @@
   align-items: center;
   gap: clamp(1.25rem, 5vw, 5rem);
 }
-.museum .hero h1 { font: 500 clamp(2.75rem, 7vw, 6.2rem)/.98 var(--display); letter-spacing: -.045em; overflow-wrap: anywhere; }
+.museum .hero h1 { font: 500 clamp(2.75rem, 7vw, 6.2rem)/.98 var(--display); letter-spacing: -.025em; overflow-wrap: anywhere; }
 .museum .lead { color: #d8e8e3; max-width: 34ch; }
 .museum .hero-links { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.55rem; }
 .museum .hero-links a {
@@ -101,8 +105,8 @@
 .museum .content h1 {
   max-width: 24ch;
   margin: 0 0 1.4rem;
-  font: 500 clamp(2.3rem, 5vw, 4.6rem)/1.02 var(--display);
-  letter-spacing: -.04em;
+  font: 600 clamp(2.3rem, 5vw, 4.6rem)/1.02 var(--display);
+  letter-spacing: -.025em;
   overflow-wrap: anywhere;
 }
 .museum .reading { font-family: var(--reading); font-size: 1.075rem; line-height: 1.78; max-width: 72ch; }
@@ -267,49 +271,176 @@
 .reading-audio-link small { display: block; margin-top: .25rem; color: var(--gold); font: .78rem/1.35 var(--ui); }
 
 .museum .audio-archive { max-width: none; }
-.museum .audio-archive h1 { max-width: 36ch; font-size: clamp(2.1rem, 4.65vw, 4rem); }
 .audio-studio {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, .95fr);
-  gap: clamp(.75rem, 2.2vw, 1.6rem);
-  align-items: start;
-  padding: clamp(.75rem, 2.5vw, 1.65rem);
-  background: linear-gradient(130deg, #142829, #204449);
+  grid-template-areas: "intro" "deck" "playlist";
+  gap: 1rem;
+  padding: clamp(1rem, 2.75vw, 2.25rem) clamp(1rem, 2.6vw, 2rem);
+  background: linear-gradient(135deg, #142021, #173234, #1f4447);
   border: 1px solid var(--accent);
-  border-radius: .8rem;
-  box-shadow: var(--shadow);
-  color: var(--paper-card);
-  font: .95rem/1.55 var(--ui);
+  border-radius: 1.5rem;
+  box-shadow: 0 22px 40px -19px #14282965;
+  color: #fff;
+  font: .875rem/1.5 var(--ui);
 }
-.audio-deck { background: #08171980; border: 1px solid #d6cfc130; border-radius: .55rem; padding: clamp(.8rem, 3vw, 1.6rem); }
-.audio-track-display { display: flex; gap: clamp(.65rem, 2.5vw, 1.5rem); align-items: center; min-height: 9.7rem; }
-.audio-track-display p { color: var(--gold); }
-.audio-deck .audio-title { font: 600 clamp(1.35rem, 3vw, 2.25rem)/1.15 var(--display); margin: .3rem 0 0; overflow-wrap: anywhere; }
-.audio-deck audio { display: block; width: 100%; margin: 1rem 0 .65rem; }
-.audio-deck nav { display: flex; flex-wrap: wrap; gap: .45rem; align-items: center; }
-.audio-deck a, .audio-studio figcaption { color: var(--gold); }
-.audio-deck button { background: #ffffff14; border-color: #f3d9b190; }
-.audio-deck button:disabled { opacity: .5; cursor: default; }
-.audio-deck .record { animation: turn-record 9s linear infinite paused; }
-.audio-deck .record.is-playing { animation-play-state: running; }
+.audio-intro { grid-area: intro; min-width: 0; }
+.museum .audio-intro h1 {
+  max-width: none;
+  margin: .25rem 0;
+  color: #fff;
+  font: 600 clamp(1.875rem, 3vw, 2.25rem)/1.12 var(--display);
+  letter-spacing: normal;
+}
+.audio-intro p { margin: 0; color: #d0e0dc; }
+.audio-studio:not(.is-enhanced) .audio-link-hint { display: none; }
+.audio-intro .audio-kicker {
+  color: var(--gold);
+  font: .75rem/1.5 var(--mono);
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+.audio-deck {
+  grid-area: deck;
+  align-self: center;
+  display: grid;
+  gap: 1.45rem;
+  min-width: 0;
+  padding: clamp(1rem, 2.35vw, 1.5rem);
+  background: #0005;
+  border: 1px solid #ffffff1a;
+  border-radius: 1rem;
+}
+.audio-deck-header, .audio-file {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: .45rem .9rem;
+  font: .75rem/1.5 var(--mono);
+}
+.audio-deck-header, .audio-deck a { color: var(--gold); }
+.audio-collection, .audio-download { display: inline-flex; align-items: center; gap: .375rem; }
+.audio-track-anchor { text-decoration: none; }
+.audio-track-anchor:hover { text-decoration: underline; }
+.audio-studio svg {
+  flex: none;
+  width: 1rem;
+  height: 1rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.audio-collection svg { color: var(--bronze); }
+.audio-track-display { display: flex; align-items: center; gap: 1rem; min-width: 0; min-height: 7rem; }
+.audio-track-display > div:last-child { min-width: 0; }
+.audio-track-display p { margin: 0; font-size: .75rem; }
+.audio-track-display .audio-voice { color: #a8d5ba; font-weight: 500; }
+.audio-deck .audio-title {
+  color: #fff;
+  font: 600 1.5rem/1.15 var(--display);
+  margin: .375rem 0;
+  overflow-wrap: anywhere;
+}
+.audio-description { color: #ffffffb3; }
+.audio-controls { min-width: 0; padding-top: .5rem; }
+.audio-deck audio { display: block; width: 100%; height: 2.5rem; color-scheme: dark; }
+.audio-file { margin-top: .5rem; color: #ffffffb3; font-size: .6875rem; }
+.audio-file > span { max-width: 13rem; }
+.audio-download { text-decoration: none; }
+.audio-download:hover { text-decoration: underline; }
+.audio-download svg { width: .75rem; height: .75rem; }
+.audio-deck .record {
+  --record-size: clamp(3.75rem, 10vw, 5rem);
+  border-width: .25rem;
+  background: linear-gradient(35deg, #0b1213, #263839, #0b1213);
+  animation: turn-record 9s linear infinite paused;
+}
+.audio-deck .record > span {
+  width: 40%;
+  border-width: 2px;
+  font: .5625rem/1 var(--mono);
+}
+.audio-studio.is-playing .record { animation-play-state: running; }
 @keyframes turn-record { to { transform: rotate(360deg); } }
-.audio-studio .audio-list { max-height: 27rem; overflow: auto; gap: .3rem; padding: .25rem; }
-.audio-archive .audio-list .audio-item { background: var(--paper-card); border-radius: .4rem; }
-.audio-studio .audio-list .audio-item { background: #0e2021a3; border: 1px solid #f3d9b13b; padding: 0; }
-.audio-studio .audio-list .audio-item h2 { margin: 0; }
-.audio-studio .audio-item button {
-  display: block;
-  width: 100%;
-  text-align: left;
-  background: transparent;
+.audio-studio .audio-list { grid-area: playlist; min-width: 0; }
+.audio-archive .audio-list .audio-item { background: var(--paper-card); border-radius: .4rem; color: var(--ink); }
+.audio-studio.is-enhanced .audio-list {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-auto-rows: max-content;
+  gap: .625rem;
+  max-block-size: 17.25rem;
+  overflow-y: auto;
+  padding: .125rem .25rem .125rem .125rem;
+  scrollbar-color: #819a9d66 transparent;
+  scrollbar-width: thin;
+}
+.audio-studio.is-enhanced .audio-list .audio-item {
+  margin: 0;
+  padding: 0;
   border: 0;
-  border-radius: .3rem;
-  padding: .6rem .8rem;
+  color: inherit;
+  background: transparent;
+}
+.audio-studio.is-enhanced .audio-item h2 { margin: 0; font: inherit; }
+.audio-studio .audio-item button {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  width: 100%;
+  min-height: 3.75rem;
+  padding: .7rem .75rem;
+  border: 1px solid #ffffff1a;
+  border-radius: .75rem;
+  background: #ffffff0d;
+  color: #fff;
+  text-align: left;
   cursor: pointer;
 }
-.audio-studio .audio-item button:hover { background: #ffffff15; }
-.audio-studio .audio-item button[aria-current="true"] { background: var(--wine); }
-.media-error { color: var(--gold); margin-top: .65rem; }
+.audio-studio .audio-item button:hover { background: #ffffff1a; }
+.audio-studio .audio-item button[aria-current="true"] {
+  background: var(--wine);
+  border-color: #f3d9b180;
+  box-shadow: 0 4px 9px #0b121333;
+}
+.audio-studio .audio-item button:focus-visible { outline: 2px solid var(--gold); outline-offset: -3px; }
+.audio-card-icon {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 2rem;
+  height: 2rem;
+  border-radius: .5rem;
+  background: #0005;
+  color: #fffc;
+}
+.audio-card-copy { flex: 1; min-width: 0; }
+.audio-card-title {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 500;
+}
+.audio-card-id { display: block; color: #fffc; font: .625rem/1.5 var(--mono); }
+.audio-item .audio-card-check { width: .875rem; height: .875rem; opacity: .6; }
+.audio-card-icon .audio-pause-icon, .audio-studio.is-playing [aria-current="true"] .audio-play-icon { display: none; }
+.audio-studio.is-playing [aria-current="true"] .audio-pause-icon { display: block; color: var(--gold); }
+.media-error { color: var(--gold); margin-top: .5rem; }
+@media (min-width: 64rem) {
+  .audio-studio.is-enhanced {
+    grid-template-areas: "deck intro" "deck playlist";
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    column-gap: 2rem;
+  }
+}
+@media (max-width: 39.99rem) {
+  .audio-link-hint, .audio-description { display: none; }
+  .audio-deck { gap: .85rem; }
+  .audio-track-display { min-height: 0; }
+  .audio-studio.is-enhanced .audio-list { grid-template-columns: minmax(0, 1fr); }
+}
 
 .reader-settings, .gallery-toolbar {
   display: flex;
@@ -435,14 +566,12 @@
   .museum .gallery:not([data-view="filmstrip"], [data-view="masonry"], [data-view="contact"]) figure[data-aspect="wide-doc"] { grid-column: span 2; }
 }
 @media (max-width: 44rem) {
-  .museum .hero-inner, .atlas, .audio-studio { grid-template-columns: minmax(0, 1fr); }
+  .museum .hero-inner, .atlas { grid-template-columns: minmax(0, 1fr); }
   .museum .nav a { padding: .28rem .42rem; }
-  .museum .audio-studio .audio-list { max-height: 18rem; }
   .directory-letters { gap: .25rem .3rem; }
   .directory-letters button { min-width: 1.9rem; padding-inline: .48rem; }
 }
 @media (max-width: 24rem) {
-  .audio-track-display .record { --record-size: 4.4rem; }
   .people-list.is-filterable, .places-page.is-filterable { --anchor-offset: 13.5rem; }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -458,9 +587,6 @@
 .museum .person > summary span { min-width: 0; }
 .places-page.is-filterable { --anchor-offset: 11rem; }
 .museum .person-body .bibliography > summary { background: transparent; border: none; }
-.audio-deck h2 { color: var(--paper-card); }
-.audio-deck .audio-track-display p { margin-bottom: .25rem; }
-.museum .audio-archive .audio-item:target { border-color: var(--gold); }
 .lightbox-stage.is-zoomed { display: block; }
 @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
   .museum .gallery:not([data-view="contact"]) figure {
