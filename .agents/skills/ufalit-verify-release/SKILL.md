@@ -3,6 +3,10 @@ name: ufalit-verify-release
 description: Verify content, files, links, gallery coverage and GitHub Pages subpath compatibility for the ufalit static migration. Use after capture batches and before a release; publish only after the user separately requests publication of the prepared candidate.
 ---
 
+## Действующая схема публикации — 17 ноября 2026 года
+
+По уточнению пользователя публиковать только папку `site/` из ветки `main` через `.github/workflows/pages.yml` (GitHub Actions, `path: site`). Harness, `.agents/`, `migration/`, доказательства проверок, LICENSE и история остаются в `main` вне `site/`. Не переносить их в публикуемую папку и не удалять. `gh-pages` больше не является источником Pages; прежнюю ветку сохранить как историю первой публикации. Эта схема заменяет прежние указания о публикации через `gh-pages`. Оформление и содержимое `site/` не менять до отдельного поручения.
+
 # Проверка и релиз
 
 ## Проверка партии и кандидата
