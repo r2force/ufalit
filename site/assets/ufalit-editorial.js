@@ -149,6 +149,17 @@
       const header = document.createElement("header");
       header.className = "person-profile-heading";
       const portrait = node.querySelector("summary > img");
+      const thumbnail = document.createElement("img");
+      thumbnail.className = "people-directory-portrait";
+      thumbnail.src = portrait.dataset.thumbnail ?? portrait.src;
+      thumbnail.alt = "";
+      thumbnail.loading = "lazy";
+      thumbnail.width = 40;
+      thumbnail.height = 50;
+      const label = document.createElement("span");
+      label.textContent = title;
+      link.replaceChildren(thumbnail, label);
+
       portrait.classList.add("person-profile-portrait");
       const info = document.createElement("div");
       info.className = "person-profile-info";
@@ -162,7 +173,7 @@
         meta.append(date);
         const small = document.createElement("small");
         small.textContent = years;
-        link.append(small);
+        label.append(small);
       }
       const role = body.querySelector(".person-role");
       if (role) meta.append(role);

@@ -130,7 +130,10 @@
   list-style: none;
 }
 .people-directory a {
-  display: block;
+  display: grid;
+  grid-template-columns: 2.5rem minmax(0, 1fr);
+  align-items: center;
+  gap: .7rem;
   padding: clamp(.65rem, 1.1vw, .85rem);
   overflow-wrap: anywhere;
   color: var(--ink);
@@ -149,6 +152,15 @@
 }
 .people-directory small { display: block; margin-top: .25rem; color: var(--ink-muted); font: .75rem/1.4 var(--mono); }
 .people-directory a[aria-current] small { color: var(--gold); }
+.people-list img.people-directory-portrait {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: center 30%;
+  background: var(--paper-warm);
+  border: 1px solid var(--line);
+  border-radius: .4rem;
+}
 
 .people-list .people-profiles .person {
   margin: 0;
