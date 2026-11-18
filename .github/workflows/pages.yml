@@ -4,8 +4,8 @@ on:
     branches: [main]
     paths:
       - 'site/**'
-      - 'templates/navigation.html'
-      - 'scripts/render_navigation.py'
+      - 'templates/**'
+      - 'scripts/render_site.py'
       - '.github/workflows/pages.yml'
   workflow_dispatch:
 permissions:
@@ -25,8 +25,8 @@ jobs:
     steps:
       - name: Checkout main
         uses: actions/checkout@v4
-      - name: Render shared navigation
-        run: python3 scripts/render_navigation.py --in-place
+      - name: Build static pages
+        run: python3 scripts/render_site.py --in-place
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload only site directory
