@@ -124,7 +124,7 @@
 .people-list .person-body img.portrait-left { float: left; }
 .people-list .person-body img.portrait-right { float: right; }
 .people-list .person-body img.portrait-middle { vertical-align: middle; }
-.people-list .person-body :is(b, p).archive-small { font-size: 14px; }
+.people-list .person-body :is(b, p).archive-small { font-size: calc(.875rem * var(--reader-scale, 1)); }
 .people-list .person-body p.text-center { text-align: center; }
 .people-list .person-body p.text-left { text-align: left; }
 .people-list .person-body p.text-right { text-align: right; }

@@ -1,0 +1,142 @@
+.museum :is([data-reader]:not(.directory-page), .directory-content.reader-sheet) {
+  --reader-scale: 1;
+  --reader-size-selected: #8e2d36;
+  --reader-tone-selected: #173b3d;
+  min-inline-size: 0;
+  padding: clamp(1rem, 3.1vw, 2.5rem);
+  color: var(--ink);
+  background: var(--paper-card);
+  border: 1px solid var(--line);
+  border-radius: clamp(.95rem, 2vw, 1.5rem);
+  box-shadow: 0 .15rem .45rem #1428291c;
+  font: calc(1.075rem * var(--reader-scale))/1.78 var(--reading);
+  overflow-wrap: anywhere;
+}
+
+.museum .reading[data-reader]:not(.directory-page) {
+  max-inline-size: 66rem;
+  margin-inline: auto;
+}
+.museum .reading[data-reader]:not(.directory-page, .reader-sheet) { max-inline-size: 76ch; }
+
+.museum .reader-sheet[data-tone="sepia"] {
+  --paper: #ebdfc4;
+  --paper-card: #f1e7d0;
+  --ink: #2b2118;
+  --ink-muted: #58473a;
+  --line: #d5c4a1;
+}
+.museum .reader-sheet[data-tone="night"] {
+  --paper: #1b2c2d;
+  --paper-card: #121d1e;
+  --paper-warm: #243738;
+  --ink: #e6ece8;
+  --ink-muted: #becdca;
+  --accent: #a9d8ce;
+  --wine: #f2b0b7;
+  --bronze: #d7ae73;
+  --line: #385153;
+  --directory-card-line: var(--line);
+  --reader-tone-selected: #28595c;
+  color-scheme: dark;
+}
+
+.reader-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: .85rem 1.25rem;
+  margin: 0 0 clamp(1.1rem, 2.3vw, 1.75rem);
+  padding-bottom: clamp(.9rem, 2vw, 1.5rem);
+  border-bottom: 1px solid var(--line);
+}
+.museum .reader-sheet .reader-header :is(h1, h2) {
+  flex: 1 1 17rem;
+  max-inline-size: none;
+  margin: 0;
+  font: 650 clamp(2rem, 4.3vw, 3.2rem)/1.06 var(--display);
+}
+.reader-settings {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .5rem;
+  max-inline-size: 100%;
+  font: .82rem/1.35 var(--ui);
+}
+.reader-options {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .18rem;
+  padding: .2rem;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: .55rem;
+}
+.reader-size-icon { margin-inline: .45rem; color: var(--ink-muted); font: 600 1rem var(--display); }
+.museum .reader-settings button {
+  min-block-size: 2rem;
+  padding: .32rem .58rem;
+  color: var(--ink);
+  background: transparent;
+  border: 0;
+  border-radius: .35rem;
+  font-weight: 550;
+  cursor: pointer;
+}
+.museum .reader-settings button:hover { box-shadow: inset 0 0 0 1px var(--ink-muted); }
+.museum .reader-settings button[aria-pressed="true"] { color: white; background: var(--reader-tone-selected); }
+.museum .reader-settings button[data-reader-scale][aria-pressed="true"] { background: var(--reader-size-selected); }
+.museum .reader-sheet :focus-visible { outline-color: var(--bronze); }
+
+.reader-body {
+  display: flow-root;
+  max-inline-size: 70ch;
+  margin-inline: auto;
+}
+.reader-body :is(.medal-copy, .stipend-copy) { font-size: inherit; }
+.reader-body :is(table, pre) { display: block; max-inline-size: 100%; overflow-x: auto; }
+.museum [data-reader] .article-cover { max-width: min(34%, 12rem); }
+
+.museum .directory-content.reader-sheet { padding: clamp(1rem, 2.6vw, 2rem); }
+.directory-content.reader-sheet:not(:has(.directory-card:not([hidden]))) { display: none; }
+.directory-content.reader-sheet .reader-header { justify-content: flex-end; }
+.directory-page .directory-content.reader-sheet .directory-card {
+  padding: 0;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+.museum .directory-page .directory-content.reader-sheet :is(.person-body, .place-section) { max-inline-size: 70ch; }
+.museum .directory-page .directory-content.reader-sheet .place-section { margin-inline: auto; }
+.museum .reader-sheet[data-tone="night"] .person-profile-heading a:is([href^="../reading/"], [href^="../reading-"]) {
+  color: var(--gold);
+}
+.museum .reader-sheet[data-tone="night"] .person-profile-years { background: var(--reader-size-selected); }
+
+.reading .reader-verse {
+  max-inline-size: 62ch;
+  margin-block: 1.25em;
+  padding-inline-start: clamp(.75rem, 2.2vw, 1.15rem);
+  border-inline-start: 2px solid var(--bronze);
+  font-style: italic;
+  line-height: 1.72;
+}
+.museum .reading .reader-verse p { margin: 0; line-height: inherit; }
+.reader-verse p:empty { min-block-size: 1em; }
+.reading .reader-verse p:has(> b:only-child) { margin-block: 1.15em .45em; font-style: normal; }
+.reader-verse p > b:only-child { font-style: normal; }
+.reader-verse-lines br + br { display: none; }
+.reader-verse-title { display: inline-block; margin-block: .65em .2em; font-style: normal; }
+
+@media (max-width: 36rem) {
+  .directory-content.reader-sheet .reader-header { justify-content: flex-start; }
+  .museum [data-reader] .article-cover {
+    display: block;
+    float: none;
+    max-width: min(70%, 10rem);
+    margin: 0 auto .85rem;
+  }
+}

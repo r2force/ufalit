@@ -14,6 +14,7 @@ LINK = re.compile(r'href="([^"]+)"')
 DEFERRED_PAGES = {"videos", "video-81", "video-388", "video-389", "large-videos", "legends"}
 # The source link contains its label (which may include strong/small) and cover URL.
 COVER_LINK = re.compile(r'<a\b([^<>]*?)\sdata-cover="([^"]+)"([^<>]*)>(.*?)</a>', re.S)
+READER_ARTICLE = re.compile(r'<article\b[^>]*\sdata-reader(?=[\s>])')
 AWARD_PAGES = {"fund", "medal", "stipend"}
 
 
@@ -83,7 +84,11 @@ def render_page(source, relative, templates):
     metadata, content = source[4:].split("\n---\n", 1)
     page = json.loads(metadata)
     prefix = "../" * (len(relative.parts) - 1)
+    style_names = list(page.get("styles", []))
     script_names = list(page.get("scripts", []))
+    if READER_ARTICLE.search(content):
+        style_names.append("reader.css")
+        script_names.append("ufalit-reader.js?v=2")
     if "photos" in page:
         photos = page["photos"]
         content = insert_list(content, "photos", (render_photo(photo, templates["photo"]) for photo in photos))
@@ -108,7 +113,7 @@ def render_page(source, relative, templates):
 
     assets = prefix + "assets/"
     styles = [f'<link rel="stylesheet" href="{assets}{escape(name)}">'
-              for name in page.get("styles", [])]
+              for name in style_names]
     scripts = [f'<script src="{assets}{escape(name)}" defer></script>'
                for name in script_names]
     header = templates["header"].substitute(
