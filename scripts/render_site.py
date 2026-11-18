@@ -12,6 +12,8 @@ ROOT = Path(__file__).resolve().parents[1]
 SITE = ROOT / "site"
 LINK = re.compile(r'href="([^"]+)"')
 DEFERRED_PAGES = {"videos", "video-81", "video-388", "video-389", "large-videos", "legends"}
+# The source link contains its label (which may include strong/small) and cover URL.
+COVER_LINK = re.compile(r'<a\b([^<>]*?)\sdata-cover="([^"]+)"([^<>]*)>(.*?)</a>', re.S)
 AWARD_PAGES = {"fund", "medal", "stipend"}
 
 
@@ -41,8 +43,10 @@ def render_menu(template, relative):
 
 
 def render_photo(photo, template):
+    photo = {"loading": "lazy", **photo}
+
     def attributes(names):
-        return "".join(f' {name}="{escape(photo[name])}"' for name in names if name in photo)
+        return "".join(f' {name}="{escape(photo[name])}"' for name in names if photo.get(name) is not None)
 
     caption = photo["caption_html"] if "caption_html" in photo else escape(photo["caption"])
     alt = photo["alt"] if "alt" in photo else photo["caption"]
@@ -53,18 +57,47 @@ def render_photo(photo, template):
     )
 
 
+def photo_count(count):
+    last = count % 10
+    if 11 <= count % 100 <= 14:
+        word = "фотографий"
+    elif last == 1:
+        word = "фотография"
+    elif 2 <= last <= 4:
+        word = "фотографии"
+    else:
+        word = "фотографий"
+    return f"{count} {word}"
+
+
+def insert_list(content, name, rows):
+    marker = f"<!-- {name} -->"
+    if content.count(marker) != 1:
+        raise ValueError(f"expected one {marker} for {name}")
+    return content.replace(marker, "\n".join(rows))
+
+
 def render_page(source, relative, templates):
     if not source.startswith("---\n"):
         raise ValueError("missing page metadata")
     metadata, content = source[4:].split("\n---\n", 1)
     page = json.loads(metadata)
     prefix = "../" * (len(relative.parts) - 1)
-    photos = page.get("photos", [])
-    if content.count("<!-- photos -->") != int(bool(photos)):
-        raise ValueError("an album must have one photo list and one photo marker")
-    if photos:
-        figures = "\n".join(render_photo(photo, templates["photo"]) for photo in photos)
-        content = content.replace("<!-- photos -->", figures)
+    script_names = list(page.get("scripts", []))
+    if "photos" in page:
+        photos = page["photos"]
+        content = insert_list(content, "photos", (render_photo(photo, templates["photo"]) for photo in photos))
+        content = content.replace("<!-- photo-count -->", photo_count(len(photos)))
+        if "ufalit-gallery.js" not in script_names:
+            script_names.append("ufalit-gallery.js")
+    if "tracks" in page:
+        tracks = (templates["audio-track"].substitute({key: escape(value) for key, value in track.items()})
+                  for track in page["tracks"])
+        content = insert_list(content, "tracks", tracks)
+    if any(marker in content for marker in ("<!-- tracks -->", "<!-- photos -->", "<!-- photo-count -->")):
+        raise ValueError("missing metadata for a media list")
+    content = COVER_LINK.sub(lambda match: templates["album-cover"].substitute(
+        attributes=(match[1] + match[3]).strip(), cover=match[2], label=match[4]), content)
     intro, marker, main_content = content.partition("<!-- main -->")
     items = []
     for crumb in page.get("breadcrumbs", []):
@@ -77,7 +110,7 @@ def render_page(source, relative, templates):
     styles = [f'<link rel="stylesheet" href="{assets}{escape(name)}">'
               for name in page.get("styles", [])]
     scripts = [f'<script src="{assets}{escape(name)}" defer></script>'
-               for name in page.get("scripts", [])]
+               for name in script_names]
     header = templates["header"].substitute(
         prefix=prefix, navigation=render_menu(templates["navigation"].template, relative)
     )
@@ -101,7 +134,7 @@ def main():
         parser.error("--output must be outside the source site directory")
 
     templates = {name: Template((ROOT / "templates" / f"{name}.html").read_text(encoding="utf-8").strip())
-                 for name in ("base", "header", "navigation", "breadcrumbs", "footer", "photo")}
+                 for name in ("base", "header", "navigation", "breadcrumbs", "footer", "photo", "audio-track", "album-cover")}
     pages = [SITE / "index.html", *sorted((SITE / "pages").glob("*/index.html"))]
     generated = {}
     for page in pages:
