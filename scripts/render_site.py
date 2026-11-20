@@ -15,6 +15,7 @@ DEFERRED_PAGES = {"videos", "video-81", "video-388", "video-389", "large-videos"
 # The source link contains its label (which may include strong/small) and cover URL.
 COVER_LINK = re.compile(r'<a\b([^<>]*?)\sdata-cover="([^"]+)"([^<>]*)>(.*?)</a>', re.S)
 READER_ARTICLE = re.compile(r'<article\b[^>]*\sdata-reader(?=[\s>])')
+DIRECTORY_RECORD = re.compile(r'<(details|section)\b[^>]*\sid="([^"]+)"\sdata-writer="([^"]+)"[^>]*>')
 AWARD_PAGES = {"fund", "medal", "stipend"}
 
 
@@ -78,7 +79,45 @@ def insert_list(content, name, rows):
     return content.replace(marker, "\n".join(rows))
 
 
-def render_page(source, relative, templates):
+def render_writer_directory(content, records, prefix, templates, writers):
+    def writer_fields(slug):
+        writer = writers[slug]
+        return {"name": escape(writer["name"]), "years": escape(writer["years"]),
+                "thumbnail": escape(f"{prefix}assets/persons/thumbnails/{slug}.jpg")}
+
+    def render_profile(match):
+        tag, _, slug = match.groups()
+        if tag != "details":
+            return match[0]
+        writer = writers[slug]
+        gallery = writer.get("gallery", "gallery")
+        reading_anchor = f'#{writer["reading"]}' if "reading" in writer else ""
+        audio = ""
+        if "audio" in writer:
+            audio_url = escape(f'{prefix}pages/{writer["audio"]}/')
+            audio = f'\n      <a class="profile-reading-link" href="{audio_url}">Аудиозаписи</a>'
+        full_name = escape(writer.get("full_name", ""))
+        return match[0] + "\n" + templates["writer-profile"].substitute(
+            **writer_fields(slug), portrait=escape(prefix + writer["portrait"]),
+            role=escape(writer["role"]), ufa=escape(writer["ufa"]),
+            full_name=f'\n    <p class="person-full-name">{full_name}</p>' if full_name else "",
+            gallery_url=escape(f"{prefix}pages/{gallery}/"),
+            gallery_label="Фотогалерея" if "gallery" in writer else "Каталог фотогалереи",
+            places_url=escape(f'{prefix}pages/places/#{writer["place"]}'),
+            reading_url=escape(f"{prefix}pages/reading/{reading_anchor}"), audio_link=audio,
+        ) + "\n"
+
+    cards = "\n".join(templates["writer-card"].substitute(
+        **writer_fields(slug), id=escape(record_id), letter=escape(writers[slug]["letter"]),
+        alias=escape(writers[slug].get("full_name", "")),
+    ) for _, record_id, slug in (match.groups() for match in records))
+    first_record = records[0].start()
+    content = DIRECTORY_RECORD.sub(render_profile, content)
+    return (content[:first_record] + f'<template class="directory-entries">\n{cards}\n</template>\n'
+            + content[first_record:])
+
+
+def render_page(source, relative, templates, writers):
     if not source.startswith("---\n"):
         raise ValueError("missing page metadata")
     metadata, content = source[4:].split("\n---\n", 1)
@@ -86,8 +125,13 @@ def render_page(source, relative, templates):
     prefix = "../" * (len(relative.parts) - 1)
     style_names = list(page.get("styles", []))
     script_names = list(page.get("scripts", []))
+    records = list(DIRECTORY_RECORD.finditer(content))
+    if records:
+        content = render_writer_directory(content, records, prefix, templates, writers)
+        style_names.insert(0, "directory.css?v=2")
+        script_names.append("ufalit-editorial.js?v=6")
     if READER_ARTICLE.search(content):
-        style_names.extend(("reader.css?v=2", "illustrations.css"))
+        style_names.extend(("reader.css?v=3", "illustrations.css?v=2"))
         script_names.append("ufalit-reader.js?v=2")
     if "photos" in page:
         photos = page["photos"]
@@ -139,7 +183,9 @@ def main():
         parser.error("--output must be outside the source site directory")
 
     templates = {name: Template((ROOT / "templates" / f"{name}.html").read_text(encoding="utf-8").strip())
-                 for name in ("base", "header", "navigation", "breadcrumbs", "footer", "photo", "audio-track", "album-cover")}
+                 for name in ("base", "header", "navigation", "breadcrumbs", "footer", "photo", "audio-track",
+                              "album-cover", "writer-card", "writer-profile")}
+    writers = json.loads((ROOT / "templates" / "writers.json").read_text(encoding="utf-8"))
     pages = [SITE / "index.html", *sorted((SITE / "pages").glob("*/index.html"))]
     generated = {}
     for page in pages:
@@ -147,7 +193,7 @@ def main():
             continue
         relative = page.relative_to(SITE)
         try:
-            generated[relative] = render_page(page.read_bytes().decode("utf-8"), relative, templates)
+            generated[relative] = render_page(page.read_bytes().decode("utf-8"), relative, templates, writers)
         except (ValueError, KeyError, TypeError) as exc:
             raise SystemExit(f"Invalid page {relative}: {exc}") from exc
 

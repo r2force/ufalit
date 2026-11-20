@@ -109,9 +109,9 @@
   border: 0;
   box-shadow: none;
 }
-.museum .directory-page .directory-content.reader-sheet :is(.person-body, .place-section) { max-inline-size: 70ch; }
-.museum .directory-page .directory-content.reader-sheet .place-section { margin-inline: auto; }
-.museum .reader-sheet[data-tone="night"] .person-profile-heading a:is([href^="../reading/"], [href^="../reading-"]) {
+.museum .directory-page .directory-content.reader-sheet :is(.person-body, .place-section, .award-section) { max-inline-size: 70ch; }
+.museum .directory-page .directory-content.reader-sheet :is(.place-section, .award-section) { margin-inline: auto; }
+.museum .reader-sheet[data-tone="night"] .person-profile-heading .profile-reading-link {
   color: var(--gold);
 }
 .museum .reader-sheet[data-tone="night"] .person-profile-years { background: var(--reader-size-selected); }

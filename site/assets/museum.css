@@ -228,10 +228,6 @@
 .directory-outline { margin: 0 0 1.5rem; font: .93rem/1.65 var(--ui); }
 .directory-outline ul { padding-left: 1.4rem; columns: 3 14rem; }
 .directory-outline li { break-inside: avoid; }
-.bibliography { margin-block: 1rem; padding: .45rem .65rem; background: var(--paper); border: 1px solid var(--line); border-radius: .4rem; }
-.bibliography summary, .person .bibliography summary { display: list-item; padding: .35rem; font: 650 .9rem/1.35 var(--ui); cursor: pointer; }
-.person .bibliography summary::before { content: none; }
-.bibliography .directory-query { margin: .65rem .35rem; font: .85rem/1.5 var(--ui); }
 
 .record {
   --record-size: clamp(6rem, 16vw, 9rem);
@@ -484,11 +480,13 @@
   object-fit: contain;
 }
 .museum .gallery figcaption {
-  padding: .7rem .85rem .85rem;
+  padding: .6rem .75rem .75rem;
+  color: var(--ink-muted);
   border-top: 1px solid var(--line);
   white-space: normal;
   overflow-wrap: anywhere;
-  font: 1.04rem/1.4 var(--reading);
+  font: .85rem/1.5 var(--ui);
+  text-align: center;
 }
 .museum .gallery[data-view="filmstrip"] {
   display: flex;
@@ -553,5 +551,4 @@
 }
 .museum .person > summary span { min-width: 0; }
 .places-page.is-filterable { --anchor-offset: 11rem; }
-.museum .person-body .bibliography > summary { background: transparent; border: none; }
 .lightbox-stage.is-zoomed { display: block; }

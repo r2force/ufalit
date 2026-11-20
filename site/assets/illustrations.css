@@ -34,12 +34,14 @@
   border: 0;
   object-fit: contain;
 }
-.material-figure figcaption {
-  padding: .55rem .75rem .65rem;
+.material-inline-captioned { display: grid; }
+:is(.material-figure figcaption, .material-caption) {
+  display: block;
+  padding: .5rem .7rem .6rem;
   color: var(--ink-muted);
   border-block-start: 1px solid var(--line);
-  font: calc(.86rem * var(--reader-scale, 1))/1.55 var(--ui);
-  text-align: start;
+  font: calc(.8rem * var(--reader-scale, 1))/1.5 var(--ui);
+  text-align: center;
   overflow-wrap: anywhere;
 }
 

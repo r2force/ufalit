@@ -8,6 +8,7 @@
   --directory-filter-height: 4rem;
   --directory-sidebar-top: calc(var(--directory-sticky-top) + var(--directory-filter-height) + var(--directory-sticky-gap));
 }
+.museum .reading.directory-page { max-width: none; }
 .directory-banner {
   margin-bottom: var(--directory-gap);
   padding: clamp(1.4rem, 3vw, 2.5rem);
