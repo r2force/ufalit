@@ -9,7 +9,7 @@
     const title = (people ? name.firstChild.textContent : name.textContent).trim();
     const years = people ? name.querySelector("small")?.textContent : null;
     const portrait = people ? node.querySelector("summary > img") : null;
-    const annotations = people ? [] : Array.from(node.querySelectorAll("p[id]"), (paragraph) => {
+    const annotations = people ? [] : Array.from(node.querySelectorAll("p[id], figcaption[id]"), (paragraph) => {
       const text = paragraph.textContent.trim();
       const label = normalize(paragraph.querySelector("b, strong")?.textContent ?? "");
       const addresses = text.match(/(?:ул\.|улиц[аеыу]|проспект[ае]?|переул(?:ок|ке)|адресу:)\s*[\p{L}.\d–-]+(?:[ ,]+[\p{L}\d–/-]+){0,4}/giu) ?? [];
@@ -173,7 +173,8 @@
     for (let details = target.closest("details"); details; details = details.parentElement.closest("details")) {
       details.open = true;
     }
-    target.scrollIntoView({ block: "start", behavior: "instant" });
+    const illustration = target.closest(".material-figure");
+    (illustration ?? target).scrollIntoView({ block: "start", behavior: "instant" });
   }
 
   function enhancePerson(record) {

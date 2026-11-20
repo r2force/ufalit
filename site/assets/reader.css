@@ -2,6 +2,7 @@
   --reader-scale: 1;
   --reader-size-selected: #8e2d36;
   --reader-tone-selected: #173b3d;
+  container-type: inline-size;
   min-inline-size: 0;
   padding: clamp(1rem, 3.1vw, 2.5rem);
   color: var(--ink);
@@ -98,7 +99,6 @@
 }
 .reader-body :is(.medal-copy, .stipend-copy) { font-size: inherit; }
 .reader-body :is(table, pre) { display: block; max-inline-size: 100%; overflow-x: auto; }
-.museum [data-reader] .article-cover { max-width: min(34%, 12rem); }
 
 .museum .directory-content.reader-sheet { padding: clamp(1rem, 2.6vw, 2rem); }
 .directory-content.reader-sheet:not(:has(.directory-card:not([hidden]))) { display: none; }
@@ -133,10 +133,4 @@
 
 @media (max-width: 36rem) {
   .directory-content.reader-sheet .reader-header { justify-content: flex-start; }
-  .museum [data-reader] .article-cover {
-    display: block;
-    float: none;
-    max-width: min(70%, 10rem);
-    margin: 0 auto .85rem;
-  }
 }

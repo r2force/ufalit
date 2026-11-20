@@ -10,7 +10,6 @@
   if (!frames.length) return;
 
   const motion = matchMedia("(prefers-reduced-motion: reduce)");
-  const precisePointer = matchMedia("(hover: hover) and (pointer: fine)");
   const options = [
     ["grid", "Паспарту-сетка"],
     ["filmstrip", "Диафильм"],
@@ -50,31 +49,6 @@
     });
   });
   gallery.before(toolbar);
-
-  for (const { figure, link, image } of frames) {
-    function sizeFrame() {
-      if (!image.naturalHeight) return;
-      const ratio = image.naturalWidth / image.naturalHeight;
-      figure.dataset.aspect = ratio > 1.65 || ["photo-307", "photo-309"].includes(figure.id) ? "wide-doc" :
-        ratio > 1.13 ? "landscape" : ratio < .88 ? "portrait" : "square";
-      link.style.setProperty("--photo-wash", `url(${JSON.stringify(image.currentSrc || image.src)})`);
-    }
-    image.addEventListener("load", sizeFrame, { once: true });
-    if (image.complete) sizeFrame();
-
-    figure.addEventListener("pointermove", (event) => {
-      if (!precisePointer.matches || motion.matches || gallery.dataset.view === "contact") return;
-      const bounds = figure.getBoundingClientRect();
-      const x = (event.clientX - bounds.left) / bounds.width;
-      const y = (event.clientY - bounds.top) / bounds.height;
-      figure.style.setProperty("--turn-x", `${(0.5 - y) * 3}deg`);
-      figure.style.setProperty("--turn-y", `${(x - 0.5) * 3}deg`);
-    });
-    figure.addEventListener("pointerleave", () => {
-      figure.style.removeProperty("--turn-x");
-      figure.style.removeProperty("--turn-y");
-    });
-  }
 
   const dialog = document.createElement("dialog");
   if (typeof dialog.showModal !== "function") return;

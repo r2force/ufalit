@@ -87,14 +87,14 @@ def render_page(source, relative, templates):
     style_names = list(page.get("styles", []))
     script_names = list(page.get("scripts", []))
     if READER_ARTICLE.search(content):
-        style_names.append("reader.css")
+        style_names.extend(("reader.css?v=2", "illustrations.css"))
         script_names.append("ufalit-reader.js?v=2")
     if "photos" in page:
         photos = page["photos"]
         content = insert_list(content, "photos", (render_photo(photo, templates["photo"]) for photo in photos))
         content = content.replace("<!-- photo-count -->", photo_count(len(photos)))
-        if "ufalit-gallery.js" not in script_names:
-            script_names.append("ufalit-gallery.js")
+        if not any(name.partition("?")[0] == "ufalit-gallery.js" for name in script_names):
+            script_names.append("ufalit-gallery.js?v=2")
     if "tracks" in page:
         tracks = (templates["audio-track"].substitute({key: escape(value) for key, value in track.items()})
                   for track in page["tracks"])
