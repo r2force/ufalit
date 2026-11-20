@@ -2,3 +2,5 @@
 *.mp4 filter=lfs diff=lfs merge=lfs binary
 *.jpg filter=lfs diff=lfs merge=lfs binary
 *.png filter=lfs diff=lfs merge=lfs binary
+*.ppt filter=lfs diff=lfs merge=lfs binary
+*.pptx filter=lfs diff=lfs merge=lfs binary
