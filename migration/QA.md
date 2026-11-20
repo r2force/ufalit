@@ -40,10 +40,10 @@ HTTP-проверка: все 949 файлов без видео получил�
 | `assets.csv` | 1 712 | 898 `captured`, 814 `discovered` |
 | `assets.csv`, captured | 898 | 873 image, 23 audio, 1 document, 1 video |
 | `assets.csv`, discovered | 814 | 214 script, 267 CSS, 108 image, 200 thumbnail, 25 video |
-| `content-parity.csv` | 9 522 | 9 486 `matched`, 10 `changed`, 0 `blocked`, 26 `accepted-exception` |
+| `content-parity.csv` | 9 522 | 9 482 `matched`, 14 `changed`, 0 `blocked`, 26 `accepted-exception` |
 | `exceptions.csv` | 4 | 4 `accepted`, 0 `open`; видео исключены из скачивания и проверки содержимого/воспроизведения |
 
-Типы в `content-parity.csv`: 8 598 text (8 588 matched, 10 changed), 874 image (все matched), 23 audio (все matched), 1 document (matched), 26 video (0 blocked, 26 accepted-exception). Вхождения parity — размещения/текстовые элементы; они не равны числу уникальных файлов или URL.
+Типы в `content-parity.csv`: 8 598 text (8 584 matched, 14 changed), 874 image (все matched), 23 audio (все matched), 1 document (matched), 26 video (0 blocked, 26 accepted-exception). Вхождения parity — размещения/текстовые элементы; они не равны числу уникальных файлов или URL.
 
 Статус `captured` в `pages.csv` означает регистрацию локальной цели и evidence согласно схеме реестра; сам по себе он не означает свежую сверку содержания. Для image/audio/document итоговые matched-строки дополнительно прошли отдельные проверки, перечисленные ниже. В частности, 873 строки captured-image в `assets.csv` и 874 image-вхождения в parity — разные единицы учёта.
 
@@ -56,10 +56,11 @@ HTTP-проверка: все 949 файлов без видео получил�
 
 ### Изменённые текстовые элементы
 
-В реестре 10 строк со статусом `changed`; это выявленные различия текста интерфейса/счётчиков, а не потерянные статьи или материалы:
+В реестре 14 строк со статусом `changed`; это выявленные различия текста интерфейса/счётчиков и четыре исправленные редакционные опечатки, а не потерянные статьи или материалы:
 
 - Восемь различий формы счётчика при сохранённом числовом значении: `gallery-30-count`, `gallery-7-34`, `gallery-7-33`, `gallery-18-child-category`, `gallery-34-count`, `gallery-35-count`, `gallery-36-count`, `gallery-43-count`.
 - Две подписи перехода к списку категорий: `gallery-7-parent` и `gallery-39-category-list-link`. Исходное `Category List` локализовано; ссылка ведёт на локальную страницу списка.
+- Четыре исправленные опечатки источника при вычитке 2026-11-20: `gallery-6-28`, `gallery-28-title` («Совемренники» → «Современники»), `awards-text-015` («А..С. Пушкина» → «А.С. Пушкина»), `awards-text-107` («Прияли участие» → «Приняли участие»). Подробности: `migration/evidence/2026-11-20/EDITORIAL-PROOFREADING.md`.
 
 Точные строки и локаторы приведены в `migration/content-parity.csv`.
 
