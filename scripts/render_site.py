@@ -129,7 +129,7 @@ def render_page(source, relative, templates, writers):
     if records:
         content = render_writer_directory(content, records, prefix, templates, writers)
         style_names.insert(0, "directory.css?v=2")
-        script_names.append("ufalit-editorial.js?v=6")
+        script_names.append("ufalit-editorial.js?v=7")
     if READER_ARTICLE.search(content):
         style_names.extend(("reader.css?v=3", "illustrations.css?v=2"))
         script_names.append("ufalit-reader.js?v=2")

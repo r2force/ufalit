@@ -9,10 +9,12 @@
     "Легенды"
   ],
   "styles": [
-    "legends.css"
+    "bibliography.css",
+    "legends.css?v=2"
   ],
   "scripts": [
-    "ufalit-gallery.js?v=3"
+    "ufalit-gallery.js?v=3",
+    "ufalit-editorial.js?v=7"
   ]
 }
 ---
@@ -25,7 +27,6 @@
       <a href="#pamyatniki">Выбрать памятник</a>
       <a href="../../assets/documents/literary-monuments-ufa.ppt" download>Скачать презентацию (PPT)</a>
     </div>
-    <p class="legend-credits">МБУ Централизованная система детских библиотек городского округа г. Уфа РБ<br>Детская библиотека № 19, филиал № 4</p>
   </div>
 <figure class="legend-cover">
   <a href="../../assets/legends/images/cover-zuhra-moon-illustration.png"><img src="../../assets/legends/images/cover-zuhra-moon-illustration.png" width="660" height="880" fetchpriority="high" alt="Зухра с коромыслом на золотом месяце"></a>
@@ -35,15 +36,35 @@
 <nav aria-labelledby="legend-index-title">
 <h2 id="legend-index-title">Литературные памятники Уфы</h2>
 <ul>
-  <li><a href="#zuhra">Скульптура «Лунная девушка»<small>Дёмский район</small></a></li>
-  <li><a href="#salavat">Памятник Салавату Юлаеву<small>Площадь имени Салавата</small></a></li>
-  <li><a href="#kunitsa">Памятник кунице<small>Площадь перед Гостиным двором</small></a></li>
-  <li><a href="#kurai">Памятник кураю<small>Проспект Октября</small></a></li>
+  <li>
+    <a href="#zuhra">
+      <img src="../../assets/legends/images/zuhra-moon-sculpture.jpg" width="817" height="1154" loading="lazy" alt="">
+      <span>Скульптура «Лунная девушка»<small>Дёмский район, ул. Новороссийская, 105, территория «Иммунопрепарата»</small></span>
+    </a>
+  </li>
+  <li>
+    <a href="#salavat">
+      <img src="../../assets/legends/images/salavat-yulaev-monument-daylight.jpg" width="470" height="700" loading="lazy" alt="">
+      <span>Памятник Салавату Юлаеву<small>Сквер имени Салавата Юлаева, ул. Заки Валиди, 26. Памятник на реставрации</small></span>
+    </a>
+  </li>
+  <li>
+    <a href="#kunitsa">
+      <img src="../../assets/legends/images/kunitsa-monument-close.jpg" width="642" height="731" loading="lazy" alt="">
+      <span>Памятник кунице<small>Ул. Ленина, у входа в парк имени Ивана Якутова</small></span>
+    </a>
+  </li>
+  <li>
+    <a href="#kurai">
+      <img src="../../assets/legends/images/kurai-player-monument-fountain.jpg" width="298" height="448" loading="lazy" alt="">
+      <span>Памятник кураю<small>Проспект Октября, 94, перед бывшим кинотеатром «Искра»</small></span>
+    </a>
+  </li>
 </ul>
 </nav>
 <figure class="legend-map">
   <a href="../../assets/legends/images/ufa-literary-monuments-map.png"><img src="../../assets/legends/images/ufa-literary-monuments-map.png" width="1171" height="1278" loading="lazy" alt="Карта литературных памятников Уфы"></a>
-  <figcaption>Карта литературных памятников Уфы</figcaption>
+  <figcaption>Карта из презентации</figcaption>
 </figure>
 </div>
 <article class="legend-chapter" id="zuhra" aria-labelledby="zuhra-title">
@@ -88,7 +109,7 @@
   <figcaption>Ульфат Кубагушев у памятника</figcaption>
 </figure>
 </div>
-<details class="legend-biblio">
+<details class="legend-biblio bibliography-panel" id="zuhra-bibliography" data-bibliography>
 <summary>Библиография</summary>
 <ol>
   <li>Башкирские предания и легенды [Текст] / сост. Ф. Надршина. – Уфа: Башкирское книжное издательство, 1985. – 288с.</li>
@@ -150,7 +171,7 @@
   <figcaption>Скульптор Сосланбек Тавасиев</figcaption>
 </figure>
 </div>
-<details class="legend-biblio">
+<details class="legend-biblio bibliography-panel" id="salavat-bibliography" data-bibliography>
 <summary>Библиография</summary>
 <ol>
   <li>Узиков, Ю.А. Это с нами всегда [Текст] / Уфа: Китап, 1983. - С. 224-228.</li>
@@ -187,7 +208,7 @@
 </figure>
 </div>
 <footer class="legend-address">
-<p><strong>Адрес</strong>г. Уфа, ул. М.Гафури, площадь им. Салавата</p>
+<p><strong>Адрес в презентации</strong>г. Уфа, ул. М.Гафури, площадь им. Салавата</p>
 <a href="#pamyatniki">К карте и списку памятников</a>
 </footer>
 </article>
@@ -219,7 +240,7 @@
   <figcaption>Бронзовые куницы у Гостиного двора</figcaption>
 </figure>
 </div>
-<details class="legend-biblio">
+<details class="legend-biblio bibliography-panel" id="kunitsa-bibliography" data-bibliography>
 <summary>Библиография</summary>
 <ol>
   <li>Мавлетов, В.С. Благословенный край [Текст] : учебное пособие для учащихся / Уфа: Уфимский полиграф. комбинат, 2005. – 72 с.: ил.</li>
@@ -235,7 +256,7 @@
 </figure>
 </div>
 <footer class="legend-address">
-<p><strong>Адрес</strong>г. Уфа ул. Ленина, площадь перед Гостиным двором</p>
+<p><strong>Адрес в презентации</strong>г. Уфа ул. Ленина, площадь перед Гостиным двором</p>
 <a href="#pamyatniki">К карте и списку памятников</a>
 </footer>
 </article>
@@ -278,7 +299,7 @@
 <p>Архитектурный проект тоже был утвержден. Скульптуру поставили на колонну в большой чаше, украшенной башкирским орнаментом.</p>
 <p>Скульптуру мальчика отливали на ленинградском заводе монументальной скульптуры.</p>
 </div>
-<details class="legend-biblio">
+<details class="legend-biblio bibliography-panel" id="kurai-bibliography" data-bibliography>
 <summary>Библиография</summary>
 <ol>
   <li>Рахимов, Р.Р. Курай [Текст] : учебное пособие для муз. школ и училищ / Р.Р. Рахимов. – Уфа: Китап, 1999. – 448 с.</li>

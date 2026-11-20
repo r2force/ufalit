@@ -1,4 +1,78 @@
 (() => {
+  const normalize = (text) => text.toLocaleLowerCase("ru").replaceAll("ё", "е").replace(/\s+/g, " ").trim();
+
+  function createBibliographyPanel(resultsId) {
+    const panel = document.createElement("section");
+    panel.className = "bibliography-panel";
+    panel.innerHTML = `
+      <div class="bibliography-toolbar">
+        <button class="bibliography-toggle" type="button" aria-expanded="false">Библиографический указатель</button>
+        <input class="bibliography-search" type="search" aria-label="Фильтр по году, книге или автору" placeholder="Год, книга или автор…" autocomplete="off">
+      </div>
+      <div class="bibliography-body" hidden>
+        <output class="bibliography-count" aria-live="polite"></output>
+        <div class="bibliography-results" role="region" aria-label="Записи библиографии" tabindex="0"></div>
+      </div>
+    `;
+    const button = panel.querySelector("button");
+    const query = panel.querySelector("input");
+    const body = panel.querySelector(".bibliography-body");
+    body.id = resultsId;
+    button.setAttribute("aria-controls", resultsId);
+    const results = panel.querySelector(".bibliography-results");
+    const count = panel.querySelector("output");
+
+    function setupFilter(sections) {
+      const searchWords = (value) => normalize(value).split(/[^\p{L}\p{N}]+/u).filter(Boolean);
+      const terms = new Map(sections.flatMap(({ entries }) => entries.map((item) => [item, searchWords(item.textContent)])));
+      function filterEntries() {
+        const words = searchWords(query.value);
+        let found = 0;
+        for (const { heading, entries } of sections) {
+          let matched = 0;
+          for (const item of entries) {
+            const index = terms.get(item);
+            item.hidden = !words.every((word) => index.some((term) => /^\d{4}$/.test(word) ? term === word : term.includes(word)));
+            if (!item.hidden) matched += 1;
+          }
+          if (heading) heading.hidden = words.length > 0 && matched === 0;
+          found += matched;
+        }
+        count.textContent = found ? `Найдено записей: ${found}` : "Совпадений нет";
+        results.scrollTop = 0;
+      }
+
+      function setOpen(open) {
+        body.hidden = !open;
+        button.setAttribute("aria-expanded", open);
+      }
+
+      button.addEventListener("click", () => setOpen(body.hidden));
+      query.addEventListener("input", () => {
+        setOpen(true);
+        filterEntries();
+      });
+      filterEntries();
+    }
+
+    return { panel, results, setupFilter };
+  }
+
+  for (const details of document.querySelectorAll("details[data-bibliography]")) {
+    const list = details.querySelector("ol");
+    const entries = Array.from(list.children);
+    const bibliography = createBibliographyPanel(`${details.id}-results`);
+    bibliography.panel.id = details.id;
+    list.classList.add("bibliography-list");
+    entries.forEach((item, index) => {
+      item.value = index + 1;
+      item.classList.add("bibliography-entry");
+    });
+    bibliography.results.append(list);
+    details.replaceWith(bibliography.panel);
+    bibliography.setupFilter([{ heading: null, entries }]);
+  }
+
   const directory = document.querySelector(".directory-page");
   if (!directory) return;
   const entries = directory.querySelector(".directory-entries");
@@ -6,7 +80,6 @@
   const people = directory.matches(".people-list");
   const places = directory.matches(".places-page");
 
-  const normalize = (text) => text.toLocaleLowerCase("ru").replaceAll("ё", "е").replace(/\s+/g, " ").trim();
   const records = Array.from(entries.content.children, (entry) => {
     const link = entry.querySelector("a");
     const node = document.getElementById(link.getAttribute("href").slice(1));
@@ -164,26 +237,8 @@
     const title = Array.from(bio.children).find((node) => normalize(node.textContent) === "библиография");
     if (!title) return;
 
-    const panel = document.createElement("section");
-    panel.className = "bibliography-panel";
-    const resultsId = `${profile.id}-bibliography`;
-    panel.innerHTML = `
-      <div class="bibliography-toolbar">
-        <button class="bibliography-toggle" type="button" aria-expanded="false">Библиографический указатель</button>
-        <input class="bibliography-search" type="search" aria-label="Фильтр по году, книге или автору" placeholder="Год, книга или автор…" autocomplete="off">
-      </div>
-      <div class="bibliography-body" hidden>
-        <output class="bibliography-count" aria-live="polite"></output>
-        <div class="bibliography-results" role="region" aria-label="Записи библиографии" tabindex="0"></div>
-      </div>
-    `;
-    const button = panel.querySelector("button");
-    const query = panel.querySelector("input");
-    const body = panel.querySelector(".bibliography-body");
-    body.id = resultsId;
-    button.setAttribute("aria-controls", resultsId);
-    const results = panel.querySelector(".bibliography-results");
-    const count = panel.querySelector("output");
+    const bibliography = createBibliographyPanel(`${profile.id}-bibliography`);
+    const { panel, results } = bibliography;
     const source = [];
     for (let node = title; node; node = node.nextSibling) source.push(node);
     title.before(panel);
@@ -217,36 +272,7 @@
       (entry ?? results).append(node);
     }
 
-    const searchWords = (value) => normalize(value).split(/[^\p{L}\p{N}]+/u).filter(Boolean);
-    const terms = new Map(sections.flatMap(({ entries }) => entries.map((item) => [item, searchWords(item.textContent)])));
-    function filterEntries() {
-      const words = searchWords(query.value);
-      let found = 0;
-      for (const { heading, entries } of sections) {
-        let matched = 0;
-        for (const item of entries) {
-          const index = terms.get(item);
-          item.hidden = !words.every((word) => index.some((term) => /^\d{4}$/.test(word) ? term === word : term.includes(word)));
-          if (!item.hidden) matched += 1;
-        }
-        if (heading) heading.hidden = words.length > 0 && matched === 0;
-        found += matched;
-      }
-      count.textContent = found ? `Найдено записей: ${found}` : "Совпадений нет";
-      results.scrollTop = 0;
-    }
-
-    function setOpen(open) {
-      body.hidden = !open;
-      button.setAttribute("aria-expanded", open);
-    }
-
-    button.addEventListener("click", () => setOpen(body.hidden));
-    query.addEventListener("input", () => {
-      setOpen(true);
-      filterEntries();
-    });
-    filterEntries();
+    bibliography.setupFilter(sections);
   }
 
   render();

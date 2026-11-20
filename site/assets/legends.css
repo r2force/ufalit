@@ -27,12 +27,6 @@
   color: var(--paper-warm);
   font: clamp(1.03rem, 1.8vw, 1.38rem)/1.55 var(--reading);
 }
-.legend-credits {
-  max-width: 54ch;
-  margin: 1.3rem 0 0;
-  color: #d1e0da;
-  font: .875rem/1.55 var(--ui);
-}
 .legend-cover {
   justify-self: center;
   width: min(100%, 20rem);
@@ -61,13 +55,26 @@
 .legend-index ul { margin: 0; padding: 0; list-style: none; }
 .legend-index li { border-bottom: 1px solid var(--line); }
 .legend-index li a {
-  display: block;
+  display: grid;
+  grid-template-columns: clamp(3.4rem, 7vw, 5rem) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(.6rem, 2vw, 1rem);
   padding: .65rem .35rem .65rem 0;
   color: var(--ink);
   text-decoration: none;
   font: 600 clamp(1.35rem, 2.45vw, 1.8rem)/1.14 var(--display);
 }
 .legend-index li a:hover { color: var(--wine); text-decoration: underline; }
+.legend-index li img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
+  object-position: center 15%;
+  border: 1px solid var(--line);
+  border-radius: .35rem;
+}
 .legend-index small {
   display: block;
   margin-top: .25rem;
@@ -148,18 +155,14 @@
   color: var(--ink-muted);
   font: .875rem/1.45 var(--ui);
 }
-.legend-biblio {
-  margin-top: 1.25rem;
-  border-block: 1px solid var(--line);
-}
 .legend-biblio summary {
-  padding: .7rem .2rem;
+  padding: .95rem;
   cursor: pointer;
   font: 600 1rem/1.4 var(--ui);
   color: var(--wine);
 }
 .legend-biblio ol {
-  margin: 0 0 1rem;
+  margin: 0 1rem 1rem;
   padding-inline-start: 2em;
   font: 1rem/1.65 var(--reading);
 }

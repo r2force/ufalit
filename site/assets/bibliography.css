@@ -1,0 +1,73 @@
+.bibliography-panel {
+  margin-block: 1.6rem 0;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: .9rem;
+}
+.bibliography-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: .7rem 1rem;
+  padding: .95rem;
+  background: var(--paper-warm);
+  border-radius: .85rem .85rem 0 0;
+}
+.museum .bibliography-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .2rem 0;
+  color: var(--ink);
+  background: transparent;
+  border: 0;
+  font: 650 1.35rem/1.1 var(--display);
+  text-align: start;
+  cursor: pointer;
+}
+.bibliography-toggle::after {
+  flex: none;
+  inline-size: .42rem;
+  block-size: .42rem;
+  border: solid var(--wine);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  content: "";
+}
+.bibliography-toggle[aria-expanded="true"]::after { transform: rotate(225deg); }
+.museum .bibliography-search {
+  flex: 1 1 12rem;
+  min-inline-size: 0;
+  max-inline-size: min(100%, 17rem);
+  padding: .5rem .7rem;
+  color: var(--ink);
+  background: var(--paper-card);
+  border: 1px solid var(--line);
+  border-radius: .5rem;
+  font: .83rem/1.4 var(--ui);
+}
+.bibliography-body { padding: .85rem .95rem .95rem; border-block-start: 1px solid var(--line); }
+.bibliography-count { display: block; margin-bottom: .6rem; color: var(--ink-muted); font: .78rem/1.45 var(--ui); }
+.bibliography-results {
+  max-block-size: min(24rem, 56dvh);
+  padding: .2rem .35rem .2rem .18rem;
+  overflow: auto;
+  scrollbar-color: var(--line) var(--paper);
+  scrollbar-gutter: stable;
+}
+.bibliography-entry {
+  margin-bottom: .5rem;
+  padding: .6rem .72rem;
+  background: var(--paper-card);
+  border: 1px solid var(--line);
+  border-radius: .48rem;
+  font: .87em/1.6 var(--reading);
+}
+
+.bibliography-list { margin: 0; padding: 0; list-style-position: inside; }
+
+@media (max-width: 37.5rem) {
+  .museum .bibliography-search { max-inline-size: 100%; }
+  .bibliography-results { max-block-size: none; overflow: visible; }
+}
