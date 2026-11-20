@@ -4,3 +4,5 @@
 *.png filter=lfs diff=lfs merge=lfs binary
 *.ppt filter=lfs diff=lfs merge=lfs binary
 *.pptx filter=lfs diff=lfs merge=lfs binary
+# Pages publishes these extracted illustrations directly from the Git checkout.
+site/assets/legends/images/* -filter binary

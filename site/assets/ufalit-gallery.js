@@ -1,5 +1,5 @@
 (() => {
-  const gallery = document.querySelector(".gallery");
+  const gallery = document.querySelector(".gallery, [data-image-viewer]");
   if (!gallery) return;
   const frames = Array.from(gallery.querySelectorAll("figure"), (figure) => ({
     figure,
@@ -9,55 +9,57 @@
   })).filter(({ link, image }) => link && image);
   if (!frames.length) return;
 
-  const motion = matchMedia("(prefers-reduced-motion: reduce)");
-  const options = [
-    ["grid", "Паспарту-сетка"],
-    ["filmstrip", "Диафильм"],
-    ["masonry", "Журнальная кладка"],
-    ["contact", "Контактный лист"],
-  ];
+  if (gallery.matches(".gallery")) {
+    const motion = matchMedia("(prefers-reduced-motion: reduce)");
+    const options = [
+      ["grid", "Паспарту-сетка"],
+      ["filmstrip", "Диафильм"],
+      ["masonry", "Журнальная кладка"],
+      ["contact", "Контактный лист"],
+    ];
 
-  const toolbar = document.createElement("div");
-  toolbar.className = "gallery-toolbar";
-  toolbar.innerHTML = `
-    <div role="group" aria-label="Раскладка галереи"></div>
-    <div role="group" aria-label="Прокрутка диафильма" hidden>
-      <button class="museum-control" type="button" aria-label="Прокрутить к предыдущим фотографиям">←</button>
-      <button class="museum-control" type="button" aria-label="Прокрутить к следующим фотографиям">→</button>
-    </div>
-  `;
-  const [views, navigation] = toolbar.children;
-  const viewButtons = options.map(([mode, label]) => {
-    const button = document.createElement("button");
-    button.className = "museum-control";
-    button.type = "button";
-    button.textContent = label;
-    button.setAttribute("aria-pressed", mode === "grid");
-    button.addEventListener("click", () => {
-      if (button.getAttribute("aria-pressed") === "true") return;
-      gallery.dataset.view = mode;
-      navigation.hidden = mode !== "filmstrip";
-      for (const option of viewButtons) option.setAttribute("aria-pressed", option === button);
+    const toolbar = document.createElement("div");
+    toolbar.className = "gallery-toolbar";
+    toolbar.innerHTML = `
+      <div role="group" aria-label="Раскладка галереи"></div>
+      <div role="group" aria-label="Прокрутка диафильма" hidden>
+        <button class="museum-control" type="button" aria-label="Прокрутить к предыдущим фотографиям">←</button>
+        <button class="museum-control" type="button" aria-label="Прокрутить к следующим фотографиям">→</button>
+      </div>
+    `;
+    const [views, navigation] = toolbar.children;
+    const viewButtons = options.map(([mode, label]) => {
+      const button = document.createElement("button");
+      button.className = "museum-control";
+      button.type = "button";
+      button.textContent = label;
+      button.setAttribute("aria-pressed", mode === "grid");
+      button.addEventListener("click", () => {
+        if (button.getAttribute("aria-pressed") === "true") return;
+        gallery.dataset.view = mode;
+        navigation.hidden = mode !== "filmstrip";
+        for (const option of viewButtons) option.setAttribute("aria-pressed", option === button);
+      });
+      views.append(button);
+      return button;
     });
-    views.append(button);
-    return button;
-  });
-  navigation.querySelectorAll("button").forEach((button, index) => {
-    button.addEventListener("click", () => {
-      const distance = frames[0].figure.getBoundingClientRect().width + 12;
-      gallery.scrollBy({ left: distance * (index ? 1 : -1), behavior: motion.matches ? "instant" : "smooth" });
+    navigation.querySelectorAll("button").forEach((button, index) => {
+      button.addEventListener("click", () => {
+        const distance = frames[0].figure.getBoundingClientRect().width + 12;
+        gallery.scrollBy({ left: distance * (index ? 1 : -1), behavior: motion.matches ? "instant" : "smooth" });
+      });
     });
-  });
-  gallery.before(toolbar);
+    gallery.before(toolbar);
+  }
 
   const dialog = document.createElement("dialog");
   if (typeof dialog.showModal !== "function") return;
   dialog.className = "ufalit-lightbox";
-  dialog.setAttribute("aria-label", "Просмотр архивной фотографии");
+  dialog.setAttribute("aria-label", "Просмотр изображения");
   dialog.innerHTML = `
     <div class="lightbox-controls">
-      <button class="museum-control" type="button" aria-label="Предыдущая фотография">←</button>
-      <button class="museum-control" type="button" aria-label="Следующая фотография">→</button>
+      <button class="museum-control" type="button" aria-label="Предыдущее изображение">←</button>
+      <button class="museum-control" type="button" aria-label="Следующее изображение">→</button>
       <button class="museum-control" type="button" aria-pressed="false">Лупа 2,8×</button>
       <a target="_blank" rel="noopener">Открыть оригинал</a>
       <button class="museum-control" type="button" autofocus>Закрыть</button>

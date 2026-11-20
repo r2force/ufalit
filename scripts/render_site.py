@@ -11,7 +11,7 @@ from string import Template
 ROOT = Path(__file__).resolve().parents[1]
 SITE = ROOT / "site"
 LINK = re.compile(r'href="([^"]+)"')
-DEFERRED_PAGES = {"videos", "video-81", "video-388", "video-389", "large-videos", "legends"}
+DEFERRED_PAGES = {"videos", "video-81", "video-388", "video-389", "large-videos"}
 # The source link contains its label (which may include strong/small) and cover URL.
 COVER_LINK = re.compile(r'<a\b([^<>]*?)\sdata-cover="([^"]+)"([^<>]*)>(.*?)</a>', re.S)
 READER_ARTICLE = re.compile(r'<article\b[^>]*\sdata-reader(?=[\s>])')

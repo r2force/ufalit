@@ -1,0 +1,202 @@
+.legend-exhibit {
+  overflow-wrap: anywhere;
+  --exhibit-gap: clamp(1.2rem, 4vw, 3.4rem);
+}
+.legend-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, .7fr);
+  align-items: center;
+  gap: var(--exhibit-gap);
+  padding: clamp(1.5rem, 5vw, 4.5rem);
+  color: var(--paper-card);
+  background: linear-gradient(115deg, var(--ink), #173b3d 70%, var(--accent));
+  border-radius: .65rem;
+  border-bottom: 3px solid var(--bronze);
+}
+.museum .legend-exhibit .legend-hero h1 {
+  font-size: clamp(3rem, 6.7vw, 6rem);
+  font-weight: 500;
+  max-width: 15ch;
+  margin-bottom: 1rem;
+  line-height: .98;
+  text-wrap: balance;
+}
+.legend-subtitle {
+  max-width: 36ch;
+  margin: 0;
+  color: var(--paper-warm);
+  font: clamp(1.03rem, 1.8vw, 1.38rem)/1.55 var(--reading);
+}
+.legend-credits {
+  max-width: 54ch;
+  margin: 1.3rem 0 0;
+  color: #d1e0da;
+  font: .875rem/1.55 var(--ui);
+}
+.legend-cover {
+  justify-self: center;
+  width: min(100%, 20rem);
+  margin: 0;
+  padding: clamp(.5rem, 1vw, .85rem);
+  border: 1px solid var(--bronze);
+  background: var(--paper-warm);
+  box-shadow: 0 12px 30px #081b1c6b;
+}
+.legend-exhibit figure a { display: block; }
+.legend-cover img, .legend-map img { display: block; width: 100%; height: auto; }
+.legend-index {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(12rem, .55fr);
+  align-items: center;
+  gap: var(--exhibit-gap);
+  max-width: 64rem;
+  margin: clamp(2rem, 5vw, 4.5rem) auto;
+}
+.legend-exhibit h2, .legend-exhibit h3 { font-family: var(--display); }
+.legend-index h2 {
+  margin: 0 0 .75rem;
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.08;
+}
+.legend-index ul { margin: 0; padding: 0; list-style: none; }
+.legend-index li { border-bottom: 1px solid var(--line); }
+.legend-index li a {
+  display: block;
+  padding: .65rem .35rem .65rem 0;
+  color: var(--ink);
+  text-decoration: none;
+  font: 600 clamp(1.35rem, 2.45vw, 1.8rem)/1.14 var(--display);
+}
+.legend-index li a:hover { color: var(--wine); text-decoration: underline; }
+.legend-index small {
+  display: block;
+  margin-top: .25rem;
+  color: var(--ink-muted);
+  font: .875rem/1.4 var(--ui);
+}
+.legend-map {
+  justify-self: center;
+  width: min(100%, 19rem);
+  margin: 0;
+  padding: .5rem;
+  border: 1px solid var(--line);
+  background: var(--paper-card);
+}
+.legend-chapter {
+  max-width: 70rem;
+  margin: clamp(2rem, 5vw, 4rem) auto;
+  border-top: 2px solid var(--bronze);
+  padding: clamp(1.5rem, 3.5vw, 3.2rem) 0 0;
+}
+.legend-chapter header { margin-bottom: clamp(1rem, 2.8vw, 2rem); }
+.legend-monument {
+  margin: 0 0 .4rem;
+  color: var(--wine);
+  font: 650 .92rem/1.45 var(--ui);
+}
+.legend-chapter h2 {
+  margin: 0;
+  font-size: clamp(2.4rem, 5vw, 4.25rem);
+  line-height: 1.05;
+  text-wrap: balance;
+}
+.legend-columns {
+  display: grid;
+  grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
+  gap: var(--exhibit-gap);
+  align-items: start;
+}
+.legend-prose {
+  max-width: 68ch;
+  color: var(--ink);
+  font: clamp(1rem, 1.2vw, 1.125rem)/1.72 var(--reading);
+  overflow-wrap: break-word;
+}
+.legend-prose p { margin: 0 0 .92em; }
+.legend-prose .legend-story p:first-child::first-letter {
+  color: var(--wine);
+  font: 600 1.85em/1 var(--display);
+}
+.legend-prose h3 {
+  margin: 1.4em 0 .45em;
+  font-size: clamp(1.65rem, 3vw, 2.25rem);
+  line-height: 1.12;
+}
+.legend-photos {
+  display: grid;
+  gap: clamp(.75rem, 1.75vw, 1.4rem);
+}
+.legend-figure {
+  min-width: 0;
+  margin: 0;
+  padding: clamp(.45rem, 1vw, .8rem);
+  background: var(--paper-card);
+  border: 1px solid var(--line);
+  border-radius: .35rem;
+}
+.legend-figure a { background: var(--paper-warm); }
+.legend-figure img {
+  display: block;
+  margin: auto;
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  max-height: 20rem;
+}
+.legend-exhibit figcaption {
+  padding: .55rem .2rem 0;
+  color: var(--ink-muted);
+  font: .875rem/1.45 var(--ui);
+}
+.legend-biblio {
+  margin-top: 1.25rem;
+  border-block: 1px solid var(--line);
+}
+.legend-biblio summary {
+  padding: .7rem .2rem;
+  cursor: pointer;
+  font: 600 1rem/1.4 var(--ui);
+  color: var(--wine);
+}
+.legend-biblio ol {
+  margin: 0 0 1rem;
+  padding-inline-start: 2em;
+  font: 1rem/1.65 var(--reading);
+}
+.legend-biblio li + li { margin-top: .5rem; }
+.legend-photos {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+  margin-top: 1.5rem;
+}
+.legend-photos img { height: 14rem; object-fit: contain; }
+.legend-address {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem 1.25rem;
+  align-items: center;
+  padding: 1rem 0;
+  margin-top: 1rem;
+  border-bottom: 1px solid var(--line);
+}
+.legend-address p { margin: 0; }
+.legend-address strong { display: block; color: var(--ink-muted); font-size: .875rem; }
+.legend-address a { margin-inline-start: auto; font-size: .92rem; }
+@media (max-width: 46rem) {
+  .legend-columns { grid-template-columns: minmax(0, 1fr); }
+  .legend-index { grid-template-columns: minmax(0, 1.4fr) minmax(0, .65fr); }
+}
+@media (max-width: 36rem) {
+  .legend-hero, .legend-index { grid-template-columns: minmax(0, 1fr); }
+  .legend-hero { padding-inline: 5vw; }
+  .legend-cover { width: min(65%, 12rem); }
+  .legend-map { width: min(100%, 15rem); }
+  .legend-address a { margin-inline-start: 0; }
+}
+.legend-columns + .legend-columns, .legend-interview { margin-top: clamp(1.5rem, 4vw, 3rem); }
+.legend-prose > h3:first-child { margin-top: 0; }
+.legend-type {
+  margin-bottom: .65rem;
+  color: var(--ink-muted);
+  font: italic 1rem/1.45 var(--reading);
+}
+.legend-photos:has(> :only-child) { max-width: 33rem; }
