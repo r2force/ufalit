@@ -552,3 +552,66 @@
 .museum .person > summary span { min-width: 0; }
 .places-page.is-filterable { --anchor-offset: 11rem; }
 .lightbox-stage.is-zoomed { display: block; }
+
+/* Literary city guide: a quieter shared visual layer over the existing components. */
+.museum {
+  --ink: #203d42;
+  --ink-muted: #50676a;
+  --accent: #27696d;
+  --paper: #f2f6f4;
+  --paper-card: #ffffff;
+  --paper-warm: #e6efec;
+  --wine: #87474b;
+  --bronze: #b79569;
+  --line: #d1dfda;
+  --shadow: 0 12px 30px -24px #1b424b80;
+}
+.museum .site-header { background: #173c42; border-bottom: 0; }
+.museum .header-inner { padding-block: 1.1rem; gap: 1rem 2rem; }
+.museum .brand { font-size: clamp(1.65rem, 2.5vw, 2.1rem); }
+.museum .brand small { color: #b9d1cd; }
+.museum .nav { gap: .15rem .25rem; }
+.museum .nav a { font-size: .82rem; }
+.museum .nav a[aria-current] { background: #32636a; }
+.museum .hero { background: #d9e9e4; color: var(--ink); border: 0; padding: clamp(2.5rem, 5vw, 5rem) 0 0; }
+.museum .hero-inner { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; gap: clamp(1.5rem, 4vw, 4rem); }
+.museum .hero h1 { max-width: 9ch; font-size: clamp(3.7rem, 7.4vw, 7rem); }
+.museum .lead { color: #405f60; line-height: 1.5; }
+.museum .hero-links a { color: var(--ink); border-color: #86aaa3; border-radius: .25rem; }
+.museum .hero-links a:first-child { background: #245e62; border-color: #245e62; color: white; }
+.museum .hero-links a:hover { box-shadow: inset 0 0 0 1px currentColor; }
+.hero-image { position: relative; margin: 0; }
+.hero-image img { display: block; width: 100%; height: auto; aspect-ratio: 1.25; object-fit: cover; object-position: 50% 48%; }
+.hero-image figcaption { display: flex; justify-content: space-between; gap: .5rem; padding: .65rem 0; color: #405f60; font: .82rem/1.4 var(--ui); }
+.hero-image figcaption span { color: #587571; }
+.museum .poem { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(10rem, .7fr) minmax(0, 2fr) auto; gap: 1rem 2rem; align-items: start; padding: 1.4rem 0; margin: 0; background: none; color: #274d50; border: 0; border-top: 1px solid #a8c7bd; border-radius: 0; font: italic 1rem/1.6 var(--reading); }
+.museum .poem::before { display: none; }
+.museum .poem p:first-child, .museum .poem cite { color: #496b68; font: .8rem/1.5 var(--ui); }
+.museum .poem p { margin: 0; }
+.museum-home .content { padding-top: 2.5rem; }
+.museum :is(.section-list, .category-list) a { border: 1px solid var(--line); border-radius: .3rem; padding: 1.15rem; box-shadow: none; }
+.museum :is(.section-list, .category-list) a:hover { border-color: var(--accent); color: var(--accent); }
+.museum .section-list small { line-height: 1.5; margin-top: .45rem; }
+.museum :is(.project-copy, .reading-index) { border-radius: .3rem; box-shadow: none; }
+.atlas { border-radius: .3rem; box-shadow: none; }
+.museum .gallery { gap: 1.25rem; }
+.museum .gallery figure { border-radius: .25rem; box-shadow: none; }
+.museum .gallery figure > a { border-radius: .25rem .25rem 0 0; }
+.museum .gallery figcaption { text-align: left; color: var(--ink); padding: .8rem .9rem; }
+.gallery-toolbar { background: transparent; border: 0; padding: 0; }
+.gallery-toolbar::before { content: "Вид галереи"; color: var(--ink-muted); margin-right: .3rem; }
+.museum-control { background: #fff; border-color: #b9ccc6; }
+.museum button[aria-pressed="true"] { background: #245e62; border-color: #245e62; }
+.video-page .video-list { max-width: 100%; grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr)); }
+.video-page .video-placeholder { margin: 0; padding: 1.4rem; border: 1px solid var(--line); background: white; border-radius: .3rem; }
+.video-page .video-placeholder::before { content: "FLV"; display: inline-block; margin-bottom: 1rem; padding: .2rem .5rem; border: 1px solid #b9ccc6; border-radius: .2rem; font: 600 .7rem/1.3 var(--ui); color: #486668; }
+.video-page .video-placeholder h2 { font: 600 1.7rem/1.1 var(--display); }
+.video-page .note { border-color: var(--accent); background: #e5efeb; }
+.video-page .reading { max-width: 100%; }
+.video-page .reading > p { max-width: 72ch; }
+@media (max-width: 44rem) {
+  .museum .hero-inner { grid-template-columns: minmax(0, 1fr); }
+  .museum .hero h1 { font-size: clamp(3.5rem, 13vw, 5.5rem); }
+  .museum .poem { grid-template-columns: 1fr; gap: .5rem; }
+  .museum .poem cite { margin-top: .25rem; }
+}

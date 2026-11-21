@@ -111,6 +111,13 @@
   next.addEventListener("click", () => show(active + 1));
   zoom.addEventListener("click", () => setZoom(zoom.getAttribute("aria-pressed") !== "true"));
   close.addEventListener("click", () => dialog.close());
+  // A click on the backdrop closes the viewer; clicks inside the dialog do not.
+  dialog.addEventListener("click", (event) => {
+    if (event.target !== dialog) return;
+    const bounds = dialog.getBoundingClientRect();
+    if (event.clientX < bounds.left || event.clientX > bounds.right ||
+        event.clientY < bounds.top || event.clientY > bounds.bottom) dialog.close();
+  });
   dialog.addEventListener("close", () => opener?.focus());
   dialog.addEventListener("keydown", (event) => {
     if (event.target === stage && stage.classList.contains("is-zoomed")) return;

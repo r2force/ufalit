@@ -138,7 +138,7 @@ def render_page(source, relative, templates, writers):
         content = insert_list(content, "photos", (render_photo(photo, templates["photo"]) for photo in photos))
         content = content.replace("<!-- photo-count -->", photo_count(len(photos)))
         if not any(name.partition("?")[0] == "ufalit-gallery.js" for name in script_names):
-            script_names.append("ufalit-gallery.js?v=2")
+            script_names.append("ufalit-gallery.js?v=4")
     if "tracks" in page:
         tracks = (templates["audio-track"].substitute({key: escape(value) for key, value in track.items()})
                   for track in page["tracks"])
