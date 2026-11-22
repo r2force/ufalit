@@ -1,0 +1,5 @@
+# Index project sources, not third-party libraries or migration evidence.
+/site/assets/vendor/
+/migration/
+/site/assets/legends/presentation.xml
+package-lock.json

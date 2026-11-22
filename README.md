@@ -30,6 +30,38 @@ python3 -m http.server --bind 127.0.0.1 --directory "$preview_dir"
 
 - [Инструкции агенту](AGENTS.md)
 
+## Индекс кода для AI-агентов
+
+В проекте используется [codebase-memory-mcp](https://github.com/DeusData/codebase-memory-mcp) **0.12.1**: локальный граф файлов, функций и связей, доступный через MCP и командную строку. API-ключи не нужны. Установка поддерживает macOS (Apple Silicon и Intel) и Linux (ARM64 и x86_64); на Linux используется статическая portable-сборка. Нужны Python 3.9+, `curl` и доступ к GitHub; для автоматического подключения нужен `codex` в `PATH`.
+
+Из корня репозитория:
+
+```sh
+python3 scripts/code_index.py setup
+```
+
+Команда скачивает закреплённую сборку, проверяет SHA-256, сохраняет исполняемый файл и лицензии в `.tools/codebase-memory-mcp/`, добавляет сервер `codebase-memory` в пользовательскую конфигурацию Codex и индексирует этот репозиторий под именем `ufalit`. Существующую запись с другим путём она сохраняет и сообщает о конфликте. После установки перезапустите Codex, чтобы инструменты MCP появились в новом чате. После клонирования на другой компьютер выполните ту же команду: абсолютный путь в локальной конфигурации будет соответствовать новому расположению репозитория.
+
+Индекс хранится вне Git в стандартном кеше `~/.cache/codebase-memory-mcp/` (можно переопределить через `CBM_CACHE_DIR`). Исполняемые файлы также исключены из Git. Правила [.cbmignore](.cbmignore) убирают из индекса сторонние библиотеки, архив переноса, lock-файлы и большую XML-презентацию; исходники сайта, шаблоны, скрипты и код дизайн-примера остаются доступны.
+
+HTML-страницы с JSON-метаданными в начале файла могут разбираться частично: индексатор сообщает об этом в `index_status`. Для точной проверки разметки читайте исходник напрямую; граф не заменяет сборку сайта и проверку HTML.
+
+```sh
+# Обновить индекс после изменения кода; это также можно сделать через MCP.
+python3 scripts/code_index.py index
+
+# Найти функцию и её связи.
+python3 scripts/code_index.py cli search_graph --project ufalit --name-pattern render_page
+python3 scripts/code_index.py cli trace_path --project ufalit --function-name render_page --direction both
+
+# Проверить состояние индекса.
+python3 scripts/code_index.py cli index_status --project ufalit
+```
+
+Для другого MCP-клиента установите только бинарный файл командой `python3 scripts/code_index.py install` и укажите абсолютный путь к `.tools/codebase-memory-mcp/codebase-memory-mcp` как команду stdio-сервера без аргументов. Альтернатива — команда `python3` с аргументами `<абсолютный путь>/scripts/code_index.py serve`. Для удаления подключения в Codex: `codex mcp remove codebase-memory`.
+
+Проверка установки, повторного запуска, индексации и поиска функции выполняется в [GitHub Actions на macOS и Linux](.github/workflows/code-index.yml). При обновлении версии изменяйте `VERSION` и четыре SHA-256 в `scripts/code_index.py` по `checksums.txt` соответствующего официального релиза.
+
 ## Архив переноса
 
 - [Исходные ссылки на страницы](migration/pages.csv) и [реестр ресурсов](migration/assets.csv)

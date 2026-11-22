@@ -1,0 +1,51 @@
+name: Verify code indexer on macOS and Linux
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/code_index.py'
+      - '.cbmignore'
+      - '.github/workflows/code-index.yml'
+  pull_request:
+    paths:
+      - 'scripts/code_index.py'
+      - '.cbmignore'
+      - '.github/workflows/code-index.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  index:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    env:
+      CBM_CACHE_DIR: ${{ runner.temp }}/cbm-cache
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.9'
+      - name: Install pinned release and check repeated installation
+        run: |
+          python3 scripts/code_index.py install
+          python3 scripts/code_index.py install
+      - name: Index sources and find the site renderer
+        run: |
+          python3 scripts/code_index.py index
+          python3 scripts/code_index.py cli search_graph --project ufalit --label Function --name-pattern '^render_page$' --format json > "${RUNNER_TEMP}/cbm-search.json"
+          python3 - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+          result = json.loads((Path(os.environ['RUNNER_TEMP']) / 'cbm-search.json').read_text())
+          assert result.get('total', 0) > 0, result
+          assert any(group['file'] == 'scripts/render_site.py' for group in result.get('groups', [])), result
+          print('Found render_page in scripts/render_site.py')
+          PY
