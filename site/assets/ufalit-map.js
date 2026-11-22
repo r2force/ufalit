@@ -8,6 +8,8 @@
     { id: 'museum', categories: ['museum'] },
     { id: 'park', categories: ['park'] },
     { id: 'culture', categories: ['theatre', 'library'] },
+    { id: 'monument', categories: ['monument'] },
+    { id: 'building', categories: ['building'] },
     { id: 'street', categories: ['street'] },
   ];
   const markers = places.map(place => ({

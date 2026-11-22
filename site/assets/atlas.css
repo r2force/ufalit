@@ -90,7 +90,7 @@
   .atlas-photo { height: 14rem; }
   .literary-atlas .atlas-description { max-height: 12rem; }
   .literary-atlas .atlas-show-detail { display: inline-block; margin-left: auto; }
-  .literary-atlas .atlas-choices { grid-template-columns: repeat(6, 12rem); overflow-x: auto; padding: .2rem .2rem .8rem; scroll-snap-type: x proximity; }
+  .literary-atlas .atlas-choices { display: grid; grid-auto-flow: column; grid-template-rows: repeat(3, auto); grid-auto-columns: 12rem; grid-template-columns: none; overflow-x: auto; padding: .2rem .2rem .8rem; scroll-snap-type: x proximity; }
   .atlas-choices li { scroll-snap-align: start; }
   .atlas-results, .atlas-choices { scroll-margin-top: 1rem; }
   .atlas-detail-body { padding: 1.1rem; }
