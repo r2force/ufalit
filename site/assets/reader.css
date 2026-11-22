@@ -125,10 +125,9 @@
   line-height: 1.72;
 }
 .museum .reading .reader-verse p { margin: 0; line-height: inherit; }
-.reader-verse p:empty { min-block-size: 1em; }
+.museum .reading .reader-verse p.stanza-break { margin-block-start: 1em; }
 .reading .reader-verse p:has(> b:only-child) { margin-block: 1.15em .45em; font-style: normal; }
 .reader-verse p > b:only-child { font-style: normal; }
-.reader-verse-lines br + br { display: none; }
 .reader-verse-title { display: inline-block; margin-block: .65em .2em; font-style: normal; }
 
 @media (max-width: 36rem) {

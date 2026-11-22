@@ -34,8 +34,8 @@ AWARD_PAGES = {"fund", "medal", "stipend"}
 AUDIO_MIMES = {"ogg": "audio/ogg", "mp3": "audio/mpeg", "wav": "audio/wav", "m4a": "audio/mp4"}
 TEMPLATE_NAMES = (
     "base", "header", "navigation", "breadcrumbs", "footer", "photo", "gallery-album",
-    "audio-track", "audio-studio", "video", "album-cover", "writer-card", "writer-profile",
-    "directory-banner", "zoom-image", "atlas-pin", "guide-card",
+    "audio-track", "audio-studio", "video", "video-album", "album-cover", "writer-card",
+    "writer-profile", "directory-banner", "zoom-image", "atlas-pin", "guide-card",
 )
 
 
@@ -283,6 +283,12 @@ def render_page(source, relative, templates, writers):
     if "photos" in page and "<!-- photos -->" not in content:
         extra = f"\n{content.strip()}" if content.strip() else ""
         content = templates["gallery-album"].substitute(heading=escape(page["heading"]), extra=extra)
+    if "videos" in page and "<!-- videos -->" not in content:
+        extra = f"\n  {content.strip()}" if content.strip() else ""
+        note = page.get("note", "Видеозаписи доступны для просмотра и скачивания в формате MP4.")
+        content = templates["video-album"].substitute(
+            heading=escape(page["heading"]), note=escape(note), extra=extra,
+        )
     if "audio_studio" in page:
         studio = page["audio_studio"]
         intro_html = studio["intro_html"] if "intro_html" in studio else escape(studio["intro"])
