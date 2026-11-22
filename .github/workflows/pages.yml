@@ -10,6 +10,12 @@ on:
       - 'scripts/render_site.py'
       - '.github/workflows/pages.yml'
   workflow_dispatch:
+    inputs:
+      deploy:
+        description: 'Опубликовать сайт в GitHub Pages'
+        type: boolean
+        required: false
+        default: false
 permissions:
   contents: read
   actions: read
@@ -20,7 +26,6 @@ concurrency:
   cancel-in-progress: false
 jobs:
   build:
-    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     outputs:
       artifact_name: ${{ steps.artifact-meta.outputs.artifact_name }}
@@ -40,7 +45,7 @@ jobs:
           name: ${{ steps.artifact-meta.outputs.artifact_name }}
           path: site
   deploy:
-    if: github.ref == 'refs/heads/main'
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.deploy }}
     needs: build
     environment:
       name: github-pages
