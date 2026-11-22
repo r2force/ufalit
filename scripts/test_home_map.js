@@ -74,7 +74,7 @@ function element() {
   // Simulate unavailable map tiles/WebGL. The whole list and filters must still work.
   const mapModule = { filterMarkers, createIllustratedMap: async () => { throw new Error('Map unavailable'); } };
   const integration = fs.readFileSync(path.join(root, 'site/assets/ufalit-map.js'), 'utf8');
-  await vm.runInNewContext(integration.replace("await import('./map-widget.js?v=1')", 'mapModule'), {
+  await vm.runInNewContext(integration.replace(/await import\('\.\/map-widget\.js\?v=\d+'\)/, 'mapModule'), {
     document: { querySelector: () => atlas, createElement: element },
     window: { matchMedia: () => ({ matches: false }) }, mapModule, console: { warn() {} },
   });

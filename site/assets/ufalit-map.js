@@ -1,7 +1,7 @@
 (async () => {
   const atlas = document.querySelector('.literary-atlas');
   if (!atlas) return;
-  const { createIllustratedMap, filterMarkers } = await import('./map-widget.js?v=1');
+  const { createIllustratedMap, filterMarkers } = await import('./map-widget.js?v=2');
   const places = JSON.parse(atlas.querySelector('#atlas-places').textContent);
   const byId = new Map(places.map(place => [place.id, place]));
   const filters = [
@@ -134,7 +134,7 @@
       attributionControl: { compact: true },
       fitPadding: { top: 90, right: 65, bottom: 75, left: 65 },
       fitMaxZoom: 14.5,
-      minZoom: 10,
+      autoMinZoom: true,
       maxZoom: 18,
       cooperativeGestures: true,
       labelLanguage: 'ru',

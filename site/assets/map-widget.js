@@ -430,12 +430,16 @@ export async function createIllustratedMap(config = {}) {
 
   const fitPadding = config.fitPadding ?? 48;
   const autoMinZoom = config.autoMinZoom ?? (restrictToBounds && bounds != null);
-  const updateCalculatedMinZoom = () => {
-    if (!autoMinZoom || !bounds || Number.isFinite(config.minZoom)) return;
-    const camera = map.cameraForBounds(bounds, { padding: config.minZoomPadding ?? fitPadding });
+  const updateCalculatedMinZoom = (overrides = {}) => {
+    if (!autoMinZoom || Number.isFinite(config.minZoom)) return;
+    const targetBounds = getContentBounds(overrides);
+    if (!targetBounds) return;
+    const camera = map.cameraForBounds(targetBounds, {
+      ...getFitOptions(overrides),
+      padding: overrides.padding ?? config.minZoomPadding ?? fitPadding,
+    });
     if (camera && Number.isFinite(camera.zoom)) map.setMinZoom(camera.zoom);
   };
-  updateCalculatedMinZoom();
 
   function getActivePresetFilter() {
     return controllerState.activePresetFilterId
@@ -485,6 +489,7 @@ export async function createIllustratedMap(config = {}) {
       visibleMarkers,
       totalMarkers: controllerState.markerHandles.size,
     };
+    if (notify) updateCalculatedMinZoom();
     if (notify && typeof config.onFilterChange === 'function') {
       config.onFilterChange(result, map);
     }
@@ -636,16 +641,25 @@ export async function createIllustratedMap(config = {}) {
     return controller;
   }
 
-  function fitToContent(overrides = {}) {
-    const targetBounds = bounds && (overrides.useMapBounds ?? true)
+  function getContentBounds(overrides = {}) {
+    return bounds && (overrides.useMapBounds ?? true)
       ? bounds
       : makeBoundsFromMarkers(maplibregl, getVisibleMarkers());
+  }
+
+  function getFitOptions(overrides = {}) {
+    return {
+      padding: overrides.padding ?? fitPadding,
+      maxZoom: overrides.maxZoom ?? config.fitMaxZoom ?? 15,
+      duration: overrides.duration ?? 500,
+    };
+  }
+
+  function fitToContent(overrides = {}) {
+    const targetBounds = getContentBounds(overrides);
     if (targetBounds) {
-      map.fitBounds(targetBounds, {
-        padding: overrides.padding ?? fitPadding,
-        maxZoom: overrides.maxZoom ?? config.fitMaxZoom ?? 15,
-        duration: overrides.duration ?? 500,
-      });
+      updateCalculatedMinZoom(overrides);
+      map.fitBounds(targetBounds, getFitOptions(overrides));
     } else if (controllerState.markerHandles.size === 1) {
       const only = [...controllerState.markerHandles.values()][0].item;
       map.easeTo({ center: only.coordinates, zoom: overrides.zoom ?? config.singleMarkerZoom ?? 14, duration: overrides.duration ?? 500 });
@@ -701,6 +715,7 @@ export async function createIllustratedMap(config = {}) {
 
   markersData.forEach(item => addMarker(item, false));
   applyFilters(false);
+  updateCalculatedMinZoom();
 
   if (config.filterControls) bindFilterControls(config.filterControls);
   else if (typeof config.onFilterChange === 'function') applyFilters(true);
@@ -719,8 +734,8 @@ export async function createIllustratedMap(config = {}) {
     }
   }
 
-  if (autoMinZoom && bounds && !Number.isFinite(config.minZoom)) {
-    map.on('resize', updateCalculatedMinZoom);
+  if (autoMinZoom && !Number.isFinite(config.minZoom)) {
+    map.on('resize', () => updateCalculatedMinZoom());
   }
 
   return controller;
