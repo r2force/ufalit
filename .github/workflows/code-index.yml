@@ -32,9 +32,10 @@ jobs:
       - uses: actions/setup-python@v6
         with:
           python-version: '3.9'
-      - name: Install pinned release and check repeated installation
+      - name: Set up index without agent CLIs and check repeated installation
         run: |
-          python3 scripts/code_index.py install
+          python_path=$(python3 -c 'import sys; print(sys.executable)')
+          PATH="/usr/bin:/bin" "$python_path" scripts/code_index.py setup
           python3 scripts/code_index.py install
       - name: Index sources and find the site renderer
         run: |

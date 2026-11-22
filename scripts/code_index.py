@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
-"""Install and run a pinned codebase-memory-mcp on macOS and Linux (Python 3.9+)."""
+"""Agent-independent code indexing on macOS and Linux (Python 3.9+)."""
 
 import argparse
 import hashlib
-import json
 import os
 from pathlib import Path
 import platform
@@ -91,24 +90,10 @@ def install():
     print(f"Installed: {BINARY}", flush=True)
 
 
-def register():
-    if not shutil.which("codex"):
-        raise RuntimeError("codex is not on PATH; install Codex CLI or register the binary in your MCP client manually")
-    current = subprocess.run(["codex", "mcp", "get", "codebase-memory", "--json"],
-                             capture_output=True, text=True, cwd=ROOT)
-    if current.returncode == 0:
-        transport = json.loads(current.stdout).get("transport", {})
-        if transport.get("command") != str(BINARY) or transport.get("args"):
-            raise RuntimeError("A different codebase-memory MCP entry exists; keep it or remove it with codex mcp remove codebase-memory before setup")
-        print("Codex MCP entry already registered", flush=True)
-        return
-    run("codex", "mcp", "add", "codebase-memory", "--", BINARY)
-
-
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("action", choices=("setup", "install", "index", "serve", "cli"),
-                        help="setup: install, register in Codex, index; install: download only")
+                        help="setup: install and index without an agent; install: download only")
     parser.add_argument("arguments", nargs=argparse.REMAINDER, help="arguments passed to index_repository or cli")
     args = parser.parse_args()
     if args.arguments and args.action not in ("index", "cli"):
@@ -117,8 +102,6 @@ def main():
         install()
     elif not BINARY.is_file():
         raise RuntimeError("Indexer is not installed; run python3 scripts/code_index.py setup")
-    if args.action == "setup":
-        register()
     if args.action in ("setup", "index"):
         run(BINARY, "cli", "--progress", "index_repository", "--repo-path", ROOT,
             "--name", "ufalit", *args.arguments)
