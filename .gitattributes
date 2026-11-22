@@ -6,3 +6,5 @@
 *.pptx filter=lfs diff=lfs merge=lfs binary
 # Pages publishes these extracted illustrations directly from the Git checkout.
 site/assets/legends/images/* -filter binary
+# Small frames extracted from the existing videos are shipped directly to Pages.
+site/assets/video-archive/previews/**/*.jpg -filter binary

@@ -132,6 +132,12 @@ def archive_fields(page, writers, prefix):
     )
 
 
+def archive_poster(video, prefix):
+    """Use a locally stored frame extracted from this specific recording."""
+    video_path = Path(video["src"])
+    return escape(f"{prefix}assets/video-archive/previews/{video_path.parent.name}/{video_path.stem}.jpg")
+
+
 def render_archive_index(collections, templates, writers, prefix):
     cards = []
     total = 0
@@ -321,13 +327,16 @@ def render_page(source, relative, templates, writers):
     if "video_collections" in page:
         content = render_archive_index(page["video_collections"], templates, writers, prefix)
     if "video_collections" in page or "video_archive" in page:
-        ensure_asset(style_names, "video-archive.css?v=1")
+        ensure_asset(style_names, "video-archive.css?v=2")
     if "video_archive" in page:
+        first_video = page["videos"][0]
         content = templates["archive-album"].substitute(
             **archive_fields(page, writers, prefix), heading=escape(page["heading"]),
             reel=prefix + "assets/video-archive/reel.svg",
+            title=escape(first_video["title"]), src=escape(first_video["src"]),
+            poster=archive_poster(first_video, prefix),
         )
-        ensure_asset(script_names, "ufalit-video.js?v=1")
+        ensure_asset(script_names, "ufalit-video.js?v=2")
 
     if "photos" in page and "<!-- photos -->" not in content:
         extra = f"\n{content.strip()}" if content.strip() else ""
@@ -377,8 +386,9 @@ def render_page(source, relative, templates, writers):
         if "video_archive" in page:
             videos = (
                 templates["archive-video"].substitute(
-                    number=f"{number:02}", title=escape(video["title"]), src=escape(video["src"]),
-                    poster=prefix + "assets/video-archive/frame.svg",
+                    title=escape(video["title"]), src=escape(video["src"]),
+                    poster=archive_poster(video, prefix),
+                    current=' aria-current="true"' if number == 1 else "",
                 )
                 for number, video in enumerate(page["videos"], 1)
             )
