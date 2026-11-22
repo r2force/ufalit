@@ -1,0 +1,106 @@
+/* The literary atlas uses the existing museum palette and typefaces. */
+.museum-home .literary-atlas {
+  display: block;
+  margin: 0 0 2.5rem;
+  padding: clamp(1rem, 2.8vw, 2rem);
+  background: var(--paper-card);
+  border: 1px solid var(--line);
+  border-radius: 1.5rem;
+  box-shadow: var(--shadow);
+}
+.literary-atlas [hidden] { display: none !important; }
+.atlas-sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.literary-atlas .atlas-header { display: flex; justify-content: space-between; align-items: end; gap: 1.5rem; margin-bottom: 1.5rem; }
+.atlas-header h2 { margin: 0; color: var(--ink); font: 600 clamp(2rem, 3.2vw, 3rem)/1.1 var(--display); }
+.atlas-header p { margin: 0; max-width: 25rem; color: var(--ink-muted); font: .85rem/1.6 var(--ui); }
+.atlas-header div > p { margin-bottom: .4rem; color: var(--wine); font: 500 .8rem/1.4 var(--ui); }
+.atlas-toolbar { display: flex; align-items: center; flex-wrap: wrap; gap: .75rem 1rem; margin-bottom: 1.2rem; }
+.atlas-search { display: flex; align-items: center; flex: 1 1 17rem; gap: .6rem; min-height: 2.8rem; padding: .3rem .8rem; border: 1px solid var(--line); border-radius: .65rem; background: #fff; }
+.atlas-search svg, .atlas-fit svg { width: 1.15rem; height: 1.15rem; flex: none; fill: none; stroke: currentColor; stroke-width: 1.6; }
+.atlas-search:focus-within { outline: 2px solid var(--wine); outline-offset: 2px; }
+.literary-atlas .atlas-search input { width: 100%; min-width: 0; border: 0; outline: none; background: transparent; color: var(--ink); font: .85rem/1.5 var(--ui); }
+.atlas-filters { display: flex; flex-wrap: wrap; gap: .4rem; }
+.literary-atlas button { cursor: pointer; }
+.literary-atlas .atlas-filters button { min-height: 2.6rem; padding: .55rem .85rem; border: 1px solid var(--line); border-radius: 2rem; color: var(--ink); background: transparent; font: 500 .78rem/1.25 var(--ui); }
+.literary-atlas .atlas-filters button:hover { border-color: var(--wine); }
+.literary-atlas .atlas-filters button[aria-pressed="true"] { background: var(--wine); color: white; border-color: var(--wine); }
+.atlas-workspace { display: grid; grid-template-columns: minmax(0, 1.65fr) minmax(18rem, 1fr); gap: 1.2rem; align-items: stretch; }
+.literary-atlas .atlas-sheet { position: relative; display: block; min-width: 0; min-height: 35rem; overflow: hidden; border: 1px solid #cbd4c9; border-radius: 1rem; background: #e9ede3; }
+.literary-atlas .atlas-map { position: absolute; inset: 0; width: 100%; height: 100%; font-family: var(--ui); }
+.atlas-map-notice { position: absolute; z-index: 2; inset: 0; display: grid; place-items: center; padding: 2.5rem; text-align: center; background: #e9ede3; color: var(--accent); font: 1rem/1.7 var(--ui); }
+.atlas-map-notice p { max-width: 25rem; }
+.literary-atlas .atlas-fit { position: absolute; z-index: 2; top: .8rem; left: .8rem; display: flex; align-items: center; gap: .5rem; min-height: 2.5rem; padding: .55rem .8rem; border: 1px solid #d0d6ce; border-radius: .6rem; box-shadow: 0 2px 8px #173b3d12; background: #fffefbf5; color: var(--ink); font: 600 .75rem/1.3 var(--ui); }
+.atlas-fit:hover { background: #fff; }
+.literary-atlas .atlas-key { display: flex; flex-direction: column; min-width: 0; overflow: hidden; border: 1px solid var(--line); border-radius: 1rem; background: var(--paper); }
+.atlas-photo { display: block; width: 100%; height: 13.5rem; object-fit: cover; background: var(--paper-warm); }
+.atlas-detail-body { display: flex; flex: 1; flex-direction: column; align-items: start; padding: 1.2rem 1.3rem; }
+.atlas-kicker { display: inline-block; margin: 0 0 .65rem; padding: .2rem .6rem; border-radius: 2rem; color: var(--wine); background: #efe0db; font: 600 .7rem/1.4 var(--ui); }
+.atlas-writer { margin: 0 0 .25rem; color: var(--accent); font: 500 .72rem/1.4 var(--ui); }
+.atlas-key h3 { margin: 0 0 .5rem; color: var(--ink); font: 600 clamp(1.5rem, 2.2vw, 2rem)/1.08 var(--display); }
+.atlas-address { margin: 0 0 .9rem; color: var(--ink-muted); font: .78rem/1.5 var(--ui); }
+.literary-atlas .atlas-description { width: 100%; max-height: 10rem; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; padding-right: .5rem; color: var(--ink-muted); font: .85rem/1.7 var(--reading); }
+.atlas-description p { margin: 0 0 .85rem; }
+.museum .literary-atlas .atlas-quote { margin: .5rem 0; padding: .8rem 1rem; border-radius: .5rem; font-size: .85rem; }
+.atlas-more { display: flex; justify-content: space-between; align-self: stretch; gap: 1rem; margin-top: auto; padding-top: 1rem; color: var(--wine); font: 600 .82rem/1.4 var(--ui); text-decoration: none; }
+.atlas-more:hover { text-decoration: underline; }
+.atlas-results { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1rem; margin: 1.1rem 0 .7rem; }
+.atlas-count { margin: 0; color: var(--ink-muted); font: .75rem/1.4 var(--ui); }
+.literary-atlas .atlas-reset, .literary-atlas .atlas-show-detail { min-height: 2rem; padding: .2rem 0; border: 0; background: transparent; color: var(--wine); font: 600 .75rem/1.4 var(--ui); text-decoration: underline; text-underline-offset: .2em; }
+.literary-atlas .atlas-show-detail { display: none; }
+.literary-atlas .atlas-choices { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .6rem; margin: 0; padding: 0; list-style: none; }
+.atlas-choices li { min-width: 0; margin: 0; }
+.atlas-choices a { display: flex; align-items: center; gap: .7rem; height: 100%; min-height: 4.6rem; padding: .5rem; border: 1px solid var(--line); border-radius: .65rem; color: var(--ink); background: var(--paper-card); text-decoration: none; }
+.atlas-choices a > img { width: 3.5rem; height: 3.25rem; flex: none; object-fit: cover; border-radius: .35rem; }
+.atlas-choices a > span { min-width: 0; font: 600 .77rem/1.35 var(--ui); }
+.atlas-choices small { display: block; margin-bottom: .15rem; color: var(--ink-muted); font: .65rem/1.2 var(--ui); }
+.atlas-choices a:hover { border-color: var(--wine); }
+.atlas-choices a.is-selected { border-color: var(--wine); box-shadow: inset 0 0 0 1px var(--wine); background: #f6ede8; }
+.atlas-empty { padding: 1.25rem; border: 1px dashed var(--line); border-radius: .65rem; color: var(--ink-muted); font: .9rem/1.6 var(--ui); }
+.literary-atlas:has(.atlas-key[hidden]) .atlas-workspace { grid-template-columns: minmax(0, 1fr); }
+.literary-atlas :is(a, button, .atlas-description):focus-visible { outline: 3px solid var(--wine); outline-offset: 3px; }
+/* MapLibre owns the transform on the marker button. Animate only its image. */
+.literary-atlas button.im-map-marker[aria-pressed] { background: transparent; border: 0; border-radius: 0; }
+.atlas-photo-marker::after { content: ''; position: absolute; bottom: 0; left: calc(50% - 6px); border: 6px solid transparent; border-top: 9px solid #fffdf7; border-bottom: 0; }
+.atlas-photo-marker .im-map-marker__image { box-sizing: border-box; width: 64px; height: 64px; margin-bottom: 12px; border: 4px solid #fffdf7; border-radius: 50%; object-fit: cover; box-shadow: 0 3px 12px #173b3d40; filter: none; transform-origin: center; }
+.atlas-photo-marker.is-selected { z-index: 1; }
+.atlas-photo-marker.is-selected .im-map-marker__image { border-color: var(--wine); box-shadow: 0 0 0 3px #fffdf7, 0 5px 15px #173b3d50; }
+.atlas-photo-marker.is-selected::after { border-top-color: var(--wine); }
+.literary-atlas .im-map-popup { font-family: var(--ui); }
+.literary-atlas .im-map-popup__title { font: 600 1.3rem/1.05 var(--display); }
+.literary-atlas .im-map-popup__description { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.literary-atlas .im-map-popup__link { color: var(--wine); }
+.literary-atlas .maplibregl-ctrl-top-right { top: .5rem; right: .5rem; }
+.literary-atlas .maplibregl-ctrl-attrib { max-width: calc(100% - 5rem); font-size: 10px; }
+@media (max-width: 64rem) {
+  .atlas-workspace { grid-template-columns: minmax(0, 1.3fr) minmax(17rem, 1fr); }
+  .atlas-toolbar { align-items: stretch; }
+  .atlas-search { flex-basis: 100%; }
+}
+@media (max-width: 48rem) {
+  .museum-home .literary-atlas { display: flex; flex-direction: column; }
+  .literary-atlas .atlas-header { flex-direction: column; align-items: start; gap: .6rem; }
+  .atlas-header p br { display: none; }
+  .literary-atlas .atlas-workspace { display: contents; }
+  .literary-atlas .atlas-sheet { min-height: 25rem; order: 2; }
+  .atlas-toolbar { order: 1; }
+  .atlas-results { order: 3; }
+  .literary-atlas .atlas-choices { order: 4; }
+  .atlas-empty { order: 4; }
+  .literary-atlas .atlas-key { order: 5; margin-top: 1rem; }
+  .atlas-photo { height: 14rem; }
+  .literary-atlas .atlas-description { max-height: 12rem; }
+  .literary-atlas .atlas-show-detail { display: inline-block; margin-left: auto; }
+  .literary-atlas .atlas-choices { grid-template-columns: repeat(6, 12rem); overflow-x: auto; padding: .2rem .2rem .8rem; scroll-snap-type: x proximity; }
+  .atlas-choices li { scroll-snap-align: start; }
+  .atlas-results, .atlas-choices { scroll-margin-top: 1rem; }
+  .atlas-detail-body { padding: 1.1rem; }
+  .atlas-key h3 { font-size: 1.8rem; }
+  .atlas-more { margin-top: 1rem; }
+}
+@media (max-width: 25rem) {
+  .literary-atlas .atlas-filters button { padding-inline: .65rem; }
+  .literary-atlas .atlas-fit { font-size: .7rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .literary-atlas *, .literary-atlas *::after { transition: none !important; scroll-behavior: auto !important; }
+}

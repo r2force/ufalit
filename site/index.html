@@ -2,45 +2,7 @@
 {
   "title": "Уфа литературная — о проекте",
   "scripts": [
-    "ufalit-map.js?v=2"
-  ],
-  "atlas_pins": [
-    {
-      "id": "places-text-004",
-      "label": "Дом-музей С. Т. Аксакова",
-      "x": 377,
-      "y": 241
-    },
-    {
-      "id": "places-text-016",
-      "label": "Аксаковский народный дом",
-      "x": 280,
-      "y": 146
-    },
-    {
-      "id": "places-text-031",
-      "label": "Аксаковский сад",
-      "x": 372,
-      "y": 185
-    },
-    {
-      "id": "places-text-248",
-      "label": "Дом-музей Мажита Гафури",
-      "x": 190,
-      "y": 180
-    },
-    {
-      "id": "places-text-318",
-      "label": "Улица Мустая Карима",
-      "x": 220,
-      "y": 103
-    },
-    {
-      "id": "places-text-437",
-      "label": "Библиотека им. Ш. А. Худайбердина",
-      "x": 414,
-      "y": 70
-    }
+    "ufalit-map.js?v=3"
   ],
   "guide_cards": [
     {
@@ -99,6 +61,12 @@
       "action": "Открыть раздел →",
       "badge": "Легенды"
     }
+  ],
+  "atlas": true,
+  "styles": [
+    "vendor/maplibre-gl/maplibre-gl.css",
+    "map-widget.css?v=1",
+    "atlas.css?v=1"
   ]
 }
 ---
@@ -112,43 +80,7 @@
       <p>Мне здесь любая улица знакома,<br>Я знаю каждый дом и поворот,<br>Мосты, причалы, заводи, паромы<br>И где какое дерево растет...<br>Вокруг садов чугунные ограды,<br>Как кружева, искусством тешат взор,<br>И каждому бутону сердце радо,<br>И восхищает каждый твой узор.</p><cite>— Назар Наджми</cite></blockquote>
 </div></section>
 <!-- main -->
-<section class="atlas" aria-labelledby="atlas-heading">
-  <header class="atlas-header"><div>
-      <p>Путеводитель по памятным местам</p>
-      <h2 id="atlas-heading">Литературная карта Уфы</h2>
-    </div><p>Выберите место на схеме, чтобы узнать о нём больше. Схема условная, без масштаба.</p></header>
-  <div class="atlas-sheet">
-    <svg class="atlas-map" viewBox="0 0 540 300" role="group" aria-label="Условная схема центра Уфы">
-      <rect width="540" height="300" fill="#efeae0"/>
-      <path d="M6 -18C124 66 102 148 96 193C85 277 242 294 330 298C441 303 501 227 564 243" fill="none" stroke="#a7c8c3" stroke-width="37"/>
-      <path d="M6 -18C124 66 102 148 96 193C85 277 242 294 330 298C441 303 501 227 564 243" fill="none" stroke="#dcebe6" stroke-width="2"/>
-      <g class="atlas-streets" fill="none">
-        <path d="M101 35L506 31M129 65L510 61M151 100L524 92M141 142L521 131M133 181L515 171M139 226L457 215M181 264L376 256"/>
-        <path d="M144 5L156 241M184 5L194 262M217 6L229 269M270 5L288 275M315 6L334 274M359 6L380 265M408 5L421 235M454 5L470 222M501 5L513 190"/>
-      </g>
-      <text x="36" y="250" class="atlas-river" transform="rotate(34 36 250)">р. Белая</text>
-      <g class="atlas-pins">
-<!-- atlas-pins -->
-      </g>
-    </svg>
-    <ol class="atlas-choices">
-<!-- atlas-choices -->
-    </ol>
-  </div>
-  <div class="atlas-key" aria-live="polite">
-    <p class="atlas-kicker">Дом-музей</p>
-    <div class="atlas-feature"><img src="assets/places/aksakov/image003.jpg" alt="Мемориальный Дом-музей С. Т. Аксакова" width="1054" height="616"><div>
-        <p class="atlas-writer">Аксаков Сергей Тимофеевич</p>
-        <h3>Мемориальный Дом-музей С. Т. Аксакова</h3>
-        <p class="atlas-address">ул. Зайнуллы Расулева, 4</p>
-    </div></div>
-    <blockquote class="atlas-quote">«А окна из столовой на улицу, возвышались аршина на три над землей; парадное крыльцо имело более двадцати пяти ступенек, и с него была видна река Белая почти во всю ширину».</blockquote>
-    <div class="atlas-description" tabindex="0" aria-label="Описание места">
-      <p>Мемориальный Дом-музей С.Т. Аксакова (филиал Национального музея РБ), представляющий собой образец деревянной архитектуры конца XVIII века, располагается на берегу р. Белой.</p>
-    </div>
-    <a class="atlas-more" href="pages/places/#places-text-004">Подробнее о месте</a>
-  </div>
-</section>
+<!-- atlas -->
 <div class="home-columns">
   <article class="reading project-copy" data-reader>
     <h2>О проекте «Уфа литературная»</h2>

@@ -35,7 +35,7 @@ AUDIO_MIMES = {"ogg": "audio/ogg", "mp3": "audio/mpeg", "wav": "audio/wav", "m4a
 TEMPLATE_NAMES = (
     "base", "header", "navigation", "breadcrumbs", "footer", "photo", "gallery-album",
     "audio-track", "audio-studio", "video", "video-album", "album-cover", "writer-card",
-    "writer-profile", "directory-banner", "zoom-image", "atlas-pin", "guide-card",
+    "writer-profile", "directory-banner", "zoom-image", "atlas", "atlas-choice", "guide-card",
 )
 
 
@@ -326,18 +326,23 @@ def render_page(source, relative, templates, writers):
         content = insert_list(content, "tracks", (render_track(track, templates["audio-track"]) for track in page["tracks"]))
     if "videos" in page:
         content = insert_list(content, "videos", (render_video(video, templates["video"]) for video in page["videos"]))
-    if "atlas_pins" in page:
-        pins = [
-            templates["atlas-pin"].substitute(
-                id=escape(pin["id"]), label=escape(pin["label"]),
-                x=escape(str(pin["x"])), y=escape(str(pin["y"])), number=index,
-            )
-            for index, pin in enumerate(page["atlas_pins"], 1)
-        ]
-        choices = [f'<li><a href="pages/places/#{escape(pin["id"])}">{escape(pin["label"])}</a></li>'
-                   for pin in page["atlas_pins"]]
-        content = insert_list(content, "atlas-pins", pins)
-        content = insert_list(content, "atlas-choices", choices)
+    if page.get("atlas"):
+        places = json.loads((ROOT / "templates" / "atlas-places.json").read_text(encoding="utf-8"))
+        first = places[0]
+        choices = [templates["atlas-choice"].substitute(
+            id=escape(place["id"]), label=escape(place["label"]),
+            image=escape(place["image"]), category=escape(place["category"]),
+        ) for place in places]
+        atlas = templates["atlas"].substitute(
+            **{key: escape(first.get(key, "")) for key in (
+                "id", "title", "writer", "category", "address", "image", "quote",
+            )},
+            description="".join(f"<p>{escape(text)}</p>" for text in first["paragraphs"]),
+            choices="\n".join(choices),
+            count=len(places),
+            places_json=json.dumps(places, ensure_ascii=False).replace("<", "\\u003c"),
+        )
+        content = insert_list(content, "atlas", [atlas])
     if "guide_cards" in page:
         cards = (
             templates["guide-card"].substitute(
@@ -351,7 +356,7 @@ def render_page(source, relative, templates, writers):
 
     if any(marker in content for marker in (
         "<!-- tracks -->", "<!-- photos -->", "<!-- photo-count -->",
-        "<!-- videos -->", "<!-- atlas-pins -->", "<!-- atlas-choices -->", "<!-- guide-cards -->",
+        "<!-- videos -->", "<!-- atlas -->", "<!-- guide-cards -->",
     )):
         raise ValueError("missing metadata for a template list")
 

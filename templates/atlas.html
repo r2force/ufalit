@@ -1,0 +1,39 @@
+<section class="atlas literary-atlas" aria-labelledby="atlas-heading">
+  <header class="atlas-header">
+    <div><p>Город, в котором живут истории</p><h2 id="atlas-heading">Литературная карта Уфы</h2></div>
+    <p>От дома писателя до любимого сада.<br> Выберите фотографию на карте — и познакомьтесь с местом.</p>
+  </header>
+  <div class="atlas-toolbar" hidden>
+    <label class="atlas-search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><span class="atlas-sr-only">Поиск места или писателя</span><input type="search" placeholder="Место, писатель или адрес" autocomplete="off" id="atlas-search"></label>
+    <div class="atlas-filters" role="group" aria-label="Тип памятного места">
+      <button type="button" data-map-filter="all" aria-pressed="true">Все места</button>
+      <button type="button" data-map-filter="museum" aria-pressed="false">Дома-музеи</button>
+      <button type="button" data-map-filter="park" aria-pressed="false">Сады и парки</button>
+      <button type="button" data-map-filter="culture" aria-pressed="false">Культура</button>
+      <button type="button" data-map-filter="street" aria-pressed="false">Улицы</button>
+    </div>
+  </div>
+  <div class="atlas-workspace">
+    <div class="atlas-sheet">
+      <div class="atlas-map" id="literary-map" role="region" aria-label="Интерактивная карта памятных мест Уфы"></div>
+      <div class="atlas-map-notice" role="status"><p>Загружаем карту Уфы…</p></div>
+      <button class="atlas-fit" type="button" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/><circle cx="12" cy="12" r="3"/></svg>Все места на карте</button>
+    </div>
+    <article class="atlas-key" id="atlas-detail" aria-labelledby="atlas-place-title">
+      <img class="atlas-photo" src="$image" alt="$title" width="1054" height="616">
+      <div class="atlas-detail-body">
+        <p class="atlas-kicker">$category</p>
+        <p class="atlas-writer">$writer</p>
+        <h3 id="atlas-place-title" tabindex="-1">$title</h3>
+        <p class="atlas-address">$address</p>
+        <div class="atlas-description" tabindex="0" aria-label="Описание места">$description<blockquote class="atlas-quote">$quote</blockquote></div>
+        <a class="atlas-more" href="pages/places/#$id">Подробнее о месте <span aria-hidden="true">↗</span></a>
+      </div>
+    </article>
+  </div>
+  <div class="atlas-results"><p class="atlas-count" role="status" aria-live="polite">Мест на карте: $count</p><button class="atlas-reset" type="button" hidden>Сбросить фильтры</button><button class="atlas-show-detail" type="button" hidden>К описанию места ↓</button></div>
+  <p class="atlas-empty" hidden>Таких мест пока нет на карте. Попробуйте другое название или сбросьте фильтры.</p>
+  <ul class="atlas-choices" aria-label="Памятные места">$choices</ul>
+  <noscript><p>Выберите место в списке, чтобы открыть его историю. Для интерактивной карты включите JavaScript.</p></noscript>
+  <script type="application/json" id="atlas-places">$places_json</script>
+</section>
