@@ -1,0 +1,18 @@
+<article class="archive-album archive-album--$writer" data-video-archive>
+  <a class="archive-back" href="../videos/">Все коллекции видеокопилки</a>
+  <header class="archive-hero archive-hero--album">
+    <div class="archive-intro"><p class="archive-kicker">Архив литературной кинохроники</p><h1>$heading</h1><p class="archive-description">Видеоколлекция <span aria-hidden="true">/</span> $count</p></div>
+    <img class="archive-album-reel" src="$reel" alt="" width="160" height="160" aria-hidden="true">
+    <div class="archive-hero-bottom"><span>Смотрите в плеере или скачивайте</span><span>Формат MP4</span></div>
+  </header>
+  <div class="archive-toolbar">
+    <h2 id="records-title">Видеозаписи <span>$count</span></h2>
+    <form class="archive-search" role="search" hidden><label for="video-query">Найти запись</label><div class="archive-search-field"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="10" cy="10" r="6"/><path d="m15 15 5 5"/></svg><input id="video-query" type="search" placeholder="По названию" autocomplete="off"><button type="reset" aria-label="Очистить поиск" hidden>Сбросить</button></div></form>
+  </div>
+  <p class="archive-results" role="status" aria-live="polite" hidden></p>
+  <div class="archive-records" aria-labelledby="records-title">
+<!-- videos -->
+  </div>
+  <p class="archive-empty" hidden>Записей с таким названием нет. Попробуйте другое слово или сбросьте поиск.</p>
+  <nav class="archive-end" aria-label="Навигация по видеоархиву"><a href="../videos/">Вернуться к коллекциям</a><a href="#main">К началу страницы</a></nav>
+</article>

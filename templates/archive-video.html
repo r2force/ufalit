@@ -1,0 +1,8 @@
+<article class="archive-record" aria-labelledby="record-title-$number">
+  <div class="archive-record-mark"><span>Запись $number</span><span>MP4</span></div>
+  <div class="archive-record-frames">
+    <video id="video-$number" aria-label="$title" aria-describedby="record-title-$number" controls preload="none" playsinline poster="$poster" src="$src"><a href="$src">Открыть видео «$title»</a></video>
+    <div class="archive-side-frame" aria-hidden="true"><span>$number</span><i></i><small>MP4</small></div>
+  </div>
+  <div class="archive-record-info"><h3 id="record-title-$number">$title</h3><div class="archive-record-actions"><button type="button" data-play-video aria-controls="video-$number" aria-label="Смотреть: $title" hidden><svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path d="m6 4 10 6-10 6Z" fill="currentColor"/></svg>Смотреть</button><a href="$src" download aria-label="Скачать MP4: $title">Скачать MP4</a></div><p class="archive-play-error" role="status" hidden>Не удалось запустить видео. <a href="$src">Открыть MP4 напрямую</a></p></div>
+</article>

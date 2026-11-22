@@ -36,6 +36,7 @@ TEMPLATE_NAMES = (
     "base", "header", "navigation", "breadcrumbs", "footer", "photo", "gallery-album",
     "audio-track", "audio-studio", "video", "video-album", "album-cover", "writer-card",
     "writer-profile", "directory-banner", "zoom-image", "atlas", "atlas-choice", "guide-card",
+    "archive-index", "archive-collection", "archive-album", "archive-video",
 )
 
 
@@ -107,6 +108,43 @@ def render_video(video, template):
     return template.substitute(
         id_attr=id_attr, title=escape(video["title"]), src=escape(video["src"]),
         description=description, format=escape(ext),
+    )
+
+
+def video_count(count):
+    if 11 <= count % 100 <= 14:
+        word = "видеозаписей"
+    elif count % 10 == 1:
+        word = "видеозапись"
+    elif 2 <= count % 10 <= 4:
+        word = "видеозаписи"
+    else:
+        word = "видеозаписей"
+    return f"{count} {word}"
+
+
+def archive_fields(page, writers, prefix):
+    writer = writers[page["video_archive"]]
+    return dict(
+        name=escape(writer["name"]), writer=escape(page["video_archive"]),
+        portrait=escape(prefix + writer["portrait"]),
+        count=escape(video_count(len(page["videos"]))),
+    )
+
+
+def render_archive_index(collections, templates, writers, prefix):
+    cards = []
+    total = 0
+    for slug in collections:
+        source = (SITE / "pages" / slug / "index.html").read_text(encoding="utf-8")
+        page = json.loads(source[4:].split("\n---\n", 1)[0])
+        total += len(page["videos"])
+        cards.append(templates["archive-collection"].substitute(
+            **archive_fields(page, writers, prefix), href=f"../{escape(slug)}/",
+        ))
+    return templates["archive-index"].substitute(
+        collections="\n".join(cards), count=video_count(total),
+        collection_count=len(collections), reel=prefix + "assets/video-archive/reel.svg",
     )
 
 
@@ -280,6 +318,17 @@ def render_page(source, relative, templates, writers):
     style_names = list(page.get("styles", []))
     script_names = list(page.get("scripts", []))
 
+    if "video_collections" in page:
+        content = render_archive_index(page["video_collections"], templates, writers, prefix)
+    if "video_collections" in page or "video_archive" in page:
+        ensure_asset(style_names, "video-archive.css?v=1")
+    if "video_archive" in page:
+        content = templates["archive-album"].substitute(
+            **archive_fields(page, writers, prefix), heading=escape(page["heading"]),
+            reel=prefix + "assets/video-archive/reel.svg",
+        )
+        ensure_asset(script_names, "ufalit-video.js?v=1")
+
     if "photos" in page and "<!-- photos -->" not in content:
         extra = f"\n{content.strip()}" if content.strip() else ""
         content = templates["gallery-album"].substitute(heading=escape(page["heading"]), extra=extra)
@@ -325,7 +374,17 @@ def render_page(source, relative, templates, writers):
     if "tracks" in page:
         content = insert_list(content, "tracks", (render_track(track, templates["audio-track"]) for track in page["tracks"]))
     if "videos" in page:
-        content = insert_list(content, "videos", (render_video(video, templates["video"]) for video in page["videos"]))
+        if "video_archive" in page:
+            videos = (
+                templates["archive-video"].substitute(
+                    number=f"{number:02}", title=escape(video["title"]), src=escape(video["src"]),
+                    poster=prefix + "assets/video-archive/frame.svg",
+                )
+                for number, video in enumerate(page["videos"], 1)
+            )
+        else:
+            videos = (render_video(video, templates["video"]) for video in page["videos"])
+        content = insert_list(content, "videos", videos)
     if page.get("atlas"):
         places = json.loads((ROOT / "templates" / "atlas-places.json").read_text(encoding="utf-8"))
         first = places[0]
