@@ -661,7 +661,15 @@
 .atlas-choices a { display: block; padding: .45rem .7rem; border-radius: .5rem; color: var(--ink); background: var(--paper-warm); font: 600 .75rem/1.4 var(--ui); text-decoration: none; }
 .atlas-choices a.is-selected { background: #173b3d; color: white; }
 .home-columns { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); align-items: start; gap: 2rem; }
-.museum-home .project-copy { max-width: none; border-radius: 1.5rem; box-shadow: var(--shadow); }
+/* The reader is an inline-size container; auto margins otherwise collapse its grid item to zero. */
+.museum.museum-home .home-columns > .project-copy[data-reader] {
+  inline-size: 100%;
+  min-inline-size: 0;
+  max-inline-size: none;
+  margin-inline: 0;
+  border-radius: 1.5rem;
+  box-shadow: var(--shadow);
+}
 .museum-home .project-copy h2, .home-navigation h2 { font: 600 2.15rem/1.1 var(--display); margin: 0 0 1.2rem; }
 .museum-home .project-copy { font-size: 1rem; line-height: 1.75; }
 .museum-home .section-list { grid-template-columns: 1fr; margin: 0 0 2rem; gap: .7rem; }
