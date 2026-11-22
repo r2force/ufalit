@@ -160,6 +160,24 @@
   border-radius: var(--directory-radius);
   box-shadow: 0 .15rem .45rem #1428291c;
 }
+.place-section, .award-section {
+  padding: 1.4rem 0 2rem;
+  border-top: 1px solid var(--line);
+}
+.place-section > h2, .award-section > h2 {
+  margin: 0 0 1.15rem;
+  font: 650 clamp(1.5rem, 3vw, 2.4rem)/1.12 var(--display);
+}
+.directory-content :is(.place-section, .award-section) { overflow-wrap: anywhere; }
+.directory-content :is(.place-section, .award-section) > h2 {
+  margin: 0 0 var(--directory-gap);
+  padding-bottom: var(--directory-gap);
+  border-bottom: 1px solid var(--directory-card-line);
+  font: 650 clamp(1.9rem, 3vw, 2.45rem)/1.05 var(--display);
+}
+.awards .page-title { max-width: 18ch; }
+.award-copy { line-height: 1.75; }
+.award-copy p { margin: .8rem 0; }
 @media (max-width: 57rem), (max-height: 29rem) {
   .museum .directory-page.is-filterable { --anchor-offset: .75rem; }
   .directory-page .directory-filter, .directory-sidebar { position: static; }

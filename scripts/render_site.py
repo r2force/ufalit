@@ -3,7 +3,7 @@
 import json
 import re
 from argparse import ArgumentParser
-from html import escape
+from html import escape, unescape
 from pathlib import Path
 from shutil import copytree
 from string import Template
@@ -11,25 +11,58 @@ from string import Template
 ROOT = Path(__file__).resolve().parents[1]
 SITE = ROOT / "site"
 LINK = re.compile(r'href="([^"]+)"')
-DEFERRED_PAGES = {"videos", "video-81", "video-388", "video-389", "large-videos"}
-# The source link contains its label (which may include strong/small) and cover URL.
 COVER_LINK = re.compile(r'<a\b([^<>]*?)\sdata-cover="([^"]+)"([^<>]*)>(.*?)</a>', re.S)
+WRITER_LINK = re.compile(r'<a\b([^<>]*?)\sdata-writer="([^"]+)"([^<>]*)>(.*?)</a>', re.S)
+WRITER_HEADING = re.compile(r'<h2\b([^<>]*?)\sdata-writer="([^"]+)"([^<>]*)></h2>')
 READER_ARTICLE = re.compile(r'<article\b[^>]*\sdata-reader(?=[\s>])')
-DIRECTORY_RECORD = re.compile(r'<(details|section)\b[^>]*\sid="([^"]+)"\sdata-writer="([^"]+)"[^>]*>')
+IMAGE_VIEWER = re.compile(r'\bdata-image-viewer(?=[\s>])')
+BIBLIOGRAPHY = re.compile(r'\bdata-bibliography(?=[\s>])|\bperson-hidden-bibliography-fragment\b')
+DIRECTORY_RECORD = re.compile(r'<(details|section)\b([^<>]*?\sid="([^"]+)"\sdata-writer="([^"]+)"[^<>]*)>')
+LEGEND_FIGURE = re.compile(
+    r'(<figure\b[^<>]*\bclass="[^"]*\blegend-(?:figure|cover|map)\b[^"]*"[^<>]*>\s*)'
+    r'<img\b([^<>]+)>(\s*(?:<figcaption\b[^<>]*>(.*?)</figcaption>\s*)?</figure>)',
+    re.S,
+)
+MATERIAL_CONTAINER = re.compile(
+    r'(<(?P<tag>figure|span)\b[^<>]*\bclass="[^"]*\bmaterial-(?:figure|inline)\b[^"]*"[^<>]*>\s*)'
+    r'<img\b([^<>]+)>(\s*(?:<(?P<cap>figcaption|span)\b[^<>]*>(.*?)</(?P=cap)>\s*)?</(?P=tag)>)',
+    re.S,
+)
+INLINE_MATERIAL_IMG = re.compile(r'<img\b([^<>]*\bclass="[^"]*\bmaterial-inline\b[^"]*"[^<>]*)>')
+ATTR = re.compile(r'(\b[\w-]+)="([^"]*)"')
 AWARD_PAGES = {"fund", "medal", "stipend"}
+AUDIO_MIMES = {"ogg": "audio/ogg", "mp3": "audio/mpeg", "wav": "audio/wav", "m4a": "audio/mp4"}
+TEMPLATE_NAMES = (
+    "base", "header", "navigation", "breadcrumbs", "footer", "photo", "gallery-album",
+    "audio-track", "audio-studio", "video", "album-cover", "writer-card", "writer-profile",
+    "directory-banner", "zoom-image", "atlas-pin", "guide-card",
+)
+
+
+def page_section(slug):
+    if slug.startswith(("gallery-", "reading-")):
+        return slug.split("-", 1)[0]
+    if slug.startswith("video-") or slug == "large-videos":
+        return "videos"
+    if slug in AWARD_PAGES:
+        return "awards"
+    return None
+
+
+def ensure_asset(items, asset, *, prepend=False):
+    base = asset.partition("?")[0]
+    if any(existing.partition("?")[0] == base for existing in items):
+        return
+    if prepend:
+        items.insert(0, asset)
+    else:
+        items.append(asset)
 
 
 def render_menu(template, relative):
     prefix = "../" * (len(relative.parts) - 1)
     slug = relative.parent.name
-
-    if slug.startswith(("gallery-", "reading-")):
-        section = slug.split("-", 1)[0]
-    elif slug in AWARD_PAGES:
-        section = "awards"
-    else:
-        section = None
-
+    section = page_section(slug)
     current_page = relative.as_posix().removesuffix("index.html") or "index.html"
 
     def render_link(match):
@@ -59,6 +92,24 @@ def render_photo(photo, template):
     )
 
 
+def render_track(track, template):
+    ext = Path(track["src"]).suffix.lstrip(".").lower() or "ogg"
+    return template.substitute(
+        id=escape(track["id"]), title=escape(track["title"]), src=escape(track["src"]),
+        mime=escape(AUDIO_MIMES.get(ext, f"audio/{ext}")), format=escape(ext.upper()),
+    )
+
+
+def render_video(video, template):
+    ext = Path(video["src"]).suffix.lstrip(".").upper() or "MP4"
+    id_attr = f' id="{escape(video["id"])}"' if "id" in video else ""
+    description = f'<p>{escape(video["description"])}</p>' if "description" in video else ""
+    return template.substitute(
+        id_attr=id_attr, title=escape(video["title"]), src=escape(video["src"]),
+        description=description, format=escape(ext),
+    )
+
+
 def photo_count(count):
     last = count % 10
     if 11 <= count % 100 <= 14:
@@ -79,17 +130,124 @@ def insert_list(content, name, rows):
     return content.replace(marker, "\n".join(rows))
 
 
-def render_writer_directory(content, records, prefix, templates, writers):
+def parse_attrs(raw):
+    return dict(ATTR.findall(raw))
+
+
+def format_attrs(attrs):
+    return "".join(f' {key}="{value}"' for key, value in attrs.items())
+
+
+def zoom_aria_label(caption_html, alt_value):
+    caption_text = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", "", unescape(caption_html or ""))).strip()
+    label = caption_text or unescape(alt_value or "").strip()
+    return f"Открыть изображение: {label}" if label else "Открыть изображение в полном размере"
+
+
+def expand_illustrations(content, zoom_template):
+    def expand_legend(match):
+        opening, raw_attrs, closing, caption_html = match.groups()
+        attrs = parse_attrs(raw_attrs)
+        if "alt" not in attrs:
+            caption_text = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", "", unescape(caption_html or ""))).strip()
+            attrs["alt"] = escape(caption_text)
+        if "loading" not in attrs and "fetchpriority" not in attrs:
+            attrs["loading"] = "lazy"
+        wrapped = zoom_template.substitute(href=attrs["src"], link_attrs="", img_attrs=format_attrs(attrs))
+        return f"{opening}{wrapped}{closing}"
+
+    def expand_material_container(match):
+        opening, _, raw_attrs, closing, _, caption_html = match.groups()
+        attrs = parse_attrs(raw_attrs)
+        attrs.setdefault("alt", "")
+        classes = attrs.get("class", "").split()
+        if "material-image" not in classes:
+            classes.append("material-image")
+        attrs["class"] = " ".join(classes)
+        attrs.setdefault("loading", "lazy")
+        attrs.setdefault("decoding", "async")
+        aria = escape(zoom_aria_label(caption_html, attrs["alt"]))
+        link_attrs = f' class="material-image-link" aria-label="{aria}"'
+        wrapped = zoom_template.substitute(href=attrs["src"], link_attrs=link_attrs, img_attrs=format_attrs(attrs))
+        return f"{opening}{wrapped}{closing}"
+
+    def expand_inline_material(match):
+        attrs = parse_attrs(match[1])
+        attrs.setdefault("alt", "")
+        inline_classes = [c for c in attrs.get("class", "").split() if c.startswith("material-inline")]
+        img_classes = [c for c in attrs.get("class", "").split() if not c.startswith("material-inline")]
+        if "material-image" not in img_classes:
+            img_classes.append("material-image")
+        attrs["class"] = " ".join(img_classes)
+        attrs.setdefault("loading", "lazy")
+        attrs.setdefault("decoding", "async")
+        aria = escape(zoom_aria_label("", attrs["alt"]))
+        link_class = " ".join(["material-image-link", *inline_classes])
+        link_attrs = f' class="{escape(link_class)}" aria-label="{aria}"'
+        return zoom_template.substitute(href=attrs["src"], link_attrs=link_attrs, img_attrs=format_attrs(attrs))
+
+    content = LEGEND_FIGURE.sub(expand_legend, content)
+    content = MATERIAL_CONTAINER.sub(expand_material_container, content)
+    return INLINE_MATERIAL_IMG.sub(expand_inline_material, content)
+
+
+def expand_writer_refs(content, prefix, templates, writers):
+    def render_heading(match):
+        before, slug, after = match.groups()
+        writer = writers[slug]
+        attrs = f"{before}{after}"
+        if 'id="' not in attrs:
+            attrs += f' id="{escape(writer["reading"])}"'
+        return f'<h2{attrs}>{escape(writer["name"])}</h2>'
+
+    def render_link(match):
+        before, slug, after, inner = match.groups()
+        writer = writers[slug]
+        attrs = " ".join(part.strip() for part in (before, after) if part.strip())
+        if 'href="' not in attrs:
+            href = f'href="{escape(prefix + "pages/" + writer["gallery"] + "/")}"'
+            attrs = f"{href} {attrs}".strip()
+        cover = escape(prefix + writer["portrait"])
+        label = escape(writer["name"]) + inner
+        return templates["album-cover"].substitute(attributes=attrs, cover=cover, label=label)
+
+    content = WRITER_HEADING.sub(render_heading, content)
+    return WRITER_LINK.sub(render_link, content)
+
+
+def render_writer_directory(content, records, page, prefix, templates, writers):
     def writer_fields(slug):
         writer = writers[slug]
         return {"name": escape(writer["name"]), "years": escape(writer["years"]),
                 "thumbnail": escape(f"{prefix}assets/persons/thumbnails/{slug}.jpg")}
 
-    def render_profile(match):
-        tag, _, slug = match.groups()
-        if tag != "details":
-            return match[0]
+    cards = "\n".join(templates["writer-card"].substitute(
+        **writer_fields(slug), id=escape(record_id), letter=escape(writers[slug]["letter"]),
+        alias=escape(writers[slug].get("full_name", "")),
+    ) for _, _, record_id, slug in (match.groups() for match in records))
+    banner = ""
+    if "heading" in page and "intro" in page and 'class="directory-banner"' not in content:
+        banner = templates["directory-banner"].substitute(
+            heading=escape(page["heading"]), intro=escape(page["intro"])
+        ) + "\n"
+    first_record = records[0].start()
+    prefix_html = content[:first_record]
+    tail = content[first_record:]
+
+    def render_record(match):
+        tag, raw_attrs, _, slug = match.groups()
         writer = writers[slug]
+        if tag == "section":
+            heading_match = re.search(r'\sdata-heading-id="([^"]+)"', raw_attrs)
+            clean_attrs = re.sub(r'\sdata-heading-id="[^"]+"', "", raw_attrs)
+            opening = f"<section{clean_attrs}>"
+            after = tail[match.end():].lstrip()
+            if heading_match:
+                return f'{opening}<h2 id="{escape(heading_match[1])}">{escape(writer["name"])}</h2>'
+            if not after.startswith("<h2"):
+                return f'{opening}<h2>{escape(writer["name"])}</h2>'
+            return opening
+
         gallery = writer.get("gallery", "gallery")
         reading_anchor = f'#{writer["reading"]}' if "reading" in writer else ""
         audio = ""
@@ -107,14 +265,8 @@ def render_writer_directory(content, records, prefix, templates, writers):
             reading_url=escape(f"{prefix}pages/reading/{reading_anchor}"), audio_link=audio,
         ) + "\n"
 
-    cards = "\n".join(templates["writer-card"].substitute(
-        **writer_fields(slug), id=escape(record_id), letter=escape(writers[slug]["letter"]),
-        alias=escape(writers[slug].get("full_name", "")),
-    ) for _, record_id, slug in (match.groups() for match in records))
-    first_record = records[0].start()
-    content = DIRECTORY_RECORD.sub(render_profile, content)
-    return (content[:first_record] + f'<template class="directory-entries">\n{cards}\n</template>\n'
-            + content[first_record:])
+    rest_html = DIRECTORY_RECORD.sub(render_record, tail)
+    return f'{prefix_html}{banner}<template class="directory-entries">\n{cards}\n</template>\n{rest_html}'
 
 
 def render_page(source, relative, templates, writers):
@@ -123,30 +275,86 @@ def render_page(source, relative, templates, writers):
     metadata, content = source[4:].split("\n---\n", 1)
     page = json.loads(metadata)
     prefix = "../" * (len(relative.parts) - 1)
+    slug = relative.parent.name if relative != Path("index.html") else ""
+    section = page_section(slug) if slug else None
     style_names = list(page.get("styles", []))
     script_names = list(page.get("scripts", []))
+
+    if "photos" in page and "<!-- photos -->" not in content:
+        extra = f"\n{content.strip()}" if content.strip() else ""
+        content = templates["gallery-album"].substitute(heading=escape(page["heading"]), extra=extra)
+    if "audio_studio" in page:
+        studio = page["audio_studio"]
+        intro_html = studio["intro_html"] if "intro_html" in studio else escape(studio["intro"])
+        content = templates["audio-studio"].substitute(
+            kicker=escape(studio["kicker"]), heading=escape(studio["heading"]),
+            intro=intro_html, voice=escape(studio["voice"]), description=escape(studio["description"]),
+        ) + ("\n" + content.strip() if content.strip() else "")
+        ensure_asset(script_names, "ufalit-audio.js?v=2")
+
     records = list(DIRECTORY_RECORD.finditer(content))
     if records:
-        content = render_writer_directory(content, records, prefix, templates, writers)
-        style_names.insert(0, "directory.css?v=2")
-        script_names.append("ufalit-editorial.js?v=7")
+        content = render_writer_directory(content, records, page, prefix, templates, writers)
+        ensure_asset(style_names, "directory.css?v=3", prepend=True)
+        ensure_asset(script_names, "ufalit-editorial.js?v=7")
+    if BIBLIOGRAPHY.search(content):
+        ensure_asset(style_names, "bibliography.css")
+        ensure_asset(script_names, "ufalit-editorial.js?v=7")
     if READER_ARTICLE.search(content):
-        style_names.extend(("reader.css?v=3", "illustrations.css?v=2"))
-        script_names.append("ufalit-reader.js?v=2")
+        ensure_asset(style_names, "reader.css?v=3")
+        ensure_asset(style_names, "illustrations.css?v=2")
+        ensure_asset(script_names, "ufalit-reader.js?v=2")
+
+    content = expand_writer_refs(content, prefix, templates, writers)
+    content = expand_illustrations(content, templates["zoom-image"])
+
     if "photos" in page:
         photos = page["photos"]
         content = insert_list(content, "photos", (render_photo(photo, templates["photo"]) for photo in photos))
         content = content.replace("<!-- photo-count -->", photo_count(len(photos)))
-        if not any(name.partition("?")[0] == "ufalit-gallery.js" for name in script_names):
-            script_names.append("ufalit-gallery.js?v=4")
+        ensure_asset(script_names, "ufalit-gallery.js?v=4")
+    elif IMAGE_VIEWER.search(content):
+        ensure_asset(script_names, "ufalit-gallery.js?v=4")
+
     if "tracks" in page:
-        tracks = (templates["audio-track"].substitute({key: escape(value) for key, value in track.items()})
-                  for track in page["tracks"])
-        content = insert_list(content, "tracks", tracks)
-    if any(marker in content for marker in ("<!-- tracks -->", "<!-- photos -->", "<!-- photo-count -->")):
-        raise ValueError("missing metadata for a media list")
+        content = insert_list(content, "tracks", (render_track(track, templates["audio-track"]) for track in page["tracks"]))
+    if "videos" in page:
+        content = insert_list(content, "videos", (render_video(video, templates["video"]) for video in page["videos"]))
+    if "atlas_pins" in page:
+        pins = [
+            templates["atlas-pin"].substitute(
+                id=escape(pin["id"]), label=escape(pin["label"]),
+                x=escape(str(pin["x"])), y=escape(str(pin["y"])), number=index,
+            )
+            for index, pin in enumerate(page["atlas_pins"], 1)
+        ]
+        choices = [f'<li><a href="pages/places/#{escape(pin["id"])}">{escape(pin["label"])}</a></li>'
+                   for pin in page["atlas_pins"]]
+        content = insert_list(content, "atlas-pins", pins)
+        content = insert_list(content, "atlas-choices", choices)
+    if "guide_cards" in page:
+        cards = (
+            templates["guide-card"].substitute(
+                href=escape(card["href"]), icon=card["icon"], title=escape(card["title"]),
+                description=escape(card["description"]), action=escape(card["action"]),
+                badge=escape(card["badge"]),
+            )
+            for card in page["guide_cards"]
+        )
+        content = insert_list(content, "guide-cards", cards)
+
+    if any(marker in content for marker in (
+        "<!-- tracks -->", "<!-- photos -->", "<!-- photo-count -->",
+        "<!-- videos -->", "<!-- atlas-pins -->", "<!-- atlas-choices -->", "<!-- guide-cards -->",
+    )):
+        raise ValueError("missing metadata for a template list")
+
     content = COVER_LINK.sub(lambda match: templates["album-cover"].substitute(
         attributes=(match[1] + match[3]).strip(), cover=match[2], label=match[4]), content)
+
+    if slug.startswith("reading-") and 'href="../reading/"' not in content:
+        content = content.rstrip() + '\n<p><a href="../reading/">Вернуться в читальный зал</a></p>\n'
+
     intro, marker, main_content = content.partition("<!-- main -->")
     items = []
     for crumb in page.get("breadcrumbs", []):
@@ -155,18 +363,23 @@ def render_page(source, relative, templates, writers):
         else:
             items.append(f'<a href="{escape(crumb["href"])}">{escape(crumb["label"])}</a>')
 
+    if relative == Path("index.html"):
+        body_class = "museum museum-home"
+    elif slug == "videos" or section == "videos":
+        body_class = "museum video-page"
+    else:
+        body_class = "museum"
+
     assets = prefix + "assets/"
-    styles = [f'<link rel="stylesheet" href="{assets}{escape(name)}">'
-              for name in style_names]
-    scripts = [f'<script src="{assets}{escape(name)}" defer></script>'
-               for name in script_names]
+    styles = [f'<link rel="stylesheet" href="{assets}{escape(name)}">' for name in style_names]
+    scripts = [f'<script src="{assets}{escape(name)}" defer></script>' for name in script_names]
     header = templates["header"].substitute(
         prefix=prefix, navigation=render_menu(templates["navigation"].template, relative)
     )
     return templates["base"].substitute(
         title=escape(page["title"]), prefix=prefix, extra_styles="\n".join(styles),
         scripts="\n".join(scripts), header=header, footer=templates["footer"].template,
-        body_class="museum museum-home" if relative == Path("index.html") else "museum",
+        body_class=body_class,
         breadcrumbs=templates["breadcrumbs"].substitute(items=" / ".join(items)) if items else "",
         intro=intro if marker else "", content=main_content if marker else content,
     )
@@ -183,14 +396,11 @@ def main():
         parser.error("--output must be outside the source site directory")
 
     templates = {name: Template((ROOT / "templates" / f"{name}.html").read_text(encoding="utf-8").strip())
-                 for name in ("base", "header", "navigation", "breadcrumbs", "footer", "photo", "audio-track",
-                              "album-cover", "writer-card", "writer-profile")}
+                 for name in TEMPLATE_NAMES}
     writers = json.loads((ROOT / "templates" / "writers.json").read_text(encoding="utf-8"))
     pages = [SITE / "index.html", *sorted((SITE / "pages").glob("*/index.html"))]
     generated = {}
     for page in pages:
-        if page.parent.name in DEFERRED_PAGES:
-            continue
         relative = page.relative_to(SITE)
         try:
             generated[relative] = render_page(page.read_bytes().decode("utf-8"), relative, templates, writers)
