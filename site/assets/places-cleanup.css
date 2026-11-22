@@ -1,7 +1,0 @@
-.places-page .directory-content .place-section { overflow-wrap: anywhere; }
-.places-page .directory-content .place-section > h2 {
-  margin: 0 0 var(--directory-gap);
-  padding-bottom: var(--directory-gap);
-  border-bottom: 1px solid var(--directory-card-line);
-  font: 650 clamp(1.9rem, 3vw, 2.45rem)/1.05 var(--display);
-}

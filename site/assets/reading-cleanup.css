@@ -1,5 +1,0 @@
-/* Styles moved out of preserved reading-page markup. */
-.reading .reading-cleanup-left { text-align: left; }
-.reading .reading-cleanup-center { text-align: center; }
-.reading .reading-cleanup-right { text-align: right; }
-.reading .reading-cleanup-14px { font-size: calc(.875rem * var(--reader-scale, 1)); }

@@ -1,0 +1,44 @@
+<article class="reading audio-archive" aria-labelledby="audio-archive-title">
+  <div class="audio-studio">
+    <header class="audio-intro">
+      <p class="audio-kicker">$kicker</p>
+      <h1 id="audio-archive-title" class="page-title">$heading</h1>
+      <p>$intro</p>
+    </header>
+    <section class="audio-deck" aria-label="Аудиоплеер" hidden>
+      <div class="audio-deck-header">
+        <span class="audio-collection">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M3 9h4l5-4v14l-5-4H3zM16 9a4 4 0 0 1 0 6m3-9a8 8 0 0 1 0 12"/>
+          </svg>
+          Аудиофонд
+        </span>
+        <a class="audio-track-anchor" aria-label="Выбранная дорожка"></a>
+      </div>
+      <div class="audio-track-display">
+        <div class="record" aria-hidden="true"><span></span></div>
+        <div>
+          <p class="audio-voice">$voice</p>
+          <h2 class="audio-title" aria-live="polite"></h2>
+          <p class="audio-description">$description</p>
+        </div>
+      </div>
+      <div class="audio-controls">
+        <audio controls preload="none" aria-label="Текущая аудиозапись"></audio>
+        <div class="audio-file">
+          <span>Формат OGG Vorbis (оригинальная запись)</span>
+          <a class="audio-download" download>
+            Скачать аудиозапись
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M13 5h6v6m0-6-8 8m6 0v6H5V7h6"/>
+            </svg>
+          </a>
+        </div>
+        <p class="media-error" role="status" hidden>Запись не удалось воспроизвести. Попробуйте скачать её.</p>
+      </div>
+    </section>
+    <div class="audio-list">
+<!-- tracks -->
+    </div>
+  </div>
+</article>
