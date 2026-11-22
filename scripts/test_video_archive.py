@@ -70,7 +70,7 @@ class VideoArchiveTests(unittest.TestCase):
                     self.assertEqual(Path(item["href"]).stem, poster.stem)
                     self.assertTrue((self.root / "site/pages" / slug / item["href"]).resolve().is_file())
                 visible = " ".join(document.text).lower()
-                for removed in ("смотрите в плеере или скачивайте", "формат mp4", "скачать mp4", "запись 01"):
+                for removed in ("смотрите в плеере или скачивайте", "формат mp4", "скачать mp4", "запись 01", "вернуться к коллекциям", "к началу страницы"):
                     self.assertNotIn(removed, visible)
 
     def test_collection_labels_contain_names_portraits_and_counts(self):
@@ -80,7 +80,7 @@ class VideoArchiveTests(unittest.TestCase):
         links = [attrs for tag, attrs in document.tags if tag == "a" and "archive-collection " in attrs.get("class", "")]
         self.assertEqual([link["href"] for link in links], ["../video-389/", "../video-388/", "../video-81/"])
         visible = " ".join(document.text).lower()
-        for removed in ("открыть коллекцию", "цифровая видеоколлекция", "литературная коллекция"):
+        for removed in ("открыть коллекцию", "цифровая видеоколлекция", "литературная коллекция", "смотрите в своём темпе"):
             self.assertNotIn(removed, visible)
         for name in ("Аксаков Сергей Тимофеевич", "Злобин Степан Павлович", "Мустай Карим"):
             self.assertIn(name.lower(), visible)

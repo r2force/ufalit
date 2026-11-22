@@ -327,7 +327,7 @@ def render_page(source, relative, templates, writers):
     if "video_collections" in page:
         content = render_archive_index(page["video_collections"], templates, writers, prefix)
     if "video_collections" in page or "video_archive" in page:
-        ensure_asset(style_names, "video-archive.css?v=2")
+        ensure_asset(style_names, "video-archive.css?v=3")
     if "video_archive" in page:
         first_video = page["videos"][0]
         content = templates["archive-album"].substitute(
