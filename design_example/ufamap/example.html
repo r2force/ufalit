@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Иллюстрированная карта Уфы</title>
+  <!-- Стили движка и виджета. Обе таблицы стилей нужны. -->
+  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@6.19.0/dist/maplibre-gl.css">
+  <link rel="stylesheet" href="./map-widget.css">
+  <style>
+    * { box-sizing: border-box; }
+    html, body { height: 100%; margin: 0; }
+    body { font-family: Inter, system-ui, sans-serif; color: #30413e; background: #fffaf0; }
+    .page { display: flex; flex-direction: column; min-height: 100%; }
+    header { padding: 16px 22px; background: linear-gradient(105deg, #fff4d6, #fffdf6 52%, #edf8e7); border-bottom: 1px solid #e8e4d7; }
+    .eyebrow { color: #b57b53; font-size: 10px; font-weight: 750; letter-spacing: .16em; text-transform: uppercase; }
+    h1 { margin: 4px 0 0; color: #365b56; font: 500 clamp(21px, 3vw, 29px)/1.2 Georgia, serif; }
+    .subtitle { margin-top: 5px; color: #788878; font-size: 12px; }
+    .map-toolbar { display: grid; gap: 9px; padding: 12px 22px; background: #fffdf6; border-bottom: 1px solid #e8e4d7; }
+    .map-search { box-sizing: border-box; width: 100%; min-height: 40px; padding: 9px 12px; border: 1px solid #d9dfd3; border-radius: 10px; outline: none; font: inherit; }
+    .map-search:focus { border-color: #83aa91; box-shadow: 0 0 0 3px #83aa912e; }
+    .map-filters { display: flex; flex-wrap: wrap; gap: 7px; }
+    .map-filter { padding: 7px 12px; border: 1px solid #dce4d6; border-radius: 999px; background: #fff; color: #53665b; cursor: pointer; font-family: inherit; font-size: 12px; font-weight: 600; line-height: 1.2; }
+    .map-filter.is-active { border-color: #709c7c; background: #dcefd7; color: #365b45; }
+    .map-count { color: #788878; font-size: 12px; }
+    #ufa-map { flex: 1; min-height: 500px; width: 100%; }
+    @media (max-width: 600px) { header { padding: 13px 15px; } .map-toolbar { padding: 12px 15px; } #ufa-map { min-height: 440px; } }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header>
+      <div class="eyebrow">Демонстрационный пример</div>
+      <h1>Памятные места Уфы</h1>
+      <div class="subtitle">Иллюстрированные метки · поиск по тексту · тематические фильтры · нажмите на метку для просмотра</div>
+    </header>
+    <section class="map-toolbar" aria-label="Поиск и фильтры мест">
+      <label for="places-search">Поиск по названию, адресу и описанию</label>
+      <input id="places-search" class="map-search" type="search" placeholder="Например: Габдулла, музей, парк…" autocomplete="off">
+      <div class="map-filters" aria-label="Категории">
+        <button class="map-filter is-active" type="button" data-map-filter="all" aria-pressed="true">Все места</button>
+        <button class="map-filter" type="button" data-map-filter="parks" aria-pressed="false">Парки</button>
+        <button class="map-filter" type="button" data-map-filter="museums" aria-pressed="false">Музеи</button>
+        <button class="map-filter" type="button" data-map-filter="literary" aria-pressed="false">Литературные места</button>
+        <button class="map-filter" type="button" data-map-filter="aksakov" aria-pressed="false">Аксаков</button>
+      </div>
+      <div id="places-result-count" class="map-count" aria-live="polite">Загрузка мест…</div>
+    </section>
+    <div id="ufa-map" aria-label="Интерактивная карта Уфы"></div>
+  </main>
+
+  <script type="module">
+    import { createIllustratedMap } from './map-widget.js';
+    import { ufaPlaces } from './example-data.js';
+
+    const mapWidget = await createIllustratedMap({
+      container: '#ufa-map',
+      style: 'https://tiles.openfreemap.org/styles/bright',
+      markers: ufaPlaces,
+      filters: [
+        { id: 'parks', label: 'Парки', categories: ['park'] },
+        { id: 'museums', label: 'Музеи', categories: ['museum'] },
+        { id: 'literary', label: 'Литературные места', tags: ['literature'] },
+        { id: 'aksakov', label: 'Аксаков', tags: ['aksakov'] },
+      ],
+      filterControls: {
+        searchInput: '#places-search',
+        filterButtons: '[data-map-filter]',
+        activeClass: 'is-active',
+      },
+      onFilterChange({ visibleMarkers, totalMarkers }) {
+        document.querySelector('#places-result-count').textContent =
+          `Показано мест: ${visibleMarkers.length} из ${totalMarkers}`;
+      },
+
+      // Границы приблизительной городской области Уфы:
+      // [[западная долгота, южная широта], [восточная долгота, северная широта]]
+      bounds: [[55.781564, 54.565138], [56.297619, 54.960214]],
+      restrictToBounds: true,
+      autoMinZoom: true,
+
+      // Детская пастельная палитра. Укажите false, чтобы отключить перекраску слоёв.
+      palette: true,
+      markerSize: { width: 66, height: 82 },
+      fitPadding: { top: 70, right: 65, bottom: 70, left: 65 },
+      fitMaxZoom: 12.5,
+      maxZoom: 18,
+      linkTarget: '_blank',
+      popup: { maxWidth: '310px' },
+      controls: { navigation: true, scale: true },
+      onError(error) {
+        console.error('Ошибка карты:', error);
+      },
+    });
+
+    // При необходимости доступ к нативной карте и API виджета:
+    window.ufaMapWidget = mapWidget;
+  </script>
+</body>
+</html>
