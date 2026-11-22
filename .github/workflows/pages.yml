@@ -30,8 +30,24 @@ jobs:
     outputs:
       artifact_name: ${{ steps.artifact-meta.outputs.artifact_name }}
     steps:
-      - name: Checkout main
+      - name: Checkout site and Git LFS media
         uses: actions/checkout@v6
+        with:
+          lfs: true
+      - name: Verify MP4 files are present
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          files = list(Path('site/assets/video').rglob('*.mp4'))
+          if len(files) != 25:
+              raise SystemExit(f'Expected 25 MP4 files, found {len(files)}')
+          for file in files:
+              with file.open('rb') as stream:
+                  header = stream.read(128)
+              if header.startswith(b'version https://git-lfs.github.com/spec/') or file.stat().st_size < 1024:
+                  raise SystemExit(f'MP4 is not materialized: {file}')
+          print(f'Verified {len(files)} materialized MP4 files')
+          PY
       - name: Build static pages
         run: python3 scripts/render_site.py --in-place
       - name: Configure Pages
