@@ -60,6 +60,10 @@ def ensure_asset(items, asset, *, prepend=False):
         items.append(asset)
 
 
+def atlas_detail_url(place):
+    return place.get("detail_url", f'pages/places/#{place["id"]}')
+
+
 def render_menu(template, relative):
     prefix = "../" * (len(relative.parts) - 1)
     slug = relative.parent.name
@@ -399,13 +403,15 @@ def render_page(source, relative, templates, writers):
         places = json.loads((ROOT / "templates" / "atlas-places.json").read_text(encoding="utf-8"))
         first = places[0]
         choices = [templates["atlas-choice"].substitute(
-            id=escape(place["id"]), label=escape(place["label"]),
-            image=escape(place["image"]), category=escape(place["category"]),
+            id=escape(place["id"]), href=escape(atlas_detail_url(place)),
+            label=escape(place["label"]), image=escape(place["image"]),
+            category=escape(place["category"]),
         ) for place in places]
         atlas = templates["atlas"].substitute(
             **{key: escape(first.get(key, "")) for key in (
-                "id", "title", "writer", "category", "address", "image", "quote",
+                "title", "writer", "category", "address", "image", "quote",
             )},
+            href=escape(atlas_detail_url(first)),
             description="".join(f"<p>{escape(text)}</p>" for text in first["paragraphs"]),
             choices="\n".join(choices),
             count=len(places),

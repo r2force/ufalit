@@ -1248,7 +1248,8 @@
     ]
   },
   {
-    "id": "places-text-475",
+    "id": "legend-zuhra",
+    "detail_url": "pages/legends/#zuhra",
     "label": "Скульптура «Лунная девушка»",
     "title": "Скульптура «Лунная девушка» (Зухра)",
     "category": "Скульптура",
@@ -1267,7 +1268,8 @@
     ]
   },
   {
-    "id": "places-text-478",
+    "id": "legend-salavat",
+    "detail_url": "pages/legends/#salavat",
     "label": "Памятник Салавату Юлаеву",
     "title": "Памятник Салавату Юлаеву",
     "category": "Памятник",
@@ -1286,7 +1288,8 @@
     ]
   },
   {
-    "id": "places-text-481",
+    "id": "legend-kunitsa",
+    "detail_url": "pages/legends/#kunitsa",
     "label": "Памятник кунице",
     "title": "Памятник кунице",
     "category": "Скульптура",
@@ -1305,7 +1308,8 @@
     ]
   },
   {
-    "id": "places-text-484",
+    "id": "legend-kurai",
+    "detail_url": "pages/legends/#kurai",
     "label": "Памятник кураю",
     "title": "Памятник кураю",
     "category": "Скульптура",

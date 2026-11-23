@@ -4,6 +4,7 @@
   const { createIllustratedMap, filterMarkers } = await import('./map-widget.js?v=4');
   const places = JSON.parse(atlas.querySelector('#atlas-places').textContent);
   const byId = new Map(places.map(place => [place.id, place]));
+  const detailUrl = place => place.detail_url ?? `pages/places/#${place.id}`;
   const filters = [
     { id: 'museum', categories: ['museum'] },
     { id: 'park', categories: ['park'] },
@@ -19,7 +20,7 @@
     imageAlt: place.title,
     description: place.paragraphs[0],
     keywords: [place.writer, place.category],
-    url: `pages/places/#${place.id}`,
+    url: detailUrl(place),
     linkText: 'Читать историю места',
     color: '#8e2d36',
   }));
@@ -72,7 +73,7 @@
     });
     description.replaceChildren(...paragraphs, quote);
     description.scrollTop = 0;
-    atlas.querySelector('.atlas-more').href = `pages/places/#${id}`;
+    atlas.querySelector('.atlas-more').href = detailUrl(place);
     choices.forEach(link => {
       const active = link.dataset.placeId === id;
       link.classList.toggle('is-selected', active);

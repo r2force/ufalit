@@ -6,6 +6,18 @@ const path = require('node:path');
 const root = path.join(__dirname, '..');
 const places = JSON.parse(fs.readFileSync(path.join(root, 'templates/atlas-places.json'), 'utf8'));
 const placesPage = fs.readFileSync(path.join(root, 'site/pages/places/index.html'), 'utf8');
+const legendsPage = fs.readFileSync(path.join(root, 'site/pages/legends/index.html'), 'utf8');
+const detailUrl = place => place.detail_url ?? `pages/places/#${place.id}`;
+assert.ok(!placesPage.includes('id="place-20"'), 'the duplicate legends section is removed');
+assert.ok(placesPage.includes('href="../legends/#pamyatniki"'), 'places page links to the legends index');
+for (const [id, url] of Object.entries({
+  'legend-zuhra': 'pages/legends/#zuhra',
+  'legend-salavat': 'pages/legends/#salavat',
+  'legend-kunitsa': 'pages/legends/#kunitsa',
+  'legend-kurai': 'pages/legends/#kurai',
+})) {
+  assert.equal(places.find(place => place.id === id)?.detail_url, url, `${id}: canonical legend link`);
+}
 
 function element() {
   const attributes = {};
@@ -67,15 +79,22 @@ const matching = pattern => places.filter(place => pattern.test(textOf(place))).
   sameSet(ids({ query: 'Мажит Гафури' }), matching(/мажит гафури/), 'full-name search');
   sameSet(ids({ query: 'Расулева 4' }), matching(/расулева, 4/), 'address search');
   assert.deepEqual(ids({ query: 'Расулева 4' }), ['places-text-004']);
-  assert.deepEqual(ids({ query: 'кураю' }), ['places-text-484']);
+  assert.deepEqual(ids({ query: 'кураю' }), ['legend-kurai']);
   assert.deepEqual(ids({ query: 'Гафури', presetFilterId: 'park' }), ['places-text-271']);
   assert.deepEqual(ids({ query: 'Гафури', presetFilterId: 'street' }), ['places-text-278']);
   // Unicode, token order, and ё/е are significant for Russian search.
   assert.equal(filterMarkers([{ coordinates: [0, 0], title: 'Зелёный сад' }], { query: 'сад ЗЕЛЕНЫЙ' }).length, 1);
 
+  assert.equal(new Set(places.map(place => place.id)).size, places.length, 'map IDs are unique');
   for (const place of places) {
     assert.ok(fs.existsSync(path.join(root, 'site', place.image)), place.image);
-    assert.ok(placesPage.includes(`id="${place.id}"`), place.id);
+    const [detailPage, detailAnchor] = detailUrl(place).split('#');
+    const detailHtml = {
+      'pages/places/': placesPage,
+      'pages/legends/': legendsPage,
+    }[detailPage];
+    assert.ok(detailHtml, `${place.id}: unsupported detail page ${detailPage}`);
+    assert.ok(detailHtml.includes(`id="${detailAnchor}"`), `${place.id}: missing detail anchor ${detailUrl(place)}`);
     assert.ok(place.paragraphs.length > 0 && place.paragraphs.every(text => text.trim()), place.id);
     // Ufa stretches far beyond the old town: Шакша in the north-east, Инорс and Черниковка
     // in the north, Дёма and Сипайлово on the flanks, Зелёная Роща in the south.
@@ -110,7 +129,10 @@ const matching = pattern => places.filter(place => pattern.test(textOf(place))).
   });
   const choices = places.map(place => {
     const item = element();
-    const link = element(); link.dataset.placeId = place.id; link.closest = () => item;
+    const link = element();
+    link.dataset.placeId = place.id;
+    link.href = detailUrl(place);
+    link.closest = () => item;
     return link;
   });
   const atlas = { ...element(), querySelector: selector => nodes[selector],
@@ -130,7 +152,8 @@ const matching = pattern => places.filter(place => pattern.test(textOf(place))).
     link.click({ button: 0, preventDefault() { prevented = true; } });
     assert.ok(prevented);
     const place = places.find(place => place.id === link.dataset.placeId);
-    assert.equal(nodes['.atlas-more'].href, `pages/places/#${place.id}`);
+    assert.equal(link.href, detailUrl(place), `${place.id}: list destination`);
+    assert.equal(nodes['.atlas-more'].href, detailUrl(place), `${place.id}: card destination`);
     assert.equal(nodes['#atlas-place-title'].textContent, place.title);
     assert.equal(nodes['.atlas-photo'].src, place.image);
     assert.equal(link.getAttribute('aria-current'), 'true');
