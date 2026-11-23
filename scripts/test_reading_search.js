@@ -18,7 +18,7 @@ const index = search.prepare(documents);
 const find = query => search.search(index, query);
 const bear = '../reading-kiekbaev-bear/';
 
-assert.equal(documents.length, 137);
+assert.equal(documents.length, 112);
 assert.ok(find('полакомиться').some(hit => hit.document.href === bear));
 assert.equal(find('Киекбаев полакомиться')[0].document.href, bear);
 assert.equal(find('Киекбаев полакомиться несуществующееслово').length, 0);

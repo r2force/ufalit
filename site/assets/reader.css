@@ -129,6 +129,8 @@
 .reading .reader-verse p:has(> b:only-child) { margin-block: 1.15em .45em; font-style: normal; }
 .reader-verse p > b:only-child { font-style: normal; }
 .reader-verse-title { display: inline-block; margin-block: .65em .2em; font-style: normal; }
+.reader-footnotes { margin-block-start: 1.5em; padding-block-start: 1em; border-block-start: 1px solid var(--line); font-size: .9em; line-height: 1.65; }
+.reader-footnotes p { margin-block: .5em; }
 
 @media (max-width: 36rem) {
   .directory-content.reader-sheet .reader-header { justify-content: flex-start; }

@@ -2754,24 +2754,7 @@
     {
       "source": "reading-karim-audio",
       "pages": [
-        "reading-karim-vse-prosto-avtorskoe-chtenie",
-        "reading-karim-tsvety-na-kamne-avtorskoe-chtenie",
-        "reading-karim-tri-dnya-podryad-avtorskoe-chtenie",
-        "reading-karim-etu-pesnyu-mat-mne-pela-avtorskoe-chtenie",
-        "reading-karim-poduet-veter-avtorskoe-chtenie",
-        "reading-karim-berega-ostayutsya-avtorskoe-chtenie",
-        "reading-karim-muzhchiny-daryat-zhenshchinam-tsvety-avtorskoe-chtenie",
-        "reading-karim-karusel-vse-vertitsya-avtorskoe-chtenie",
-        "reading-karim-gory-avtorskoe-chtenie",
-        "reading-karim-ya-belyy-list-kladu-pered-soboy-avtorskoe-chtenie",
-        "reading-karim-byla-moya-zhizn-nepreryvnoy-igroy-avtorskoe-chtenie",
-        "reading-karim-nochami-razgovarivayut-reki-avtorskoe-chtenie",
-        "reading-karim-v-doroge-nogi-avtorskoe-chtenie",
-        "reading-karim-ya-znal-uspekh-avtorskoe-chtenie",
-        "reading-karim-a-byvaet-v-prirode-takaya-pora-avtorskoe-chtenie",
-        "reading-karim-ya-umnomu-taynu-otkryl-avtorskoe-chtenie",
-        "reading-karim-beloe-i-chernoe-avtorskoe-chtenie",
-        "reading-karim-ptits-vypuskayu-avtorskoe-chtenie"
+        "reading-karim-audio"
       ],
       "tracks": [
         {
@@ -2865,16 +2848,12 @@
           "src": "../../assets/audio/karim/18.ogg"
         }
       ],
-      "notes_group": "reading-karim-audio"
+      "notes_group": null
     },
     {
       "source": "reading-karim-nazarova",
       "pages": [
-        "reading-karim-zapis-1-zaynab-nazyrova-audio",
-        "reading-karim-zapis-2-zaynab-nazyrova-audio",
-        "reading-karim-zapis-3-zaynab-nazyrova-audio",
-        "reading-karim-zapis-4-zaynab-nazyrova-audio",
-        "reading-karim-zapis-5-zaynab-nazyrova-audio"
+        "reading-karim-nazarova"
       ],
       "tracks": [
         {
@@ -2903,7 +2882,7 @@
           "src": "../../assets/audio/karim-nazarova/tiugan.ogg"
         }
       ],
-      "notes_group": "reading-karim-nazarova"
+      "notes_group": null
     },
     {
       "source": "reading-yanabi-poems",
@@ -2998,10 +2977,7 @@
     {
       "source": "reading-shafikov-dedications",
       "pages": [
-        "reading-shafikov-gazimu-shafikovu-rozhdennye-v-sedle",
-        "reading-shafikov-lish-v-nem-odnom",
-        "reading-shafikov-veren-ty-sebe-i-slovu-serdtsa",
-        "reading-shafikov-na-smert-gazima-shafikova"
+        "personalities"
       ],
       "paragraph_hashes": {
         "81c5fde41c13023de05c4e905c8c0400ae04ae375f92c2f1d19f1e20e2f4b165": 1,
@@ -3151,7 +3127,8 @@
         "../../assets/reading/shafikov/image005.jpg",
         "../../assets/reading/shafikov/image009.gif"
       ],
-      "notes_group": "reading-shafikov-dedications"
+      "notes_group": null,
+      "destination_anchor": "shafikov-dedications"
     },
     {
       "source": "reading-shafikov-talas",
@@ -3702,6 +3679,7 @@
     "Общие вступления, комментарии о переводах и прозаические отклики на Шафикова перенесены на страницу соответствующего автора. Авторство отзывов и посвящений указано отдельно от автора раздела.",
     "Тематические фрагменты одного интервью Шафикова и обзоры отдельных книг Аксакова оставлены самостоятельными материалами. Неприведенные произведения из упоминаний в обзорах не создавались.",
     "Все 23 аудиодорожки разделены на отдельные материалы. Названия пяти записей Назыровой не реконструировались по именам файлов: сохранены исходные названия Запись 1–5.",
-    "Старые адреса девяти подборок сохранены как списки их новых материалов; исходные track-01 и другие аудиоякоря доступны в этих списках."
+    "Старые адреса девяти подборок сохранены как списки их новых материалов; исходные track-01 и другие аудиоякоря доступны в этих списках.",
+    "По уточнению пользователя аудиодорожки вновь объединены в два исходных плеера; адреса отдельных записей перенаправляют к их трекам. Посвящения Шафикову перенесены в профиль в Персоналиях; примечание о Сармасане и указание на Монологи Прометея возвращены к стихотворениям."
   ]
 }

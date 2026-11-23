@@ -39,6 +39,7 @@ TEMPLATE_NAMES = (
     "writer-profile", "directory-banner", "zoom-image", "atlas", "atlas-choice", "guide-card",
     "archive-index", "archive-collection", "archive-album", "archive-video",
     "reading-index", "reading-card", "reading-author", "reading-work", "reading-context",
+    "redirect",
 )
 
 
@@ -497,6 +498,11 @@ def render_page(source, relative, templates, writers, collections=None):
     section = page_section(slug) if slug else None
     style_names = list(page.get("styles", []))
     script_names = list(page.get("scripts", []))
+    redirect_meta = ""
+    if "redirect" in page:
+        target = escape(page["redirect"], quote=True)
+        redirect_meta = f'<meta http-equiv="refresh" content="0;url={target}">'
+        content = templates["redirect"].substitute(target=target, label=escape(page.get("redirect_label", "Открыть материал")))
     if collections is None:
         collections = json.loads((ROOT / "templates" / "reading-room.json").read_text(encoding="utf-8"))
     is_reading_room = page.get("reading_index") or "reading_author" in page or "reading_group" in page or any(
@@ -553,7 +559,7 @@ def render_page(source, relative, templates, writers, collections=None):
         ensure_asset(style_names, "bibliography.css")
         ensure_asset(script_names, "ufalit-editorial.js?v=7")
     if READER_ARTICLE.search(content):
-        ensure_asset(style_names, "reader.css?v=3")
+        ensure_asset(style_names, "reader.css?v=4")
         ensure_asset(style_names, "illustrations.css?v=2")
         ensure_asset(script_names, "ufalit-reader.js?v=3")
 
@@ -622,7 +628,7 @@ def render_page(source, relative, templates, writers, collections=None):
     content = COVER_LINK.sub(lambda match: templates["album-cover"].substitute(
         attributes=(match[1] + match[3]).strip(), cover=match[2], label=match[4]), content)
 
-    if slug.startswith("reading-") and not is_reading_room and 'href="../reading/"' not in content:
+    if slug.startswith("reading-") and not is_reading_room and "redirect" not in page and 'href="../reading/"' not in content:
         content = content.rstrip() + '\n<p><a href="../reading/">Вернуться в читальный зал</a></p>\n'
 
     intro, marker, main_content = content.partition("<!-- main -->")
@@ -649,7 +655,7 @@ def render_page(source, relative, templates, writers, collections=None):
         prefix=prefix, navigation=render_menu(templates["navigation"].template, relative)
     )
     return templates["base"].substitute(
-        title=escape(page["title"]), prefix=prefix, extra_styles="\n".join(styles),
+        title=escape(page["title"]), prefix=prefix, extra_styles="\n".join(styles), redirect_meta=redirect_meta,
         scripts="\n".join(scripts), header=header, footer=templates["footer"].template,
         body_class=body_class,
         breadcrumbs=templates["breadcrumbs"].substitute(items=" / ".join(items)) if items else "",

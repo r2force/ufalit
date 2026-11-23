@@ -641,188 +641,16 @@
         "group": "reading-karim-poems"
       },
       {
-        "slug": "reading-karim-vse-prosto-avtorskoe-chtenie",
-        "title": "Все просто..",
+        "slug": "reading-karim-audio",
+        "title": "Стихотворения. Читает Мустай Карим",
         "kind": "Аудиозаписи",
-        "description": "Читает Мустай Карим.",
-        "group": "reading-karim-audio",
-        "legacy_anchor": "track-01"
+        "description": "Читает Мустай Карим."
       },
       {
-        "slug": "reading-karim-tsvety-na-kamne-avtorskoe-chtenie",
-        "title": "Цветы на камне",
+        "slug": "reading-karim-nazarova",
+        "title": "Стихи в исполнении Зайнаб Назыровой и песни на стихи Мустая Карима",
         "kind": "Аудиозаписи",
-        "description": "Читает Мустай Карим.",
-        "group": "reading-karim-audio",
-        "legacy_anchor": "track-02"
-      },
-      {
-        "slug": "reading-karim-tri-dnya-podryad-avtorskoe-chtenie",
-        "title": "Три дня подряд",
-        "kind": "Аудиозаписи",
-        "description": "Читает Мустай Карим.",
-        "group": "reading-karim-audio",
-        "legacy_anchor": "track-03"
-      },
-      {
-        "slug": "reading-karim-etu-pesnyu-mat-mne-pela-avtorskoe-chtenie",
-        "title": "Эту песню мать мне пела",
-        "kind": "Аудиозаписи",
-        "description": "Читает Мустай Карим.",
-        "group": "reading-karim-audio",
-        "legacy_anchor": "track-04"
-      },
-      {
-        "slug": "reading-karim-poduet-veter-avtorskoe-chtenie",
-        "title": "Подует ветер",
-        "kind": "Аудиозаписи",
-        "description": "Читает Мустай Карим.",
-        "group": "reading-karim-audio",
-        "legacy_anchor": "track-05"
-      },
-      {
-        "slug": "reading-karim-berega-ostayutsya-avtorskoe-chtenie",
-        "title": "Берега остаются",
-        "kind": "Аудиозаписи",
-        "description": "Читает Мустай Карим.",
-        "group": "reading-karim-audio",
-        "legacy_anchor": "track-06"
-      },
-      {
-        "slug": "reading-karim-muzhchiny-daryat-zhenshchinam-tsvety-avtorskoe-chtenie",
-        "title": "Мужчины дарят женщинам цветы",
-        "kind": "Аудиозаписи",
-        "description": "Читает Мустай Карим.",
-        "group": "reading-karim-audio",
-        "legacy_anchor": "track-07"
-      },
-      {
-        "slug": "reading-karim-karusel-vse-vertitsya-avtorskoe-chtenie",
-        "title": "Карусель все вертится",
-        "kind": "Аудиозаписи",
-        "description": "Читает Мустай Карим.",
-        "group": "reading-karim-audio",
-        "legacy_anchor": "track-08"
-      },
-      {
-        "slug": "reading-karim-gory-avtorskoe-chtenie",
-        "title": "Горы",
-        "kind": "Аудиозаписи",
-        "description": "Читает Мустай Карим.",
-        "group": "reading-karim-audio",
-        "legacy_anchor": "track-09"
-      },
-      {
-        "slug": "reading-karim-ya-belyy-list-kladu-pered-soboy-avtorskoe-chtenie",
-        "title": "Я белый лист кладу перед собой",
-        "kind": "Аудиозаписи",
-        "description": "Читает Мустай Карим.",
-        "group": "reading-karim-audio",
-        "legacy_anchor": "track-10"
-      },
-      {
-        "slug": "reading-karim-byla-moya-zhizn-nepreryvnoy-igroy-avtorskoe-chtenie",
-        "title": "Была моя жизнь непрерывной игрой",
-        "kind": "Аудиозаписи",
-        "description": "Читает Мустай Карим.",
-        "group": "reading-karim-audio",
-        "legacy_anchor": "track-11"
-      },
-      {
-        "slug": "reading-karim-nochami-razgovarivayut-reki-avtorskoe-chtenie",
-        "title": "Ночами разговаривают реки",
-        "kind": "Аудиозаписи",
-        "description": "Читает Мустай Карим.",
-        "group": "reading-karim-audio",
-        "legacy_anchor": "track-12"
-      },
-      {
-        "slug": "reading-karim-v-doroge-nogi-avtorskoe-chtenie",
-        "title": "В дороге-ноги",
-        "kind": "Аудиозаписи",
-        "description": "Читает Мустай Карим.",
-        "group": "reading-karim-audio",
-        "legacy_anchor": "track-13"
-      },
-      {
-        "slug": "reading-karim-ya-znal-uspekh-avtorskoe-chtenie",
-        "title": "Я знал успех",
-        "kind": "Аудиозаписи",
-        "description": "Читает Мустай Карим.",
-        "group": "reading-karim-audio",
-        "legacy_anchor": "track-14"
-      },
-      {
-        "slug": "reading-karim-a-byvaet-v-prirode-takaya-pora-avtorskoe-chtenie",
-        "title": "А бывает в природе такая пора",
-        "kind": "Аудиозаписи",
-        "description": "Читает Мустай Карим.",
-        "group": "reading-karim-audio",
-        "legacy_anchor": "track-15"
-      },
-      {
-        "slug": "reading-karim-ya-umnomu-taynu-otkryl-avtorskoe-chtenie",
-        "title": "Я умному тайну открыл",
-        "kind": "Аудиозаписи",
-        "description": "Читает Мустай Карим.",
-        "group": "reading-karim-audio",
-        "legacy_anchor": "track-16"
-      },
-      {
-        "slug": "reading-karim-beloe-i-chernoe-avtorskoe-chtenie",
-        "title": "Белое и черное",
-        "kind": "Аудиозаписи",
-        "description": "Читает Мустай Карим.",
-        "group": "reading-karim-audio",
-        "legacy_anchor": "track-17"
-      },
-      {
-        "slug": "reading-karim-ptits-vypuskayu-avtorskoe-chtenie",
-        "title": "Птиц выпускаю",
-        "kind": "Аудиозаписи",
-        "description": "Читает Мустай Карим.",
-        "group": "reading-karim-audio",
-        "legacy_anchor": "track-18"
-      },
-      {
-        "slug": "reading-karim-zapis-1-zaynab-nazyrova-audio",
-        "title": "Запись 1 — Зайнаб Назырова",
-        "kind": "Аудиозаписи",
-        "description": "Исполняет Зайнаб Назырова.",
-        "group": "reading-karim-nazarova",
-        "legacy_anchor": "track-01"
-      },
-      {
-        "slug": "reading-karim-zapis-2-zaynab-nazyrova-audio",
-        "title": "Запись 2 — Зайнаб Назырова",
-        "kind": "Аудиозаписи",
-        "description": "Исполняет Зайнаб Назырова.",
-        "group": "reading-karim-nazarova",
-        "legacy_anchor": "track-02"
-      },
-      {
-        "slug": "reading-karim-zapis-3-zaynab-nazyrova-audio",
-        "title": "Запись 3 — Зайнаб Назырова",
-        "kind": "Аудиозаписи",
-        "description": "Исполняет Зайнаб Назырова.",
-        "group": "reading-karim-nazarova",
-        "legacy_anchor": "track-03"
-      },
-      {
-        "slug": "reading-karim-zapis-4-zaynab-nazyrova-audio",
-        "title": "Запись 4 — Зайнаб Назырова",
-        "kind": "Аудиозаписи",
-        "description": "Исполняет Зайнаб Назырова.",
-        "group": "reading-karim-nazarova",
-        "legacy_anchor": "track-04"
-      },
-      {
-        "slug": "reading-karim-zapis-5-zaynab-nazyrova-audio",
-        "title": "Запись 5 — Зайнаб Назырова",
-        "kind": "Аудиозаписи",
-        "description": "Исполняет Зайнаб Назырова.",
-        "group": "reading-karim-nazarova",
-        "legacy_anchor": "track-05"
+        "description": "Исполняет Зайнаб Назырова."
       }
     ],
     "groups": [
@@ -835,20 +663,8 @@
       {
         "slug": "reading-karim-poems",
         "title": "Стихотворения",
-        "notes_html": "<p class=\"text-center\"><b class=\"archive-small\">Стихотворения</b></p>\n<p class=\"text-center\"><b>Переводы с башкирского</b></p>\n<p>Примечание к стихотворению «В краю моей любимой»:</p>\n<p>***</p>\n<p>Сармасан - река в Башкирии.</p>\n<p>К стихотворениям «Когда грустно», «Когда сгорела Агазия» и «Пусть время не останавливается»:</p>\n<p><b>* ИЗ «МОНОЛОГОВ ПРОМЕТЕЯ» *</b></p>",
+        "notes_html": "<p class=\"text-center\"><b class=\"archive-small\">Стихотворения</b></p>\n<p class=\"text-center\"><b>Переводы с башкирского</b></p>",
         "label": "Стихотворения"
-      },
-      {
-        "slug": "reading-karim-audio",
-        "title": "Стихотворения. Читает Мустай Карим",
-        "notes_html": "<p>В фонотеке собраны 18 стихотворений в авторском исполнении Мустая Карима. Выберите дорожку, чтобы послушать её, или скачайте оригинал. <span class=\"audio-link-hint\">Прямую ссылку на запись можно скопировать по её номеру в плеере.</span></p>",
-        "label": "Авторское чтение"
-      },
-      {
-        "slug": "reading-karim-nazarova",
-        "title": "Стихи в исполнении Зайнаб Назыровой и песни на стихи Мустая Карима",
-        "notes_html": "<p>Выберите дорожку, чтобы послушать запись, или скачайте оригинал. <span class=\"audio-link-hint\">Прямую ссылку на запись можно скопировать по её номеру в плеере.</span></p>",
-        "label": "Стихи и песни"
       }
     ]
   },
@@ -895,45 +711,13 @@
   },
   {
     "writer": "shafikov",
-    "intro": "Стихотворения, проза и высказывания Газима Шафикова, а также поэтические посвящения ему.",
+    "intro": "Стихотворения, проза и высказывания Газима Шафикова.",
     "works": [
       {
         "slug": "reading-shafikov-sayings",
         "title": "Высказывания Газима Шафикова",
         "kind": "Высказывания",
         "description": "Размышления писателя."
-      },
-      {
-        "slug": "reading-shafikov-gazimu-shafikovu-rozhdennye-v-sedle",
-        "title": "Газиму Шафикову. «Рожденные в седле»",
-        "kind": "Посвящение",
-        "description": "Газиму Шафикову.",
-        "group": "reading-shafikov-dedications",
-        "author": "Равиль Бикбаев"
-      },
-      {
-        "slug": "reading-shafikov-lish-v-nem-odnom",
-        "title": "Лишь в нем одном…",
-        "kind": "Посвящение",
-        "description": "Газиму Шафикову.",
-        "group": "reading-shafikov-dedications",
-        "author": "Ирек Киньябулатов"
-      },
-      {
-        "slug": "reading-shafikov-veren-ty-sebe-i-slovu-serdtsa",
-        "title": "«Верен ты себе и слову сердца…»",
-        "kind": "Посвящение",
-        "description": "Газиму Шафикову.",
-        "group": "reading-shafikov-dedications",
-        "author": "Ирек Киньябулатов"
-      },
-      {
-        "slug": "reading-shafikov-na-smert-gazima-shafikova",
-        "title": "На смерть Газима Шафикова",
-        "kind": "Посвящение",
-        "description": "Газиму Шафикову.",
-        "group": "reading-shafikov-dedications",
-        "author": "Айдар Хусаинов"
       },
       {
         "slug": "reading-shafikov-talas",
@@ -1062,12 +846,6 @@
       }
     ],
     "groups": [
-      {
-        "slug": "reading-shafikov-dedications",
-        "title": "Посвящения Газиму Шафикову",
-        "notes_html": "<p class=\"text-center\"><b>ПОСВЯЩЕНИЯ</b></p>\n  <div class=\"material-photo-grid\">\n    <figure class=\"text-center material-figure\"><img class=\"article-illustration\" src=\"../../assets/reading/shafikov/image001.png\" alt=\"Портрет Газима Шафикова работы А. Лутфуллина\" width=\"1904\" height=\"2287\"><figcaption class=\"text-center\">Портрет Газима Шафикова работы А. Лутфуллина</figcaption></figure>\n    <figure class=\"text-center material-figure\"><img class=\"article-illustration\" src=\"../../assets/reading/shafikov/image003.png\" alt=\"Трое мужчин беседуют\" width=\"2364\" height=\"1522\"></figure>\n  </div>\n  <p class=\"text-left\"><b>Мустай Карим</b> (после авторского вечера Г. Шафикова)</p>\n  <p><i>Газим Шафиков – причина того, что сегодня наши заблудшие души соединились.</i></p>\n  <p><i>Газим, ты у всех на виду. Как подобает настоящему поэту и гражданину.</i></p>\n  <p><i>Дай Бог, чтобы ты еще долго заставлял нас думать, размышлять, иногда сомневаться, иногда каяться…</i></p>\n  <figure class=\"text-center material-figure\"><img class=\"article-illustration\" src=\"../../assets/reading/shafikov/image005.jpg\" alt=\"Двое мужчин беседуют\" width=\"400\" height=\"300\"></figure>\n  <p class=\"text-left\"><b>Георгий Кацерик</b></p>\n  <p><i>…Только теперь, читая и перечитывая «Избранное», до выхода которого поэт так и не дотянул, я начинаю понимать, что Газим Шафиков и впрямь был неким избранником Поэзии. Исключительно своеобразным и прекрасным, просто изумительным поэтом, какому наверняка при рождении медоносные пчелы вложили в рот сладчайшие медовые соты...</i></p>\n  <figure class=\"text-center material-figure\"><img class=\"article-illustration\" src=\"../../assets/reading/shafikov/image009.gif\" alt=\"Два архивных снимка\" width=\"820\" height=\"430\"></figure>",
-        "label": "Посвящения"
-      },
       {
         "slug": "reading-shafikov-poems",
         "title": "Стихотворения",

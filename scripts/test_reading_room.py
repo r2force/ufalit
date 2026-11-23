@@ -41,18 +41,27 @@ class ReadingRoomTests(unittest.TestCase):
         source = (self.root / 'site' / relative).read_text()
         return source, render_site.render_page(source, relative, self.templates, self.writers, self.collections)
 
+    def redirects(self):
+        result = {}
+        for path in (self.root / 'site/pages').glob('reading-*/index.html'):
+            page = json.loads(path.read_text()[4:].split('\n---\n', 1)[0])
+            if 'redirect' in page:
+                result[path.parent.name] = page['redirect']
+        return result
+
     def test_catalogue_covers_every_reading_material_once(self):
         writers = [item['writer'] for item in self.collections]
         works = [work['slug'] for item in self.collections for work in item['works']]
         self.assertEqual(len(writers), 6)
         self.assertEqual(len(writers), len(set(writers)))
-        self.assertEqual(len(works), 137)
+        self.assertEqual(len(works), 112)
         self.assertEqual(len(works), len(set(works)))
         pages = {p.parent.name for p in (self.root / 'site/pages').glob('reading-*/index.html')
                  if not p.parent.name.startswith('reading-author-')}
         groups = {group['slug'] for item in self.collections for group in item.get('groups', [])}
-        self.assertEqual(set(works) | groups, pages)
+        self.assertEqual(set(works) | groups | set(self.redirects()), pages)
         self.assertFalse(set(works) & groups)
+        self.assertFalse(set(works) & set(self.redirects()))
         _, html = self.render('reading')
         cards = [attrs for _, attrs in Document(html).tags if 'data-library-author' in attrs]
         self.assertEqual([card['id'] for card in cards], [self.writers[key]['reading'] for key in writers])
@@ -91,7 +100,7 @@ class ReadingRoomTests(unittest.TestCase):
 
     def test_full_text_index_includes_body_endnotes_and_track_names(self):
         documents = render_site.reading_search_documents(self.collections, self.writers)
-        self.assertEqual(len(documents), 137)
+        self.assertEqual(len(documents), 112)
         by_url = {item['href']: item for item in documents}
         bear = by_url['../reading-kiekbaev-bear/']
         self.assertIn('полакомиться', bear['text'])
@@ -117,6 +126,7 @@ class ReadingRoomTests(unittest.TestCase):
         slugs = ['reading'] + ['reading-author-' + item['writer'] for item in self.collections]
         slugs += [work['slug'] for item in self.collections for work in item['works']]
         slugs += [group['slug'] for item in self.collections for group in item.get('groups', [])]
+        slugs += list(self.redirects())
         for slug in slugs:
             _, html = self.render(slug)
             tags = Document(html).tags
@@ -149,11 +159,13 @@ class ReadingRoomTests(unittest.TestCase):
                 if 'tracks' in record:
                     tracks = [track for source in sources for track in json.loads(source[4:].split('\n---\n', 1)[0])['tracks']]
                     self.assertEqual(tracks, record['tracks'])
-                    self.assertTrue(all(len(json.loads(source[4:].split('\n---\n', 1)[0])['tracks']) == 1 for source in sources))
+                    self.assertEqual(len(sources), 1)
                     continue
                 sources.append(groups[record['notes_group']].get('notes_html', '') if record['notes_group'] else '')
+                if record.get('destination_anchor'):
+                    sources[0] = sources[0].split('id="' + record['destination_anchor'] + '">', 1)[1].split('</section>', 1)[0]
                 combined = '\n'.join(sources)
-                paragraphs = re.findall(r'<(?:p|h1)\b[^>]*>.*?</(?:p|h1)>', combined, re.S)
+                paragraphs = re.findall(r'<(?:p|h1|h3)\b[^>]*>.*?</(?:p|h1|h3)>', combined, re.S)
                 actual = Counter(hashlib.sha256(re.sub(r'\s+', ' ', ''.join(Document(part).text)).strip().encode()).hexdigest()
                                  for part in paragraphs)
                 for digest, count in record['paragraph_hashes'].items():
@@ -179,6 +191,50 @@ class ReadingRoomTests(unittest.TestCase):
                         self.assertIn(f'href="../{work["slug"]}/"', html)
                         if 'legacy_anchor' in work:
                             self.assertIn(f'id="{work["legacy_anchor"]}"', html)
+
+    def test_audio_is_two_original_multitrack_players(self):
+        karim = next(item for item in self.collections if item['writer'] == 'karim')
+        audio = [work for work in karim['works'] if work['kind'] == 'Аудиозаписи']
+        self.assertEqual([work['slug'] for work in audio], ['reading-karim-audio', 'reading-karim-nazarova'])
+        self.assertEqual([work['title'] for work in audio], ['Стихотворения. Читает Мустай Карим', 'Стихи в исполнении Зайнаб Назыровой и песни на стихи Мустая Карима'])
+        _, author = self.render('reading-author-karim')
+        shelf = author.split('id="library-audio">', 1)[1].split('</section>', 1)[0]
+        self.assertEqual(sum(tag == 'a' for tag, _ in Document(shelf).tags), 2)
+        for work, count in zip(audio, [18, 5]):
+            source, result = self.render(work['slug'])
+            page = json.loads(source[4:].split('\n---\n', 1)[0])
+            self.assertEqual(len(page['tracks']), count)
+            self.assertEqual(result.count('class="audio-studio"'), 1)
+            self.assertEqual(result.count('class="audio-item"'), count)
+            self.assertIn('ufalit-audio.js', result)
+
+    def test_footnotes_belong_to_their_works(self):
+        _, author = self.render('reading-author-karim')
+        self.assertNotIn('Сармасан - река', author)
+        self.assertNotIn('ИЗ «МОНОЛОГОВ ПРОМЕТЕЯ»', author)
+        _, poem = self.render('reading-karim-v-krayu-moey-lyubimoy')
+        self.assertIn('Сармасан - река в Башкирии.', poem)
+        self.assertIn('href="#note-sarmasan"', poem)
+        self.assertIn('href="#ref-sarmasan"', poem)
+        for slug in ['reading-karim-kogda-grustno', 'reading-karim-kogda-sgorela-agaziya', 'reading-karim-pust-vremya-ne-ostanavlivaetsya']:
+            _, poem = self.render(slug)
+            self.assertIn('ИЗ «МОНОЛОГОВ ПРОМЕТЕЯ»', poem)
+
+    def test_dedications_moved_to_profile_and_old_addresses_redirect(self):
+        shafikov = next(item for item in self.collections if item['writer'] == 'shafikov')
+        self.assertFalse(any(work.get('group') == 'reading-shafikov-dedications' for work in shafikov['works']))
+        _, profile = self.render('personalities')
+        section = profile.split('id="shafikov-dedications">', 1)[1].split('</section>', 1)[0]
+        for name in ['Мустай Карим', 'Георгий Кацерик', 'Равиль Бикбаев', 'Ирек Киньябулатов', 'Айдар Хусаинов']:
+            self.assertIn(name, section)
+        self.assertEqual(section.count('Путь пройденный обозревая, все же'), 1)
+        redirects = self.redirects()
+        self.assertEqual(len(redirects), 28)
+        self.assertEqual(redirects['reading-shafikov-dedications'], '../personalities/#shafikov-dedications')
+        for slug, target in redirects.items():
+            _, result = self.render(slug)
+            self.assertIn(f'content="0;url={target}"', result)
+            self.assertIn(f'href="{target}"', result)
 
 
 if __name__ == '__main__':
