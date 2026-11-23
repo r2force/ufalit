@@ -1,7 +1,7 @@
 (async () => {
   const atlas = document.querySelector('.literary-atlas');
   if (!atlas) return;
-  const { createIllustratedMap, filterMarkers } = await import('./map-widget.js?v=3');
+  const { createIllustratedMap, filterMarkers } = await import('./map-widget.js?v=4');
   const places = JSON.parse(atlas.querySelector('#atlas-places').textContent);
   const byId = new Map(places.map(place => [place.id, place]));
   const filters = [
@@ -39,6 +39,10 @@
   let presetFilterId = 'all';
   let visible = markers;
   const duration = () => reducedMotion.matches ? 0 : 400;
+
+  // Одна метка в кадре: вместо вырожденных границ — городской масштаб,
+  // чтобы фильтр с единственным результатом не улетал в уличный зум.
+  const singleMarkerZoom = 13.6;
 
   // Масштаб z даёт 78271.5*cos(lat)/2^z метров на пиксель; ScaleControl берёт
   // ближайшую «красивую» величину 1, 2, 3 или 5×10^n в интервале 50–100 px.
@@ -78,8 +82,12 @@
     detailButton.hidden = false;
     // Место, выбранное в списке, показывается крупно: масштаб подобран так,
     // чтобы линейка ScaleControl показывала около 50 м.
+    // center=false оставляет камеру как есть: смена фильтра и первичная отрисовка
+    // не должны приближать карту к одной метке.
     widget?.selectMarker(id, {
-      openPopup: false, center: !fromMarker, zoom: fromMarker ? undefined : focusZoom(),
+      openPopup: false,
+      center: center && !fromMarker,
+      zoom: center && !fromMarker ? focusZoom() : undefined,
       duration: duration(),
     });
   }
@@ -95,6 +103,7 @@
     if (widget) {
       widget.setTextFilter(search.value);
       widget.setPresetFilter(presetFilterId);
+      // Фильтр и поиск показывают всю подборку на обзорном масштабе.
       if (visible.length) widget.fitToContent({ useMapBounds: false, duration: duration() });
     }
     if (!ids.has(selectedId)) {
@@ -147,6 +156,7 @@
       attributionControl: { compact: true },
       fitPadding: { top: 90, right: 65, bottom: 75, left: 65 },
       fitMaxZoom: 14.5,
+      singleMarkerZoom,
       autoMinZoom: true,
       maxZoom: 18,
       cooperativeGestures: true,

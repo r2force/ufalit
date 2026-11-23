@@ -674,13 +674,24 @@ export async function createIllustratedMap(config = {}) {
   }
 
   function fitToContent(overrides = {}) {
+    const visible = getVisibleMarkers();
+    // Одна точка в кадре: fitBounds для вырожденных границ уходит в максимальный зум,
+    // поэтому показываем окрестности на городском масштабе singleMarkerZoom.
+    if (visible.length === 1 && !(bounds && (overrides.useMapBounds ?? true))) {
+      map.easeTo({
+        center: visible[0].coordinates,
+        zoom: overrides.zoom ?? config.singleMarkerZoom ?? 13.5,
+        duration: overrides.duration ?? 500,
+      });
+      return;
+    }
     const targetBounds = getContentBounds(overrides);
     if (targetBounds) {
       updateCalculatedMinZoom(overrides);
       map.fitBounds(targetBounds, getFitOptions(overrides));
     } else if (controllerState.markerHandles.size === 1) {
       const only = [...controllerState.markerHandles.values()][0].item;
-      map.easeTo({ center: only.coordinates, zoom: overrides.zoom ?? config.singleMarkerZoom ?? 14, duration: overrides.duration ?? 500 });
+      map.easeTo({ center: only.coordinates, zoom: overrides.zoom ?? config.singleMarkerZoom ?? 13.5, duration: overrides.duration ?? 500 });
     }
   }
 

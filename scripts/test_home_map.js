@@ -82,6 +82,20 @@ const matching = pattern => places.filter(place => pattern.test(textOf(place))).
     assert.ok(place.coordinates[0] > 55.75 && place.coordinates[0] < 56.3, `${place.id}: longitude`);
     assert.ok(place.coordinates[1] > 54.65 && place.coordinates[1] < 54.85, `${place.id}: latitude`);
   }
+  // Фото не должно повторяться у соседних объектов: именно так разъезжались
+  // подписи в разделе Ю. Узикова, где снимок стоит перед своим заголовком.
+  const uzikov = ['places-text-409', 'places-text-410', 'places-text-411']
+    .map(id => places.find(place => place.id === id).image);
+  assert.equal(new Set(uzikov).size, 3, 'each Узиков place keeps its own photo');
+  const byImage = new Map();
+  for (const place of places) {
+    const ids = byImage.get(place.image) ?? [];
+    ids.push(place.id);
+    byImage.set(place.image, ids);
+  }
+  for (const [image, ids] of byImage) {
+    assert.equal(ids.length, 1, `${image} is reused by ${ids.join(', ')}`);
+  }
   assert.equal(places[0].id, 'places-text-004', 'the first record opens on load');
 
   const nodes = {};
@@ -184,7 +198,8 @@ const matching = pattern => places.filter(place => pattern.test(textOf(place))).
           on() {}, once(event, handler) { if (event === 'load') setTimeout(handler, 0); },
           addControl() {}, getStyle: () => ({ layers: [] }), setLayoutProperty() {},
           setPaintProperty() {}, setMinZoom() {}, getZoom: () => 10, resize() {}, remove() {},
-          cameraForBounds: () => ({ zoom: 10 }), fitBounds() {},
+          cameraForBounds: () => ({ zoom: 10 }),
+          fitBounds(b, options) { globalThis.__fits.push({ bounds: b, options }); },
           easeTo(options) { globalThis.__mapCalls.push(options); return this; },
           project: point => ({ x: point[0], y: point[1] }),
           unproject: point => ({ lng: point.x, lat: point.y, toArray: () => [point.x, point.y] }),
@@ -193,6 +208,7 @@ const matching = pattern => places.filter(place => pattern.test(textOf(place))).
     }`;
   globalThis.__mapCalls = mapCalls;
   globalThis.__markerPopups = markerPopups;
+  globalThis.__fits = [];
   const widgetModuleUrl = `data:text/javascript;base64,${Buffer.from(fakeLibre).toString('base64')}`;
   const widgetSource = source.replace(
     "const MAPLIBRE_MODULE = './vendor/maplibre-gl/maplibre-gl.mjs';",
@@ -213,6 +229,22 @@ const matching = pattern => places.filter(place => pattern.test(textOf(place))).
   assert.equal(markerPopups.length, 0, 'no popup is bound to markers, so clicks show only the panel');
   assert.equal(globalThis.__popupConstructions ?? 0, 0, 'no popup element is even created for markers');
   assert.ok(Array.isArray(controller.getVisibleMarkers()) && controller.getVisibleMarkers().length === places.length);
+
+  // Фильтр «Памятники» и одиночный результат поиска — это обзор, а не уличный зум.
+  controller.setPresetFilter('monument');
+  assert.equal(controller.getVisibleMarkers().length, byCategory('monument').length);
+  const markerFilterFit = globalThis.__fits.at(-1);
+  assert.ok(markerFilterFit, 'filter change fits all matching markers');
+  const lone = places.find(place => place.id === 'places-text-409');
+  controller.setPresetFilter('all');
+  controller.setTextFilter('Парковая');
+  controller.fitToContent({ useMapBounds: false, duration: 0 });
+  const visibleAfterSearch = controller.getVisibleMarkers();
+  assert.deepEqual(visibleAfterSearch.map(place => place.id), ['places-text-409']);
+  const loneCall = mapCalls.at(-1);
+  assert.deepEqual(loneCall.center, lone.coordinates, 'single result centers its marker');
+  assert.equal(loneCall.zoom, 13.5, 'single result keeps the city-wide overview instead of zooming in');
+  assert.ok(loneCall.zoom < 15, 'single result is not an extreme street-level zoom');
 
   console.log(`Home map: ${places.length} places, selections, six category filters, Russian search, empty/reset states, images, links and offline fallback passed.`);
 })().catch(error => { console.error(error); process.exitCode = 1; });
