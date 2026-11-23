@@ -59,6 +59,9 @@ const matching = pattern => places.filter(place => pattern.test(textOf(place))).
   assert.deepEqual(ids({ presetFilterId: 'museum' }).slice(0, 2), ['places-text-004', 'places-text-196']);
   assert.equal(ids({}).length, places.length);
   assert.ok(ids({}).length > 50, 'the map must stay a large city overview');
+  assert.deepEqual(ids({ query: 'Парковая' }), ['places-text-409']);
+  assert.deepEqual(ids({ query: 'Янаби', presetFilterId: 'street' }), ['places-text-398']);
+  assert.deepEqual(ids({ query: 'Сазонова' }), ['places-text-289']);
 
   sameSet(ids({ query: ' АКСАКОВ ' }), matching(/аксаков/), 'writer search');
   sameSet(ids({ query: 'Мажит Гафури' }), matching(/мажит гафури/), 'full-name search');
@@ -78,6 +81,20 @@ const matching = pattern => places.filter(place => pattern.test(textOf(place))).
     // in the north, Дёма and Сипайлово on the flanks, Зелёная Роща in the south.
     assert.ok(place.coordinates[0] > 55.75 && place.coordinates[0] < 56.3, `${place.id}: longitude`);
     assert.ok(place.coordinates[1] > 54.65 && place.coordinates[1] < 54.85, `${place.id}: latitude`);
+  }
+  // Фото не должно повторяться у соседних объектов: именно так разъезжались
+  // подписи в разделе Ю. Узикова, где снимок стоит перед своим заголовком.
+  const uzikov = ['places-text-409', 'places-text-410', 'places-text-411']
+    .map(id => places.find(place => place.id === id).image);
+  assert.equal(new Set(uzikov).size, 3, 'each Узиков place keeps its own photo');
+  const byImage = new Map();
+  for (const place of places) {
+    const ids = byImage.get(place.image) ?? [];
+    ids.push(place.id);
+    byImage.set(place.image, ids);
+  }
+  for (const [image, ids] of byImage) {
+    assert.equal(ids.length, 1, `${image} is reused by ${ids.join(', ')}`);
   }
   assert.equal(places[0].id, 'places-text-004', 'the first record opens on load');
 
@@ -101,10 +118,12 @@ const matching = pattern => places.filter(place => pattern.test(textOf(place))).
   // Simulate unavailable map tiles/WebGL. The whole list and filters must still work.
   const mapModule = { filterMarkers, createIllustratedMap: async () => { throw new Error('Map unavailable'); } };
   const integration = fs.readFileSync(path.join(root, 'site/assets/ufalit-map.js'), 'utf8');
-  await vm.runInNewContext(integration.replace(/await import\('\.\/map-widget\.js\?v=\d+'\)/, 'mapModule'), {
-    document: { querySelector: () => atlas, createElement: element },
-    window: { matchMedia: () => ({ matches: false }) }, mapModule, console: { warn() {} },
-  });
+  const runIntegration = (module, scope) => vm.runInNewContext(
+    integration.replace(/await import\('\.\/map-widget\.js\?v=\d+'\)/, 'mapModule'),
+    { document: { querySelector: () => atlas, createElement: element },
+      window: { matchMedia: () => ({ matches: false }) }, mapModule: module, console: { warn() {} }, ...scope },
+  );
+  await runIntegration(mapModule);
   assert.ok(atlas.classList.contains('atlas-unavailable'));
   for (const link of choices) {
     let prevented = false;
@@ -142,5 +161,90 @@ const matching = pattern => places.filter(place => pattern.test(textOf(place))).
   assert.equal(nodes['.atlas-key'].hidden, false);
   assert.equal(nodes['.atlas-empty'].hidden, true);
   assert.equal(nodes['.atlas-count'].textContent, `Показано мест: ${places.length} из ${places.length}`);
+  // Виджет против поддельного MapLibre: выбор из списка центрирует метку и
+  // приближает карту примерно до 50 м, а к меткам не привязывается всплывающая карточка.
+  const domElement = () => {
+    const node = element();
+    node.style = { setProperty() {} };
+    return node;
+  };
+  class FakeHTMLElement {}
+  globalThis.HTMLElement = FakeHTMLElement;
+  globalThis.window = { setTimeout, clearTimeout, matchMedia: () => ({ matches: true }) };
+  globalThis.document = {
+    createElement: () => Object.assign(new FakeHTMLElement(), domElement()),
+    querySelector: () => null,
+  };
+  const mapCalls = [];
+  const markerPopups = [];
+  const fakeLibre = `
+    export class Marker {
+      constructor(options) { this.element = options.element; this.popups = []; }
+      setLngLat() { return this; } addTo() { return this; } remove() { return this; }
+      setPopup(popup) { this.popups.push(popup); globalThis.__markerPopups.push(popup); return this; }
+      togglePopup() { return this; }
+    }
+    export class Popup {
+      setDOMContent() { return this; } setLngLat() { return this; }
+      constructor() { globalThis.__popupConstructions = (globalThis.__popupConstructions ?? 0) + 1; }
+      addTo() { return this; } remove() { this.removed = true; } isOpen() { return false; }
+    }
+    export class LngLatBounds { extend() { return this; } isEmpty() { return false; } }
+    export class NavigationControl {}
+    export class ScaleControl {}
+    export class Map {
+      constructor() {
+        return {
+          on() {}, once(event, handler) { if (event === 'load') setTimeout(handler, 0); },
+          addControl() {}, getStyle: () => ({ layers: [] }), setLayoutProperty() {},
+          setPaintProperty() {}, setMinZoom() {}, getZoom: () => 10, resize() {}, remove() {},
+          cameraForBounds: () => ({ zoom: 10 }),
+          fitBounds(b, options) { globalThis.__fits.push({ bounds: b, options }); },
+          easeTo(options) { globalThis.__mapCalls.push(options); return this; },
+          project: point => ({ x: point[0], y: point[1] }),
+          unproject: point => ({ lng: point.x, lat: point.y, toArray: () => [point.x, point.y] }),
+        };
+      }
+    }`;
+  globalThis.__mapCalls = mapCalls;
+  globalThis.__markerPopups = markerPopups;
+  globalThis.__fits = [];
+  const widgetModuleUrl = `data:text/javascript;base64,${Buffer.from(fakeLibre).toString('base64')}`;
+  const widgetSource = source.replace(
+    "const MAPLIBRE_MODULE = './vendor/maplibre-gl/maplibre-gl.mjs';",
+    `const MAPLIBRE_MODULE = ${JSON.stringify(widgetModuleUrl)};`,
+  );
+  const widget = await import(`data:text/javascript;base64,${Buffer.from(widgetSource).toString('base64')}`);
+  const controller = await widget.createIllustratedMap({
+    container: new FakeHTMLElement(),
+    markers: places.map(place => ({ ...place })),
+    filters,
+    popupOnMarkerClick: false,
+  });
+  const parkovaya = places.find(place => place.id === 'places-text-409');
+  assert.equal(controller.selectMarker('places-text-409', { zoom: 16.33, duration: 0 }), true);
+  const camera = mapCalls.at(-1);
+  assert.deepEqual(camera.center, parkovaya.coordinates, 'list selection centers the marker');
+  assert.equal(camera.zoom, 16.33, 'list selection zooms to the ~50 m scale');
+  assert.equal(markerPopups.length, 0, 'no popup is bound to markers, so clicks show only the panel');
+  assert.equal(globalThis.__popupConstructions ?? 0, 0, 'no popup element is even created for markers');
+  assert.ok(Array.isArray(controller.getVisibleMarkers()) && controller.getVisibleMarkers().length === places.length);
+
+  // Фильтр «Памятники» и одиночный результат поиска — это обзор, а не уличный зум.
+  controller.setPresetFilter('monument');
+  assert.equal(controller.getVisibleMarkers().length, byCategory('monument').length);
+  const markerFilterFit = globalThis.__fits.at(-1);
+  assert.ok(markerFilterFit, 'filter change fits all matching markers');
+  const lone = places.find(place => place.id === 'places-text-409');
+  controller.setPresetFilter('all');
+  controller.setTextFilter('Парковая');
+  controller.fitToContent({ useMapBounds: false, duration: 0 });
+  const visibleAfterSearch = controller.getVisibleMarkers();
+  assert.deepEqual(visibleAfterSearch.map(place => place.id), ['places-text-409']);
+  const loneCall = mapCalls.at(-1);
+  assert.deepEqual(loneCall.center, lone.coordinates, 'single result centers its marker');
+  assert.equal(loneCall.zoom, 13.5, 'single result keeps the city-wide overview instead of zooming in');
+  assert.ok(loneCall.zoom < 15, 'single result is not an extreme street-level zoom');
+
   console.log(`Home map: ${places.length} places, selections, six category filters, Russian search, empty/reset states, images, links and offline fallback passed.`);
 })().catch(error => { console.error(error); process.exitCode = 1; });
