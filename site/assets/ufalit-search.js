@@ -11,10 +11,12 @@
 
   function pattern(words) {
     if (!words.length) return null;
+    const meaningful = words.filter(word => word.length > 2);
+    const phrases = words.length > 1 ? [words.join(' ')] : [];
     // Terms contain only Unicode letters, numbers and spaces, never regex syntax.
-    const alternatives = [...words].sort((a, b) => b.length - a.length)
+    const alternatives = [...new Set([...phrases, ...(meaningful.length ? meaningful : words)])].sort((a, b) => b.length - a.length)
       .map(word => word.replaceAll('е', '[её]').split(' ').join('[^\\p{L}\\p{N}]+'));
-    return new RegExp(alternatives.join('|'), 'giu');
+    return new RegExp(`(?<![\\p{L}\\p{N}])(?:${alternatives.join('|')})(?![\\p{L}\\p{N}])`, 'giu');
   }
 
   function prepare(documents) {
@@ -32,7 +34,7 @@
     for (const entry of index) {
       let score = 0;
       for (const word of words) {
-        const field = entry.fields.findIndex(text => text.includes(word));
+        const field = entry.fields.findIndex(text => (` ${text} `).includes(` ${word} `));
         if (field < 0) { score = 0; break; }
         score += weights[field];
       }

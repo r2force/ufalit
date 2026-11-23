@@ -28,16 +28,77 @@
     "intro": "Рассказы Анвера Бикчентаева и отзывы о его творчестве.",
     "works": [
       {
+        "slug": "reading-bikchentaev-bakenshchiki-ne-plachut",
+        "title": "Бакенщики не плачут",
+        "kind": "Рассказ",
+        "description": "",
+        "group": "reading-bikchentaev-stories"
+      },
+      {
+        "slug": "reading-bikchentaev-malenkaya-bibi-i-bolshaya-chempionka",
+        "title": "Маленькая Биби и большая чемпионка",
+        "kind": "Рассказ",
+        "description": "",
+        "group": "reading-bikchentaev-stories"
+      },
+      {
+        "slug": "reading-bikchentaev-devushka-v-sharovarakh",
+        "title": "Девушка в шароварах",
+        "kind": "Рассказ",
+        "description": "",
+        "group": "reading-bikchentaev-stories"
+      },
+      {
+        "slug": "reading-bikchentaev-vzroslym-o-malenkikh",
+        "title": "Взрослым о маленьких",
+        "kind": "Литературная критика",
+        "description": "",
+        "group": "reading-bikchentaev-reviews",
+        "author": "Д. Милютина"
+      },
+      {
+        "slug": "reading-bikchentaev-o-tekh-kto-zazhigaet-bakeny",
+        "title": "О тех, кто зажигает бакены",
+        "kind": "Литературная критика",
+        "description": "",
+        "group": "reading-bikchentaev-reviews",
+        "author": "Римма Казакова"
+      },
+      {
+        "slug": "reading-bikchentaev-put-k-podvigu",
+        "title": "Путь к подвигу",
+        "kind": "Литературная критика",
+        "description": "",
+        "group": "reading-bikchentaev-reviews",
+        "author": "Ахнаф Харисов, Мустай Карим"
+      },
+      {
+        "slug": "reading-bikchentaev-s-gaydarovskoy-intonatsiey",
+        "title": "С гайдаровской интонацией",
+        "kind": "Литературная критика",
+        "description": "",
+        "group": "reading-bikchentaev-reviews",
+        "author": "Г. Куклис"
+      },
+      {
+        "slug": "reading-bikchentaev-vesna-zolotoy-sopki",
+        "title": "Весна Золотой Сопки",
+        "kind": "Литературная критика",
+        "description": "",
+        "group": "reading-bikchentaev-reviews",
+        "author": "Гилемдар Рамазанов"
+      }
+    ],
+    "groups": [
+      {
         "slug": "reading-bikchentaev-stories",
         "title": "Рассказы",
-        "kind": "Проза",
-        "description": "«Бакенщики не плачут» и другие рассказы."
+        "label": "Рассказы"
       },
       {
         "slug": "reading-bikchentaev-reviews",
         "title": "Отзывы",
-        "kind": "О творчестве",
-        "description": "Литературные отклики на произведения писателя."
+        "label": "Отзывы"
       }
     ]
   },
@@ -64,10 +125,32 @@
     "intro": "Поэзия, проза и сказки Мустая Карима. Здесь можно прочитать произведения и услышать голос поэта.",
     "works": [
       {
-        "slug": "reading-karim-children",
-        "title": "Мустай Карим — детям",
-        "kind": "Для детей",
-        "description": "Произведения и страницы творчества для юных читателей."
+        "slug": "reading-karim-v-berezovom-lesu",
+        "title": "В берёзовом лесу",
+        "kind": "Рассказ",
+        "description": "",
+        "group": "reading-karim-children"
+      },
+      {
+        "slug": "reading-karim-skvorchonok",
+        "title": "Скворчонок",
+        "kind": "Рассказ",
+        "description": "",
+        "group": "reading-karim-children"
+      },
+      {
+        "slug": "reading-karim-tuda-ili-syuda",
+        "title": "Туда или сюда?",
+        "kind": "Рассказ",
+        "description": "",
+        "group": "reading-karim-children"
+      },
+      {
+        "slug": "reading-karim-petushinaya-melnitsa",
+        "title": "Петушиная мельница",
+        "kind": "Повесть",
+        "description": "",
+        "group": "reading-karim-children"
       },
       {
         "slug": "reading-karim-smile",
@@ -76,22 +159,690 @@
         "description": "Восточная сказка в переводе Р. Хакимова."
       },
       {
+        "slug": "reading-karim-berega-ostayutsya",
+        "title": "Берега остаются",
+        "kind": "Стихотворение",
+        "description": "",
+        "group": "reading-karim-poems"
+      },
+      {
+        "slug": "reading-karim-chtob-starye-slova-ne-ustareli",
+        "title": "«Чтоб старые слова не устарели…»",
+        "kind": "Стихотворение без названия",
+        "description": "",
+        "group": "reading-karim-poems"
+      },
+      {
+        "slug": "reading-karim-etu-pesnyu-mat-mne-pela",
+        "title": "Эту песню мать мне пела",
+        "kind": "Стихотворение",
+        "description": "",
+        "group": "reading-karim-poems"
+      },
+      {
+        "slug": "reading-karim-v-trekh-obrazakh-vizhu-tebya",
+        "title": "В трех образах вижу тебя",
+        "kind": "Стихотворение",
+        "description": "",
+        "group": "reading-karim-poems"
+      },
+      {
+        "slug": "reading-karim-moy-kray-vozlyublennyy-naveki",
+        "title": "«Мой край, возлюбленный навеки…»",
+        "kind": "Стихотворение без названия",
+        "description": "",
+        "group": "reading-karim-poems"
+      },
+      {
+        "slug": "reading-karim-o-berezovom-liste",
+        "title": "О березовом листе",
+        "kind": "Стихотворение",
+        "description": "",
+        "group": "reading-karim-poems"
+      },
+      {
+        "slug": "reading-karim-puskay-na-globuse-ty-kazheshsya-listkom",
+        "title": "«Пускай на глобусе ты кажешься листком…»",
+        "kind": "Стихотворение без названия",
+        "description": "",
+        "group": "reading-karim-poems"
+      },
+      {
+        "slug": "reading-karim-na-globuse-strana-ne-velika",
+        "title": "«На глобусе страна не велика…»",
+        "kind": "Стихотворение без названия",
+        "description": "",
+        "group": "reading-karim-poems"
+      },
+      {
+        "slug": "reading-karim-dozhd",
+        "title": "Дождь",
+        "kind": "Стихотворение",
+        "description": "",
+        "group": "reading-karim-poems"
+      },
+      {
+        "slug": "reading-karim-russkaya-devochka",
+        "title": "Русская девочка",
+        "kind": "Стихотворение",
+        "description": "",
+        "group": "reading-karim-poems"
+      },
+      {
+        "slug": "reading-karim-luna",
+        "title": "Луна",
+        "kind": "Стихотворение",
+        "description": "",
+        "group": "reading-karim-poems"
+      },
+      {
+        "slug": "reading-karim-dva-bokala",
+        "title": "Два бокала",
+        "kind": "Стихотворение",
+        "description": "",
+        "group": "reading-karim-poems"
+      },
+      {
+        "slug": "reading-karim-tri-dnya-podryad",
+        "title": "Три дня подряд",
+        "kind": "Стихотворение",
+        "description": "",
+        "group": "reading-karim-poems"
+      },
+      {
+        "slug": "reading-karim-mne-pervye-khlopya-lozhatsya-na-plechi",
+        "title": "«Мне первые хлопья ложатся на плечи…»",
+        "kind": "Стихотворение без названия",
+        "description": "",
+        "group": "reading-karim-poems"
+      },
+      {
+        "slug": "reading-karim-tsvety-na-kamne",
+        "title": "Цветы на камне",
+        "kind": "Стихотворение",
+        "description": "",
+        "group": "reading-karim-poems"
+      },
+      {
+        "slug": "reading-karim-vera",
+        "title": "Вера",
+        "kind": "Стихотворение",
+        "description": "",
+        "group": "reading-karim-poems"
+      },
+      {
+        "slug": "reading-karim-ya-belyy-list-kladu-pered-soboy",
+        "title": "«Я белый лист кладу перед собой…»",
+        "kind": "Стихотворение без названия",
+        "description": "",
+        "group": "reading-karim-poems"
+      },
+      {
+        "slug": "reading-karim-s-moey-lyubimoy-uplyvaet",
+        "title": "«С моей любимой уплывает…»",
+        "kind": "Стихотворение без названия",
+        "description": "",
+        "group": "reading-karim-poems"
+      },
+      {
+        "slug": "reading-karim-vsegda-trevozhno-i-nesmelo",
+        "title": "«Всегда тревожно и несмело…»",
+        "kind": "Стихотворение без названия",
+        "description": "",
+        "group": "reading-karim-poems"
+      },
+      {
+        "slug": "reading-karim-tri-chuda-plenili-menya",
+        "title": "«Три чуда пленили меня…»",
+        "kind": "Стихотворение без названия",
+        "description": "",
+        "group": "reading-karim-poems"
+      },
+      {
+        "slug": "reading-karim-v-krayu-moey-lyubimoy",
+        "title": "В краю моей любимой",
+        "kind": "Стихотворение",
+        "description": "",
+        "group": "reading-karim-poems"
+      },
+      {
+        "slug": "reading-karim-ya-nemalo-tayn-prirody-znayu",
+        "title": "«Я немало тайн природы знаю…»",
+        "kind": "Стихотворение без названия",
+        "description": "",
+        "group": "reading-karim-poems"
+      },
+      {
+        "slug": "reading-karim-ya-uekhal-ty-ostalas",
+        "title": "«Я уехал, ты осталась…»",
+        "kind": "Стихотворение без названия",
+        "description": "",
+        "group": "reading-karim-poems"
+      },
+      {
+        "slug": "reading-karim-govoryat-sotvoril-tebya-nekogda-bog",
+        "title": "«Говорят, сотворил тебя некогда Бог…»",
+        "kind": "Стихотворение без названия",
+        "description": "",
+        "group": "reading-karim-poems"
+      },
+      {
+        "slug": "reading-karim-grustnaya-pesnya",
+        "title": "Грустная песня",
+        "kind": "Стихотворение",
+        "description": "",
+        "group": "reading-karim-poems"
+      },
+      {
+        "slug": "reading-karim-ko-mne-skvoz-belyy-les-skvoz-belyy-dym",
+        "title": "«Ко мне сквозь белый лес, сквозь белый дым…»",
+        "kind": "Стихотворение без названия",
+        "description": "",
+        "group": "reading-karim-poems"
+      },
+      {
+        "slug": "reading-karim-vlyublennye-v-uprekakh-pyl-umerte",
+        "title": "«Влюбленные, в упреках пыл умерьте…»",
+        "kind": "Стихотворение без названия",
+        "description": "",
+        "group": "reading-karim-poems"
+      },
+      {
+        "slug": "reading-karim-prervav-svoy-put-s-toboyu-ostayus",
+        "title": "«Прервав свой путь, с тобою остаюсь…»",
+        "kind": "Стихотворение без названия",
+        "description": "",
+        "group": "reading-karim-poems"
+      },
+      {
+        "slug": "reading-karim-pesnya-rassveta",
+        "title": "Песня рассвета",
+        "kind": "Стихотворение",
+        "description": "",
+        "group": "reading-karim-poems"
+      },
+      {
+        "slug": "reading-karim-nochami-razgovarivayut-reki",
+        "title": "«Ночами разговаривают реки…»",
+        "kind": "Стихотворение без названия",
+        "description": "",
+        "group": "reading-karim-poems"
+      },
+      {
+        "slug": "reading-karim-pervyy-sneg-tak-rano-tak-nezhdanno",
+        "title": "«Первый снег так рано, так нежданно…»",
+        "kind": "Стихотворение без названия",
+        "description": "",
+        "group": "reading-karim-poems"
+      },
+      {
+        "slug": "reading-karim-ona-govorit",
+        "title": "«Она говорит…»",
+        "kind": "Стихотворение без названия",
+        "description": "",
+        "group": "reading-karim-poems"
+      },
+      {
+        "slug": "reading-karim-davay-dorogaya-ulozhim-i-skarb-i-odezhdu",
+        "title": "«Давай, дорогая, уложим и скарб, и одежду…»",
+        "kind": "Стихотворение без названия",
+        "description": "",
+        "group": "reading-karim-poems"
+      },
+      {
+        "slug": "reading-karim-vse-bylo-vzbudorazheno-vokrug",
+        "title": "«Все было взбудоражено вокруг…»",
+        "kind": "Стихотворение без названия",
+        "description": "",
+        "group": "reading-karim-poems"
+      },
+      {
+        "slug": "reading-karim-ty-v-etot-raz-vdol-morya-shla-ko-mne",
+        "title": "«Ты в этот раз вдоль моря шла ко мне…»",
+        "kind": "Стихотворение без названия",
+        "description": "",
+        "group": "reading-karim-poems"
+      },
+      {
+        "slug": "reading-karim-kakaya-nynche-osen-zaglyadene",
+        "title": "«Какая нынче осень - загляденье…»",
+        "kind": "Стихотворение без названия",
+        "description": "",
+        "group": "reading-karim-poems"
+      },
+      {
+        "slug": "reading-karim-lyubov-moya-neistovoy-vesnoy",
+        "title": "«Любовь моя!.. Неистовой весной…»",
+        "kind": "Стихотворение без названия",
+        "description": "",
+        "group": "reading-karim-poems"
+      },
+      {
+        "slug": "reading-karim-do-solntsa-ya-s-toboy-ne-do-zari",
+        "title": "«До солнца я с тобой - не до зари…»",
+        "kind": "Стихотворение без названия",
+        "description": "",
+        "group": "reading-karim-poems"
+      },
+      {
+        "slug": "reading-karim-kogda-grustno",
+        "title": "Когда грустно",
+        "kind": "Стихотворение",
+        "description": "Из «Монологов Прометея».",
+        "group": "reading-karim-poems"
+      },
+      {
+        "slug": "reading-karim-kogda-sgorela-agaziya",
+        "title": "Когда сгорела Агазия",
+        "kind": "Стихотворение",
+        "description": "Из «Монологов Прометея».",
+        "group": "reading-karim-poems"
+      },
+      {
+        "slug": "reading-karim-pust-vremya-ne-ostanavlivaetsya",
+        "title": "Пусть время не останавливается",
+        "kind": "Стихотворение",
+        "description": "Из «Монологов Прометея».",
+        "group": "reading-karim-poems"
+      },
+      {
+        "slug": "reading-karim-poduet-veter-i-vse-bolshe-listev",
+        "title": "«Подует ветер - и все больше листьев…»",
+        "kind": "Стихотворение без названия",
+        "description": "",
+        "group": "reading-karim-poems"
+      },
+      {
+        "slug": "reading-karim-nam-s-sovestyu-nikak-ne-sgovoritsya",
+        "title": "«Нам с совестью никак не сговориться…»",
+        "kind": "Стихотворение без названия",
+        "description": "",
+        "group": "reading-karim-poems"
+      },
+      {
+        "slug": "reading-karim-ty-govorish-chtob-ya-sebya-bereg",
+        "title": "«Ты говоришь, чтоб я себя берег…»",
+        "kind": "Стихотворение без названия",
+        "description": "",
+        "group": "reading-karim-poems"
+      },
+      {
+        "slug": "reading-karim-tsvet-gorya-cheren-cheren-kak-zemlya",
+        "title": "«Цвет горя черен, черен, как земля…»",
+        "kind": "Стихотворение без названия",
+        "description": "",
+        "group": "reading-karim-poems"
+      },
+      {
+        "slug": "reading-karim-a-byvaet-v-prirode-takaya-pora",
+        "title": "«...А бывает в природе такая пора…»",
+        "kind": "Стихотворение без названия",
+        "description": "",
+        "group": "reading-karim-poems"
+      },
+      {
+        "slug": "reading-karim-kogda-uydu-pobegut-navernoe",
+        "title": "«Когда уйду, побегут, наверное…»",
+        "kind": "Стихотворение без названия",
+        "description": "",
+        "group": "reading-karim-poems"
+      },
+      {
+        "slug": "reading-karim-khasanu-tufanu",
+        "title": "Хасану Туфану",
+        "kind": "Стихотворение",
+        "description": "",
+        "group": "reading-karim-poems"
+      },
+      {
+        "slug": "reading-karim-legenda",
+        "title": "Легенда",
+        "kind": "Стихотворение",
+        "description": "",
+        "group": "reading-karim-poems"
+      },
+      {
+        "slug": "reading-karim-v-doroge-nogi-v-pesne-dumy-khochesh",
+        "title": "«В дороге - ноги. В песне - думы... Хочешь…»",
+        "kind": "Стихотворение без названия",
+        "description": "",
+        "group": "reading-karim-poems"
+      },
+      {
+        "slug": "reading-karim-obeshchaniy-ne-davay",
+        "title": "Обещаний не давай",
+        "kind": "Стихотворение",
+        "description": "",
+        "group": "reading-karim-poems"
+      },
+      {
+        "slug": "reading-karim-ya-s-sabantuya-vozvrashchayus",
+        "title": "Я с сабантуя возвращаюсь...",
+        "kind": "Стихотворение",
+        "description": "",
+        "group": "reading-karim-poems"
+      },
+      {
+        "slug": "reading-karim-karusel-vse-vertitsya",
+        "title": "Карусель все вертится...",
+        "kind": "Стихотворение",
+        "description": "",
+        "group": "reading-karim-poems"
+      },
+      {
+        "slug": "reading-karim-khorosho-chto-ya-ne-garmonist",
+        "title": "Хорошо, что я не гармонист",
+        "kind": "Стихотворение",
+        "description": "",
+        "group": "reading-karim-poems"
+      },
+      {
+        "slug": "reading-karim-devushki-vyshivayut",
+        "title": "Девушки вышивают",
+        "kind": "Стихотворение",
+        "description": "",
+        "group": "reading-karim-poems"
+      },
+      {
+        "slug": "reading-karim-byl-blizkim-gorizont-togda",
+        "title": "«Был близким горизонт тогда…»",
+        "kind": "Стихотворение без названия",
+        "description": "",
+        "group": "reading-karim-poems"
+      },
+      {
+        "slug": "reading-karim-ptits-vypuskayu",
+        "title": "Птиц выпускаю...",
+        "kind": "Стихотворение",
+        "description": "",
+        "group": "reading-karim-poems"
+      },
+      {
+        "slug": "reading-karim-ne-speshi-starost",
+        "title": "Не спеши, старость!",
+        "kind": "Стихотворение",
+        "description": "",
+        "group": "reading-karim-poems"
+      },
+      {
+        "slug": "reading-karim-v-pare-chernykh",
+        "title": "«В паре черных…»",
+        "kind": "Стихотворение без названия",
+        "description": "",
+        "group": "reading-karim-poems"
+      },
+      {
+        "slug": "reading-karim-kogda-to-na-pechi-moy-ded",
+        "title": "«Когда-то на печи мой дед…»",
+        "kind": "Стихотворение без названия",
+        "description": "",
+        "group": "reading-karim-poems"
+      },
+      {
+        "slug": "reading-karim-sluchalis-dni-udachnye",
+        "title": "«Случались дни удачные…»",
+        "kind": "Стихотворение без названия",
+        "description": "",
+        "group": "reading-karim-poems"
+      },
+      {
+        "slug": "reading-karim-v-nachale-dnya-vstrechaet-lay-menya",
+        "title": "«В начале дня встречает лай меня…»",
+        "kind": "Стихотворение без названия",
+        "description": "",
+        "group": "reading-karim-poems"
+      },
+      {
+        "slug": "reading-karim-zemlya-zelenaya-eshche-vchera",
+        "title": "«Земля, зеленая еще вчера…»",
+        "kind": "Стихотворение без названия",
+        "description": "",
+        "group": "reading-karim-poems"
+      },
+      {
+        "slug": "reading-karim-stareyut-radosti-moi",
+        "title": "«Стареют радости мои…»",
+        "kind": "Стихотворение без названия",
+        "description": "",
+        "group": "reading-karim-poems"
+      },
+      {
+        "slug": "reading-karim-v-poldnevnyy-zhar-v-doline-dagestana",
+        "title": "«В полдневный жар в долине Дагестана…»",
+        "kind": "Стихотворение без названия",
+        "description": "",
+        "group": "reading-karim-poems"
+      },
+      {
+        "slug": "reading-karim-dolgaya-zhizn-i-korotkaya-starost",
+        "title": "«Долгая жизнь и короткая старость…»",
+        "kind": "Стихотворение без названия",
+        "description": "",
+        "group": "reading-karim-poems"
+      },
+      {
+        "slug": "reading-karim-uslyshal-ya-buran-na-ves-kavkaz",
+        "title": "«Услышал я: «Буран на весь Кавказ…»",
+        "kind": "Стихотворение без названия",
+        "description": "",
+        "group": "reading-karim-poems"
+      },
+      {
+        "slug": "reading-karim-druzya-ya-vse-chashche-terzayus-gadaya",
+        "title": "«Друзья, я все чаще терзаюсь, гадая…»",
+        "kind": "Стихотворение без названия",
+        "description": "",
+        "group": "reading-karim-poems"
+      },
+      {
+        "slug": "reading-karim-vse-prosto-avtorskoe-chtenie",
+        "title": "Все просто..",
+        "kind": "Аудиозаписи",
+        "description": "Читает Мустай Карим.",
+        "group": "reading-karim-audio",
+        "legacy_anchor": "track-01"
+      },
+      {
+        "slug": "reading-karim-tsvety-na-kamne-avtorskoe-chtenie",
+        "title": "Цветы на камне",
+        "kind": "Аудиозаписи",
+        "description": "Читает Мустай Карим.",
+        "group": "reading-karim-audio",
+        "legacy_anchor": "track-02"
+      },
+      {
+        "slug": "reading-karim-tri-dnya-podryad-avtorskoe-chtenie",
+        "title": "Три дня подряд",
+        "kind": "Аудиозаписи",
+        "description": "Читает Мустай Карим.",
+        "group": "reading-karim-audio",
+        "legacy_anchor": "track-03"
+      },
+      {
+        "slug": "reading-karim-etu-pesnyu-mat-mne-pela-avtorskoe-chtenie",
+        "title": "Эту песню мать мне пела",
+        "kind": "Аудиозаписи",
+        "description": "Читает Мустай Карим.",
+        "group": "reading-karim-audio",
+        "legacy_anchor": "track-04"
+      },
+      {
+        "slug": "reading-karim-poduet-veter-avtorskoe-chtenie",
+        "title": "Подует ветер",
+        "kind": "Аудиозаписи",
+        "description": "Читает Мустай Карим.",
+        "group": "reading-karim-audio",
+        "legacy_anchor": "track-05"
+      },
+      {
+        "slug": "reading-karim-berega-ostayutsya-avtorskoe-chtenie",
+        "title": "Берега остаются",
+        "kind": "Аудиозаписи",
+        "description": "Читает Мустай Карим.",
+        "group": "reading-karim-audio",
+        "legacy_anchor": "track-06"
+      },
+      {
+        "slug": "reading-karim-muzhchiny-daryat-zhenshchinam-tsvety-avtorskoe-chtenie",
+        "title": "Мужчины дарят женщинам цветы",
+        "kind": "Аудиозаписи",
+        "description": "Читает Мустай Карим.",
+        "group": "reading-karim-audio",
+        "legacy_anchor": "track-07"
+      },
+      {
+        "slug": "reading-karim-karusel-vse-vertitsya-avtorskoe-chtenie",
+        "title": "Карусель все вертится",
+        "kind": "Аудиозаписи",
+        "description": "Читает Мустай Карим.",
+        "group": "reading-karim-audio",
+        "legacy_anchor": "track-08"
+      },
+      {
+        "slug": "reading-karim-gory-avtorskoe-chtenie",
+        "title": "Горы",
+        "kind": "Аудиозаписи",
+        "description": "Читает Мустай Карим.",
+        "group": "reading-karim-audio",
+        "legacy_anchor": "track-09"
+      },
+      {
+        "slug": "reading-karim-ya-belyy-list-kladu-pered-soboy-avtorskoe-chtenie",
+        "title": "Я белый лист кладу перед собой",
+        "kind": "Аудиозаписи",
+        "description": "Читает Мустай Карим.",
+        "group": "reading-karim-audio",
+        "legacy_anchor": "track-10"
+      },
+      {
+        "slug": "reading-karim-byla-moya-zhizn-nepreryvnoy-igroy-avtorskoe-chtenie",
+        "title": "Была моя жизнь непрерывной игрой",
+        "kind": "Аудиозаписи",
+        "description": "Читает Мустай Карим.",
+        "group": "reading-karim-audio",
+        "legacy_anchor": "track-11"
+      },
+      {
+        "slug": "reading-karim-nochami-razgovarivayut-reki-avtorskoe-chtenie",
+        "title": "Ночами разговаривают реки",
+        "kind": "Аудиозаписи",
+        "description": "Читает Мустай Карим.",
+        "group": "reading-karim-audio",
+        "legacy_anchor": "track-12"
+      },
+      {
+        "slug": "reading-karim-v-doroge-nogi-avtorskoe-chtenie",
+        "title": "В дороге-ноги",
+        "kind": "Аудиозаписи",
+        "description": "Читает Мустай Карим.",
+        "group": "reading-karim-audio",
+        "legacy_anchor": "track-13"
+      },
+      {
+        "slug": "reading-karim-ya-znal-uspekh-avtorskoe-chtenie",
+        "title": "Я знал успех",
+        "kind": "Аудиозаписи",
+        "description": "Читает Мустай Карим.",
+        "group": "reading-karim-audio",
+        "legacy_anchor": "track-14"
+      },
+      {
+        "slug": "reading-karim-a-byvaet-v-prirode-takaya-pora-avtorskoe-chtenie",
+        "title": "А бывает в природе такая пора",
+        "kind": "Аудиозаписи",
+        "description": "Читает Мустай Карим.",
+        "group": "reading-karim-audio",
+        "legacy_anchor": "track-15"
+      },
+      {
+        "slug": "reading-karim-ya-umnomu-taynu-otkryl-avtorskoe-chtenie",
+        "title": "Я умному тайну открыл",
+        "kind": "Аудиозаписи",
+        "description": "Читает Мустай Карим.",
+        "group": "reading-karim-audio",
+        "legacy_anchor": "track-16"
+      },
+      {
+        "slug": "reading-karim-beloe-i-chernoe-avtorskoe-chtenie",
+        "title": "Белое и черное",
+        "kind": "Аудиозаписи",
+        "description": "Читает Мустай Карим.",
+        "group": "reading-karim-audio",
+        "legacy_anchor": "track-17"
+      },
+      {
+        "slug": "reading-karim-ptits-vypuskayu-avtorskoe-chtenie",
+        "title": "Птиц выпускаю",
+        "kind": "Аудиозаписи",
+        "description": "Читает Мустай Карим.",
+        "group": "reading-karim-audio",
+        "legacy_anchor": "track-18"
+      },
+      {
+        "slug": "reading-karim-zapis-1-zaynab-nazyrova-audio",
+        "title": "Запись 1 — Зайнаб Назырова",
+        "kind": "Аудиозаписи",
+        "description": "Исполняет Зайнаб Назырова.",
+        "group": "reading-karim-nazarova",
+        "legacy_anchor": "track-01"
+      },
+      {
+        "slug": "reading-karim-zapis-2-zaynab-nazyrova-audio",
+        "title": "Запись 2 — Зайнаб Назырова",
+        "kind": "Аудиозаписи",
+        "description": "Исполняет Зайнаб Назырова.",
+        "group": "reading-karim-nazarova",
+        "legacy_anchor": "track-02"
+      },
+      {
+        "slug": "reading-karim-zapis-3-zaynab-nazyrova-audio",
+        "title": "Запись 3 — Зайнаб Назырова",
+        "kind": "Аудиозаписи",
+        "description": "Исполняет Зайнаб Назырова.",
+        "group": "reading-karim-nazarova",
+        "legacy_anchor": "track-03"
+      },
+      {
+        "slug": "reading-karim-zapis-4-zaynab-nazyrova-audio",
+        "title": "Запись 4 — Зайнаб Назырова",
+        "kind": "Аудиозаписи",
+        "description": "Исполняет Зайнаб Назырова.",
+        "group": "reading-karim-nazarova",
+        "legacy_anchor": "track-04"
+      },
+      {
+        "slug": "reading-karim-zapis-5-zaynab-nazyrova-audio",
+        "title": "Запись 5 — Зайнаб Назырова",
+        "kind": "Аудиозаписи",
+        "description": "Исполняет Зайнаб Назырова.",
+        "group": "reading-karim-nazarova",
+        "legacy_anchor": "track-05"
+      }
+    ],
+    "groups": [
+      {
+        "slug": "reading-karim-children",
+        "title": "Мустай Карим — детям",
+        "notes_html": "<figure class=\"text-center material-figure\"><img class=\"article-illustration\" src=\"../../assets/reading/karim/image002.jpg\" alt=\"Мустай Карим за столом\" width=\"600\" height=\"450\"></figure>\n  <p>Мустай Карим – автор более ста поэтических и прозаических сборников, свыше десяти пьес. Его произведения вошли в золотой фонд башкирской литературы и театра.</p>\n  <p>Классикой детского чтения стали повести \"Радость нашего дома\" (1951), \"Таганок\" (1966), \"Батя Ялалетдин\". Популярна автобиографическая повесть \"Долгое-долгое детство\" (1976), по которой был снят художественный фильм.</p>\n  <div class=\"text-left material-photo-grid\">\n    <figure class=\"material-figure\"><img class=\"article-illustration\" src=\"../../assets/reading/karim/image004.jpg\" alt=\"Обложка книги «Долгое-долгое детство»\" width=\"200\" height=\"317\"></figure>\n    <figure class=\"material-figure\"><img class=\"article-illustration\" src=\"../../assets/reading/karim/image006.jpg\" alt=\"Обложка книги «Радость нашего дома. Таганок»\" width=\"200\" height=\"278\"></figure>\n  </div>",
+        "label": "Для детей"
+      },
+      {
         "slug": "reading-karim-poems",
         "title": "Стихотворения",
-        "kind": "Поэзия",
-        "description": "Стихотворения в переводах с башкирского языка."
+        "notes_html": "<p class=\"text-center\"><b class=\"archive-small\">Стихотворения</b></p>\n<p class=\"text-center\"><b>Переводы с башкирского</b></p>\n<p>Примечание к стихотворению «В краю моей любимой»:</p>\n<p>***</p>\n<p>Сармасан - река в Башкирии.</p>\n<p>К стихотворениям «Когда грустно», «Когда сгорела Агазия» и «Пусть время не останавливается»:</p>\n<p><b>* ИЗ «МОНОЛОГОВ ПРОМЕТЕЯ» *</b></p>",
+        "label": "Стихотворения"
       },
       {
         "slug": "reading-karim-audio",
         "title": "Стихотворения. Читает Мустай Карим",
-        "kind": "Аудиозаписи",
-        "description": "18 стихотворений в авторском исполнении."
+        "notes_html": "<p>В фонотеке собраны 18 стихотворений в авторском исполнении Мустая Карима. Выберите дорожку, чтобы послушать её, или скачайте оригинал. <span class=\"audio-link-hint\">Прямую ссылку на запись можно скопировать по её номеру в плеере.</span></p>",
+        "label": "Авторское чтение"
       },
       {
         "slug": "reading-karim-nazarova",
         "title": "Стихи в исполнении Зайнаб Назыровой и песни на стихи Мустая Карима",
-        "kind": "Аудиозаписи",
-        "description": "Литературно-музыкальные записи из фонотеки."
+        "notes_html": "<p>Выберите дорожку, чтобы послушать запись, или скачайте оригинал. <span class=\"audio-link-hint\">Прямую ссылку на запись можно скопировать по её номеру в плеере.</span></p>",
+        "label": "Стихи и песни"
       }
     ]
   },
@@ -100,10 +851,39 @@
     "intro": "Тухват Янаби — детям. Стихи и басня в переводах учеников школы № 60.",
     "works": [
       {
+        "slug": "reading-yanabi-shkolnik",
+        "title": "Школьник",
+        "kind": "Стихотворение",
+        "description": "",
+        "group": "reading-yanabi-poems"
+      },
+      {
+        "slug": "reading-yanabi-pesnya-oktyabrenka",
+        "title": "Песня октябрёнка",
+        "kind": "Стихотворение",
+        "description": "",
+        "group": "reading-yanabi-poems"
+      },
+      {
+        "slug": "reading-yanabi-shkolnye-chastushki",
+        "title": "Школьные частушки",
+        "kind": "Стихотворение",
+        "description": "",
+        "group": "reading-yanabi-poems"
+      },
+      {
+        "slug": "reading-yanabi-slon-i-petukh",
+        "title": "Слон и петух",
+        "kind": "Басня",
+        "description": "",
+        "group": "reading-yanabi-poems"
+      }
+    ],
+    "groups": [
+      {
         "slug": "reading-yanabi-poems",
         "title": "Стихотворения и басня",
-        "kind": "Поэзия",
-        "description": "«Школьник», «Песня октябрёнка», «Школьные частушки» и «Слон и петух»."
+        "notes_html": "<p class=\"text-center\"><b>Тухват Янаби – детям</b></p>\n<p>Специально для подрастающего поколения Тухват Янаби написал два сборника: «Подарок весны» (1928) и «На посту» (1934). Обращаясь к детям, поэт призывает их быть во всём прилежными, стремиться к знаниям и помогать старшим.</p>\n<p>Стихи Тухват Янаби писал на башкирском языке. Ученики школы № 60 – Гильманова Альбина и Насырова Диана решили перевести некоторые его произведения на русский язык. Руководила их работой Гульнара Мухаметовна Амирова – преподаватель башкирского языка и литературы.</p>"
       }
     ]
   },
@@ -118,10 +898,36 @@
         "description": "Размышления писателя."
       },
       {
-        "slug": "reading-shafikov-dedications",
-        "title": "Посвящения Газиму Шафикову",
-        "kind": "Посвящения",
-        "description": "Стихи, обращённые к поэту."
+        "slug": "reading-shafikov-gazimu-shafikovu-rozhdennye-v-sedle",
+        "title": "Газиму Шафикову. «Рожденные в седле»",
+        "kind": "Посвящение",
+        "description": "Газиму Шафикову.",
+        "group": "reading-shafikov-dedications",
+        "author": "Равиль Бикбаев"
+      },
+      {
+        "slug": "reading-shafikov-lish-v-nem-odnom",
+        "title": "Лишь в нем одном…",
+        "kind": "Посвящение",
+        "description": "Газиму Шафикову.",
+        "group": "reading-shafikov-dedications",
+        "author": "Ирек Киньябулатов"
+      },
+      {
+        "slug": "reading-shafikov-veren-ty-sebe-i-slovu-serdtsa",
+        "title": "«Верен ты себе и слову сердца…»",
+        "kind": "Посвящение",
+        "description": "Газиму Шафикову.",
+        "group": "reading-shafikov-dedications",
+        "author": "Ирек Киньябулатов"
+      },
+      {
+        "slug": "reading-shafikov-na-smert-gazima-shafikova",
+        "title": "На смерть Газима Шафикова",
+        "kind": "Посвящение",
+        "description": "Газиму Шафикову.",
+        "group": "reading-shafikov-dedications",
+        "author": "Айдар Хусаинов"
       },
       {
         "slug": "reading-shafikov-talas",
@@ -130,10 +936,136 @@
         "description": "Первая часть повести Газима Шафикова."
       },
       {
+        "slug": "reading-shafikov-ya-sovremennik",
+        "title": "Я – современник",
+        "kind": "Стихотворение",
+        "description": "",
+        "group": "reading-shafikov-poems"
+      },
+      {
+        "slug": "reading-shafikov-elegiya-goroda",
+        "title": "Элегия города",
+        "kind": "Стихотворение",
+        "description": "",
+        "group": "reading-shafikov-poems"
+      },
+      {
+        "slug": "reading-shafikov-ya-zamer-na-razvilke-dvukh-dorog",
+        "title": "«Я замер на развилке двух дорог…»",
+        "kind": "Стихотворение без названия",
+        "description": "",
+        "group": "reading-shafikov-poems"
+      },
+      {
+        "slug": "reading-shafikov-polet",
+        "title": "Полет",
+        "kind": "Стихотворение",
+        "description": "",
+        "group": "reading-shafikov-poems"
+      },
+      {
+        "slug": "reading-shafikov-pushkin-v-orenburzhe",
+        "title": "Пушкин в Оренбуржье",
+        "kind": "Стихотворение",
+        "description": "",
+        "group": "reading-shafikov-poems"
+      },
+      {
+        "slug": "reading-shafikov-ufimskaya-propiska-andreya-platonova",
+        "title": "Уфимская прописка Андрея Платонова",
+        "kind": "Стихотворение",
+        "description": "",
+        "group": "reading-shafikov-poems"
+      },
+      {
+        "slug": "reading-shafikov-akmulla",
+        "title": "Акмулла",
+        "kind": "Стихотворение",
+        "description": "",
+        "group": "reading-shafikov-poems"
+      },
+      {
+        "slug": "reading-shafikov-slovo",
+        "title": "Слово",
+        "kind": "Стихотворение",
+        "description": "",
+        "group": "reading-shafikov-poems"
+      },
+      {
+        "slug": "reading-shafikov-probuzhdenie",
+        "title": "Пробуждение",
+        "kind": "Стихотворение",
+        "description": "",
+        "group": "reading-shafikov-poems"
+      },
+      {
+        "slug": "reading-shafikov-kak-mne-khotya-by-den-prozhit",
+        "title": "«Как мне хотя бы день прожить…»",
+        "kind": "Стихотворение без названия",
+        "description": "",
+        "group": "reading-shafikov-poems"
+      },
+      {
+        "slug": "reading-shafikov-ya-zamer-na-razvilke-dvukh-dorog-2",
+        "title": "«Я замер на развилке двух дорог…»",
+        "kind": "Стихотворение без названия",
+        "description": "",
+        "group": "reading-shafikov-poems"
+      },
+      {
+        "slug": "reading-shafikov-topolya",
+        "title": "Тополя",
+        "kind": "Стихотворение",
+        "description": "",
+        "group": "reading-shafikov-poems"
+      },
+      {
+        "slug": "reading-shafikov-chernota",
+        "title": "Чернота",
+        "kind": "Стихотворение",
+        "description": "",
+        "group": "reading-shafikov-poems"
+      },
+      {
+        "slug": "reading-shafikov-moi-uchitelya",
+        "title": "Мои учителя",
+        "kind": "Стихотворение",
+        "description": "",
+        "group": "reading-shafikov-poems"
+      },
+      {
+        "slug": "reading-shafikov-kuda-ni-glyanesh-fotoapparaty",
+        "title": "«Куда ни глянешь – фотоаппараты…»",
+        "kind": "Стихотворение без названия",
+        "description": "",
+        "group": "reading-shafikov-poems"
+      },
+      {
+        "slug": "reading-shafikov-reministsentsii",
+        "title": "Реминисценции",
+        "kind": "Стихотворение",
+        "description": "",
+        "group": "reading-shafikov-poems"
+      },
+      {
+        "slug": "reading-shafikov-konstitutsionnye-motivy",
+        "title": "Конституционные мотивы",
+        "kind": "Стихотворение",
+        "description": "",
+        "group": "reading-shafikov-poems"
+      }
+    ],
+    "groups": [
+      {
+        "slug": "reading-shafikov-dedications",
+        "title": "Посвящения Газиму Шафикову",
+        "notes_html": "<p class=\"text-center\"><b>ПОСВЯЩЕНИЯ</b></p>\n  <div class=\"material-photo-grid\">\n    <figure class=\"text-center material-figure\"><img class=\"article-illustration\" src=\"../../assets/reading/shafikov/image001.png\" alt=\"Портрет Газима Шафикова работы А. Лутфуллина\" width=\"1904\" height=\"2287\"><figcaption class=\"text-center\">Портрет Газима Шафикова работы А. Лутфуллина</figcaption></figure>\n    <figure class=\"text-center material-figure\"><img class=\"article-illustration\" src=\"../../assets/reading/shafikov/image003.png\" alt=\"Трое мужчин беседуют\" width=\"2364\" height=\"1522\"></figure>\n  </div>\n  <p class=\"text-left\"><b>Мустай Карим</b> (после авторского вечера Г. Шафикова)</p>\n  <p><i>Газим Шафиков – причина того, что сегодня наши заблудшие души соединились.</i></p>\n  <p><i>Газим, ты у всех на виду. Как подобает настоящему поэту и гражданину.</i></p>\n  <p><i>Дай Бог, чтобы ты еще долго заставлял нас думать, размышлять, иногда сомневаться, иногда каяться…</i></p>\n  <figure class=\"text-center material-figure\"><img class=\"article-illustration\" src=\"../../assets/reading/shafikov/image005.jpg\" alt=\"Двое мужчин беседуют\" width=\"400\" height=\"300\"></figure>\n  <p class=\"text-left\"><b>Георгий Кацерик</b></p>\n  <p><i>…Только теперь, читая и перечитывая «Избранное», до выхода которого поэт так и не дотянул, я начинаю понимать, что Газим Шафиков и впрямь был неким избранником Поэзии. Исключительно своеобразным и прекрасным, просто изумительным поэтом, какому наверняка при рождении медоносные пчелы вложили в рот сладчайшие медовые соты...</i></p>\n  <figure class=\"text-center material-figure\"><img class=\"article-illustration\" src=\"../../assets/reading/shafikov/image009.gif\" alt=\"Два архивных снимка\" width=\"820\" height=\"430\"></figure>",
+        "label": "Посвящения"
+      },
+      {
         "slug": "reading-shafikov-poems",
         "title": "Стихотворения",
-        "kind": "Поэзия",
-        "description": "Поэтическая подборка Газима Шафикова."
+        "label": "Стихотворения"
       }
     ]
   }

@@ -46,7 +46,7 @@
     title.append(link);
     const text = document.createElement('p');
     text.className = 'library-search-excerpt';
-    appendParts(text, excerpt.target ? excerpt.parts : search.highlight(work.description, words));
+    appendParts(text, work.text ? excerpt.parts : search.highlight(work.description, words));
     row.append(author, kind, title, text);
     return row;
   }

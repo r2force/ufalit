@@ -376,7 +376,8 @@ def reading_search_documents(collections, writers):
             content = re.sub(r'<h1\b[^>]*>.*?</h1>', '', content, count=1, flags=re.S)
             text = ReadingText(content).text()
             documents.append(dict(
-                title=work["title"], author=writer["name"], alias=writer.get("full_name", ""),
+                title=work["title"], author=work.get("author", writer["name"]),
+                alias=" ".join([writer.get("full_name", ""), writer["name"] if "author" in work else ""]),
                 kind=work["kind"], description=work["description"],
                 href=f'../{work["slug"]}/', text=" ".join(part for part in (text, tracks) if part),
             ))
@@ -406,26 +407,64 @@ def render_reading_room(page, content, slug, templates, writers, collections, pr
         search_index = json.dumps(reading_search_documents(collections, writers), ensure_ascii=False).replace("<", "\\u003c")
         return templates["reading-index"].substitute(cards='\n'.join(cards), search_index=search_index)
 
-    if "reading_author" in page:
-        key = page["reading_author"]
+    if "reading_author" in page or "reading_group" in page:
+        legacy = page.get("reading_group")
+        key = page.get("reading_author") or next(item["writer"] for item in collections
+                    if any(group["slug"] == legacy for group in item.get("groups", [])))
         collection = next(item for item in collections if item["writer"] == key)
-        rows, audio = [], []
-        for work in collection["works"]:
-            is_audio = work["kind"] == "Аудиозаписи"
-            row = templates["reading-work"].substitute(
-                title=escape(work["title"]), kind=escape(work["kind"]),
-                description=escape(work["description"]), href=f'../{escape(work["slug"])}/',
-                action="Слушать" if is_audio else "Открыть" if work["kind"] == "О книге" else "Читать",
-            )
-            (audio if is_audio else rows).append(row)
+        groups = {group["slug"]: group for group in collection.get("groups", [])}
+        works = [work for work in collection["works"] if not legacy or work.get("group") == legacy]
+
+        def render_shelf(items):
+            blocks, rows, current_group = [], [], None
+
+            def finish_group():
+                if not rows:
+                    return
+                listing = '<ul class="library-works">' + '\n'.join(rows) + '</ul>'
+                if current_group:
+                    heading = escape(groups[current_group]["title"])
+                    listing = (f'<section class="library-work-group" id="{escape(current_group)}">'
+                               f'<header><h3>{heading}</h3><span>{material_count(len(rows))}</span></header>{listing}</section>')
+                blocks.append(listing)
+
+            for work in items:
+                group = work.get("group") if not legacy else None
+                if group != current_group:
+                    finish_group()
+                    rows, current_group = [], group
+                rows.append(templates["reading-work"].substitute(
+                    title=escape(work["title"]), kind=escape(work["kind"]),
+                    description=escape(work["description"]), href=f'../{escape(work["slug"])}/',
+                    action="Слушать" if work["kind"] == "Аудиозаписи" else "Открыть" if work["kind"] == "О книге" else "Читать",
+                    title_tag="h4" if group else "h3",
+                    id=escape(work.get("legacy_anchor", work["slug"]) if legacy else work["slug"]),
+                ))
+            finish_group()
+            return '\n'.join(blocks)
+
+        rows = render_shelf(work for work in works if work["kind"] != "Аудиозаписи")
+        audio = render_shelf(work for work in works if work["kind"] == "Аудиозаписи")
         audio_html = ('<section class="library-audio-shelf" id="library-audio"><h2>Послушать</h2>'
-                      '<ul class="library-works">' + '\n'.join(audio) + '</ul></section>') if audio else ''
+                      + audio + '</section>') if audio else ''
+        selected_groups = [groups[legacy]] if legacy else list(groups.values())
+        notes = '\n'.join(f'<section class="library-editorial">{group["notes_html"]}</section>'
+                          for group in selected_groups if group.get("notes_html"))
+        group_links = '' if legacy or len(groups) < 2 else (
+            '<nav class="library-group-nav" aria-label="Подборки автора">' +
+            ''.join(f'<a href="#{escape(group["slug"])}">{escape(group.get("label", group["title"]))}</a>' for group in selected_groups) + '</nav>'
+        )
         others = ''.join(f'<a href="{author_url(item["writer"])}">{escape(writers[item["writer"]]["name"])}</a>'
                          for item in collections if item["writer"] != key)
         page["breadcrumbs"] = [{"label": "Читальный зал", "href": "../reading/"}, writers[key]["name"]]
+        if legacy:
+            page["breadcrumbs"] = [{"label": "Читальный зал", "href": "../reading/"},
+                                   {"label": writers[key]["name"], "href": author_url(key)}, groups[legacy]["title"]]
         return templates["reading-author"].substitute(
             **writer_fields(key), writer=escape(key), role=escape(writers[key]["role"]),
-            intro=escape(collection["intro"]), works='\n'.join(rows), audio=audio_html, authors=others,
+            intro=escape(collection["intro"]), works=rows, audio=audio_html, authors=others,
+            notes=notes, group_links=group_links,
+            shelf_title=escape(groups[legacy]["title"]) if legacy else "Произведения и материалы",
         )
 
     for collection in collections:
@@ -460,7 +499,7 @@ def render_page(source, relative, templates, writers, collections=None):
     script_names = list(page.get("scripts", []))
     if collections is None:
         collections = json.loads((ROOT / "templates" / "reading-room.json").read_text(encoding="utf-8"))
-    is_reading_room = page.get("reading_index") or "reading_author" in page or any(
+    is_reading_room = page.get("reading_index") or "reading_author" in page or "reading_group" in page or any(
         work["slug"] == slug for collection in collections for work in collection["works"]
     )
 
@@ -498,10 +537,12 @@ def render_page(source, relative, templates, writers, collections=None):
 
     if is_reading_room:
         content = render_reading_room(page, content, slug, templates, writers, collections, prefix)
-        ensure_asset(style_names, "reading-room.css?v=2")
+        ensure_asset(style_names, "reading-room.css?v=3")
+        if "reading_author" in page or "reading_group" in page:
+            ensure_asset(style_names, "illustrations.css?v=2")
         if page.get("reading_index"):
-            ensure_asset(script_names, "ufalit-search.js?v=1")
-            ensure_asset(script_names, "ufalit-library.js?v=2")
+            ensure_asset(script_names, "ufalit-search.js?v=2")
+            ensure_asset(script_names, "ufalit-library.js?v=3")
 
     records = list(DIRECTORY_RECORD.finditer(content))
     if records:

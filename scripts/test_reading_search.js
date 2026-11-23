@@ -18,7 +18,7 @@ const index = search.prepare(documents);
 const find = query => search.search(index, query);
 const bear = '../reading-kiekbaev-bear/';
 
-assert.equal(documents.length, 17);
+assert.equal(documents.length, 136);
 assert.ok(find('полакомиться').some(hit => hit.document.href === bear));
 assert.equal(find('Киекбаев полакомиться')[0].document.href, bear);
 assert.equal(find('Киекбаев полакомиться несуществующееслово').length, 0);
@@ -44,4 +44,13 @@ assert.equal(search.highlight('<img onerror=x> ЁЖ', ['еж']).map(part => part
 assert.ok(search.highlight('ӘКИӘТ һәм ҠОЯШ', ['әкиәт', 'ҡояш']).filter(part => part.match).length === 2);
 assert.ok(search.highlight('пчёлы', ['пче', 'пчелы']).some(part => part.text === 'пчёлы' && part.match));
 assert.ok(search.snippet('Начало. Слон — и петух. Конец.', ['слон и петух']).target === 'Слон — и петух');
+assert.deepEqual(search.highlight('Газим, большой слон и петух. Они пришли.', ['слон', 'и', 'петух']).filter(part => part.match).map(part => part.text), ['слон и петух']);
+assert.deepEqual(search.highlight('Слоник, петушок, огромный, пришли', ['слон', 'и', 'петух']).filter(part => part.match), []);
+assert.deepEqual(search.highlight('Газим и слон. Петух кричит.', ['слон', 'и', 'петух']).filter(part => part.match).map(part => part.text), ['слон', 'Петух']);
+assert.equal(find('слон и петух')[0].document.title, 'Слон и петух');
+const wordIndex = search.prepare([
+  {title: 'Газим', author: '', alias: '', description: 'Огромный мир', text: 'Пришли великаны.'},
+  {title: 'Слон и петух', author: '', alias: '', description: '', text: ''},
+]);
+assert.deepEqual(search.search(wordIndex, 'и').map(hit => hit.document.title), ['Слон и петух']);
 console.log('Reading search: full corpus, phrases, all-word matching, ranking, Cyrillic/ё, snippets, audio and empty queries passed.');

@@ -2,6 +2,9 @@
 
 import json
 import unittest
+import hashlib
+import re
+from collections import Counter
 from html.parser import HTMLParser
 from pathlib import Path
 from string import Template
@@ -43,11 +46,13 @@ class ReadingRoomTests(unittest.TestCase):
         works = [work['slug'] for item in self.collections for work in item['works']]
         self.assertEqual(len(writers), 6)
         self.assertEqual(len(writers), len(set(writers)))
-        self.assertEqual(len(works), 17)
+        self.assertEqual(len(works), 136)
         self.assertEqual(len(works), len(set(works)))
         pages = {p.parent.name for p in (self.root / 'site/pages').glob('reading-*/index.html')
                  if not p.parent.name.startswith('reading-author-')}
-        self.assertEqual(set(works), pages)
+        groups = {group['slug'] for item in self.collections for group in item.get('groups', [])}
+        self.assertEqual(set(works) | groups, pages)
+        self.assertFalse(set(works) & groups)
         _, html = self.render('reading')
         cards = [attrs for _, attrs in Document(html).tags if 'data-library-author' in attrs]
         self.assertEqual([card['id'] for card in cards], [self.writers[key]['reading'] for key in writers])
@@ -86,14 +91,14 @@ class ReadingRoomTests(unittest.TestCase):
 
     def test_full_text_index_includes_body_endnotes_and_track_names(self):
         documents = render_site.reading_search_documents(self.collections, self.writers)
-        self.assertEqual(len(documents), 17)
+        self.assertEqual(len(documents), 136)
         by_url = {item['href']: item for item in documents}
         bear = by_url['../reading-kiekbaev-bear/']
         self.assertIn('полакомиться', bear['text'])
         self.assertNotIn('полакомиться', bear['title'] + bear['description'])
         self.assertIn('Чий — вид жесткого тростника, растущего у реки.', by_url['../reading-shafikov-talas/']['text'])
-        self.assertIn('Теперь я вырос, октябренком стал,', by_url['../reading-yanabi-poems/']['text'])
-        self.assertIn('Цветы на камне', by_url['../reading-karim-audio/']['text'])
+        self.assertIn('Теперь я вырос, октябренком стал,', next(item['text'] for item in documents if item['title'] == 'Песня октябрёнка'))
+        self.assertTrue(any('Цветы на камне' in item['text'] and item['kind'] == 'Аудиозаписи' for item in documents))
         _, html = self.render('reading')
         start = html.index('<script type="application/json" data-library-index>') + len('<script type="application/json" data-library-index>')
         self.assertEqual(json.loads(html[start:html.index('</script>', start)]), documents)
@@ -111,9 +116,13 @@ class ReadingRoomTests(unittest.TestCase):
     def test_all_library_links_images_and_fragments_resolve_under_subpath(self):
         slugs = ['reading'] + ['reading-author-' + item['writer'] for item in self.collections]
         slugs += [work['slug'] for item in self.collections for work in item['works']]
+        slugs += [group['slug'] for item in self.collections for group in item.get('groups', [])]
         for slug in slugs:
             _, html = self.render(slug)
-            for tag, attrs in Document(html).tags:
+            tags = Document(html).tags
+            ids = [attrs['id'] for _, attrs in tags if 'id' in attrs]
+            self.assertEqual(len(ids), len(set(ids)), slug)
+            for tag, attrs in tags:
                 url = attrs.get('href') if tag == 'a' else attrs.get('src') if tag in ('img', 'script') else None
                 if not url or urlsplit(url).scheme:
                     continue
@@ -128,6 +137,48 @@ class ReadingRoomTests(unittest.TestCase):
                     if target.suffix == '.html':
                         _, target_html = self.render(target_slug)
                         self.assertIn(f'id="{parsed.fragment}"', target_html, (slug, url))
+
+    def test_split_preserves_every_original_paragraph_image_and_audio_track(self):
+        audit = json.loads((self.root / 'migration/evidence/2026-11-23/reading-split-check.json').read_text())
+        groups = {group['slug']: group for item in self.collections for group in item.get('groups', [])}
+        for record in audit['sources']:
+            if record.get('unchanged'):
+                continue
+            with self.subTest(source=record['source']):
+                sources = [(self.root / 'site/pages' / slug / 'index.html').read_text() for slug in record['pages']]
+                if 'tracks' in record:
+                    tracks = [track for source in sources for track in json.loads(source[4:].split('\n---\n', 1)[0])['tracks']]
+                    self.assertEqual(tracks, record['tracks'])
+                    self.assertTrue(all(len(json.loads(source[4:].split('\n---\n', 1)[0])['tracks']) == 1 for source in sources))
+                    continue
+                sources.append(groups[record['notes_group']].get('notes_html', '') if record['notes_group'] else '')
+                combined = '\n'.join(sources)
+                paragraphs = re.findall(r'<(?:p|h1)\b[^>]*>.*?</(?:p|h1)>', combined, re.S)
+                actual = Counter(hashlib.sha256(re.sub(r'\s+', ' ', ''.join(Document(part).text)).strip().encode()).hexdigest()
+                                 for part in paragraphs)
+                for digest, count in record['paragraph_hashes'].items():
+                    self.assertGreaterEqual(actual[digest], count, (record['source'], digest))
+                images = Counter(re.findall(r'<img\b[^>]*\bsrc="([^"]+)"', combined))
+                for image, count in Counter(record['images']).items():
+                    self.assertGreaterEqual(images[image], count, (record['source'], image))
+
+    def test_editorial_notes_are_on_author_shelf_and_legacy_groups_keep_links(self):
+        collection = next(item for item in self.collections if item['writer'] == 'yanabi')
+        _, author = self.render('reading-author-yanabi')
+        self.assertIn('Гильманова Альбина и Насырова Диана', author)
+        self.assertLess(author.index('Произведения и материалы'), author.index('Гильманова Альбина'))
+        for work in collection['works']:
+            source, _ = self.render(work['slug'])
+            self.assertNotIn('Гильманова Альбина', source)
+        self.assertEqual([work['title'] for work in collection['works']], ['Школьник', 'Песня октябрёнка', 'Школьные частушки', 'Слон и петух'])
+        for item in self.collections:
+            for group in item.get('groups', []):
+                _, html = self.render(group['slug'])
+                for work in item['works']:
+                    if work.get('group') == group['slug']:
+                        self.assertIn(f'href="../{work["slug"]}/"', html)
+                        if 'legacy_anchor' in work:
+                            self.assertIn(f'id="{work["legacy_anchor"]}"', html)
 
 
 if __name__ == '__main__':
