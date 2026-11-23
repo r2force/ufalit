@@ -6,6 +6,7 @@ from html.parser import HTMLParser
 from pathlib import Path
 from string import Template
 from urllib.parse import unquote, urlsplit
+from unittest.mock import patch
 
 import render_site
 
@@ -82,6 +83,30 @@ class ReadingRoomTests(unittest.TestCase):
                             self.assertIn(track['src'], html)
                     self.assertIn(f'href="../reading-author-{collection["writer"]}/"', html)
                     self.assertIn('aria-current="location">Читальный зал', html)
+
+    def test_full_text_index_includes_body_endnotes_and_track_names(self):
+        documents = render_site.reading_search_documents(self.collections, self.writers)
+        self.assertEqual(len(documents), 17)
+        by_url = {item['href']: item for item in documents}
+        bear = by_url['../reading-kiekbaev-bear/']
+        self.assertIn('полакомиться', bear['text'])
+        self.assertNotIn('полакомиться', bear['title'] + bear['description'])
+        self.assertIn('Чий — вид жесткого тростника, растущего у реки.', by_url['../reading-shafikov-talas/']['text'])
+        self.assertIn('Теперь я вырос, октябренком стал,', by_url['../reading-yanabi-poems/']['text'])
+        self.assertIn('Цветы на камне', by_url['../reading-karim-audio/']['text'])
+        _, html = self.render('reading')
+        start = html.index('<script type="application/json" data-library-index>') + len('<script type="application/json" data-library-index>')
+        self.assertEqual(json.loads(html[start:html.index('</script>', start)]), documents)
+
+    def test_search_text_extraction_and_json_do_not_expose_markup(self):
+        text = render_site.ReadingText('<p>Әкиәт <b>һәм</b> шиғыр.</p><p>Ёж &amp; лиса<br>Ҡояш</p>'
+                                       '<script>hidden()</script><style>hidden{}</style><template>hidden</template>').text()
+        self.assertEqual(text, 'Әкиәт һәм шиғыр. Ёж & лиса Ҡояш')
+        payload = [{'text': '</script><img src=x onerror=alert(1)>'}]
+        with patch.object(render_site, 'reading_search_documents', return_value=payload):
+            _, html = self.render('reading')
+        self.assertNotIn('</script><img', html)
+        self.assertIn('\\u003c/script>', html)
 
     def test_all_library_links_images_and_fragments_resolve_under_subpath(self):
         slugs = ['reading'] + ['reading-author-' + item['writer'] for item in self.collections]

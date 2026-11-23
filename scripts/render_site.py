@@ -4,6 +4,7 @@ import json
 import re
 from argparse import ArgumentParser
 from html import escape, unescape
+from html.parser import HTMLParser
 from pathlib import Path
 from shutil import copytree
 from string import Template
@@ -330,6 +331,58 @@ def material_count(count):
     return f"{count} {word}"
 
 
+class ReadingText(HTMLParser):
+    """Extract readable source content without HTML, scripts, or styles."""
+    BREAKS = {"p", "div", "section", "article", "br", "li", "h1", "h2", "h3", "h4", "td", "tr", "figure", "figcaption"}
+    IGNORED = {"script", "style", "template"}
+
+    def __init__(self, source):
+        super().__init__(convert_charrefs=True)
+        self.parts = []
+        self.ignored = 0
+        self.feed(source)
+
+    def handle_starttag(self, tag, attrs):
+        if tag in self.IGNORED:
+            self.ignored += 1
+        if not self.ignored and tag in self.BREAKS:
+            self.parts.append(" ")
+
+    def handle_endtag(self, tag):
+        if tag in self.IGNORED:
+            self.ignored = max(0, self.ignored - 1)
+        if not self.ignored and tag in self.BREAKS:
+            self.parts.append(" ")
+
+    def handle_data(self, data):
+        if not self.ignored:
+            self.parts.append(data)
+
+    def text(self):
+        return re.sub(r"\s+", " ", "".join(self.parts)).strip()
+
+
+def reading_search_documents(collections, writers):
+    documents = []
+    for collection in collections:
+        writer = writers[collection["writer"]]
+        for work in collection["works"]:
+            source = (SITE / "pages" / work["slug"] / "index.html").read_text(encoding="utf-8")
+            metadata, content = source[4:].split("\n---\n", 1)
+            page = json.loads(metadata)
+            # Audio is searchable by track titles; no transcript is invented.
+            tracks = " ".join(track["title"] for track in page.get("tracks", []))
+            # Titles have their own search field; snippets should start in the body.
+            content = re.sub(r'<h1\b[^>]*>.*?</h1>', '', content, count=1, flags=re.S)
+            text = ReadingText(content).text()
+            documents.append(dict(
+                title=work["title"], author=writer["name"], alias=writer.get("full_name", ""),
+                kind=work["kind"], description=work["description"],
+                href=f'../{work["slug"]}/', text=" ".join(part for part in (text, tracks) if part),
+            ))
+    return documents
+
+
 def render_reading_room(page, content, slug, templates, writers, collections, prefix):
     """Build all three library levels from one ordered catalogue and shared writers."""
     def author_url(writer):
@@ -345,14 +398,13 @@ def render_reading_room(page, content, slug, templates, writers, collections, pr
         for collection in collections:
             key = collection["writer"]
             writer = writers[key]
-            links = ''.join(f'<li><a href="../{escape(work["slug"])}/">{escape(work["title"])}</a></li>'
-                            for work in collection["works"])
             cards.append(templates["reading-card"].substitute(
                 **writer_fields(key), anchor=escape(writer["reading"]), href=author_url(key),
-                alias=escape(writer.get("full_name", "")), count=material_count(len(collection["works"])),
-                preview=escape(collection["intro"]), work_links=links,
+                count=material_count(len(collection["works"])), preview=escape(collection["intro"]),
             ))
-        return templates["reading-index"].substitute(cards='\n'.join(cards))
+        # Escaping '<' keeps even literal '</script>' in a work inside the JSON block.
+        search_index = json.dumps(reading_search_documents(collections, writers), ensure_ascii=False).replace("<", "\\u003c")
+        return templates["reading-index"].substitute(cards='\n'.join(cards), search_index=search_index)
 
     if "reading_author" in page:
         key = page["reading_author"]
@@ -446,9 +498,10 @@ def render_page(source, relative, templates, writers, collections=None):
 
     if is_reading_room:
         content = render_reading_room(page, content, slug, templates, writers, collections, prefix)
-        ensure_asset(style_names, "reading-room.css?v=1")
+        ensure_asset(style_names, "reading-room.css?v=2")
         if page.get("reading_index"):
-            ensure_asset(script_names, "ufalit-library.js?v=1")
+            ensure_asset(script_names, "ufalit-search.js?v=1")
+            ensure_asset(script_names, "ufalit-library.js?v=2")
 
     records = list(DIRECTORY_RECORD.finditer(content))
     if records:
