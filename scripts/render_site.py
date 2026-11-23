@@ -37,6 +37,7 @@ TEMPLATE_NAMES = (
     "audio-track", "audio-studio", "video", "video-album", "album-cover", "writer-card",
     "writer-profile", "directory-banner", "zoom-image", "atlas", "atlas-choice", "guide-card",
     "archive-index", "archive-collection", "archive-album", "archive-video",
+    "reading-index", "reading-card", "reading-author", "reading-work", "reading-context",
 )
 
 
@@ -297,7 +298,7 @@ def render_writer_directory(content, records, page, prefix, templates, writers):
             return opening
 
         gallery = writer.get("gallery", "gallery")
-        reading_anchor = f'#{writer["reading"]}' if "reading" in writer else ""
+        reading_path = f'reading-author-{slug}/' if "reading" in writer else "reading/"
         audio = ""
         if "audio" in writer:
             audio_url = escape(f'{prefix}pages/{writer["audio"]}/')
@@ -310,14 +311,92 @@ def render_writer_directory(content, records, page, prefix, templates, writers):
             gallery_url=escape(f"{prefix}pages/{gallery}/"),
             gallery_label="Фотогалерея" if "gallery" in writer else "Каталог фотогалереи",
             places_url=escape(f'{prefix}pages/places/#{writer["place"]}'),
-            reading_url=escape(f"{prefix}pages/reading/{reading_anchor}"), audio_link=audio,
+            reading_url=escape(f"{prefix}pages/{reading_path}"), audio_link=audio,
         ) + "\n"
 
     rest_html = DIRECTORY_RECORD.sub(render_record, tail)
     return f'{prefix_html}{banner}<template class="directory-entries">\n{cards}\n</template>\n{rest_html}'
 
 
-def render_page(source, relative, templates, writers):
+def material_count(count):
+    if 11 <= count % 100 <= 14:
+        word = "материалов"
+    elif count % 10 == 1:
+        word = "материал"
+    elif 2 <= count % 10 <= 4:
+        word = "материала"
+    else:
+        word = "материалов"
+    return f"{count} {word}"
+
+
+def render_reading_room(page, content, slug, templates, writers, collections, prefix):
+    """Build all three library levels from one ordered catalogue and shared writers."""
+    def author_url(writer):
+        return f'../reading-author-{writer}/'
+
+    def writer_fields(key):
+        writer = writers[key]
+        return dict(name=escape(writer["name"]), years=escape(writer["years"]),
+                    portrait=escape(prefix + writer["portrait"]))
+
+    if page.get("reading_index"):
+        cards = []
+        for collection in collections:
+            key = collection["writer"]
+            writer = writers[key]
+            links = ''.join(f'<li><a href="../{escape(work["slug"])}/">{escape(work["title"])}</a></li>'
+                            for work in collection["works"])
+            cards.append(templates["reading-card"].substitute(
+                **writer_fields(key), anchor=escape(writer["reading"]), href=author_url(key),
+                alias=escape(writer.get("full_name", "")), count=material_count(len(collection["works"])),
+                preview=escape(collection["intro"]), work_links=links,
+            ))
+        return templates["reading-index"].substitute(cards='\n'.join(cards))
+
+    if "reading_author" in page:
+        key = page["reading_author"]
+        collection = next(item for item in collections if item["writer"] == key)
+        rows, audio = [], []
+        for work in collection["works"]:
+            is_audio = work["kind"] == "Аудиозаписи"
+            row = templates["reading-work"].substitute(
+                title=escape(work["title"]), kind=escape(work["kind"]),
+                description=escape(work["description"]), href=f'../{escape(work["slug"])}/',
+                action="Слушать" if is_audio else "Открыть" if work["kind"] == "О книге" else "Читать",
+            )
+            (audio if is_audio else rows).append(row)
+        audio_html = ('<section class="library-audio-shelf" id="library-audio"><h2>Послушать</h2>'
+                      '<ul class="library-works">' + '\n'.join(audio) + '</ul></section>') if audio else ''
+        others = ''.join(f'<a href="{author_url(item["writer"])}">{escape(writers[item["writer"]]["name"])}</a>'
+                         for item in collections if item["writer"] != key)
+        page["breadcrumbs"] = [{"label": "Читальный зал", "href": "../reading/"}, writers[key]["name"]]
+        return templates["reading-author"].substitute(
+            **writer_fields(key), writer=escape(key), role=escape(writers[key]["role"]),
+            intro=escape(collection["intro"]), works='\n'.join(rows), audio=audio_html, authors=others,
+        )
+
+    for collection in collections:
+        for number, work in enumerate(collection["works"]):
+            if work["slug"] != slug:
+                continue
+            key = collection["writer"]
+            page["breadcrumbs"] = [
+                {"label": "Читальный зал", "href": "../reading/"},
+                {"label": writers[key]["name"], "href": author_url(key)}, work["title"],
+            ]
+            content = READER_ARTICLE.sub(lambda match: match[0] + ' data-reading-work', content, count=1)
+            following = collection["works"][number + 1:number + 2]
+            next_link = (f'<a href="../{escape(following[0]["slug"])}/">Далее: {escape(following[0]["title"])}</a>'
+                         if following else '')
+            return templates["reading-context"].substitute(
+                name=escape(writers[key]["name"]), portrait=escape(prefix + writers[key]["portrait"]),
+                author_url=author_url(key), content=content, next=next_link,
+            )
+    return content
+
+
+def render_page(source, relative, templates, writers, collections=None):
     if not source.startswith("---\n"):
         raise ValueError("missing page metadata")
     metadata, content = source[4:].split("\n---\n", 1)
@@ -327,6 +406,11 @@ def render_page(source, relative, templates, writers):
     section = page_section(slug) if slug else None
     style_names = list(page.get("styles", []))
     script_names = list(page.get("scripts", []))
+    if collections is None:
+        collections = json.loads((ROOT / "templates" / "reading-room.json").read_text(encoding="utf-8"))
+    is_reading_room = page.get("reading_index") or "reading_author" in page or any(
+        work["slug"] == slug for collection in collections for work in collection["works"]
+    )
 
     if "video_collections" in page:
         content = render_archive_index(page["video_collections"], templates, writers, prefix)
@@ -360,6 +444,12 @@ def render_page(source, relative, templates, writers):
         ) + ("\n" + content.strip() if content.strip() else "")
         ensure_asset(script_names, "ufalit-audio.js?v=2")
 
+    if is_reading_room:
+        content = render_reading_room(page, content, slug, templates, writers, collections, prefix)
+        ensure_asset(style_names, "reading-room.css?v=1")
+        if page.get("reading_index"):
+            ensure_asset(script_names, "ufalit-library.js?v=1")
+
     records = list(DIRECTORY_RECORD.finditer(content))
     if records:
         content = render_writer_directory(content, records, page, prefix, templates, writers)
@@ -371,7 +461,7 @@ def render_page(source, relative, templates, writers):
     if READER_ARTICLE.search(content):
         ensure_asset(style_names, "reader.css?v=3")
         ensure_asset(style_names, "illustrations.css?v=2")
-        ensure_asset(script_names, "ufalit-reader.js?v=2")
+        ensure_asset(script_names, "ufalit-reader.js?v=3")
 
     content = expand_writer_refs(content, prefix, templates, writers)
     content = expand_illustrations(content, templates["zoom-image"])
@@ -438,7 +528,7 @@ def render_page(source, relative, templates, writers):
     content = COVER_LINK.sub(lambda match: templates["album-cover"].substitute(
         attributes=(match[1] + match[3]).strip(), cover=match[2], label=match[4]), content)
 
-    if slug.startswith("reading-") and 'href="../reading/"' not in content:
+    if slug.startswith("reading-") and not is_reading_room and 'href="../reading/"' not in content:
         content = content.rstrip() + '\n<p><a href="../reading/">Вернуться в читальный зал</a></p>\n'
 
     intro, marker, main_content = content.partition("<!-- main -->")
@@ -453,6 +543,8 @@ def render_page(source, relative, templates, writers):
         body_class = "museum museum-home"
     elif slug == "videos" or section == "videos":
         body_class = "museum video-page"
+    elif is_reading_room:
+        body_class = "museum library-page"
     else:
         body_class = "museum"
 
@@ -484,12 +576,13 @@ def main():
     templates = {name: Template((ROOT / "templates" / f"{name}.html").read_text(encoding="utf-8").strip())
                  for name in TEMPLATE_NAMES}
     writers = json.loads((ROOT / "templates" / "writers.json").read_text(encoding="utf-8"))
+    collections = json.loads((ROOT / "templates" / "reading-room.json").read_text(encoding="utf-8"))
     pages = [SITE / "index.html", *sorted((SITE / "pages").glob("*/index.html"))]
     generated = {}
     for page in pages:
         relative = page.relative_to(SITE)
         try:
-            generated[relative] = render_page(page.read_bytes().decode("utf-8"), relative, templates, writers)
+            generated[relative] = render_page(page.read_bytes().decode("utf-8"), relative, templates, writers, collections)
         except (ValueError, KeyError, TypeError) as exc:
             raise SystemExit(f"Invalid page {relative}: {exc}") from exc
 

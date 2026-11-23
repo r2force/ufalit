@@ -1,0 +1,20 @@
+<section class="reading-room" data-library>
+  <header class="library-banner">
+    <div>
+      <h1>Читальный зал</h1>
+      <p>Литературная Уфа в сказках, стихах и прозе.<br>Выберите автора и откройте произведение.</p>
+    </div>
+    <svg class="library-book" viewBox="0 0 240 160" fill="none" aria-hidden="true"><path d="M120 37C90 15 48 17 14 31v103c36-14 77-14 106 7 29-21 70-21 106-7V31c-34-14-76-16-106 6Z" stroke="currentColor" stroke-width="2"/><path d="M120 37v104M30 49c25-8 53-7 75 4M30 65c25-8 53-7 75 4M30 81c25-8 53-7 75 4M30 97c25-8 53-7 75 4M135 53c22-11 50-12 75-4M135 69c22-11 50-12 75-4M135 85c22-11 50-12 75-4M135 101c22-11 50-12 75-4" stroke="currentColor" stroke-opacity=".5"/><path d="m156 24 1 46 10-8 10 6-1-48" fill="currentColor" stroke="currentColor"/></svg>
+  </header>
+  <div class="library-catalog-heading">
+    <h2>Литераторы</h2>
+    <form class="library-search" role="search" data-library-search hidden>
+      <label for="library-query">Найти автора или произведение</label>
+      <div><input id="library-query" type="search" placeholder="Автор или название произведения" autocomplete="off" aria-controls="library-authors"><button type="reset">Сбросить</button></div>
+    </form>
+  </div>
+  <p class="library-result" role="status" data-library-result hidden></p>
+  <div class="library-authors" id="library-authors">$cards</div>
+  <div class="library-empty" data-library-empty hidden><h2>Ничего не найдено</h2><p>Попробуйте фамилию автора или несколько слов из названия.</p><button class="library-button" type="button" data-library-reset>Показать всех авторов</button></div>
+  <aside class="library-audio-note"><span aria-hidden="true">♫</span><div><h2>Литература звучит</h2><p>Услышьте живой голос Мустая Карима и стихи в исполнении Зайнаб Назыровой.</p></div><a href="../reading-author-karim/#library-audio">Открыть фонотеку</a></aside>
+</section>
