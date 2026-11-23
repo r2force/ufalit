@@ -104,7 +104,7 @@ def render_track(track, template):
     ext = Path(track["src"]).suffix.lstrip(".").lower() or "ogg"
     return template.substitute(
         id=escape(track["id"]), title=escape(track["title"]), src=escape(track["src"]),
-        mime=escape(AUDIO_MIMES.get(ext, f"audio/{ext}")), format=escape(ext.upper()),
+        mime=escape(AUDIO_MIMES.get(ext, f"audio/{ext}")),
     )
 
 
@@ -539,7 +539,7 @@ def render_page(source, relative, templates, writers, collections=None):
             kicker=escape(studio["kicker"]), heading=escape(studio["heading"]),
             intro=intro_html, voice=escape(studio["voice"]), description=escape(studio["description"]),
         ) + ("\n" + content.strip() if content.strip() else "")
-        ensure_asset(script_names, "ufalit-audio.js?v=2")
+        ensure_asset(script_names, "ufalit-audio.js?v=3")
 
     if is_reading_room:
         content = render_reading_room(page, content, slug, templates, writers, collections, prefix)

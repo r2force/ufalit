@@ -9,15 +9,11 @@
     section,
     heading: section.querySelector("h2"),
     audio: section.querySelector("audio"),
-    download: section.querySelector("a"),
   }));
-  if (original.some(({ heading, audio, download }) => !heading || !audio || !download)) return;
+  if (original.some(({ heading, audio }) => !heading || !audio)) return;
 
   const player = deck.querySelector("audio");
   const title = deck.querySelector(".audio-title");
-  const label = deck.querySelector(".record span");
-  const anchor = deck.querySelector(".audio-track-anchor");
-  const download = deck.querySelector(".audio-download");
   const error = deck.querySelector(".media-error");
   let current = -1;
 
@@ -37,11 +33,7 @@
     track.button.setAttribute("aria-current", "true");
 
     title.textContent = track.name;
-    label.textContent = track.section.id.replace("track-", "");
-    anchor.href = "#" + track.section.id;
-    anchor.textContent = anchor.hash;
-    download.href = track.download.getAttribute("href");
-    player.src = track.audio.querySelector("source")?.getAttribute("src") ?? download.href;
+    player.src = track.audio.querySelector("source")?.getAttribute("src") ?? "";
     player.setAttribute("aria-label", track.name);
     error.hidden = true;
   }
@@ -75,17 +67,14 @@
       </span>
       <span class="audio-card-copy">
         <span class="audio-card-title"></span>
-        <span class="audio-card-id" aria-hidden="true"></span>
       </span>
       <svg class="audio-card-check" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
         <circle cx="12" cy="12" r="9"/><path d="m8.5 12 2.5 2.5 4.5-5"/>
       </svg>
     `;
     button.querySelector(".audio-card-title").append(...track.heading.childNodes);
-    button.querySelector(".audio-card-id").textContent = "#" + track.section.id;
     track.heading.append(button);
     track.audio.hidden = true;
-    track.download.hidden = true;
     button.addEventListener("click", () => toggleTrack(index));
     return { ...track, button, name };
   });

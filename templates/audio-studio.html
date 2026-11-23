@@ -13,10 +13,9 @@
           </svg>
           Аудиофонд
         </span>
-        <a class="audio-track-anchor" aria-label="Выбранная дорожка"></a>
       </div>
       <div class="audio-track-display">
-        <div class="record" aria-hidden="true"><span></span></div>
+        <div class="record" aria-hidden="true"></div>
         <div>
           <p class="audio-voice">$voice</p>
           <h2 class="audio-title" aria-live="polite"></h2>
@@ -25,16 +24,7 @@
       </div>
       <div class="audio-controls">
         <audio controls preload="none" aria-label="Текущая аудиозапись"></audio>
-        <div class="audio-file">
-          <span>Формат OGG Vorbis (оригинальная запись)</span>
-          <a class="audio-download" download>
-            Скачать аудиозапись
-            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-              <path d="M13 5h6v6m0-6-8 8m6 0v6H5V7h6"/>
-            </svg>
-          </a>
-        </div>
-        <p class="media-error" role="status" hidden>Запись не удалось воспроизвести. Попробуйте скачать её.</p>
+        <p class="media-error" role="status" hidden>Запись не удалось воспроизвести.</p>
       </div>
     </section>
     <div class="audio-list">
