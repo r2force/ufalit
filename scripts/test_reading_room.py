@@ -46,7 +46,7 @@ class ReadingRoomTests(unittest.TestCase):
         works = [work['slug'] for item in self.collections for work in item['works']]
         self.assertEqual(len(writers), 6)
         self.assertEqual(len(writers), len(set(writers)))
-        self.assertEqual(len(works), 136)
+        self.assertEqual(len(works), 137)
         self.assertEqual(len(works), len(set(works)))
         pages = {p.parent.name for p in (self.root / 'site/pages').glob('reading-*/index.html')
                  if not p.parent.name.startswith('reading-author-')}
@@ -91,7 +91,7 @@ class ReadingRoomTests(unittest.TestCase):
 
     def test_full_text_index_includes_body_endnotes_and_track_names(self):
         documents = render_site.reading_search_documents(self.collections, self.writers)
-        self.assertEqual(len(documents), 136)
+        self.assertEqual(len(documents), 137)
         by_url = {item['href']: item for item in documents}
         bear = by_url['../reading-kiekbaev-bear/']
         self.assertIn('полакомиться', bear['text'])

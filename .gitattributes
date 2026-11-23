@@ -8,3 +8,5 @@
 site/assets/legends/images/* -filter binary
 # Small frames extracted from the existing videos are shipped directly to Pages.
 site/assets/video-archive/previews/**/*.jpg -filter binary
+# Small original artwork is served directly from the checkout.
+site/assets/reading/karim/moon-eclipse.jpg -filter binary
