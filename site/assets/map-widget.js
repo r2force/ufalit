@@ -225,6 +225,17 @@ function createMarkerElement(item, options) {
   return button;
 }
 
+/** Заглушка окна: при popupOnMarkerClick=false окна нет, но API метки остаётся рабочим. */
+function createDetachedPopup() {
+  return {
+    isOpen: () => false,
+    remove() {},
+    setLngLat() { return this; },
+    addTo() { return this; },
+    setDOMContent() { return this; },
+  };
+}
+
 function createPopupContent(item, options) {
   const article = document.createElement('article');
   article.className = 'im-map-popup';
@@ -597,13 +608,19 @@ export async function createIllustratedMap(config = {}) {
     }
 
     const element = createMarkerElement(item, config);
-    const popup = new maplibregl.Popup({
-      offset: config.popup?.offset ?? 34,
-      closeButton: config.popup?.closeButton ?? true,
-      closeOnClick: config.popup?.closeOnClick ?? true,
-      maxWidth: config.popup?.maxWidth ?? '310px',
-      className: config.popup?.className ?? 'im-map-popup-container',
-    }).setDOMContent(createPopupContent(item, config));
+    // popupOnMarkerClick=false: описание показывается только в карточке страницы.
+    // MapLibre вешает свой обработчик клика в setPopup, поэтому окно не создаём и не
+    // привязываем к метке. Заглушка оставляет рабочими remove()/isOpen() в API метки.
+    const withPopup = config.popupOnMarkerClick !== false;
+    const popup = withPopup
+      ? new maplibregl.Popup({
+          offset: config.popup?.offset ?? 34,
+          closeButton: config.popup?.closeButton ?? true,
+          closeOnClick: config.popup?.closeOnClick ?? true,
+          maxWidth: config.popup?.maxWidth ?? '310px',
+          className: config.popup?.className ?? 'im-map-popup-container',
+        }).setDOMContent(createPopupContent(item, config))
+      : createDetachedPopup();
 
     element.addEventListener('click', () => {
       for (const handle of controllerState.markerHandles.values()) {
@@ -616,7 +633,8 @@ export async function createIllustratedMap(config = {}) {
       element,
       anchor: item.anchor ?? 'bottom',
       offset: item.offset ?? [0, 0],
-    }).setLngLat(item.coordinates).setPopup(popup).addTo(map);
+    }).setLngLat(item.coordinates).addTo(map);
+    if (withPopup) marker.setPopup(popup);
 
     const handle = { item, marker, popup, element, visible: true };
     controllerState.markerHandles.set(item.id, handle);
@@ -689,7 +707,7 @@ export async function createIllustratedMap(config = {}) {
     setPresetFilter,
     clearFilters,
     getVisibleMarkers,
-    selectMarker(id, { openPopup = true, center = true, duration = 400 } = {}) {
+    selectMarker(id, { openPopup = true, center = true, zoom, duration = 400 } = {}) {
       const selected = controllerState.markerHandles.get(String(id));
       if (!selected || !selected.visible) return false;
       for (const handle of controllerState.markerHandles.values()) {
@@ -698,8 +716,10 @@ export async function createIllustratedMap(config = {}) {
         handle.element.setAttribute('aria-pressed', String(active));
         if (!active || !openPopup) handle.popup.remove();
       }
-      if (center) map.easeTo({ center: selected.item.coordinates, duration });
-      if (openPopup && !selected.popup.isOpen()) selected.marker.togglePopup();
+      if (center) map.easeTo({ center: selected.item.coordinates, zoom, duration });
+      if (openPopup && config.popupOnMarkerClick !== false && !selected.popup.isOpen()) {
+        selected.marker.togglePopup();
+      }
       return true;
     },
     bindFilterControls,

@@ -1,7 +1,7 @@
 (async () => {
   const atlas = document.querySelector('.literary-atlas');
   if (!atlas) return;
-  const { createIllustratedMap, filterMarkers } = await import('./map-widget.js?v=2');
+  const { createIllustratedMap, filterMarkers } = await import('./map-widget.js?v=3');
   const places = JSON.parse(atlas.querySelector('#atlas-places').textContent);
   const byId = new Map(places.map(place => [place.id, place]));
   const filters = [
@@ -40,6 +40,13 @@
   let visible = markers;
   const duration = () => reducedMotion.matches ? 0 : 400;
 
+  // Масштаб z даёт 78271.5*cos(lat)/2^z метров на пиксель; ScaleControl берёт
+  // ближайшую «красивую» величину 1, 2, 3 или 5×10^n в интервале 50–100 px.
+  // 55 м на 100 px — середина полосы, где подпись линейки равна 50 м на всей
+  // широте города (54.69–54.82), а не только в его южной части.
+  const focusZoom = (latitude = 54.73, meters = 55, scalePx = 100) =>
+    Math.min(19, Math.max(15, Math.log2(78271.5 * Math.cos(latitude * Math.PI / 180) / meters * scalePx)));
+
   function select(id, { fromMarker = false, center = true } = {}) {
     const place = byId.get(id);
     if (!place) return;
@@ -69,8 +76,12 @@
       else link.removeAttribute('aria-current');
     });
     detailButton.hidden = false;
-    // Native marker clicks toggle their popup after this handler runs.
-    widget?.selectMarker(id, { openPopup: !fromMarker && center, center: !fromMarker && center, duration: duration() });
+    // Место, выбранное в списке, показывается крупно: масштаб подобран так,
+    // чтобы линейка ScaleControl показывала около 50 м.
+    widget?.selectMarker(id, {
+      openPopup: false, center: !fromMarker, zoom: fromMarker ? undefined : focusZoom(),
+      duration: duration(),
+    });
   }
 
   function applyFilters() {
@@ -159,6 +170,8 @@
         education: '#ded9d1', healthcare: '#e6d8d2',
       },
       popup: { maxWidth: '265px', offset: 40 },
+      // Описание выбранной метки показывается в карточке справа, а не поверх карты.
+      popupOnMarkerClick: false,
       onMarkerClick: place => select(place.id, { fromMarker: true }),
     });
     notice.hidden = true;
