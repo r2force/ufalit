@@ -9,7 +9,7 @@ const placesPage = fs.readFileSync(path.join(root, 'site/pages/places/index.html
 const legendsPage = fs.readFileSync(path.join(root, 'site/pages/legends/index.html'), 'utf8');
 const detailUrl = place => place.detail_url ?? `pages/places/#${place.id}`;
 assert.ok(!placesPage.includes('id="place-20"'), 'the duplicate legends section is removed');
-assert.ok(placesPage.includes('href="../legends/#pamyatniki"'), 'places page links to the legends index');
+assert.ok(!placesPage.includes('href="../legends/#pamyatniki"'), 'places page has no redundant legends section link');
 for (const [id, url] of Object.entries({
   'legend-zuhra': 'pages/legends/#zuhra',
   'legend-salavat': 'pages/legends/#salavat',
