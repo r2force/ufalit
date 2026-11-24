@@ -5,7 +5,7 @@
     figure,
     link: figure.querySelector('a[href]'),
     image: figure.querySelector('img'),
-    caption: figure.querySelector('.photo-caption') || figure.querySelector('figcaption'),
+    caption: figure.querySelector('.photo-caption') || (figure.querySelector('.photo-stage') ? null : figure.querySelector('figcaption')),
     metadata: figure.querySelector('.photo-metadata'),
     note: figure.querySelector('.photo-note'),
     category: figure.dataset.category || 'Фотоархив',

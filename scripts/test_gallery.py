@@ -78,12 +78,18 @@ class GalleryTests(unittest.TestCase):
                     tags = Document(figure).tags
                     img = next(attrs for tag, attrs in tags if tag == 'img')
                     self.assertEqual(img['src'], photo['src'])
-                    self.assertEqual(img['alt'], photo.get('alt', photo.get('caption')))
+                    meaningful = render_site.is_meaningful_caption(photo)
+                    if meaningful:
+                        self.assertEqual(img['alt'], photo.get('alt', photo.get('caption')))
+                        caption = re.search(r'<div class="photo-caption">(.*?)</div>', figure, re.S)[1]
+                        expected = photo.get('caption_html', photo.get('caption'))
+                        self.assertEqual(unescape(caption), expected)
+                    else:
+                        self.assertNotIn('<div class="photo-caption">', figure)
+                        self.assertNotEqual(img['alt'].strip(), photo.get('caption', '').strip())
+                        self.assertTrue(img['alt'].strip())
                     if photo.get('loading', 'lazy') is not None:
                         self.assertEqual(img['loading'], photo.get('loading', 'lazy'))
-                    caption = re.search(r'<div class="photo-caption">(.*?)</div>', figure, re.S)[1]
-                    expected = photo.get('caption_html', photo.get('caption'))
-                    self.assertEqual(unescape(caption), expected)
                 for url in re.findall(r'href="([^"#]+)(?:#[^"]*)?"', album['body']):
                     self.assertIn(f'href="{url}"', html)
                 self.assertEqual(sum(tag == 'h1' for tag, _ in document.tags), 1)

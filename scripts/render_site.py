@@ -85,21 +85,45 @@ def render_menu(template, relative):
     return LINK.sub(render_link, template)
 
 
+MEANINGLESS_CAPTION = re.compile(
+    r"""(?ix)
+    ^\s*(
+        [\d\s.\-_,№#()]+
+        | (?:фото|рисунок|изображение|скан|photo|image|img|dsc|pic)?\s*[\d.\-_()№#]+
+        | [\w\-. ()№#]*(?:DSC|IMG|DSCN|P\d{6,}|IMG_|_MG_)[\w\-. ()№#]*
+        | [\w\-]+\.(?:jpg|jpeg|png|gif|tif|tiff)
+    )\s*$
+    """
+)
+
+
+def is_meaningful_caption(photo):
+    caption = photo.get("caption_html") or photo.get("caption") or photo.get("alt") or ""
+    plain = re.sub(r"<[^>]+>", "", unescape(caption)).strip()
+    if not plain:
+        return False
+    return not MEANINGLESS_CAPTION.match(plain)
+
+
 def render_photo(photo, template):
     photo = {"loading": "lazy", **photo}
 
     def attributes(names):
         return "".join(f' {name}="{escape(photo[name])}"' for name in names if photo.get(name) is not None)
 
-    caption = photo["caption_html"] if "caption_html" in photo else escape(photo["caption"])
-    alt = photo["alt"] if "alt" in photo else photo["caption"]
+    meaningful = is_meaningful_caption(photo)
+    raw_caption = photo.get("caption_html") if "caption_html" in photo else escape(photo.get("caption", ""))
+    caption = raw_caption if meaningful else ""
+    alt_source = photo.get("alt") or (photo.get("caption") if meaningful else "") or photo.get("writer_name") or "Фотография"
+    alt = alt_source
+    caption_html = f'<div class="photo-caption">{caption}</div>' if caption else ""
     return template.substitute(
-        id=escape(photo["id"]), src=escape(photo["src"]), alt=escape(alt), caption=caption,
+        id=escape(photo["id"]), src=escape(photo["src"]), alt=escape(alt), caption=caption_html,
         category=escape(photo_category(photo)),
         writer=escape(photo.get("writer", "")), writer_name=escape(photo.get("writer_name", "")),
         order=escape(str(photo.get("order", ""))),
         note=f'<p class="photo-note">{escape(photo["note"])}</p>' if photo.get("note") else "",
-        metadata=photo_metadata(photo),
+        metadata=photo_metadata(photo) if meaningful else "",
         link_attrs=attributes(("title", "aria-label")),
         image_attrs=attributes(("loading", "width", "height", "fetchpriority")),
     )
