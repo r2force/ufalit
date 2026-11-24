@@ -724,6 +724,9 @@ def render_page(source, relative, templates, writers, collections=None, gallery_
         content = insert_list(content, "videos", videos)
     if page.get("atlas"):
         places = json.loads((ROOT / "templates" / "atlas-places.json").read_text(encoding="utf-8"))
+        # Resolve paths once for both the initial HTML and interactive map data.
+        places = [{**place, "image": prefix + place["image"],
+                   "detail_url": prefix + atlas_detail_url(place)} for place in places]
         first = places[0]
         choices = [templates["atlas-choice"].substitute(
             id=escape(place["id"]), href=escape(atlas_detail_url(place)),
