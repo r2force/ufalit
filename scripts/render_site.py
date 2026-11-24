@@ -85,77 +85,32 @@ def render_menu(template, relative):
     return LINK.sub(render_link, template)
 
 
-MEANINGLESS_CAPTION = re.compile(
-    r"""(?ix)
-    ^\s*(
-        [\d\s.\-_,№#()]+
-        | (?:фото|рисунок|изображение|скан|photo|image|img|dsc|pic)?\s*[\d.\-_()№#]+
-        | [\w\-. ()№#]*(?:DSC|IMG|DSCN|P\d{6,}|IMG_|_MG_)[\w\-. ()№#]*
-        | [\w\-]+\.(?:jpg|jpeg|png|gif|tif|tiff)
-    )\s*$
-    """
-)
-
-
-def is_meaningful_caption(photo):
-    caption = photo.get("caption_html") or photo.get("caption") or photo.get("alt") or ""
-    plain = re.sub(r"<[^>]+>", "", unescape(caption)).strip()
-    if not plain:
-        return False
-    return not MEANINGLESS_CAPTION.match(plain)
-
-
 def render_photo(photo, template):
     photo = {"loading": "lazy", **photo}
 
     def attributes(names):
         return "".join(f' {name}="{escape(photo[name])}"' for name in names if photo.get(name) is not None)
 
-    meaningful = is_meaningful_caption(photo)
-    raw_caption = photo.get("caption_html") if "caption_html" in photo else escape(photo.get("caption", ""))
-    caption = raw_caption if meaningful else ""
-    alt_source = photo.get("alt") or (photo.get("caption") if meaningful else "") or photo.get("writer_name") or "Фотография"
-    alt = alt_source
+    caption = photo.get("caption_html") if "caption_html" in photo else escape(photo.get("caption", ""))
+    if photo.get("hide_caption"):
+        caption = ""
+    alt = photo.get("alt") or (photo.get("caption") if caption else "") or photo.get("writer_name") or "Фотография"
     caption_html = f'<div class="photo-caption">{caption}</div>' if caption else ""
     return template.substitute(
         id=escape(photo["id"]), src=escape(photo["src"]), alt=escape(alt), caption=caption_html,
-        category=escape(photo_category(photo)),
+        category=escape(photo.get("category") or "Фотоархив"),
         writer=escape(photo.get("writer", "")), writer_name=escape(photo.get("writer_name", "")),
         order=escape(str(photo.get("order", ""))),
         note=f'<p class="photo-note">{escape(photo["note"])}</p>' if photo.get("note") else "",
-        metadata=photo_metadata(photo) if meaningful else "",
+        metadata=photo_metadata(photo) if not photo.get("hide_caption") else "",
         link_attrs=attributes(("title", "aria-label")),
         image_attrs=attributes(("loading", "width", "height", "fetchpriority")),
     )
 
 
-def photo_category(photo):
-    """Classify descriptive captions; leave unnamed archival frames unclassified."""
-    if photo.get("category"):
-        return photo["category"]
-    caption = photo.get("caption", photo.get("alt", "")).lower()
-    for pattern, category in (
-        (r"карт[аы]|древо|автограф|документ|родослов", "Карты и документы"),
-        (r"из книг|обложк|книж|афиш", "Книжные издания"),
-        (r"бюст|памятник|мемориаль|доск|скульптур|табличк|могил", "Памятники и доски"),
-        (r"улиц|бульвар|дом|музей|гимназ|медресе|театр|сад[ ау]|читальн|парк|библиотек|школ|уфа|печати|умпо|университет|академи", "Архитектура и улицы"),
-        (r"портрет|аксаков$|амантай|бикбай|киекбаев|узиков|гафури|короленко|рахимкулов|сотников|ибрагимов|янаби|с семь|семейн|с жен|сестр|с детьми|с другом", "Портреты"),
-    ):
-        if re.search(pattern, caption):
-            return category
-    return "Фотоархив"
-
-
 def photo_metadata(photo):
-    caption = photo.get("caption", photo.get("alt", ""))
     address = photo.get("address")
-    if not address:
-        match = re.search(r"(?:ул\.?\s|улиц[аеы]\s|бульвар\s)[^()]+", caption, re.I)
-        address = match[0].strip() if match else None
     year = photo.get("year")
-    if not year:
-        match = re.search(r"\b(?:18|19|20)\d{2}(?:[-–]е)?(?:\s*(?:год[ауы]?|гг?\.))?", caption)
-        year = match[0] if match else None
     parts = []
     if address:
         parts.append(f'<span class="photo-location">{escape(address)}</span>')
@@ -217,14 +172,10 @@ def render_gallery(page, content, slug, prefix, templates, writers, catalog_data
     else:
         photos = page.get("photos", [])
         extra = content.strip()
-        source_heading = re.search(r'<h1\b[^>]*>(.*?)</h1>', content, re.S)
-        heading = page.get("heading") or (unescape(re.sub(r'<[^>]+>', '', source_heading[1])) if source_heading else writers[selected["writer"]]["name"])
-        if heading == "Фотогалерея":
-            heading = writers[selected["writer"]]["name"]
+        heading = page["heading"]
         if not photos or slug == writers[selected["writer"]]["gallery"]:
             photos = gallery_photos(albums, gallery_descendants(albums, slug))
     # Keep the source links and anchors for every related collection.
-    extra = re.sub(r'<h1\b[^>]*>.*?</h1>\s*', '', extra, flags=re.S)
     if extra:
         extra = f'<section class="gallery-related" aria-label="Подборки фотографий">{extra}</section>'
     # Keep other writers inert until they are selected or a global search is entered.
@@ -725,7 +676,6 @@ def render_page(source, relative, templates, writers, collections=None, gallery_
     if "photos" in page:
         photos = page["photos"]
         content = insert_list(content, "photos", (render_photo(photo, templates["photo"]) for photo in photos))
-        content = content.replace("<!-- photo-count -->", photo_count(len(photos)))
         ensure_asset(script_names, "ufalit-gallery.js?v=6")
     elif IMAGE_VIEWER.search(content):
         ensure_asset(script_names, "ufalit-gallery.js?v=6")
@@ -780,7 +730,7 @@ def render_page(source, relative, templates, writers, collections=None, gallery_
         content = insert_list(content, "guide-cards", cards)
 
     if any(marker in content for marker in (
-        "<!-- tracks -->", "<!-- photos -->", "<!-- photo-count -->",
+        "<!-- tracks -->", "<!-- photos -->",
         "<!-- videos -->", "<!-- atlas -->", "<!-- guide-cards -->",
     )):
         raise ValueError("missing metadata for a template list")

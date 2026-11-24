@@ -78,7 +78,7 @@ class GalleryTests(unittest.TestCase):
                     tags = Document(figure).tags
                     img = next(attrs for tag, attrs in tags if tag == 'img')
                     self.assertEqual(img['src'], photo['src'])
-                    meaningful = render_site.is_meaningful_caption(photo)
+                    meaningful = not photo.get("hide_caption")
                     if meaningful:
                         self.assertEqual(img['alt'], photo.get('alt', photo.get('caption')))
                         caption = re.search(r'<div class="photo-caption">(.*?)</div>', figure, re.S)[1]
@@ -139,17 +139,26 @@ class GalleryTests(unittest.TestCase):
                     target /= 'index.html'
                 self.assertTrue(target.is_file(), (slug, url))
 
-    def test_metadata_uses_only_available_caption_or_explicit_fields(self):
-        self.assertEqual(render_site.photo_metadata({'caption': 'Амантай'}), '')
-        self.assertIn('Ул. Ленина 2', render_site.photo_metadata({'caption': 'Детская библиотека (Ул. Ленина 2)'}))
-        self.assertIn('1928 года', render_site.photo_metadata({'caption': 'Из книг 1928 года «Маленьким друзьям»'}))
-        self.assertEqual(render_site.photo_category({'caption': 'DSC04010'}), 'Фотоархив')
+    def test_metadata_uses_only_explicit_fields(self):
+        self.assertEqual(render_site.photo_metadata({'caption': 'Дом на ул. Ленина 2, 1928 года'}), '')
         photo = {'id': 'photo-test', 'src': 'image.jpg', 'caption': 'Ә Ҙ Ҡ Ң Ө Ҫ Ү Һ Ё',
-                 'address': '<script>bad</script>', 'note': '<b>Текст</b>'}
+                 'address': '<script>bad</script>', 'year': '1928 года', 'note': '<b>Текст</b>'}
         html = render_site.render_photo(photo, self.templates['photo'])
         self.assertIn('Ә Ҙ Ҡ Ң Ө Ҫ Ү Һ Ё', html)
+        self.assertIn('data-category="Фотоархив"', html)
+        self.assertIn('<span class="photo-date">1928 года</span>', html)
+        self.assertIn('&lt;script&gt;bad&lt;/script&gt;', html)
         self.assertNotIn('<script>', html)
         self.assertIn('&lt;b&gt;Текст&lt;/b&gt;', html)
+        photo.update(caption='Улица Амантая', category='Карты и документы')
+        self.assertIn('data-category="Карты и документы"', render_site.render_photo(photo, self.templates['photo']))
+        del photo['category']
+        self.assertIn('data-category="Фотоархив"', render_site.render_photo(photo, self.templates['photo']))
+        photo['hide_caption'] = True
+        html = render_site.render_photo(photo, self.templates['photo'])
+        self.assertNotIn('<div class="photo-caption">', html)
+        self.assertNotIn('<span class="photo-date">', html)
+        self.assertIn('alt="Фотография"', html)
 
     def test_article_viewer_keeps_its_styles_without_archive_controls(self):
         source = '---\n{"title":"Статья"}\n---\n<article data-image-viewer><figure><a href="photo.jpg"><img src="photo.jpg" alt="Фото"></a></figure></article>'
