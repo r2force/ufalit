@@ -8,6 +8,7 @@
   const error = archive.querySelector('.archive-play-error');
   const fallback = error.querySelector('a');
   const choices = [...archive.querySelectorAll('.archive-video-choice')];
+  if (!choices.length) return;
   let selection = 0;
 
   choices.forEach(choice => {

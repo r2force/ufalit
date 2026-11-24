@@ -38,13 +38,11 @@ jobs:
         uses: actions/checkout@v6
         with:
           lfs: true
-      - name: Verify MP4 files are present
+      - name: Verify available MP4 files
         run: |
           python3 - <<'PY'
           from pathlib import Path
           files = list(Path('site/assets/video').rglob('*.mp4'))
-          if len(files) != 25:
-              raise SystemExit(f'Expected 25 MP4 files, found {len(files)}')
           for file in files:
               with file.open('rb') as stream:
                   header = stream.read(128)

@@ -6,9 +6,9 @@
   </header>
   <div class="archive-workspace">
     <section class="archive-player" aria-labelledby="current-video-title" tabindex="-1">
-      <div class="archive-player-heading"><h2 id="current-video-title" aria-live="polite">$title</h2><a class="archive-download" href="$src" download aria-label="Скачать видео: $title" title="Скачать видео"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></svg></a></div>
-      <video id="archive-video" aria-label="$title" controls preload="none" playsinline poster="$poster" src="$src"><a href="$src">Открыть видео «$title»</a></video>
-      <p class="archive-play-error" role="status" hidden>Не удалось запустить видео. <a href="$src">Открыть видео напрямую</a></p>
+      <div class="archive-player-heading"><h2 id="current-video-title" aria-live="polite">$title</h2><a class="archive-download" $download_attrs download aria-label="Скачать видео: $title" title="Скачать видео"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></svg></a></div>
+      <video id="archive-video" aria-label="$title" controls preload="none" playsinline $video_attrs>$video_fallback</video>
+      <p class="archive-play-error" role="status" hidden>Не удалось запустить видео. <a $fallback_attrs>Открыть видео напрямую</a></p>
     </section>
     <section class="archive-playlist" aria-labelledby="records-title">
       <h2 id="records-title">Видеозаписи</h2>

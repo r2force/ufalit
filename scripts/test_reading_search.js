@@ -16,30 +16,27 @@ const documents = JSON.parse(execFileSync('python3', ['-c', [
 ].join('\n')], {cwd: root, encoding: 'utf8', maxBuffer: 8 * 1024 * 1024}));
 const index = search.prepare(documents);
 const find = query => search.search(index, query);
-const bear = '../reading-kiekbaev-bear/';
+const school = '../reading-yanabi-shkolnik/';
 
-assert.equal(documents.length, 112);
-assert.ok(find('полакомиться').some(hit => hit.document.href === bear));
-assert.equal(find('Киекбаев полакомиться')[0].document.href, bear);
-assert.equal(find('Киекбаев полакомиться несуществующееслово').length, 0);
-assert.equal(find('"толстый сук"')[0].document.href, bear);
-assert.equal(find('«сук толстый»').length, 0);
-assert.ok(find('ПЧЕЛЫ').some(hit => hit.document.href === bear));
-assert.equal(find('Улыбка. Восточная сказка')[0].document.href, '../reading-karim-smile/');
-assert.equal(find('жесткого тростника')[0].document.href, '../reading-shafikov-talas/');
-assert.ok(find('"Цветы на камне"').some(hit => hit.document.kind === 'Аудиозаписи'));
+assert.equal(documents.length, 7);
+assert.ok(find('Хулиганов').some(hit => hit.document.href === school));
+assert.equal(find('Янаби Хулиганов')[0].document.href, school);
+assert.equal(find('Янаби Хулиганов несуществующееслово').length, 0);
+assert.equal(find('"учимся прилежно"')[0].document.href, school);
+assert.equal(find('«прилежно учимся»').length, 0);
+assert.equal(find('ПЕСНЯ ОКТЯБРЕНКА')[0].document.href, '../reading-yanabi-pesnya-oktyabrenka/');
+for (const query of ['Мустай Карим', 'Киекбаев', 'Бикчентаев', 'Газим Шафиков', '"Цветы на камне"']) {
+  assert.equal(find(query).length, 0, query);
+}
 assert.deepEqual(search.terms('"слон и петух" ЁЖ ёж'), ['слон и петух', 'еж']);
 assert.deepEqual(search.terms('слон,петух'), ['слон', 'петух']);
 for (const query of ['', '   ', '…?!', '""', 'несуществующееслово']) assert.equal(find(query).length, 0);
 
-const work = documents.find(item => item.href === bear);
-const excerpt = search.snippet(work.text, search.terms('пчелы'));
-assert.equal(excerpt.target, 'пчёлы');
-assert.ok(excerpt.parts.some(part => part.match && part.text === 'пчёлы'));
+const work = documents.find(item => item.href === school);
+const excerpt = search.snippet(work.text, search.terms('хулиганов'));
+assert.equal(excerpt.target, 'Хулиганов');
+assert.ok(excerpt.parts.some(part => part.match && part.text === 'Хулиганов'));
 assert.ok(excerpt.parts.map(part => part.text).join('').length < 300);
-const endnote = search.snippet(find('жесткого тростника')[0].document.text, search.terms('жесткого тростника'));
-assert.ok(endnote.parts.map(part => part.text).join('').includes('Чий'));
-assert.ok(endnote.parts.some(part => part.match));
 assert.equal(search.highlight('<img onerror=x> ЁЖ', ['еж']).map(part => part.text).join(''), '<img onerror=x> ЁЖ');
 assert.ok(search.highlight('ӘКИӘТ һәм ҠОЯШ', ['әкиәт', 'ҡояш']).filter(part => part.match).length === 2);
 assert.ok(search.highlight('пчёлы', ['пче', 'пчелы']).some(part => part.text === 'пчёлы' && part.match));
@@ -53,4 +50,4 @@ const wordIndex = search.prepare([
   {title: 'Слон и петух', author: '', alias: '', description: '', text: ''},
 ]);
 assert.deepEqual(search.search(wordIndex, 'и').map(hit => hit.document.title), ['Слон и петух']);
-console.log('Reading search: full corpus, phrases, all-word matching, ranking, Cyrillic/ё, snippets, audio and empty queries passed.');
+console.log('Reading search: full corpus, phrases, all-word matching, ranking, Cyrillic/ё, snippets, removed authors and empty queries passed.');

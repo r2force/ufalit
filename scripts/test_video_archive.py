@@ -5,6 +5,7 @@ import unittest
 from html.parser import HTMLParser
 from pathlib import Path
 from string import Template
+from urllib.parse import urlsplit, unquote
 
 import render_site
 
@@ -41,17 +42,24 @@ class VideoArchiveTests(unittest.TestCase):
             source, relative, self.templates, self.writers,
         ))
 
-    def test_single_player_preserves_all_recordings_and_download(self):
-        for slug, count in (("video-389", 4), ("video-388", 7), ("video-81", 14)):
+    def test_single_player_supports_current_recordings_and_empty_collections(self):
+        for slug in ("video-389", "video-388", "video-81"):
             with self.subTest(collection=slug):
                 page, document = self.render(slug)
                 tags = document.tags
                 players = [attrs for tag, attrs in tags if tag == "video"]
                 self.assertEqual(len(players), 1)
-                self.assertEqual(players[0]["src"], page["videos"][0]["src"])
                 self.assertIn("controls", players[0])
+                if not page["videos"]:
+                    self.assertNotIn("src", players[0])
+                    self.assertNotIn("poster", players[0])
+                    self.assertFalse(any("data-video-title" in attrs for _, attrs in tags))
+                    self.assertFalse(any("download" in attrs and "href" in attrs for _, attrs in tags))
+                    self.assertIn("Видеозаписи будут добавлены позже", " ".join(document.text))
+                    continue
+                self.assertEqual(players[0]["src"], page["videos"][0]["src"])
                 choices = [attrs for tag, attrs in tags if "data-video-title" in attrs]
-                self.assertEqual(len(choices), count)
+                self.assertEqual(len(choices), len(page["videos"]))
                 self.assertEqual(
                     [(item["data-video-title"], item["href"]) for item in choices],
                     [(item["title"], item["src"]) for item in page["videos"]],
@@ -84,6 +92,53 @@ class VideoArchiveTests(unittest.TestCase):
             self.assertNotIn(removed, visible)
         for name in ("Аксаков Сергей Тимофеевич", "Злобин Степан Павлович", "Мустай Карим"):
             self.assertIn(name.lower(), visible)
+
+    def test_new_recordings_still_render_player_choices_and_downloads(self):
+        relative = Path('pages/video-389/index.html')
+        source = (self.root / 'site' / relative).read_text()
+        page = json.loads(source[4:].split('\n---\n', 1)[0])
+        page['videos'] = [{'title': 'Новая запись', 'src': '../../assets/video/aksakov/new.mp4'}]
+        source = '---\n' + json.dumps(page, ensure_ascii=False) + '\n---\n'
+        document = Document(render_site.render_page(source, relative, self.templates, self.writers))
+        player = next(attrs for tag, attrs in document.tags if tag == 'video')
+        self.assertEqual(player['src'], page['videos'][0]['src'])
+        choices = [attrs for _, attrs in document.tags if 'data-video-title' in attrs]
+        self.assertEqual(len(choices), 1)
+        self.assertEqual(choices[0]['data-video-title'], 'Новая запись')
+        download = next(attrs for tag, attrs in document.tags if tag == 'a' and 'download' in attrs)
+        self.assertEqual(download['href'], player['src'])
+        self.assertNotIn('hidden', download)
+
+    def test_audio_player_and_its_styles_remain_ready_for_new_tracks(self):
+        page = dict(title='Аудиозаписи', audio_studio=dict(
+            kicker='Аудиофонд', heading='Аудиозаписи', intro='Новые записи',
+            voice='Авторское чтение', description=''), tracks=[
+                dict(id='track-01', title='Новая запись', src='../../assets/audio/new.ogg')])
+        source = '---\n' + json.dumps(page, ensure_ascii=False) + '\n---\n'
+        html = render_site.render_page(source, Path('pages/audio/index.html'), self.templates, self.writers)
+        self.assertIn('class="audio-studio"', html)
+        self.assertIn('class="audio-deck"', html)
+        self.assertIn('class="audio-item"', html)
+        self.assertIn('ufalit-audio.js', html)
+        self.assertIn('audio-studio', (self.root / 'site/assets/museum.css').read_text())
+
+    def test_published_media_references_point_to_existing_files(self):
+        referenced = set()
+        extensions = {'.mp4', '.webm', '.ogg', '.mp3', '.wav', '.m4a'}
+        for path in (self.root / 'site').rglob('*.html'):
+            relative = path.relative_to(self.root / 'site')
+            html = render_site.render_page(path.read_text(), relative, self.templates, self.writers)
+            for _, attrs in Document(html).tags:
+                for name in ('href', 'src'):
+                    url = urlsplit(unquote(attrs.get(name, '')))
+                    if url.scheme or Path(url.path).suffix.lower() not in extensions:
+                        continue
+                    target = (path.parent / url.path).resolve()
+                    self.assertTrue(target.is_file(), (relative, url.path))
+                    referenced.add(target)
+        available = {path.resolve() for path in (self.root / 'site/assets').rglob('*')
+                     if path.suffix.lower() in extensions}
+        self.assertEqual(referenced, available)
 
 
 if __name__ == "__main__":

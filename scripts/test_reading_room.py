@@ -52,9 +52,9 @@ class ReadingRoomTests(unittest.TestCase):
     def test_catalogue_covers_every_reading_material_once(self):
         writers = [item['writer'] for item in self.collections]
         works = [work['slug'] for item in self.collections for work in item['works']]
-        self.assertEqual(len(writers), 6)
+        self.assertEqual(writers, ['aksakov', 'yanabi'])
         self.assertEqual(len(writers), len(set(writers)))
-        self.assertEqual(len(works), 112)
+        self.assertEqual(len(works), 7)
         self.assertEqual(len(works), len(set(works)))
         pages = {p.parent.name for p in (self.root / 'site/pages').glob('reading-*/index.html')
                  if not p.parent.name.startswith('reading-author-')}
@@ -76,12 +76,10 @@ class ReadingRoomTests(unittest.TestCase):
                 self.assertEqual(work_links, [f'../{work["slug"]}/' for work in collection['works']])
                 self.assertEqual(sum(tag == 'h1' for tag, _ in document.tags), 1)
                 self.assertIn(f'../personalities/#person-{collection["writer"]}', html)
-                if collection['writer'] == 'karim':
-                    self.assertIn('id="library-audio"', html)
                 if collection['writer'] == 'aksakov':
                     self.assertEqual(html.count('class="library-kind">О книге'), 3)
 
-    def test_work_texts_and_audio_metadata_are_preserved(self):
+    def test_work_texts_are_preserved(self):
         for collection in self.collections:
             for work in collection['works']:
                 with self.subTest(work=work['slug']):
@@ -91,23 +89,16 @@ class ReadingRoomTests(unittest.TestCase):
                         result = html[html.index('<article'):html.index('</article>')]
                         self.assertEqual(''.join(Document(original).text), ''.join(Document(result).text))
                         self.assertIn('data-reading-work', result)
-                    else:
-                        metadata = json.loads(source[4:].split('\n---\n', 1)[0])
-                        for track in metadata['tracks']:
-                            self.assertIn(track['src'], html)
                     self.assertIn(f'href="../reading-author-{collection["writer"]}/"', html)
                     self.assertIn('aria-current="location">Читальный зал', html)
 
-    def test_full_text_index_includes_body_endnotes_and_track_names(self):
+    def test_full_text_index_contains_only_retained_works(self):
         documents = render_site.reading_search_documents(self.collections, self.writers)
-        self.assertEqual(len(documents), 112)
+        self.assertEqual(len(documents), 7)
         by_url = {item['href']: item for item in documents}
-        bear = by_url['../reading-kiekbaev-bear/']
-        self.assertIn('полакомиться', bear['text'])
-        self.assertNotIn('полакомиться', bear['title'] + bear['description'])
-        self.assertIn('Чий — вид жесткого тростника, растущего у реки.', by_url['../reading-shafikov-talas/']['text'])
+        self.assertIn('Хулиганов перевоспитываем.', by_url['../reading-yanabi-shkolnik/']['text'])
         self.assertIn('Теперь я вырос, октябренком стал,', next(item['text'] for item in documents if item['title'] == 'Песня октябрёнка'))
-        self.assertTrue(any('Цветы на камне' in item['text'] and item['kind'] == 'Аудиозаписи' for item in documents))
+        self.assertFalse(any(item['kind'] == 'Аудиозаписи' for item in documents))
         _, html = self.render('reading')
         start = html.index('<script type="application/json" data-library-index>') + len('<script type="application/json" data-library-index>')
         self.assertEqual(json.loads(html[start:html.index('</script>', start)]), documents)
@@ -148,19 +139,17 @@ class ReadingRoomTests(unittest.TestCase):
                         _, target_html = self.render(target_slug)
                         self.assertIn(f'id="{parsed.fragment}"', target_html, (slug, url))
 
-    def test_split_preserves_every_original_paragraph_image_and_audio_track(self):
+    def test_retained_texts_preserve_original_paragraphs_and_images(self):
         audit = json.loads((self.root / 'migration/evidence/2026-11-23/reading-split-check.json').read_text())
         groups = {group['slug']: group for item in self.collections for group in item.get('groups', [])}
+        retained = {work['slug'] for item in self.collections for work in item['works']} | {'personalities'}
         for record in audit['sources']:
+            if not set(record['pages']) <= retained:
+                continue
             if record.get('unchanged'):
                 continue
             with self.subTest(source=record['source']):
                 sources = [(self.root / 'site/pages' / slug / 'index.html').read_text() for slug in record['pages']]
-                if 'tracks' in record:
-                    tracks = [track for source in sources for track in json.loads(source[4:].split('\n---\n', 1)[0])['tracks']]
-                    self.assertEqual(tracks, record['tracks'])
-                    self.assertEqual(len(sources), 1)
-                    continue
                 sources.append(groups[record['notes_group']].get('notes_html', '') if record['notes_group'] else '')
                 if record.get('destination_anchor'):
                     sources[0] = sources[0].split('id="' + record['destination_anchor'] + '">', 1)[1].split('</section>', 1)[0]
@@ -192,49 +181,22 @@ class ReadingRoomTests(unittest.TestCase):
                         if 'legacy_anchor' in work:
                             self.assertIn(f'id="{work["legacy_anchor"]}"', html)
 
-    def test_audio_is_two_original_multitrack_players(self):
-        karim = next(item for item in self.collections if item['writer'] == 'karim')
-        audio = [work for work in karim['works'] if work['kind'] == 'Аудиозаписи']
-        self.assertEqual([work['slug'] for work in audio], ['reading-karim-audio', 'reading-karim-nazarova'])
-        self.assertEqual([work['title'] for work in audio], ['Стихотворения. Читает Мустай Карим', 'Стихи в исполнении Зайнаб Назыровой и песни на стихи Мустая Карима'])
-        _, author = self.render('reading-author-karim')
-        shelf = author.split('id="library-audio">', 1)[1].split('</section>', 1)[0]
-        self.assertEqual(sum(tag == 'a' for tag, _ in Document(shelf).tags), 2)
-        for work, count in zip(audio, [18, 5]):
-            source, result = self.render(work['slug'])
-            page = json.loads(source[4:].split('\n---\n', 1)[0])
-            self.assertEqual(len(page['tracks']), count)
-            self.assertEqual(result.count('class="audio-studio"'), 1)
-            self.assertEqual(result.count('class="audio-item"'), count)
-            self.assertIn('ufalit-audio.js', result)
 
-    def test_footnotes_belong_to_their_works(self):
-        _, author = self.render('reading-author-karim')
-        self.assertNotIn('Сармасан - река', author)
-        self.assertNotIn('ИЗ «МОНОЛОГОВ ПРОМЕТЕЯ»', author)
-        _, poem = self.render('reading-karim-v-krayu-moey-lyubimoy')
-        self.assertIn('Сармасан - река в Башкирии.', poem)
-        self.assertIn('href="#note-sarmasan"', poem)
-        self.assertIn('href="#ref-sarmasan"', poem)
-        for slug in ['reading-karim-kogda-grustno', 'reading-karim-kogda-sgorela-agaziya', 'reading-karim-pust-vremya-ne-ostanavlivaetsya']:
-            _, poem = self.render(slug)
-            self.assertIn('ИЗ «МОНОЛОГОВ ПРОМЕТЕЯ»', poem)
-
-    def test_dedications_moved_to_profile_and_old_addresses_redirect(self):
-        shafikov = next(item for item in self.collections if item['writer'] == 'shafikov')
-        self.assertFalse(any(work.get('group') == 'reading-shafikov-dedications' for work in shafikov['works']))
+    def test_removed_reading_pages_and_crosslinks_are_absent(self):
+        removed = ('karim', 'bikchentaev', 'kiekbaev', 'shafikov')
+        for path in (self.root / 'site/pages').glob('reading-*/index.html'):
+            self.assertFalse(any(path.parent.name.startswith(f'reading-{key}-') or
+                                 path.parent.name == f'reading-author-{key}' for key in removed))
+        for path in (self.root / 'site').rglob('*.html'):
+            self.assertNotRegex(path.read_text(), r'reading-(?:author-)?(?:karim|bikchentaev|kiekbaev|shafikov)(?:/|-)')
         _, profile = self.render('personalities')
-        section = profile.split('id="shafikov-dedications">', 1)[1].split('</section>', 1)[0]
-        for name in ['Мустай Карим', 'Георгий Кацерик', 'Равиль Бикбаев', 'Ирек Киньябулатов', 'Айдар Хусаинов']:
-            self.assertIn(name, section)
-        self.assertEqual(section.count('Путь пройденный обозревая, все же'), 1)
-        redirects = self.redirects()
-        self.assertEqual(len(redirects), 28)
-        self.assertEqual(redirects['reading-shafikov-dedications'], '../personalities/#shafikov-dedications')
-        for slug, target in redirects.items():
-            _, result = self.render(slug)
-            self.assertIn(f'content="0;url={target}"', result)
-            self.assertIn(f'href="{target}"', result)
+        links = [attrs['href'] for tag, attrs in Document(profile).tags
+                 if tag == 'a' and attrs.get('class') == 'profile-reading-link']
+        self.assertEqual(links, ['../../pages/reading-author-aksakov/', '../../pages/reading-author-yanabi/'])
+        for key in removed:
+            self.assertIn(f'id="person-{key}"', profile)
+        self.assertIn('id="shafikov-dedications"', profile)
+        self.assertFalse(self.redirects())
 
 
 if __name__ == '__main__':

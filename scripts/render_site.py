@@ -300,7 +300,10 @@ def render_writer_directory(content, records, page, prefix, templates, writers):
             return opening
 
         gallery = writer.get("gallery", "gallery")
-        reading_path = f'reading-author-{slug}/' if "reading" in writer else "reading/"
+        reading_link = ""
+        if "reading" in writer:
+            reading_url = escape(f'{prefix}pages/reading-author-{slug}/')
+            reading_link = f'<a class="profile-reading-link" href="{reading_url}">Читальный зал</a>'
         audio = ""
         if "audio" in writer:
             audio_url = escape(f'{prefix}pages/{writer["audio"]}/')
@@ -313,7 +316,7 @@ def render_writer_directory(content, records, page, prefix, templates, writers):
             gallery_url=escape(f"{prefix}pages/{gallery}/"),
             gallery_label="Фотогалерея" if "gallery" in writer else "Каталог фотогалереи",
             places_url=escape(f'{prefix}pages/places/#{writer["place"]}'),
-            reading_url=escape(f"{prefix}pages/{reading_path}"), audio_link=audio,
+            reading_link=reading_link, audio_link=audio,
         ) + "\n"
 
     rest_html = DIRECTORY_RECORD.sub(render_record, tail)
@@ -514,14 +517,19 @@ def render_page(source, relative, templates, writers, collections=None):
     if "video_collections" in page or "video_archive" in page:
         ensure_asset(style_names, "video-archive.css?v=3")
     if "video_archive" in page:
-        first_video = page["videos"][0]
+        first_video = page["videos"][0] if page["videos"] else None
+        title = escape(first_video["title"]) if first_video else "Видеозаписи будут добавлены позже"
+        src = escape(first_video["src"]) if first_video else ""
         content = templates["archive-album"].substitute(
             **archive_fields(page, writers, prefix), heading=escape(page["heading"]),
             reel=prefix + "assets/video-archive/reel.svg",
-            title=escape(first_video["title"]), src=escape(first_video["src"]),
-            poster=archive_poster(first_video, prefix),
+            title=title,
+            download_attrs=f'href="{src}"' if first_video else 'hidden',
+            video_attrs=f'poster="{archive_poster(first_video, prefix)}" src="{src}"' if first_video else '',
+            video_fallback=f'<a href="{src}">Открыть видео «{title}»</a>' if first_video else '',
+            fallback_attrs=f'href="{src}"' if first_video else 'hidden',
         )
-        ensure_asset(script_names, "ufalit-video.js?v=2")
+        ensure_asset(script_names, "ufalit-video.js?v=3")
 
     if "photos" in page and "<!-- photos -->" not in content:
         extra = f"\n{content.strip()}" if content.strip() else ""
