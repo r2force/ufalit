@@ -1,7 +1,7 @@
 /* The literary atlas uses the existing museum palette and typefaces. */
 .museum-home .literary-atlas {
   display: block;
-  margin: 0 0 2.5rem;
+  margin: 2.5rem 0 0;
   padding: clamp(1rem, 2.8vw, 2rem);
   background: var(--paper-card);
   border: 1px solid var(--line);
