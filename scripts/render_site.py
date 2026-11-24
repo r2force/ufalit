@@ -96,6 +96,8 @@ def render_photo(photo, template):
     return template.substitute(
         id=escape(photo["id"]), src=escape(photo["src"]), alt=escape(alt), caption=caption,
         category=escape(photo_category(photo)),
+        writer=escape(photo.get("writer", "")), writer_name=escape(photo.get("writer_name", "")),
+        order=escape(str(photo.get("order", ""))),
         note=f'<p class="photo-note">{escape(photo["note"])}</p>' if photo.get("note") else "",
         metadata=photo_metadata(photo),
         link_attrs=attributes(("title", "aria-label")),
@@ -177,7 +179,8 @@ def render_gallery(page, content, slug, prefix, templates, writers, catalog_data
     for item in catalog:
         writer = writers[item["writer"]]
         cards.append(templates["gallery-writer"].substitute(
-            href=escape(f'{prefix}pages/{writer["gallery"]}/'),
+            href=escape(f'{prefix}pages/{writer["gallery"]}/#gallery-photos'),
+            writer=escape(item["writer"]),
             current=' aria-current="true"' if item is selected else "",
             portrait=escape(prefix + writer["portrait"]), name=escape(writer["name"]),
             years=escape(writer["years"]), count=photo_count(item["count"]),
@@ -200,8 +203,19 @@ def render_gallery(page, content, slug, prefix, templates, writers, catalog_data
     extra = re.sub(r'<h1\b[^>]*>.*?</h1>\s*', '', extra, flags=re.S)
     if extra:
         extra = f'<section class="gallery-related" aria-label="Подборки фотографий">{extra}</section>'
+    # Keep other writers inert until they are selected or a global search is entered.
+    # The same photo template is used for both the current album and the search corpus.
+    all_photos = [dict(photo, writer=item["writer"], writer_name=writers[item["writer"]]["name"])
+                  for item in catalog for photo in gallery_photos(albums, item["slugs"])]
+    for order, photo in enumerate(all_photos):
+        photo["order"] = order
+    by_id = {photo["id"]: photo for photo in all_photos}
+    photos = [by_id[photo["id"]] for photo in photos]
+    shown = {photo["id"] for photo in photos}
+    pool = "\n".join(render_photo(photo, templates["photo"]) for photo in all_photos if photo["id"] not in shown)
     content = templates["gallery-album"].substitute(
         heading=escape(heading), extra=extra, writers="\n".join(cards), count=photo_count(len(photos)),
+        writer=escape(selected["writer"]), pool=pool,
     )
     return content, photos
 
@@ -643,7 +657,7 @@ def render_page(source, relative, templates, writers, collections=None, gallery_
             page, content, slug, prefix, templates, writers,
             gallery_catalog if gallery_catalog is not None else load_gallery_catalog(writers),
         )
-        ensure_asset(style_names, "gallery.css?v=1")
+        ensure_asset(style_names, "gallery.css?v=2")
     if "videos" in page and "<!-- videos -->" not in content:
         extra = f"\n  {content.strip()}" if content.strip() else ""
         note = page.get("note", "Видеозаписи доступны для просмотра и скачивания в формате MP4.")
@@ -688,10 +702,10 @@ def render_page(source, relative, templates, writers, collections=None, gallery_
         photos = page["photos"]
         content = insert_list(content, "photos", (render_photo(photo, templates["photo"]) for photo in photos))
         content = content.replace("<!-- photo-count -->", photo_count(len(photos)))
-        ensure_asset(script_names, "ufalit-gallery.js?v=5")
+        ensure_asset(script_names, "ufalit-gallery.js?v=6")
     elif IMAGE_VIEWER.search(content):
-        ensure_asset(script_names, "ufalit-gallery.js?v=5")
-        ensure_asset(style_names, "gallery.css?v=1")
+        ensure_asset(script_names, "ufalit-gallery.js?v=6")
+        ensure_asset(style_names, "gallery.css?v=2")
 
     if "tracks" in page:
         content = insert_list(content, "tracks", (render_track(track, templates["audio-track"]) for track in page["tracks"]))

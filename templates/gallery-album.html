@@ -1,9 +1,13 @@
 <h1 class="page-title">Фотогалерея</h1>
 <section class="gallery-collections" aria-label="Фотографии литераторов">
-  <div class="gallery-collections-heading"><h2>Литераторы</h2><div data-collection-navigation hidden><button type="button" class="museum-control" data-collection-prev aria-label="Предыдущие литераторы">←</button> <button type="button" class="museum-control" data-collection-next aria-label="Следующие литераторы">→</button></div></div>
+  <div class="gallery-collections-heading"><h2>Литераторы</h2></div>
   <nav class="gallery-writers" aria-label="Выберите литератора">$writers</nav>
 </section>
-<div class="gallery-album-heading"><h2>$heading</h2><p>$count</p></div>
-<div class="gallery" data-archive-gallery>
+<section id="gallery-photos" class="gallery-content" aria-label="Фотографии выбранного литератора">
+<div class="gallery-album-heading"><h2 tabindex="-1">$heading</h2><p>$count</p></div>
+<div class="gallery" data-archive-gallery data-writer="$writer">
 <!-- photos -->
-</div>$extra
+</div>
+<template data-gallery-catalog>$pool</template>
+$extra
+</section>

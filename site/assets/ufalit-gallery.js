@@ -1,7 +1,7 @@
 (() => {
   const gallery = document.querySelector('.gallery, [data-image-viewer]');
   if (!gallery) return;
-  const frames = Array.from(gallery.querySelectorAll('figure'), (figure) => ({
+  const readFrames = (root) => Array.from(root.querySelectorAll('figure'), (figure) => ({
     figure,
     link: figure.querySelector('a[href]'),
     image: figure.querySelector('img'),
@@ -9,17 +9,37 @@
     metadata: figure.querySelector('.photo-metadata'),
     note: figure.querySelector('.photo-note'),
     category: figure.dataset.category || 'Фотоархив',
+    writer: figure.dataset.writer || '',
+    writerName: figure.dataset.writerName || '',
   })).filter(({ link, image }) => link && image);
-  if (!frames.length) return;
+  const initialFrames = readFrames(gallery);
+  if (!initialFrames.length) return;
+  const initialScope = new Set(initialFrames);
+  const catalogTemplate = document.querySelector('template[data-gallery-catalog]');
+  const remainingFrames = catalogTemplate ? readFrames(catalogTemplate.content) : [];
+  const frames = [...initialFrames, ...remainingFrames].sort((a, b) => Number(a.figure.dataset.galleryOrder || 0) - Number(b.figure.dataset.galleryOrder || 0));
   const archive = gallery.hasAttribute('data-archive-gallery');
   const motion = matchMedia('(prefers-reduced-motion: reduce)');
   const behavior = () => motion.matches ? 'instant' : 'smooth';
   const normalize = (text) => text.toLocaleLowerCase('ru').replaceAll('ё', 'е').replace(/\s+/g, ' ').trim();
-  let visible = [...frames];
+  let visible = [...initialFrames];
   let mode = 'grid';
   let stageIndex = 0;
   let film;
   let updateFilm = () => {};
+  const icons = {
+    grid: '<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>',
+    filmstrip: '<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 3v18M17 3v18M3 8h4M3 16h4M17 8h4M17 16h4"/>',
+    masonry: '<rect x="3" y="3" width="18" height="18" rx="1"/><path d="M12 3v18M3 9h9M12 15h9"/>',
+    contact: '<rect x="3" y="3" width="18" height="18" rx="1"/><path d="M9 3v18M15 3v18M3 9h18M3 15h18"/>',
+    search: '<circle cx="10.5" cy="10.5" r="7.5"/><path d="m16 16 5 5"/>',
+    zoomIn: '<circle cx="10.5" cy="10.5" r="7.5"/><path d="m16 16 5 5M7 10.5h7M10.5 7v7"/>',
+    zoomOut: '<circle cx="10.5" cy="10.5" r="7.5"/><path d="m16 16 5 5M7 10.5h7"/>',
+    layers: '<path d="m12 3 9 5-9 5-9-5 9-5ZM3 12l9 5 9-5M3 16l9 5 9-5"/>',
+    external: '<path d="M14 3h7v7M10 14 21 3M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5"/>',
+    close: '<path d="m6 6 12 12M6 18 18 6"/>',
+  };
+  const icon = (name) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">${icons[name]}</svg>`;
 
   function background(element, source) {
     // Quoted CSS URL keeps filenames with spaces, quotes and parentheses intact.
@@ -54,35 +74,28 @@
 
   if (archive) {
     const writers = document.querySelector('.gallery-writers');
-    const navigation = document.querySelector('[data-collection-navigation]');
-    if (writers && navigation) {
-      navigation.hidden = false;
-      for (const [selector, direction] of [['[data-collection-prev]', -1], ['[data-collection-next]', 1]]) {
-        navigation.querySelector(selector).addEventListener('click', () => writers.scrollBy({ left: writers.clientWidth * direction, behavior: behavior() }));
-      }
-      // Scroll only this strip; keep the page and incoming #photo anchor in place.
-      const selected = writers.querySelector('[aria-current]');
-      if (selected) writers.scrollLeft = selected.offsetLeft - writers.firstElementChild.offsetLeft;
+    const heading = document.querySelector('.gallery-album-heading h2');
+    const albumCount = document.querySelector('.gallery-album-heading p');
+    const content = document.querySelector('.gallery-content');
+    const related = document.querySelector('.gallery-related');
+    let selectedWriter = gallery.dataset.writer;
+    let selectedHeading = heading.textContent;
+    let selectedCount = albumCount.textContent;
+    let useInitialScope = true;
+    let mounted = false;
+    initialFrames.forEach((frame) => background(frame.link, frame.image.src));
+    function mountCatalog() {
+      if (mounted || !catalogTemplate) return;
+      remainingFrames.forEach((frame) => { frame.figure.hidden = true; });
+      gallery.replaceChildren(...frames.map((frame) => frame.figure));
+      catalogTemplate.remove();
+      remainingFrames.forEach((frame) => background(frame.link, frame.image.src));
+      mounted = true;
     }
-    frames.forEach((frame, index) => {
-      background(frame.link, frame.image.src);
-      const number = document.createElement('span');
-      number.className = 'photo-number';
-      number.textContent = `№ ${String(index + 1).padStart(2, '0')}`;
-      frame.figure.querySelector('.photo-identifier').prepend(number);
-    });
-
-    const icons = {
-      grid: '<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>',
-      filmstrip: '<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 3v18M17 3v18M3 8h4M3 16h4M17 8h4M17 16h4"/>',
-      masonry: '<rect x="3" y="3" width="18" height="18" rx="1"/><path d="M12 3v18M3 9h9M12 15h9"/>',
-      contact: '<rect x="3" y="3" width="18" height="18" rx="1"/><path d="M9 3v18M15 3v18M3 9h18M3 15h18"/>',
-    };
-    const icon = (name) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">${icons[name]}</svg>`;
     const toolbar = document.createElement('section');
     toolbar.className = 'gallery-toolbar';
     toolbar.setAttribute('aria-label', 'Вид и фильтры фотографий');
-    toolbar.innerHTML = `<div class="gallery-tools-top"><div class="gallery-views" role="group" aria-label="Вид отображения"></div><label class="gallery-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="10" cy="10" r="7"/><path d="m15 15 6 6"/></svg><input type="search" aria-label="Поиск фотографий по подписи, месту или номеру" placeholder="Поиск по подписи, месту или #photo"></label></div><div class="gallery-tools-bottom"><div class="gallery-filters" role="group" aria-label="Категория фотографий"></div><p class="gallery-result" role="status" aria-live="polite"></p></div>`;
+    toolbar.innerHTML = `<div class="gallery-tools-top"><div class="gallery-views" role="group" aria-label="Вид отображения"></div><label class="gallery-search">${icon('search')}<input type="search" aria-label="Поиск по подписям фотографий всех литераторов" placeholder="Поиск по всем фотографиям"></label></div><div class="gallery-tools-bottom"><div class="gallery-filters" role="group" aria-label="Категория фотографий"></div><p class="gallery-result" role="status" aria-live="polite"></p></div>`;
     gallery.before(toolbar);
     const empty = document.createElement('div');
     empty.className = 'gallery-empty';
@@ -119,7 +132,7 @@
       const frame = visible[stageIndex];
       filmImage.src = frame.link.href;
       filmImage.alt = frame.image.alt;
-      filmCount.textContent = `Кадр ${stageIndex + 1} из ${visible.length} · #${frame.figure.id}`;
+      filmCount.textContent = `Кадр ${stageIndex + 1} из ${visible.length}`;
       copyCaption(filmDetail, frame);
       filmLoupe.reset();
       frames.forEach((item) => item.figure.classList.toggle('is-current', item === frame));
@@ -153,13 +166,19 @@
     }
     function filter() {
       const query = normalize(search.value);
+      if (query) mountCatalog();
+      const scope = query ? frames : frames.filter((frame) => useInitialScope ? initialScope.has(frame) : frame.writer === selectedWriter);
+      const allowed = new Set(scope);
       visible = frames.filter((frame) => {
-        const found = (category === 'Все' || frame.category === category) && normalize(`${description(frame)} ${frame.figure.id}`).includes(query);
+        const found = allowed.has(frame) && (category === 'Все' || frame.category === category) && normalize(frame.caption?.textContent || frame.image.alt).includes(query);
         frame.figure.hidden = !found;
         return found;
       });
       for (const button of filters.children) button.setAttribute('aria-pressed', button.textContent === category);
-      result.textContent = `Показано: ${visible.length} из ${frames.length}`;
+      result.textContent = `Показано: ${visible.length} из ${scope.length}${query ? ' · Все литераторы' : ''}`;
+      heading.textContent = query ? 'Результаты поиска по всем литераторам' : selectedHeading;
+      albumCount.textContent = query ? `${visible.length} фото` : selectedCount;
+      if (related) related.hidden = !!query || !useInitialScope;
       empty.hidden = !!visible.length;
       gallery.hidden = !visible.length;
       stageIndex = 0;
@@ -175,13 +194,44 @@
     }
     search.addEventListener('input', filter);
     empty.querySelector('button').addEventListener('click', () => { search.value = ''; category = 'Все'; filter(); search.focus(); });
+    function selectWriter(card, scroll) {
+      mountCatalog();
+      selectedWriter = card.dataset.galleryWriter;
+      selectedHeading = card.querySelector('.gallery-writer-name').textContent;
+      selectedCount = card.querySelector('.gallery-writer-count').textContent;
+      useInitialScope = false;
+      category = 'Все';
+      search.value = '';
+      writers.querySelectorAll('.gallery-writer').forEach((item) => {
+        if (item === card) item.setAttribute('aria-current', 'true');
+        else item.removeAttribute('aria-current');
+      });
+      gallery.dataset.writer = selectedWriter;
+      filter();
+      if (scroll) {
+        history.replaceState(null, '', '#gallery-photos');
+        content.scrollIntoView({ behavior: behavior(), block: 'start' });
+        heading.focus({ preventScroll: true });
+      }
+    }
+    writers.querySelectorAll('.gallery-writer').forEach((card) => card.addEventListener('click', (event) => {
+      if (event.button !== 0 || event.ctrlKey || event.metaKey || event.altKey || event.shiftKey) return;
+      event.preventDefault();
+      selectWriter(card, true);
+    }));
     let saved;
     try { saved = sessionStorage.getItem('ufalit-gallery-view'); } catch { /* Use the default layout. */ }
     setMode(layouts.some(([value]) => value === saved) ? saved : 'grid');
     filter();
     // Incoming photo anchors must stay visible in every layout, including the filmstrip.
     function followAnchor() {
-      const index = visible.findIndex((frame) => `#${frame.figure.id}` === location.hash);
+      const target = frames.find((frame) => `#${frame.figure.id}` === location.hash);
+      if (target && !visible.includes(target)) {
+        const card = Array.from(writers.querySelectorAll('.gallery-writer')).find((item) => item.dataset.galleryWriter === target.writer);
+        if (card) selectWriter(card, false);
+        target.figure.scrollIntoView({ block: 'start' });
+      }
+      const index = visible.indexOf(target);
       if (index < 0) return;
       stageIndex = index;
       updateFilm();
@@ -231,7 +281,29 @@
   dialog.className = 'ufalit-lightbox';
   dialog.dataset.theme = 'dark';
   dialog.setAttribute('aria-label', 'Просмотр фотографий');
-  dialog.innerHTML = `<div class="lightbox-controls"><div class="lightbox-heading"><h2></h2><div class="lightbox-counter" aria-live="polite"></div></div><div class="lightbox-actions"><button class="museum-control" type="button" data-loupe aria-pressed="false">Лупа 2,8×</button><button class="museum-control" type="button" data-zoom-out aria-label="Уменьшить">−</button><output data-zoom>100%</output><button class="museum-control" type="button" data-zoom-in aria-label="Увеличить">+</button><button class="museum-control" type="button" data-zoom-reset>Сброс</button><select aria-label="Оформление просмотра"><option value="dark">Тёмный зал</option><option value="mat">Паспарту</option><option value="ambient">Амбиент</option></select><a class="lightbox-original" target="_blank" rel="noopener">Оригинал ↗</a><button class="museum-control lightbox-close" type="button" autofocus aria-label="Закрыть просмотр">✕</button></div></div><div class="lightbox-center"><button class="museum-control lightbox-prev" type="button" aria-label="Предыдущее изображение">←</button><div class="lightbox-stage" tabindex="0" aria-label="Фотография. Увеличенное изображение можно прокручивать."><div class="lightbox-image-wrap"><img class="lightbox-image" alt=""><div class="photo-loupe" hidden aria-hidden="true"></div></div></div><button class="museum-control lightbox-next" type="button" aria-label="Следующее изображение">→</button></div><div class="lightbox-footer"><p class="lightbox-caption"></p><div class="lightbox-thumbnails" aria-label="Фотографии подборки"></div></div>`;
+  dialog.innerHTML = `
+    <header class="lightbox-controls">
+      <div class="lightbox-heading"><h2></h2><div class="lightbox-counter" aria-live="polite"></div></div>
+      <div class="lightbox-tools">
+        <button class="museum-control lightbox-loupe-toggle" type="button" data-loupe aria-pressed="false" title="Горячая клавиша: L">${icon('search')}<span>Лупа краеведа 2,8× (L)</span></button>
+        <div class="lightbox-zoom" role="group" aria-label="Масштаб фотографии">
+          <button class="museum-control lightbox-icon-button" type="button" data-zoom-out aria-label="Уменьшить">${icon('zoomOut')}</button>
+          <button class="lightbox-zoom-label" type="button" data-zoom data-zoom-reset aria-label="Сбросить масштаб">100%</button>
+          <button class="museum-control lightbox-icon-button" type="button" data-zoom-in aria-label="Увеличить">${icon('zoomIn')}</button>
+        </div>
+        <div class="lightbox-themes" role="group" aria-label="Оформление просмотра">${icon('layers')}
+          <button type="button" data-theme="dark" aria-pressed="true">Тёмный зал</button>
+          <button type="button" data-theme="mat" aria-pressed="false">Паспарту</button>
+          <button type="button" data-theme="ambient" aria-pressed="false">Амбиент</button>
+        </div>
+      </div>
+      <div class="lightbox-actions">
+        <a class="lightbox-original" target="_blank" rel="noopener"><span>Оригинал</span>${icon('external')}</a>
+        <button class="museum-control lightbox-icon-button lightbox-close" type="button" autofocus aria-label="Закрыть просмотр">${icon('close')}</button>
+      </div>
+    </header>
+    <div class="lightbox-center"><button class="museum-control lightbox-prev" type="button" aria-label="Предыдущее изображение">←</button><div class="lightbox-stage" tabindex="0" aria-label="Фотография. Увеличенное изображение можно прокручивать."><div class="lightbox-image-wrap"><img class="lightbox-image" alt=""><div class="photo-loupe" hidden aria-hidden="true"></div></div></div><button class="museum-control lightbox-next" type="button" aria-label="Следующее изображение">→</button></div>
+    <div class="lightbox-footer"><p class="lightbox-caption"></p><div class="lightbox-thumbnails" aria-label="Фотографии подборки"></div></div>`;
   gallery.after(dialog);
   const enlarged = dialog.querySelector('.lightbox-image');
   const stage = dialog.querySelector('.lightbox-stage');
@@ -281,7 +353,9 @@
     enlarged.alt = frame.image.alt;
     enlarged.src = original.href = frame.link.href;
     title.textContent = frame.caption?.textContent.trim() || frame.image.alt;
-    counter.textContent = `Кадр ${active + 1} из ${viewerFrames.length} · #${frame.figure.id}`;
+    counter.textContent = `${frame.writerName ? frame.writerName + ' · ' : ''}Кадр ${active + 1} из ${viewerFrames.length}`;
+    const extension = new URL(frame.link.href).pathname.split('.').pop().toUpperCase();
+    original.querySelector('span').textContent = `Оригинал ${['JPG', 'JPEG'].includes(extension) ? 'JPEG' : extension}`;
     caption.textContent = description(frame);
     background(dialog, frame.link.href);
     thumbButtons.forEach((button, item) => {
@@ -331,7 +405,11 @@
   plus.addEventListener('click', () => setZoom(zoom + .5));
   minus.addEventListener('click', () => setZoom(zoom - .5));
   dialog.querySelector('[data-zoom-reset]').addEventListener('click', () => setZoom(1));
-  dialog.querySelector('select').addEventListener('change', (event) => { dialog.dataset.theme = event.target.value; measure(); });
+  dialog.querySelectorAll('[data-theme]').forEach((button) => button.addEventListener('click', () => {
+    dialog.dataset.theme = button.dataset.theme;
+    dialog.querySelectorAll('[data-theme]').forEach((item) => item.setAttribute('aria-pressed', item === button));
+    measure();
+  }));
   dialog.querySelector('.lightbox-close').addEventListener('click', () => dialog.close());
   dialog.addEventListener('close', () => opener?.focus({ preventScroll: true }));
   dialog.addEventListener('keydown', (event) => {

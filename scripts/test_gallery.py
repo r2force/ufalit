@@ -13,13 +13,28 @@ import render_site
 
 
 class Document(HTMLParser):
-    def __init__(self, html):
+    def __init__(self, html, include_templates=False):
         super().__init__()
         self.tags = []
+        self.text = []
+        self.include_templates = include_templates
+        self.template_depth = 0
         self.feed(html)
 
     def handle_starttag(self, tag, attrs):
+        if tag == 'template':
+            self.template_depth += 1
+        if self.template_depth and not self.include_templates:
+            return
         self.tags.append((tag, dict(attrs)))
+
+    def handle_endtag(self, tag):
+        if tag == 'template':
+            self.template_depth -= 1
+
+    def handle_data(self, text):
+        if not self.template_depth or self.include_templates:
+            self.text.append(text)
 
 
 class GalleryTests(unittest.TestCase):
@@ -73,8 +88,8 @@ class GalleryTests(unittest.TestCase):
                     self.assertIn(f'href="{url}"', html)
                 self.assertEqual(sum(tag == 'h1' for tag, _ in document.tags), 1)
                 self.assertNotIn('<!-- photos -->', html)
-                self.assertIn('gallery.css?v=1', html)
-                self.assertIn('ufalit-gallery.js?v=5', html)
+                self.assertIn('gallery.css?v=2', html)
+                self.assertIn('ufalit-gallery.js?v=6', html)
 
     def test_writer_cards_match_the_selected_archive_and_counts(self):
         for slug in ['gallery', *self.albums]:
@@ -84,10 +99,26 @@ class GalleryTests(unittest.TestCase):
             selected = [card for card in cards if 'aria-current' in card]
             self.assertEqual(len(selected), 1)
             expected = next((item for item in self.catalog if slug in item['slugs']), self.catalog[0])
-            self.assertEqual(selected[0]['href'], '../../pages/' + self.writers[expected['writer']]['gallery'] + '/')
+            self.assertEqual(selected[0]['href'], '../../pages/' + self.writers[expected['writer']]['gallery'] + '/#gallery-photos')
             if slug == 'gallery' or slug == self.writers[expected['writer']]['gallery']:
                 count = len([1 for tag, _ in Document(html).tags if tag == 'figure'])
                 self.assertEqual(count, expected['count'])
+
+    def test_global_search_corpus_covers_all_writers_without_visible_identifiers(self):
+        expected = {photo['id']: item['writer'] for item in self.catalog
+                    for photo in render_site.gallery_photos(self.albums, item['slugs'])}
+        for slug in ['gallery', 'gallery-amantai', 'gallery-32']:
+            with self.subTest(album=slug):
+                html = self.render(slug)
+                document = Document(html, include_templates=True)
+                photos = [attrs for tag, attrs in document.tags if tag == 'figure']
+                self.assertEqual(len(photos), len(expected))
+                self.assertEqual({photo['id']: photo['data-writer'] for photo in photos}, expected)
+                self.assertEqual(sorted(int(photo['data-gallery-order']) for photo in photos), list(range(len(expected))))
+                self.assertTrue(all(photo['data-writer-name'] for photo in photos))
+                self.assertNotRegex(' '.join(document.text), r'#photo-\d+')
+                self.assertIn('id="gallery-photos"', html)
+                self.assertNotIn('data-collection-navigation', html)
 
     def test_links_and_images_resolve_from_the_published_subpath(self):
         for slug in ['gallery', *self.albums]:
@@ -117,8 +148,8 @@ class GalleryTests(unittest.TestCase):
     def test_article_viewer_keeps_its_styles_without_archive_controls(self):
         source = '---\n{"title":"Статья"}\n---\n<article data-image-viewer><figure><a href="photo.jpg"><img src="photo.jpg" alt="Фото"></a></figure></article>'
         html = render_site.render_page(source, Path('pages/article/index.html'), self.templates, self.writers)
-        self.assertIn('ufalit-gallery.js?v=5', html)
-        self.assertIn('gallery.css?v=1', html)
+        self.assertIn('ufalit-gallery.js?v=6', html)
+        self.assertIn('gallery.css?v=2', html)
         self.assertNotIn('gallery-writers', html)
 
 
