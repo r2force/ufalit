@@ -1,4 +1,5 @@
-<figure id="$id">
-<a href="$src"$link_attrs><img src="$src" alt="$alt"$image_attrs></a>
-<figcaption>$caption</figcaption>
+<figure id="$id" data-category="$category">
+<div class="photo-register"><span class="photo-identifier">#$id</span><span class="photo-category">$category</span></div>
+<a class="photo-stage" href="$src"$link_attrs><span class="photo-mat"><img src="$src" alt="$alt"$image_attrs></span><span class="photo-open" aria-hidden="true">Открыть ↗</span></a>
+<figcaption><div class="photo-caption">$caption</div>$note<div class="photo-footer"><span class="photo-metadata">$metadata</span><a class="photo-original" href="$src" target="_blank" rel="noopener">Оригинал ↗</a></div></figcaption>
 </figure>

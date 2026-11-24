@@ -39,7 +39,7 @@ TEMPLATE_NAMES = (
     "writer-profile", "directory-banner", "zoom-image", "atlas", "atlas-choice", "guide-card",
     "archive-index", "archive-collection", "archive-album", "archive-video",
     "reading-index", "reading-card", "reading-author", "reading-work", "reading-context",
-    "redirect",
+    "redirect", "gallery-writer",
 )
 
 
@@ -95,9 +95,115 @@ def render_photo(photo, template):
     alt = photo["alt"] if "alt" in photo else photo["caption"]
     return template.substitute(
         id=escape(photo["id"]), src=escape(photo["src"]), alt=escape(alt), caption=caption,
+        category=escape(photo_category(photo)),
+        note=f'<p class="photo-note">{escape(photo["note"])}</p>' if photo.get("note") else "",
+        metadata=photo_metadata(photo),
         link_attrs=attributes(("title", "aria-label")),
         image_attrs=attributes(("loading", "width", "height", "fetchpriority")),
     )
+
+
+def photo_category(photo):
+    """Classify descriptive captions; leave unnamed archival frames unclassified."""
+    if photo.get("category"):
+        return photo["category"]
+    caption = photo.get("caption", photo.get("alt", "")).lower()
+    for pattern, category in (
+        (r"карт[аы]|древо|автограф|документ|родослов", "Карты и документы"),
+        (r"из книг|обложк|книж|афиш", "Книжные издания"),
+        (r"бюст|памятник|мемориаль|доск|скульптур|табличк|могил", "Памятники и доски"),
+        (r"улиц|бульвар|дом|музей|гимназ|медресе|театр|сад[ ау]|читальн|парк|библиотек|школ|уфа|печати|умпо|университет|академи", "Архитектура и улицы"),
+        (r"портрет|аксаков$|амантай|бикбай|киекбаев|узиков|гафури|короленко|рахимкулов|сотников|ибрагимов|янаби|с семь|семейн|с жен|сестр|с детьми|с другом", "Портреты"),
+    ):
+        if re.search(pattern, caption):
+            return category
+    return "Фотоархив"
+
+
+def photo_metadata(photo):
+    caption = photo.get("caption", photo.get("alt", ""))
+    address = photo.get("address")
+    if not address:
+        match = re.search(r"(?:ул\.?\s|улиц[аеы]\s|бульвар\s)[^()]+", caption, re.I)
+        address = match[0].strip() if match else None
+    year = photo.get("year")
+    if not year:
+        match = re.search(r"\b(?:18|19|20)\d{2}(?:[-–]е)?(?:\s*(?:год[ауы]?|гг?\.))?", caption)
+        year = match[0] if match else None
+    parts = []
+    if address:
+        parts.append(f'<span class="photo-location">{escape(address)}</span>')
+    if year:
+        parts.append(f'<span class="photo-date">{escape(year)}</span>')
+    return "".join(parts)
+
+
+def gallery_descendants(albums, slug, seen=None):
+    """Keep source order while following nested albums and stopping back-links."""
+    if seen is None:
+        seen = set()
+    if slug in seen:
+        return []
+    seen.add(slug)
+    result = [slug]
+    for child in re.findall(r'href="\.\./(gallery-[^/]+)/', albums[slug]["body"]):
+        result.extend(gallery_descendants(albums, child, seen))
+    return result
+
+
+def gallery_photos(albums, slugs):
+    return [photo for slug in slugs for photo in albums[slug]["page"].get("photos", [])]
+
+
+def load_gallery_catalog(writers):
+    summaries = json.loads((ROOT / "templates/gallery-catalog.json").read_text(encoding="utf-8"))
+    albums = {}
+    for path in sorted((SITE / "pages").glob("gallery-*/index.html")):
+        metadata, body = path.read_text(encoding="utf-8")[4:].split("\n---\n", 1)
+        albums[path.parent.name] = {"page": json.loads(metadata), "body": body}
+
+    catalog = []
+    for writer, summary in summaries.items():
+        slugs = gallery_descendants(albums, writers[writer]["gallery"])
+        photos = gallery_photos(albums, slugs)
+        catalog.append(dict(writer=writer, summary=summary, slugs=slugs, count=len(photos)))
+    return catalog, albums
+
+
+def render_gallery(page, content, slug, prefix, templates, writers, catalog_data):
+    catalog, albums = catalog_data
+    selected = next((item for item in catalog if slug in item["slugs"]), catalog[0])
+    cards = []
+    for item in catalog:
+        writer = writers[item["writer"]]
+        cards.append(templates["gallery-writer"].substitute(
+            href=escape(f'{prefix}pages/{writer["gallery"]}/'),
+            current=' aria-current="true"' if item is selected else "",
+            portrait=escape(prefix + writer["portrait"]), name=escape(writer["name"]),
+            years=escape(writer["years"]), count=photo_count(item["count"]),
+            summary=escape(item["summary"]),
+        ))
+    if slug == "gallery":
+        photos = gallery_photos(albums, selected["slugs"])
+        extra = ""
+        heading = writers[selected["writer"]]["name"]
+    else:
+        photos = page.get("photos", [])
+        extra = content.strip()
+        source_heading = re.search(r'<h1\b[^>]*>(.*?)</h1>', content, re.S)
+        heading = page.get("heading") or (unescape(re.sub(r'<[^>]+>', '', source_heading[1])) if source_heading else writers[selected["writer"]]["name"])
+        if heading == "Фотогалерея":
+            heading = writers[selected["writer"]]["name"]
+        if not photos or slug == writers[selected["writer"]]["gallery"]:
+            photos = gallery_photos(albums, gallery_descendants(albums, slug))
+    # Keep the source links and anchors for every related collection.
+    extra = re.sub(r'<h1\b[^>]*>.*?</h1>\s*', '', extra, flags=re.S)
+    if extra:
+        extra = f'<section class="gallery-related" aria-label="Подборки фотографий">{extra}</section>'
+    content = templates["gallery-album"].substitute(
+        heading=escape(heading), extra=extra, writers="\n".join(cards), count=photo_count(len(photos)),
+    )
+    return content, photos
 
 
 def render_track(track, template):
@@ -491,7 +597,7 @@ def render_reading_room(page, content, slug, templates, writers, collections, pr
     return content
 
 
-def render_page(source, relative, templates, writers, collections=None):
+def render_page(source, relative, templates, writers, collections=None, gallery_catalog=None):
     if not source.startswith("---\n"):
         raise ValueError("missing page metadata")
     metadata, content = source[4:].split("\n---\n", 1)
@@ -531,9 +637,13 @@ def render_page(source, relative, templates, writers, collections=None):
         )
         ensure_asset(script_names, "ufalit-video.js?v=3")
 
-    if "photos" in page and "<!-- photos -->" not in content:
-        extra = f"\n{content.strip()}" if content.strip() else ""
-        content = templates["gallery-album"].substitute(heading=escape(page["heading"]), extra=extra)
+    is_gallery = slug == "gallery" or section == "gallery"
+    if is_gallery:
+        content, page["photos"] = render_gallery(
+            page, content, slug, prefix, templates, writers,
+            gallery_catalog if gallery_catalog is not None else load_gallery_catalog(writers),
+        )
+        ensure_asset(style_names, "gallery.css?v=1")
     if "videos" in page and "<!-- videos -->" not in content:
         extra = f"\n  {content.strip()}" if content.strip() else ""
         note = page.get("note", "Видеозаписи доступны для просмотра и скачивания в формате MP4.")
@@ -578,9 +688,10 @@ def render_page(source, relative, templates, writers, collections=None):
         photos = page["photos"]
         content = insert_list(content, "photos", (render_photo(photo, templates["photo"]) for photo in photos))
         content = content.replace("<!-- photo-count -->", photo_count(len(photos)))
-        ensure_asset(script_names, "ufalit-gallery.js?v=4")
+        ensure_asset(script_names, "ufalit-gallery.js?v=5")
     elif IMAGE_VIEWER.search(content):
-        ensure_asset(script_names, "ufalit-gallery.js?v=4")
+        ensure_asset(script_names, "ufalit-gallery.js?v=5")
+        ensure_asset(style_names, "gallery.css?v=1")
 
     if "tracks" in page:
         content = insert_list(content, "tracks", (render_track(track, templates["audio-track"]) for track in page["tracks"]))
@@ -651,6 +762,8 @@ def render_page(source, relative, templates, writers, collections=None):
         body_class = "museum museum-home"
     elif slug == "videos" or section == "videos":
         body_class = "museum video-page"
+    elif is_gallery:
+        body_class = "museum gallery-page"
     elif is_reading_room:
         body_class = "museum library-page"
     else:
@@ -685,12 +798,13 @@ def main():
                  for name in TEMPLATE_NAMES}
     writers = json.loads((ROOT / "templates" / "writers.json").read_text(encoding="utf-8"))
     collections = json.loads((ROOT / "templates" / "reading-room.json").read_text(encoding="utf-8"))
+    gallery_catalog = load_gallery_catalog(writers)
     pages = [SITE / "index.html", *sorted((SITE / "pages").glob("*/index.html"))]
     generated = {}
     for page in pages:
         relative = page.relative_to(SITE)
         try:
-            generated[relative] = render_page(page.read_bytes().decode("utf-8"), relative, templates, writers, collections)
+            generated[relative] = render_page(page.read_bytes().decode("utf-8"), relative, templates, writers, collections, gallery_catalog)
         except (ValueError, KeyError, TypeError) as exc:
             raise SystemExit(f"Invalid page {relative}: {exc}") from exc
 

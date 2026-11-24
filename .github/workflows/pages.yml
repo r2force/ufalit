@@ -9,6 +9,7 @@ on:
       - 'templates/**'
       - 'scripts/render_site.py'
       - 'scripts/test_home_map.js'
+      - 'scripts/test_gallery.py'
       - 'scripts/test_video_archive.py'
       - 'scripts/test_reading_room.py'
       - 'scripts/test_reading_search.js'
@@ -54,6 +55,8 @@ jobs:
         run: node scripts/test_home_map.js
       - name: Test video archive
         run: python3 scripts/test_video_archive.py
+      - name: Test photo gallery
+        run: python3 scripts/test_gallery.py
       - name: Test reading room
         run: python3 scripts/test_reading_room.py
       - name: Test reading search
