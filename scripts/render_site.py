@@ -748,7 +748,7 @@ def render_page(source, relative, templates, writers, collections=None, gallery_
         cards = (
             templates["guide-card"].substitute(
                 href=escape(card["href"]), icon=card["icon"], title=escape(card["title"]),
-                description=escape(card["description"]), action=escape(card["action"]),
+                description=escape(card["description"]),
                 badge=escape(card["badge"]),
             )
             for card in page["guide_cards"]
