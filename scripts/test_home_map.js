@@ -123,7 +123,12 @@ const matching = pattern => places.filter(place => pattern.test(textOf(place))).
     '.atlas-writer', '.atlas-kicker', '.atlas-address', '.atlas-photo', '.atlas-more', '.atlas-count', '.atlas-empty']) {
     nodes[selector] = element();
   }
-  nodes['#atlas-places'] = { textContent: JSON.stringify(places) };
+  const atlasPlaces = places.map(place => ({
+    ...place,
+    image: '../../' + place.image.replace('assets/', 'assets/atlas/') + '.640.webp',
+    marker_image: '../../' + place.image.replace('assets/', 'assets/atlas/') + '.128.webp',
+  }));
+  nodes['#atlas-places'] = { textContent: JSON.stringify(atlasPlaces) };
   const buttons = ['all', 'museum', 'park', 'culture', 'monument', 'building', 'street'].map(id => {
     const button = element(); button.dataset.mapFilter = id; return button;
   });
@@ -136,28 +141,50 @@ const matching = pattern => places.filter(place => pattern.test(textOf(place))).
     return link;
   });
   const atlas = { ...element(), querySelector: selector => nodes[selector],
-    querySelectorAll: selector => selector === '[data-map-filter]' ? buttons : choices };
+    querySelectorAll: selector => ({
+      '[data-map-filter]': buttons, '.atlas-choices a': choices, '[data-atlas-stop]': [],
+    })[selector] };
   // Simulate unavailable map tiles/WebGL. The whole list and filters must still work.
-  const mapModule = { filterMarkers, createIllustratedMap: async () => { throw new Error('Map unavailable'); } };
+  let markerOptions;
+  const mapModule = { filterMarkers, createIllustratedMap: async options => {
+    markerOptions = options;
+    throw new Error('Map unavailable');
+  } };
   const integration = fs.readFileSync(path.join(root, 'site/assets/ufalit-map.js'), 'utf8');
+  const browser = {
+    ...element(), matchMedia: () => ({ matches: false }),
+    location: { href: 'https://example.test/ufalit/pages/map/?place=places-text-016' },
+    history: {
+      pushState(_, title, url) { browser.location.href = String(url); },
+      replaceState(_, title, url) { browser.location.href = String(url); },
+    },
+  };
   const runIntegration = (module, scope) => vm.runInNewContext(
     integration.replace(/await import\('\.\/map-widget\.js\?v=\d+'\)/, 'mapModule'),
-    { document: { querySelector: () => atlas, createElement: element },
-      window: { matchMedia: () => ({ matches: false }) }, mapModule: module, console: { warn() {} }, ...scope },
+    { document: { querySelector: () => atlas, createElement: element, dispatchEvent() {} },
+      URL, CustomEvent: class {}, window: browser, mapModule: module, console: { warn() {} }, ...scope },
   );
   await runIntegration(mapModule);
   assert.ok(atlas.classList.contains('atlas-unavailable'));
+  assert.equal(nodes['#atlas-place-title'].textContent, 'Аксаковский народный дом', 'direct link opens the selected place');
+  for (const [index, marker] of markerOptions.markers.entries()) {
+    assert.equal(marker.markerImage, atlasPlaces[index].marker_image, 'markers use the small preview');
+  }
   for (const link of choices) {
     let prevented = false;
     link.click({ button: 0, preventDefault() { prevented = true; } });
     assert.ok(prevented);
-    const place = places.find(place => place.id === link.dataset.placeId);
-    assert.equal(link.href, detailUrl(place), `${place.id}: list destination`);
+    const place = atlasPlaces.find(place => place.id === link.dataset.placeId);
+    assert.equal(new URL(link.href).searchParams.get('place'), place.id, `${place.id}: list destination`);
+    assert.equal(browser.location.href, link.href, `${place.id}: selection updates the URL`);
     assert.equal(nodes['.atlas-more'].href, detailUrl(place), `${place.id}: card destination`);
     assert.equal(nodes['#atlas-place-title'].textContent, place.title);
     assert.equal(nodes['.atlas-photo'].src, place.image);
     assert.equal(link.getAttribute('aria-current'), 'true');
   }
+  browser.location.href = choices[1].href;
+  browser.popstate();
+  assert.equal(nodes['#atlas-place-title'].textContent, 'Аксаковский народный дом', 'browser history restores the place');
   let prevented = false;
   choices[0].click({ button: 0, ctrlKey: true, preventDefault() { prevented = true; } });
   assert.equal(prevented, false, 'modified clicks must remain normal links');

@@ -7,12 +7,18 @@
     <svg class="library-book" viewBox="0 0 240 160" fill="none" aria-hidden="true"><path d="M120 37C90 15 48 17 14 31v103c36-14 77-14 106 7 29-21 70-21 106-7V31c-34-14-76-16-106 6Z" stroke="currentColor" stroke-width="2"/><path d="M120 37v104M30 49c25-8 53-7 75 4M30 65c25-8 53-7 75 4M30 81c25-8 53-7 75 4M30 97c25-8 53-7 75 4M135 53c22-11 50-12 75-4M135 69c22-11 50-12 75-4M135 85c22-11 50-12 75-4M135 101c22-11 50-12 75-4" stroke="currentColor" stroke-opacity=".5"/><path d="m156 24 1 46 10-8 10 6-1-48" fill="currentColor" stroke="currentColor"/></svg>
   </header>
   <div class="library-catalog-heading">
-    <h2 data-library-heading>Литераторы</h2>
     <form class="library-search" role="search" data-library-search hidden>
       <label for="library-query">Поиск по произведениям</label>
       <div><input id="library-query" type="search" placeholder="Автор, название или слова из текста" maxlength="200" autocomplete="off" aria-describedby="library-search-hint" aria-controls="library-search-results library-authors"><button type="reset">Сбросить</button></div>
       <p id="library-search-hint">Ищем слова целиком во всех текстах. Точную фразу заключите в кавычки.</p>
     </form>
+    <nav class="library-start" aria-label="С чего начать чтение">
+      <ul>
+        <li><a href="../reading-yanabi-shkolnik/">Прочитать «Школьник» Тухвата Янаби</a></li>
+        <li><a href="../reading-aksakov-flower/">Узнать об «Аленьком цветочке» Аксакова</a></li>
+      </ul>
+    </nav>
+    <h2 data-library-heading>Литераторы</h2>
   </div>
   <p class="library-result" role="status" data-library-result hidden></p>
   <section class="library-search-results" id="library-search-results" aria-label="Найденные произведения" hidden><ol data-library-results></ol></section>

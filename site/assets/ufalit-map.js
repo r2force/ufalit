@@ -15,7 +15,7 @@
   ];
   const markers = places.map(place => ({
     ...place,
-    markerImage: place.image,
+    markerImage: place.marker_image,
     markerAlt: '',
     imageAlt: place.title,
     description: place.paragraphs[0],
@@ -35,11 +35,26 @@
   const fit = atlas.querySelector('.atlas-fit');
   const notice = atlas.querySelector('.atlas-map-notice');
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const placeFromUrl = () => new URL(window.location.href).searchParams.get('place');
+  let linkedId = placeFromUrl();
   let widget;
   let selectedId = places[0].id;
   let presetFilterId = 'all';
   let visible = markers;
   const duration = () => reducedMotion.matches ? 0 : 400;
+
+  function placeUrl(id) {
+    const url = new URL(window.location.href);
+    if (id) url.searchParams.set('place', id);
+    else url.searchParams.delete('place');
+    return url;
+  }
+
+  function placeLink(id) {
+    const url = placeUrl(id);
+    url.hash = 'atlas-detail';
+    return url.href;
+  }
 
   // Одна метка в кадре: вместо вырожденных границ — городской масштаб,
   // чтобы фильтр с единственным результатом не улетал в уличный зум.
@@ -52,11 +67,19 @@
   const focusZoom = (latitude = 54.73, meters = 55, scalePx = 100) =>
     Math.min(19, Math.max(15, Math.log2(78271.5 * Math.cos(latitude * Math.PI / 180) / meters * scalePx)));
 
-  function select(id, { fromMarker = false, center = true } = {}) {
+  function centerMarker(id) {
+    widget?.selectMarker(id, { openPopup: false, zoom: focusZoom(), duration: duration() });
+  }
+
+  function select(id, { center = false, userSelection = false } = {}) {
     const place = byId.get(id);
     if (!place) return;
     selectedId = id;
-    if ((center || fromMarker) && typeof document.dispatchEvent === 'function') {
+    if (userSelection) {
+      if (id !== linkedId) {
+        window.history.pushState(null, '', placeLink(id));
+        linkedId = id;
+      }
       document.dispatchEvent(new CustomEvent('ufalit:map-select'));
     }
     card.hidden = false;
@@ -88,12 +111,8 @@
     // чтобы линейка ScaleControl показывала около 50 м.
     // center=false оставляет камеру как есть: смена фильтра и первичная отрисовка
     // не должны приближать карту к одной метке.
-    widget?.selectMarker(id, {
-      openPopup: false,
-      center: center && !fromMarker,
-      zoom: center && !fromMarker ? focusZoom() : undefined,
-      duration: duration(),
-    });
+    if (center) centerMarker(id);
+    else widget?.selectMarker(id, { openPopup: false, center: false });
   }
 
   function applyFilters() {
@@ -111,7 +130,11 @@
       if (visible.length) widget.fitToContent({ useMapBounds: false, duration: duration() });
     }
     if (!ids.has(selectedId)) {
-      if (visible.length) select(visible[0].id, { center: false });
+      if (linkedId && !ids.has(linkedId)) {
+        window.history.replaceState(null, '', placeUrl(null));
+        linkedId = null;
+      }
+      if (visible.length) select(visible[0].id);
       else {
         selectedId = null;
         card.hidden = true;
@@ -124,11 +147,31 @@
     } else if (widget) widget.selectMarker(selectedId, { openPopup: false, center: false });
   }
 
-  choices.forEach(link => link.addEventListener('click', event => {
-    if (event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
-    event.preventDefault();
-    select(link.dataset.placeId);
-  }));
+  choices.forEach(link => {
+    const id = link.dataset.placeId;
+    link.href = placeLink(id);
+    link.addEventListener('click', event => {
+      if (event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+      event.preventDefault();
+      select(id, { center: true, userSelection: true });
+    });
+  });
+  for (const link of atlas.querySelectorAll('[data-atlas-stop]')) {
+    const place = byId.get(link.dataset.atlasStop);
+    link.href = placeLink(place.id);
+    link.textContent = 'Показать на карте';
+    link.setAttribute('aria-label', `Показать на карте «${place.label}»`);
+  }
+  window.addEventListener('popstate', () => {
+    const id = placeFromUrl();
+    if (id === linkedId) return;
+    linkedId = id;
+    search.value = '';
+    presetFilterId = 'all';
+    select(byId.has(id) ? id : places[0].id);
+    applyFilters();
+    if (byId.has(id)) centerMarker(id);
+  });
   buttons.forEach(button => button.addEventListener('click', () => {
     presetFilterId = button.dataset.mapFilter;
     applyFilters();
@@ -146,7 +189,7 @@
   });
   fit.addEventListener('click', () => widget?.fitToContent({ useMapBounds: false, duration: duration() }));
   atlas.querySelector('.atlas-toolbar').hidden = false;
-  select(selectedId, { center: false });
+  select(byId.has(linkedId) ? linkedId : selectedId);
   applyFilters();
 
   try {
@@ -186,11 +229,12 @@
       popup: { maxWidth: '265px', offset: 40 },
       // Описание выбранной метки показывается в карточке справа, а не поверх карты.
       popupOnMarkerClick: false,
-      onMarkerClick: place => select(place.id, { fromMarker: true }),
+      onMarkerClick: place => select(place.id, { userSelection: true }),
     });
     notice.hidden = true;
     fit.hidden = false;
     applyFilters();
+    if (selectedId && selectedId === linkedId) centerMarker(selectedId);
     // Resize when the responsive layout or text size changes.
     new ResizeObserver(() => widget.map.resize()).observe(atlas.querySelector('.atlas-sheet'));
   } catch (error) {

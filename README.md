@@ -73,6 +73,8 @@ python3 scripts/test_seo.py --site /tmp/ufalit-seo-preview
 
 Большие изображения используют сохранённые WebP-превью из `site/assets/optimized/`; оригинальные src и ссылки не меняются. Для нового или заменённого снимка сначала соберите предпросмотр, затем с установленным Pillow выполните `python3 scripts/optimize_images.py --site /tmp/ufalit-seo-preview` и пересоберите в новый каталог. Скрипт не изменяет оригиналы; обычная сборка не требует Pillow. Устаревшие превью заменённого снимка нужно пересоздать до публикации.
 
+После добавления или замены фотографии в `templates/atlas-places.json` запустите `python3 scripts/optimize_images.py --atlas` с установленным Pillow. Сохраните в Git сгенерированные файлы из `site/assets/atlas/`: метки и список используют WebP 128 × 128, карточки мест и прогулки — WebP до 640 пикселей по длинной стороне.
+
 Аудит: `python3 scripts/audit_seo.py --site /tmp/ufalit-seo-preview --output /tmp/ufalit-seo-audit.json --details`. Опция `--live` проверяет публичные страницы по сети. Документы: [исходный аудит](SEO_AUDIT.md), [семантика](SEO_KEYWORDS.md), [проверки](SEO_VALIDATION.md), [продвижение](SEO_PROMOTION.md).
 
 GitHub Actions запускает эти же проверки. Push в `main` собирает артефакт; публикация выполняется только ручным запуском workflow Pages с `deploy: true`. Успешный push сам по себе не обновляет публичный сайт.

@@ -1,7 +1,7 @@
 <section id="literary-atlas" class="atlas literary-atlas" aria-labelledby="atlas-heading">
   <header class="atlas-header">
     <div><p>Город, в котором живут истории</p><h1 id="atlas-heading">Литературная карта Уфы</h1></div>
-    <p>От дома писателя до любимого сада.<br> Выберите фотографию на карте — и познакомьтесь с местом.</p>
+    <p>Выберите фотографию на карте, чтобы познакомиться с местом, или отправляйтесь <a href="#aksakov-walk">на прогулку по аксаковской Уфе</a>.</p>
   </header>
   <div class="atlas-toolbar" hidden>
     <label class="atlas-search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><span class="atlas-sr-only">Поиск места или писателя</span><input type="search" placeholder="Место, писатель или адрес" autocomplete="off" id="atlas-search"></label>
@@ -36,6 +36,11 @@
   <div class="atlas-results"><p class="atlas-count" role="status" aria-live="polite">Мест на карте: $count</p><button class="atlas-reset" type="button" hidden>Сбросить фильтры</button><button class="atlas-show-detail" type="button" hidden>К описанию места ↓</button></div>
   <p class="atlas-empty" hidden>Таких мест пока нет на карте. Попробуйте другое название или сбросьте фильтры.</p>
   <ul class="atlas-choices" aria-label="Памятные места">$choices</ul>
+  <section class="atlas-route" id="aksakov-walk" aria-labelledby="aksakov-walk-heading">
+    <h2 id="aksakov-walk-heading">По аксаковской Уфе</h2>
+    <p>Пешая прогулка от дома-музея через Аксаковский сад к Народному дому.</p>
+    <ol>$route_stops</ol>
+  </section>
   <section class="atlas-text-places" aria-labelledby="atlas-text-heading"><h2 id="atlas-text-heading">Литературные места Уфы: адреса и истории</h2>$text_places</section>
   <noscript><p>Выберите место в списке, чтобы открыть его историю. Для интерактивной карты включите JavaScript.</p></noscript>
   <script type="application/json" id="atlas-places">$places_json</script>

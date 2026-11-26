@@ -42,7 +42,7 @@ TEMPLATE_NAMES = (
     "writer-profile", "directory-banner", "zoom-image", "atlas", "atlas-choice", "guide-card",
     "archive-index", "archive-collection", "archive-album", "archive-video",
     "reading-index", "reading-card", "reading-author", "reading-work", "reading-context",
-    "redirect", "gallery-writer", "metrika", "atlas-text-place",
+    "redirect", "gallery-writer", "metrika", "atlas-text-place", "atlas-route-stop",
 )
 
 
@@ -68,6 +68,56 @@ def ensure_asset(items, asset, *, prepend=False):
 
 def atlas_detail_url(place):
     return place.get("detail_url", f'pages/places/#{place["id"]}')
+
+
+def atlas_preview(image, size):
+    return f'assets/atlas/{image.removeprefix("assets/")}.{size}.webp'
+
+
+def render_atlas(templates, prefix, route):
+    sources = json.loads((ROOT / "templates" / "atlas-places.json").read_text(encoding="utf-8"))
+    places = []
+    for place in sources:
+        marker = atlas_preview(place["image"], 128)
+        photo = atlas_preview(place["image"], 640)
+        for preview in (marker, photo):
+            if not (SITE / preview).is_file():
+                raise ValueError(f"missing atlas preview {preview}; run scripts/optimize_images.py --atlas")
+        places.append({
+            **place, "image": prefix + photo, "marker_image": prefix + marker,
+            "detail_url": prefix + atlas_detail_url(place),
+        })
+
+    by_id = {place["id"]: place for place in places}
+    first = places[0]
+    choices = (templates["atlas-choice"].substitute(
+        id=escape(place["id"]), href=escape(place["detail_url"]),
+        label=escape(place["label"]), image=escape(place["marker_image"]),
+        category=escape(place["category"]),
+    ) for place in places)
+    descriptions = (templates["atlas-text-place"].substitute(
+        title=escape(place["title"]), address=escape(place["address"]),
+        description="".join(f"<p>{escape(text)}</p>" for text in place["paragraphs"]),
+        href=escape(place["detail_url"]),
+    ) for place in places)
+    stops = []
+    for stop in route:
+        place = by_id[stop["place"]]
+        stops.append(templates["atlas-route-stop"].substitute(
+            **{key: escape(place[key]) for key in ("id", "label", "address", "image", "detail_url")},
+            description=escape(stop["description"]),
+        ))
+    return templates["atlas"].substitute(
+        **{key: escape(first.get(key, "")) for key in (
+            "title", "writer", "category", "address", "image", "quote",
+        )},
+        href=escape(first["detail_url"]),
+        description="".join(f"<p>{escape(text)}</p>" for text in first["paragraphs"]),
+        choices="\n".join(choices), text_places="\n".join(descriptions),
+        route_stops="\n".join(stops),
+        count=len(places),
+        places_json=json.dumps(places, ensure_ascii=False).replace("<", "\\u003c"),
+    )
 
 
 def render_menu(template, relative):
@@ -659,7 +709,7 @@ def render_page(source, relative, templates, writers, collections=None, gallery_
 
     if is_reading_room:
         content = render_reading_room(page, content, slug, templates, writers, collections, prefix)
-        ensure_asset(style_names, "reading-room.css?v=3")
+        ensure_asset(style_names, "reading-room.css?v=4")
         if "reading_author" in page or "reading_group" in page:
             ensure_asset(style_names, "illustrations.css?v=2")
         if page.get("reading_index"):
@@ -706,32 +756,7 @@ def render_page(source, relative, templates, writers, collections=None, gallery_
             videos = (render_video(video, templates["video"]) for video in page["videos"])
         content = insert_list(content, "videos", videos)
     if page.get("atlas"):
-        places = json.loads((ROOT / "templates" / "atlas-places.json").read_text(encoding="utf-8"))
-        # Resolve paths once for both the initial HTML and interactive map data.
-        places = [{**place, "image": prefix + place["image"],
-                   "detail_url": prefix + atlas_detail_url(place)} for place in places]
-        first = places[0]
-        choices = [templates["atlas-choice"].substitute(
-            id=escape(place["id"]), href=escape(atlas_detail_url(place)),
-            label=escape(place["label"]), image=escape(place["image"]),
-            category=escape(place["category"]),
-        ) for place in places]
-        atlas = templates["atlas"].substitute(
-            **{key: escape(first.get(key, "")) for key in (
-                "title", "writer", "category", "address", "image", "quote",
-            )},
-            href=escape(atlas_detail_url(first)),
-            description="".join(f"<p>{escape(text)}</p>" for text in first["paragraphs"]),
-            choices="\n".join(choices),
-            text_places="\n".join(templates["atlas-text-place"].substitute(
-                title=escape(place["title"]), address=escape(place["address"]),
-                description="".join(f"<p>{escape(text)}</p>" for text in place["paragraphs"]),
-                href=escape(place["detail_url"]),
-            ) for place in places),
-            count=len(places),
-            places_json=json.dumps(places, ensure_ascii=False).replace("<", "\\u003c"),
-        )
-        content = insert_list(content, "atlas", [atlas])
+        content = insert_list(content, "atlas", [render_atlas(templates, prefix, page["atlas_route"])])
     if "guide_cards" in page:
         cards = (
             templates["guide-card"].substitute(
