@@ -4,40 +4,14 @@ on:
     branches:
       - main
       - 'arena/**'
-    paths:
-      - 'site/**'
-      - 'templates/**'
-      - 'scripts/render_site.py'
-      - 'scripts/seo.py'
-      - 'scripts/test_seo.py'
-      - 'scripts/audit_seo.py'
-      - 'scripts/optimize_images.py'
-      - 'scripts/test_analytics.js'
-      - 'scripts/email_contacts.py'
-      - 'scripts/test_email_contacts.py'
-      - 'scripts/test_email_contacts.js'
-      - 'scripts/test_home_map.js'
-      - 'scripts/test_gallery.py'
-      - 'scripts/test_video_archive.py'
-      - 'scripts/test_reading_room.py'
-      - 'scripts/fixtures/**'
-      - 'scripts/test_reading_search.js'
-      - '.github/workflows/pages.yml'
-  workflow_dispatch:
-    inputs:
-      deploy:
-        description: 'Опубликовать сайт в GitHub Pages'
-        type: boolean
-        required: false
-        default: false
 permissions:
   contents: read
   actions: read
   pages: write
   id-token: write
 concurrency:
-  group: pages
-  cancel-in-progress: false
+  group: pages-${{ github.ref }}
+  queue: max
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -91,7 +65,7 @@ jobs:
           name: ${{ steps.artifact-meta.outputs.artifact_name }}
           path: site
   deploy:
-    if: ${{ github.event_name == 'workflow_dispatch' && inputs.deploy }}
+    if: ${{ github.ref == 'refs/heads/main' && !github.event.deleted }}
     needs: build
     environment:
       name: github-pages
