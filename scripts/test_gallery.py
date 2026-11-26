@@ -78,6 +78,8 @@ class GalleryTests(unittest.TestCase):
                     tags = Document(figure).tags
                     img = next(attrs for tag, attrs in tags if tag == 'img')
                     self.assertEqual(img['src'], photo['src'])
+                    stage = next(attrs for tag, attrs in tags if attrs.get('class') == 'photo-stage')
+                    self.assertEqual(stage['href'], photo['src'])
                     meaningful = not photo.get("hide_caption")
                     if meaningful:
                         self.assertEqual(img['alt'], photo.get('alt', photo.get('caption')))
@@ -95,7 +97,7 @@ class GalleryTests(unittest.TestCase):
                 self.assertEqual(sum(tag == 'h1' for tag, _ in document.tags), 1)
                 self.assertNotIn('<!-- photos -->', html)
                 self.assertIn('gallery.css?v=2', html)
-                self.assertIn('ufalit-gallery.js?v=8', html)
+                self.assertIn('ufalit-gallery.js?v=9', html)
 
     def test_writer_cards_match_the_selected_archive_and_counts(self):
         for slug in ['gallery', *self.albums]:
@@ -175,7 +177,7 @@ class GalleryTests(unittest.TestCase):
         links = [attrs for tag, attrs in Document(html).tags if tag == 'a' and 'data-lightbox' in attrs]
         self.assertEqual([link['href'] for link in links], ['photo.jpg', 'full.P%4EG?size=large#image'])
         self.assertEqual(links[1]['target'], '_blank')
-        self.assertIn('ufalit-gallery.js?v=8', html)
+        self.assertIn('ufalit-gallery.js?v=9', html)
         self.assertIn('gallery.css?v=2', html)
         self.assertNotIn('gallery-writers', html)
 
@@ -184,7 +186,7 @@ class GalleryTests(unittest.TestCase):
                      'reading-aksakov-childhood', 'reading-aksakov-flower', 'reading-aksakov-nature'):
             with self.subTest(slug=slug):
                 html = self.render(slug)
-                self.assertIn('ufalit-gallery.js?v=8', html)
+                self.assertIn('ufalit-gallery.js?v=9', html)
                 self.assertIn('gallery.css?v=2', html)
                 links = [attrs for tag, attrs in Document(html).tags if tag == 'a']
                 images = [link for link in links

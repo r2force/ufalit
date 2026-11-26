@@ -60,6 +60,11 @@
 .museum [data-reader] :is(.material-inline-start, .material-inline-end) { max-inline-size: min(100%, 17rem); }
 .museum [data-reader] .material-inline > img { max-height: min(26rem, 66svh); }
 
+@media (37.5rem < width <= 62.5rem) {
+  /* Keep large illustrations within the tablet reading layout. */
+  .museum .places-page .material-figure img.material-image { max-width: min(100%, 50vw); }
+}
+
 @container (min-width: 30rem) {
   .material-text-with-image { display: flow-root; }
   .museum [data-reader] :is(.material-inline-start, .material-inline-end) {

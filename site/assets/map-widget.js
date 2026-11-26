@@ -212,6 +212,10 @@ function createMarkerElement(item, options) {
   if (markerImage) {
     const image = document.createElement('img');
     image.className = 'im-map-marker__image';
+    if (item.markerImageSrcset) {
+      image.sizes = `${typeof size === 'number' ? size : size?.width ?? 64}px`;
+      image.srcset = item.markerImageSrcset;
+    }
     image.src = markerImage;
     image.alt = item.markerAlt ?? '';
     image.draggable = false;

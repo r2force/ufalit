@@ -143,15 +143,28 @@
     film.innerHTML = `<div class="gallery-film-screen"><div class="gallery-film-bar"><span data-film-count aria-live="polite"></span><div><button type="button" class="museum-control" data-film-loupe aria-pressed="false">Лупа 2,8×</button> <button type="button" class="museum-control" data-film-open>На весь экран ↗</button></div></div><div class="gallery-film-image"><img alt=""><div class="photo-loupe" hidden aria-hidden="true"></div></div><div class="gallery-film-bar"><button type="button" class="museum-control" data-film-prev>← Предыдущий</button><button type="button" class="museum-control" data-film-next>Следующий →</button></div></div><div class="gallery-film-detail"></div>`;
     gallery.before(film);
     const filmImage = film.querySelector('img');
+    const filmStage = film.querySelector('.gallery-film-image');
     const filmCount = film.querySelector('[data-film-count]');
     const filmDetail = film.querySelector('.gallery-film-detail');
-    const filmLoupe = attachLoupe(film.querySelector('.gallery-film-image'), filmImage, film.querySelector('.photo-loupe'), film.querySelector('[data-film-loupe]'));
+    const filmLoupe = attachLoupe(filmStage, filmImage, film.querySelector('.photo-loupe'), film.querySelector('[data-film-loupe]'));
+    function sizeFilmImage() {
+      const frame = visible[stageIndex];
+      if (!frame || film.hidden) return;
+      const ratio = Number(frame.image.getAttribute('width')) / Number(frame.image.getAttribute('height'));
+      const width = Number.isFinite(ratio) && ratio > 0
+        ? Math.min(filmStage.clientWidth, filmStage.clientHeight * ratio)
+        : filmStage.clientWidth;
+      filmImage.sizes = `${Math.ceil(width)}px`;
+    }
+    if (typeof ResizeObserver === 'function') new ResizeObserver(sizeFilmImage).observe(filmStage);
     updateFilm = () => {
       film.hidden = mode !== 'filmstrip' || !visible.length;
       if (mode !== 'filmstrip' || !visible.length) return;
       stageIndex = (stageIndex + visible.length) % visible.length;
       const frame = visible[stageIndex];
-      filmImage.src = frame.link.href;
+      sizeFilmImage();
+      filmImage.srcset = frame.image.srcset;
+      filmImage.src = frame.image.src;
       filmImage.alt = frame.alt;
       filmCount.textContent = `Кадр ${stageIndex + 1} из ${visible.length}`;
       copyCaption(filmDetail, frame);
@@ -280,7 +293,7 @@
       const centerY = event.clientY - box.top + container.scrollTop;
       lens.style.left = `${centerX - radius}px`;
       lens.style.top = `${centerY - radius}px`;
-      lens.style.backgroundImage = `url(${JSON.stringify(img.src)})`;
+      lens.style.backgroundImage = `url(${JSON.stringify(img.currentSrc || img.src)})`;
       lens.style.backgroundSize = `${imageBounds.width * 2.8}px ${imageBounds.height * 2.8}px`;
       lens.style.backgroundPosition = `${radius - x * 2.8}px ${radius - y * 2.8}px`;
     }
@@ -399,9 +412,13 @@
       button.className = 'lightbox-thumbnail';
       button.setAttribute('aria-label', `Кадр ${index + 1}: ${item.alt}`);
       const img = document.createElement('img');
-      img.src = item.image?.dataset.previewSrc || item.image?.currentSrc || item.image?.src || item.link.href;
       img.alt = '';
       img.loading = 'lazy';
+      if (item.image?.srcset) {
+        img.sizes = '3.5rem';
+        img.srcset = item.image.srcset;
+      }
+      img.src = item.image?.dataset.previewSrc || item.image?.currentSrc || item.image?.src || item.link.href;
       button.append(img);
       button.addEventListener('click', () => show(index));
       thumbnails.append(button);

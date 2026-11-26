@@ -13,6 +13,7 @@ from xml.etree import ElementTree as ET
 SITE_URL = "https://ufalit.ufacsdb.ru/"
 DEFAULT_IMAGE = "assets/places/aksakov/image003.jpg"
 SITEMAP_NS = "http://www.sitemaps.org/schemas/sitemap/0.9"
+PREVIEW_WIDTHS = (80, 160, 256, 400, 640, 1000)
 
 
 def page_url(relative):
@@ -124,17 +125,27 @@ def write_sitemap(destination, pages):
 
 @lru_cache(maxsize=None)
 def image_size(path):
-    """Read intrinsic PNG/GIF/JPEG dimensions without an image processing dependency."""
+    """Read intrinsic PNG/GIF/JPEG/WebP dimensions without an image processing dependency."""
     try:
         with path.open("rb") as stream:
-            header = stream.read(24)
+            header = stream.read(30)
             if header.startswith(b"\x89PNG\r\n\x1a\n"):
                 return struct.unpack(">II", header[16:24])
             if header[:6] in (b"GIF87a", b"GIF89a"):
                 return struct.unpack("<HH", header[6:10])
+            if header.startswith(b"RIFF") and header[8:12] == b"WEBP" and len(header) == 30:
+                if header[12:16] == b"VP8X":
+                    return 1 + int.from_bytes(header[24:27], "little"), 1 + int.from_bytes(header[27:30], "little")
+                if header[12:16] == b"VP8L" and header[20] == 0x2F:
+                    packed = int.from_bytes(header[21:25], "little")
+                    return 1 + (packed & 0x3FFF), 1 + ((packed >> 14) & 0x3FFF)
+                if header[12:16] == b"VP8 " and header[23:26] == b"\x9d\x01\x2a":
+                    width, height = struct.unpack("<HH", header[26:30])
+                    return width & 0x3FFF, height & 0x3FFF
             if header[:2] != b"\xff\xd8":
                 return None
             stream.seek(2)
+            orientation = 1
             while True:
                 byte = stream.read(1)
                 if not byte:
@@ -149,40 +160,105 @@ def image_size(path):
                 if marker[0] in (0x01, *range(0xD0, 0xD9)):
                     continue
                 length = struct.unpack(">H", stream.read(2))[0]
+                if length < 2:
+                    return None
                 if marker[0] in {0xC0, 0xC1, 0xC2, 0xC3, 0xC5, 0xC6, 0xC7, 0xC9, 0xCA, 0xCB, 0xCD, 0xCE, 0xCF}:
                     _, height, width = struct.unpack(">BHH", stream.read(5))
-                    return width, height
-                stream.seek(length - 2, 1)
+                    return (height, width) if orientation in (5, 6, 7, 8) else (width, height)
+                if marker == b"\xe1":
+                    orientation = exif_orientation(stream.read(length - 2)) or orientation
+                else:
+                    stream.seek(length - 2, 1)
     except (OSError, struct.error):
         return None
 
 
+def exif_orientation(segment):
+    if not segment.startswith(b"Exif\0\0"):
+        return None
+    tiff = segment[6:]
+    endian = {b"II": "<", b"MM": ">"}.get(tiff[:2])
+    if endian is None:
+        return None
+    try:
+        magic, directory = struct.unpack_from(f"{endian}HI", tiff, 2)
+        if magic != 42:
+            return None
+        (count,) = struct.unpack_from(f"{endian}H", tiff, directory)
+        for offset in range(directory + 2, directory + 2 + count * 12, 12):
+            tag, kind, values = struct.unpack_from(f"{endian}HHI", tiff, offset)
+            if (tag, kind, values) == (0x112, 3, 1):
+                return struct.unpack_from(f"{endian}H", tiff, offset + 8)[0]
+    except struct.error:
+        return None
+    return None
+
+
+def preview_path(path, site, width):
+    asset = path.relative_to(site / "assets")
+    return site / "assets" / "optimized" / asset.with_name(f"{asset.name}.{width}.webp")
+
+
+def responsive_previews(path, relative, site):
+    """Return HTML srcset candidates and the smallest preview for thumbnails."""
+    if not path.is_relative_to(site / "assets"):
+        return "", ""
+    prefix = "../" * (len(relative.parts) - 1)
+
+    def url(asset):
+        return quote(prefix + asset.relative_to(site).as_posix(), safe="/.-_~")
+
+    candidates = {}
+    for width in PREVIEW_WIDTHS:
+        preview = preview_path(path, site, width)
+        if size := image_size(preview):
+            candidates.setdefault(size[0], url(preview))
+    if not candidates:
+        return "", ""
+    thumbnail = candidates[min(candidates)]
+    if (size := image_size(path)) and size[0] <= PREVIEW_WIDTHS[-1]:
+        candidates.setdefault(size[0], url(path))
+    return ", ".join(f"{candidates[width]} {width}w" for width in sorted(candidates)), thumbnail
+
+
 def image_dimensions(document, relative, site):
+    site = site.resolve()
+
     def enrich(match):
         raw = match[0]
         attrs = dict(re.findall(r'([\w-]+)="([^"]*)"', raw))
         src = attrs.get("src", "")
-        if not src or urlsplit(src).scheme or src.startswith("/"):
+        parts = urlsplit(src)
+        if not src or parts.scheme or src.startswith("/"):
             return raw
-        path = (site / relative.parent / unquote(urlsplit(src).path)).resolve()
-        if not path.is_relative_to(site.resolve()):
+        path = (site / relative.parent / unquote(parts.path)).resolve()
+        if not path.is_relative_to(site):
             return raw
         size = image_size(path)
         if size and "width" not in attrs and "height" not in attrs:
             raw = raw[:-1] + f' width="{size[0]}" height="{size[1]}">'
-        if "srcset" not in attrs and path.is_relative_to(site.resolve() / "assets"):
-            asset = path.relative_to(site.resolve() / "assets")
-            preview = site / "assets/optimized" / asset
-            variants = [preview.with_name(preview.name + f".{width}.webp") for width in (400, 1000)]
-            if all(p.is_file() for p in variants):
-                prefix = "../" * (len(relative.parts) - 1)
-                urls = [quote(prefix + p.relative_to(site).as_posix(), safe="/.-_~") for p in variants]
-                sizes = (f'{attrs["width"]}px' if attrs.get("width", "").isdigit() and int(attrs["width"]) <= 160
-                         else '(max-width: 600px) 100vw, (max-width: 1000px) 50vw, 800px')
-                candidates = {min(size[0], width): url for width, url in zip((400, 1000), urls)} if size else {400: urls[0], 1000: urls[1]}
-                srcset = ", ".join(f'{escape(url, quote=True)} {width}w' for width, url in candidates.items())
-                raw = raw[:-1] + (f' srcset="{srcset}"'
-                                  f' sizes="{sizes}" data-preview-src="{escape(urls[1], quote=True)}">')
+        if "srcset" not in attrs:
+            srcset, thumbnail = responsive_previews(path, relative, site)
+            if srcset:
+                width = attrs.get("width", "")
+                fallback = (f"{width}px" if width.isdigit() and int(width) <= 160
+                            else "(max-width: 40rem) calc(100vw - 3rem), min(40rem, 55vw)")
+                sizes = attrs.get("sizes") or fallback
+                if attrs.get("loading") == "lazy" and size:
+                    if sizes.partition(",")[0].lower() != "auto":
+                        sizes = f"auto, {sizes}"
+                    # Auto sizes activates size containment. Use the image's own
+                    # dimensions for intrinsic layouts instead of the 300×150 default.
+                    style = attrs.get("style", "").rstrip(" ;")
+                    intrinsic = f"contain-intrinsic-size: {size[0]}px {size[1]}px"
+                    if "style" in attrs:
+                        raw = re.sub(r'\s+style="[^"]*"', "", raw, count=1)
+                    style = f"{style}; {intrinsic}" if style else intrinsic
+                    raw = raw[:-1] + f' style="{escape(style)}">'
+                if "sizes" in attrs:
+                    raw = re.sub(r'\s+sizes="[^"]*"', "", raw, count=1)
+                raw = raw[:-1] + (f' srcset="{escape(srcset)}" sizes="{escape(sizes)}"'
+                                  f' data-preview-src="{escape(thumbnail)}">')
         if attrs.get("loading") == "lazy" and "decoding" not in attrs:
             raw = raw[:-1] + ' decoding="async">'
         return raw

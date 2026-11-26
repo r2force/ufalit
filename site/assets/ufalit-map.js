@@ -1,7 +1,7 @@
 (async () => {
   const atlas = document.querySelector('.literary-atlas');
   if (!atlas) return;
-  const { createIllustratedMap, filterMarkers } = await import('./map-widget.js?v=4');
+  const { createIllustratedMap, filterMarkers } = await import('./map-widget.js?v=5');
   const places = JSON.parse(atlas.querySelector('#atlas-places').textContent);
   const byId = new Map(places.map(place => [place.id, place]));
   const detailUrl = place => place.detail_url ?? `pages/places/#${place.id}`;
@@ -16,6 +16,7 @@
   const markers = places.map(place => ({
     ...place,
     markerImage: place.marker_image,
+    markerImageSrcset: place.marker_srcset,
     markerAlt: '',
     imageAlt: place.title,
     description: place.paragraphs[0],
@@ -88,6 +89,7 @@
     atlas.querySelector('.atlas-kicker').textContent = place.category;
     atlas.querySelector('.atlas-address').textContent = place.address;
     const image = atlas.querySelector('.atlas-photo');
+    image.srcset = place.image_srcset ?? '';
     image.src = place.image;
     image.alt = place.title;
     quote.textContent = place.quote || '';

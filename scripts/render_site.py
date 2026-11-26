@@ -11,7 +11,7 @@ from string import Template
 from urllib.parse import unquote, urlsplit
 
 from email_contacts import protect_email_links
-from seo import seo_head, write_sitemap, image_dimensions
+from seo import seo_head, write_sitemap, image_dimensions, responsive_previews
 
 ROOT = Path(__file__).resolve().parents[1]
 SITE = ROOT / "site"
@@ -75,7 +75,7 @@ def atlas_preview(image, size):
     return f'assets/atlas/{image.removeprefix("assets/")}.{size}.webp'
 
 
-def render_atlas(templates, prefix, route):
+def render_atlas(templates, prefix, relative, route):
     sources = json.loads((ROOT / "templates" / "atlas-places.json").read_text(encoding="utf-8"))
     places = []
     for place in sources:
@@ -86,6 +86,8 @@ def render_atlas(templates, prefix, route):
                 raise ValueError(f"missing atlas preview {preview}; run scripts/optimize_images.py --atlas")
         places.append({
             **place, "image": prefix + photo, "marker_image": prefix + marker,
+            "image_srcset": responsive_previews(SITE / photo, relative, SITE)[0],
+            "marker_srcset": responsive_previews(SITE / marker, relative, SITE)[0],
             "detail_url": prefix + atlas_detail_url(place),
         })
 
@@ -746,7 +748,7 @@ def render_page(source, relative, templates, writers, collections=None, gallery_
         content = render_reading_room(page, content, slug, templates, writers, collections, prefix)
         ensure_asset(style_names, "reading-room.css?v=4")
         if "reading_author" in page or "reading_group" in page:
-            ensure_asset(style_names, "illustrations.css?v=2")
+            ensure_asset(style_names, "illustrations.css?v=3")
         if page.get("reading_index"):
             ensure_asset(script_names, "ufalit-search.js?v=2")
             ensure_asset(script_names, "ufalit-library.js?v=3")
@@ -761,7 +763,7 @@ def render_page(source, relative, templates, writers, collections=None, gallery_
         ensure_asset(script_names, "ufalit-editorial.js?v=7")
     if READER_ARTICLE.search(content):
         ensure_asset(style_names, "reader.css?v=4")
-        ensure_asset(style_names, "illustrations.css?v=2")
+        ensure_asset(style_names, "illustrations.css?v=3")
         ensure_asset(script_names, "ufalit-reader.js?v=3")
 
     content = expand_writer_refs(content, prefix, templates, writers)
@@ -787,7 +789,7 @@ def render_page(source, relative, templates, writers, collections=None, gallery_
             videos = (render_video(video, templates["video"]) for video in page["videos"])
         content = insert_list(content, "videos", videos)
     if page.get("atlas"):
-        content = insert_list(content, "atlas", [render_atlas(templates, prefix, page["atlas_route"])])
+        content = insert_list(content, "atlas", [render_atlas(templates, prefix, relative, page["atlas_route"])])
     if "guide_cards" in page:
         cards = (
             templates["guide-card"].substitute(
@@ -813,7 +815,7 @@ def render_page(source, relative, templates, writers, collections=None, gallery_
 
     content = mark_image_links(content)
     if "photos" in page or " data-lightbox" in content:
-        ensure_asset(script_names, "ufalit-gallery.js?v=8")
+        ensure_asset(script_names, "ufalit-gallery.js?v=9")
         ensure_asset(style_names, "gallery.css?v=2")
 
     intro, marker, main_content = content.partition("<!-- main -->")

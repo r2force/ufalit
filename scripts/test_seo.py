@@ -9,7 +9,7 @@ from urllib.parse import urljoin, urlsplit, unquote
 from xml.etree import ElementTree as ET
 
 from audit_seo import Page
-from seo import SITE_URL, SITEMAP_NS
+from seo import SITE_URL, SITEMAP_NS, image_size
 
 
 def check(site):
@@ -73,8 +73,16 @@ def check(site):
             require("alt" in image, f"missing alt: {image.get('src')}")
             require(image.get("alt", "").strip().lower() not in {"фото", "фотография", "image", "img"},
                     f"generic alt: {image.get('src')}")
-        responsive = [{"url": candidate.strip().split()[0], "attribute": "srcset"}
-                      for image in page.images for candidate in image.get("srcset", "").split(",") if candidate.strip()]
+        responsive = []
+        for image in page.images:
+            for candidate in image.get("srcset", "").split(","):
+                if not candidate.strip():
+                    continue
+                source, *descriptors = candidate.split()
+                link = {"url": source, "attribute": "srcset"}
+                if descriptors and descriptors[0].endswith("w"):
+                    link["width"] = int(descriptors[0][:-1])
+                responsive.append(link)
         for link in page.links + responsive + [{"url": page.meta.get("og:image", ""), "attribute": "src"}]:
             value = link["url"]
             parsed = urlsplit(value)
@@ -85,6 +93,9 @@ def check(site):
             path = site / local
             if target.path.endswith("/") or path.is_dir(): path = path / "index.html"
             require(path.is_relative_to(site) and path.is_file(), f"broken internal URL: {value}")
+            if "width" in link:
+                size = image_size(path)
+                require(size and size[0] == link["width"], f"incorrect srcset width: {value}")
             fragment = unquote(target.fragment).split(":~:text=", 1)[0]
             if fragment and path.suffix == ".html" and path.relative_to(site) in pages:
                 require(fragment in pages[path.relative_to(site)].ids, f"missing anchor: {value}")

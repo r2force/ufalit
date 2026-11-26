@@ -1,4 +1,4 @@
-"""Create optional WebP previews of large published images; never modify originals.
+"""Create responsive WebP previews of published images; never modify originals.
 
 Run with Pillow installed after building a preview: --site /tmp/ufalit-seo-preview.
 The normal renderer and CI do not require Pillow; generated assets are committed.
@@ -7,6 +7,7 @@ The normal renderer and CI do not require Pillow; generated assets are committed
 import argparse
 import json
 from concurrent.futures import ThreadPoolExecutor
+from io import BytesIO
 from pathlib import Path
 from urllib.parse import unquote, urlsplit
 
@@ -14,29 +15,52 @@ from PIL import Image, ImageOps
 
 from audit_seo import Page
 from render_site import atlas_preview
+from seo import PREVIEW_WIDTHS, preview_path
 
 ROOT = Path(__file__).resolve().parents[1]
 SITE = ROOT / "site"
 
 
 def optimize(path):
-    if not path.is_file() or path.stat().st_size < 120000 or path.suffix.lower() not in {".jpg", ".jpeg", ".png"}:
+    if not path.is_file() or path.suffix.lower() not in {".jpg", ".jpeg", ".png", ".gif", ".webp"}:
         return 0
-    with Image.open(path) as original:
-        image = ImageOps.exif_transpose(original).convert("RGB")
-        for width in (400, 1000):
-            output = SITE / "assets/optimized" / path.relative_to(SITE / "assets")
-            output = output.with_name(output.name + f".{width}.webp")
+    source_bytes = path.stat().st_size
+    expected = set()
+    if source_bytes >= 5000:
+        with Image.open(path) as original:
+            if not getattr(original, "is_animated", False):
+                oriented = ImageOps.exif_transpose(original)
+                alpha = "A" in oriented.getbands() or "transparency" in oriented.info
+                expected = save_previews(path, oriented.convert("RGBA" if alpha else "RGB"), source_bytes)
+    for width in PREVIEW_WIDTHS:
+        if width not in expected:
+            preview_path(path, SITE, width).unlink(missing_ok=True)
+    return len(expected)
+
+
+def save_previews(path, image, source_bytes):
+    saved = set()
+    dimensions = set()
+    for width in PREVIEW_WIDTHS:
+        preview = image.copy()
+        preview.thumbnail((width, width * 4), Image.Resampling.LANCZOS)
+        if preview.width in dimensions:
+            continue
+        dimensions.add(preview.width)
+        with BytesIO() as encoded:
+            preview.save(encoded, "WEBP", quality=82, method=6)
+            if encoded.tell() > min(source_bytes - 800, source_bytes * .9):
+                continue
+            output = preview_path(path, SITE, width)
             output.parent.mkdir(parents=True, exist_ok=True)
-            preview = image.copy()
-            preview.thumbnail((width, width * 4), Image.Resampling.LANCZOS)
-            preview.save(output, "WEBP", quality=82, method=6)
-    return 1
+            output.write_bytes(encoded.getbuffer())
+        saved.add(width)
+    return saved
 
 
 def optimize_atlas():
-    places = json.loads((ROOT / "templates" / "atlas-places.json").read_text(encoding="utf-8"))
-    for source in sorted({place["image"] for place in places}):
+    sources = atlas_sources()
+    for source in sorted(sources):
         with Image.open(SITE / source) as original:
             image = ImageOps.exif_transpose(original).convert("RGB")
             marker = ImageOps.fit(image, (128, 128), Image.Resampling.LANCZOS)
@@ -45,7 +69,13 @@ def optimize_atlas():
                 output = SITE / atlas_preview(source, size)
                 output.parent.mkdir(parents=True, exist_ok=True)
                 preview.save(output, "WEBP", quality=quality, method=6)
-    print(f"Created marker and card previews for {len(places)} atlas places")
+                optimize(output)
+    print(f"Created marker and card previews for {len(sources)} atlas photos")
+
+
+def atlas_sources():
+    places = json.loads((ROOT / "templates" / "atlas-places.json").read_text(encoding="utf-8"))
+    return {place["image"] for place in places}
 
 
 def main():
@@ -57,7 +87,7 @@ def main():
     if args.atlas:
         optimize_atlas()
         return
-    sources = set()
+    sources = {SITE / atlas_preview(source, size) for source in atlas_sources() for size in (128, 640)}
     for page in args.site.rglob("*.html"):
         for image in Page(page.read_text()).images:
             src = image.get("src", "")
@@ -68,7 +98,7 @@ def main():
                     sources.add(path)
     with ThreadPoolExecutor(max_workers=4) as pool:
         count = sum(pool.map(optimize, sorted(sources)))
-    print(f"Created two WebP previews for {count} large images; originals preserved")
+    print(f"Created {count} responsive WebP previews; originals preserved")
 
 
 if __name__ == "__main__":
