@@ -140,7 +140,7 @@ class ReadingRoomTests(unittest.TestCase):
                         self.assertIn(f'id="{parsed.fragment}"', target_html, (slug, url))
 
     def test_retained_texts_preserve_original_paragraphs_and_images(self):
-        audit = json.loads((self.root / 'migration/evidence/2026-11-23/reading-split-check.json').read_text())
+        audit = json.loads((self.root / 'scripts/fixtures/reading-split-check.json').read_text())
         groups = {group['slug']: group for item in self.collections for group in item.get('groups', [])}
         retained = {work['slug'] for item in self.collections for work in item['works']} | {'personalities'}
         for record in audit['sources']:

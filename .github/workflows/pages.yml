@@ -15,6 +15,7 @@ on:
       - 'scripts/test_gallery.py'
       - 'scripts/test_video_archive.py'
       - 'scripts/test_reading_room.py'
+      - 'scripts/fixtures/**'
       - 'scripts/test_reading_search.js'
       - '.github/workflows/pages.yml'
   workflow_dispatch:
