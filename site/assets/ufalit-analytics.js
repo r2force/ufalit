@@ -10,7 +10,7 @@
     else if (link.matches('.atlas-more') || link.closest('.atlas-text-places')) goal('place_detail_open');
     else if (link.hash?.startsWith('#person-')) goal('biography_open');
     else if (link.closest('.library-work')) goal('work_open');
-    else if (link.matches('.photo-stage, [data-image-viewer]') || link.closest('.material-figure, .material-inline, .legend-figure')) goal('photo_open');
+    else if (link.matches('.photo-stage, [data-lightbox]') || link.closest('.material-figure, .material-inline, .legend-figure')) goal('photo_open');
   });
   document.addEventListener('play', event => {
     if (event.target.matches('video')) goal('video_play');

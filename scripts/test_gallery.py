@@ -95,7 +95,7 @@ class GalleryTests(unittest.TestCase):
                 self.assertEqual(sum(tag == 'h1' for tag, _ in document.tags), 1)
                 self.assertNotIn('<!-- photos -->', html)
                 self.assertIn('gallery.css?v=2', html)
-                self.assertIn('ufalit-gallery.js?v=7', html)
+                self.assertIn('ufalit-gallery.js?v=8', html)
 
     def test_writer_cards_match_the_selected_archive_and_counts(self):
         for slug in ['gallery', *self.albums]:
@@ -161,11 +161,36 @@ class GalleryTests(unittest.TestCase):
         self.assertIn('alt="Фотография"', html)
 
     def test_article_viewer_keeps_its_styles_without_archive_controls(self):
-        source = '---\n{"title":"Статья","description":"Иллюстрированная тестовая статья с просмотром фотографии в общем интерфейсе галереи."}\n---\n<article data-image-viewer><figure><a href="photo.jpg"><img src="photo.jpg" alt="Фото"></a></figure></article>'
+        source = """---
+{"title":"Статья","description":"Иллюстрированная тестовая статья с просмотром фотографии в общем интерфейсе галереи."}
+---
+<article>
+<figure class="material-figure"><img src="photo.jpg" alt="Фото"></figure>
+<a href='full.P%4EG?size=large#image' target="_blank">Снимок</a>
+<a href="album/"><img src="photo.jpg" alt="Альбом"></a>
+<a href="photo.jpg" download>Скачать</a>
+</article>
+"""
         html = render_site.render_page(source, Path('pages/article/index.html'), self.templates, self.writers)
-        self.assertIn('ufalit-gallery.js?v=7', html)
+        links = [attrs for tag, attrs in Document(html).tags if tag == 'a' and 'data-lightbox' in attrs]
+        self.assertEqual([link['href'] for link in links], ['photo.jpg', 'full.P%4EG?size=large#image'])
+        self.assertEqual(links[1]['target'], '_blank')
+        self.assertIn('ufalit-gallery.js?v=8', html)
         self.assertIn('gallery.css?v=2', html)
         self.assertNotIn('gallery-writers', html)
+
+    def test_materials_with_direct_image_links_load_the_shared_viewer(self):
+        for slug in ('personalities', 'places', 'legends', 'awards', 'medal', 'stipend',
+                     'reading-aksakov-childhood', 'reading-aksakov-flower', 'reading-aksakov-nature'):
+            with self.subTest(slug=slug):
+                html = self.render(slug)
+                self.assertIn('ufalit-gallery.js?v=8', html)
+                self.assertIn('gallery.css?v=2', html)
+                links = [attrs for tag, attrs in Document(html).tags if tag == 'a']
+                images = [link for link in links
+                          if Path(urlsplit(link.get('href', '')).path).suffix.lower() in {'.jpg', '.jpeg', '.png', '.gif', '.webp'}]
+                self.assertTrue(images)
+                self.assertTrue(all('data-lightbox' in link for link in images))
 
 
 if __name__ == '__main__':

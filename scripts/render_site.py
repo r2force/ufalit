@@ -8,6 +8,7 @@ from html.parser import HTMLParser
 from pathlib import Path
 from shutil import copytree
 from string import Template
+from urllib.parse import unquote, urlsplit
 
 from email_contacts import protect_email_links
 from seo import seo_head, write_sitemap, image_dimensions
@@ -19,7 +20,7 @@ COVER_LINK = re.compile(r'<a\b([^<>]*?)\sdata-cover="([^"]+)"([^<>]*)>(.*?)</a>'
 WRITER_LINK = re.compile(r'<a\b([^<>]*?)\sdata-writer="([^"]+)"([^<>]*)>(.*?)</a>', re.S)
 WRITER_HEADING = re.compile(r'<h2\b([^<>]*?)\sdata-writer="([^"]+)"([^<>]*)></h2>')
 READER_ARTICLE = re.compile(r'<article\b[^>]*\sdata-reader(?=[\s>])')
-IMAGE_VIEWER = re.compile(r'\bdata-image-viewer(?=[\s>])')
+IMAGE_EXTENSIONS = {".apng", ".avif", ".bmp", ".gif", ".ico", ".jpeg", ".jpg", ".jxl", ".png", ".svg", ".tif", ".tiff", ".webp"}
 BIBLIOGRAPHY = re.compile(r'\bdata-bibliography(?=[\s>])|\bperson-hidden-bibliography-fragment\b')
 DIRECTORY_RECORD = re.compile(r'<(details|section)\b([^<>]*?\sid="([^"]+)"\sdata-writer="([^"]+)"[^<>]*)>')
 LEGEND_FIGURE = re.compile(
@@ -395,6 +396,41 @@ def expand_illustrations(content, zoom_template):
     return INLINE_MATERIAL_IMG.sub(expand_inline_material, content)
 
 
+class ImageLinks(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.insertions = []
+
+    def handle_starttag(self, tag, attributes):
+        if tag != "a":
+            return
+        attrs = dict(attributes)
+        href = attrs.get("href")
+        if not href or "download" in attrs or "data-lightbox" in attrs:
+            return
+        if {"photo-stage", "photo-original"}.intersection((attrs.get("class") or "").split()):
+            return
+        url = urlsplit(href)
+        if url.scheme in {"", "http", "https"} and Path(unquote(url.path)).suffix.lower() in IMAGE_EXTENSIONS:
+            self.insertions.append(self.getpos())
+
+
+def mark_image_links(content):
+    parser = ImageLinks()
+    parser.feed(content)
+    parser.close()
+    if not parser.insertions:
+        return content
+    starts = [0, *(match.end() for match in re.finditer("\n", content))]
+    parts = []
+    previous = 0
+    for line, column in parser.insertions:
+        position = starts[line - 1] + column + len("<a")
+        parts.extend((content[previous:position], " data-lightbox"))
+        previous = position
+    return "".join([*parts, content[previous:]])
+
+
 def expand_writer_refs(content, prefix, templates, writers):
     def render_heading(match):
         before, slug, after = match.groups()
@@ -654,7 +690,7 @@ def render_page(source, relative, templates, writers, collections=None, gallery_
     section = page_section(slug) if slug else None
     style_names = list(page.get("styles", []))
     script_names = list(page.get("scripts", []))
-    ensure_asset(script_names, "ufalit-analytics.js?v=2")
+    ensure_asset(script_names, "ufalit-analytics.js?v=3")
     redirect_meta = ""
     if "redirect" in page:
         target = escape(page["redirect"], quote=True)
@@ -691,7 +727,6 @@ def render_page(source, relative, templates, writers, collections=None, gallery_
             page, content, slug, prefix, templates, writers,
             gallery_catalog if gallery_catalog is not None else load_gallery_catalog(writers),
         )
-        ensure_asset(style_names, "gallery.css?v=2")
     if "videos" in page and "<!-- videos -->" not in content:
         extra = f"\n  {content.strip()}" if content.strip() else ""
         note = page.get("note", "Видеозаписи доступны для просмотра и скачивания в формате MP4.")
@@ -735,10 +770,6 @@ def render_page(source, relative, templates, writers, collections=None, gallery_
     if "photos" in page:
         photos = page["photos"]
         content = insert_list(content, "photos", (render_photo(photo, templates["photo"]) for photo in photos))
-        ensure_asset(script_names, "ufalit-gallery.js?v=7")
-    elif IMAGE_VIEWER.search(content):
-        ensure_asset(script_names, "ufalit-gallery.js?v=7")
-        ensure_asset(style_names, "gallery.css?v=2")
 
     if "tracks" in page:
         content = insert_list(content, "tracks", (render_track(track, templates["audio-track"]) for track in page["tracks"]))
@@ -779,6 +810,11 @@ def render_page(source, relative, templates, writers, collections=None, gallery_
 
     if slug.startswith("reading-") and not is_reading_room and "redirect" not in page and 'href="../reading/"' not in content:
         content = content.rstrip() + '\n<p><a href="../reading/">Вернуться в читальный зал</a></p>\n'
+
+    content = mark_image_links(content)
+    if "photos" in page or " data-lightbox" in content:
+        ensure_asset(script_names, "ufalit-gallery.js?v=8")
+        ensure_asset(style_names, "gallery.css?v=2")
 
     intro, marker, main_content = content.partition("<!-- main -->")
     items = []

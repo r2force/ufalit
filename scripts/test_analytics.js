@@ -18,7 +18,7 @@ function click(link) { listeners.get('click')({ target: { closest: () => link } 
 click(target({ closest: ['.nav'] }));
 click(target({ match: ['.atlas-more'] }));
 click(target({ closest: ['.library-work'] }));
-click(target({ match: ['.photo-stage, [data-image-viewer]'] }));
+click(target({ match: ['.photo-stage, [data-lightbox]'] }));
 click({...target(), hash: '#person-amantai'});
 listeners.get('play')({target: target({match: ['video']})});
 listeners.get('play')({target: target({match: ['audio']})});

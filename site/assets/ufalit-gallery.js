@@ -1,24 +1,36 @@
 (() => {
-  const gallery = document.querySelector('.gallery, [data-image-viewer]');
-  if (!gallery) return;
-  const readFrames = (root) => Array.from(root.querySelectorAll('figure'), (figure) => ({
-    figure,
-    link: figure.querySelector('a[href]'),
-    image: figure.querySelector('img'),
-    caption: figure.querySelector('.photo-caption') || (figure.querySelector('.photo-stage') ? null : figure.querySelector('figcaption')),
-    metadata: figure.querySelector('.photo-metadata'),
-    note: figure.querySelector('.photo-note'),
-    category: figure.dataset.category || 'Фотоархив',
-    writer: figure.dataset.writer || '',
-    writerName: figure.dataset.writerName || '',
-  })).filter(({ link, image }) => link && image);
-  const initialFrames = readFrames(gallery);
-  if (!initialFrames.length) return;
+  const gallery = document.querySelector('.gallery[data-archive-gallery]');
+  const readFrames = (root) => Array.from(root.querySelectorAll('.photo-stage[href]'), (link) => {
+    const figure = link.closest('figure');
+    const image = link.querySelector('img');
+    return {
+      figure, link, image, alt: image.alt,
+      caption: figure.querySelector('.photo-caption'),
+      metadata: figure.querySelector('.photo-metadata'),
+      note: figure.querySelector('.photo-note'),
+      category: figure.dataset.category || 'Фотоархив',
+      writer: figure.dataset.writer || '',
+      writerName: figure.dataset.writerName || '',
+    };
+  });
+  const initialFrames = gallery ? readFrames(gallery) : [];
+  const articleGroups = new Map();
+  for (const link of document.querySelectorAll('a[data-lightbox][href]')) {
+    const group = link.closest('[data-image-viewer]')
+      || link.closest('details[data-writer], section[data-writer], article, main') || document.body;
+    const image = link.querySelector('img');
+    const figure = link.closest('figure, .material-inline-captioned');
+    const caption = figure?.querySelector('figcaption, .material-caption');
+    const alt = image?.alt || caption?.textContent.trim() || link.textContent.trim() || 'Изображение';
+    if (!articleGroups.has(group)) articleGroups.set(group, []);
+    articleGroups.get(group).push({ link, image, caption, alt });
+  }
+  if (!initialFrames.length && !articleGroups.size) return;
   const initialScope = new Set(initialFrames);
   const catalogTemplate = document.querySelector('template[data-gallery-catalog]');
   const remainingFrames = catalogTemplate ? readFrames(catalogTemplate.content) : [];
   const frames = [...initialFrames, ...remainingFrames].sort((a, b) => Number(a.figure.dataset.galleryOrder || 0) - Number(b.figure.dataset.galleryOrder || 0));
-  const archive = gallery.hasAttribute('data-archive-gallery');
+  const archive = initialFrames.length > 0;
   const motion = matchMedia('(prefers-reduced-motion: reduce)');
   const behavior = () => motion.matches ? 'instant' : 'smooth';
   const normalize = (text) => text.toLocaleLowerCase('ru').replaceAll('ё', 'е').replace(/\s+/g, ' ').trim();
@@ -54,7 +66,7 @@
     }
   }
   function description(frame) {
-    return [frame.caption?.textContent.trim() || frame.image.alt, frame.note?.textContent.trim(), frame.metadata?.textContent.trim()].filter(Boolean).join(' · ');
+    return [frame.caption?.textContent.trim() || frame.alt, frame.note?.textContent.trim(), frame.metadata?.textContent.trim()].filter(Boolean).join(' · ');
   }
   function copyCaption(target, frame) {
     target.replaceChildren();
@@ -140,7 +152,7 @@
       stageIndex = (stageIndex + visible.length) % visible.length;
       const frame = visible[stageIndex];
       filmImage.src = frame.link.href;
-      filmImage.alt = frame.image.alt;
+      filmImage.alt = frame.alt;
       filmCount.textContent = `Кадр ${stageIndex + 1} из ${visible.length}`;
       copyCaption(filmDetail, frame);
       filmLoupe.reset();
@@ -179,7 +191,7 @@
       const scope = query ? frames : frames.filter((frame) => useInitialScope ? initialScope.has(frame) : frame.writer === selectedWriter);
       const allowed = new Set(scope);
       visible = frames.filter((frame) => {
-        const found = allowed.has(frame) && (category === 'Все' || frame.category === category) && normalize(frame.caption?.textContent || frame.image.alt).includes(query);
+        const found = allowed.has(frame) && (category === 'Все' || frame.category === category) && normalize(frame.caption?.textContent || frame.alt).includes(query);
         frame.figure.hidden = !found;
         return found;
       });
@@ -313,13 +325,12 @@
     </header>
     <div class="lightbox-center"><button class="museum-control lightbox-prev" type="button" aria-label="Предыдущее изображение">←</button><div class="lightbox-stage" tabindex="0" aria-label="Фотография. Увеличенное изображение можно прокручивать."><div class="lightbox-image-wrap"><img class="lightbox-image" alt=""><div class="photo-loupe" hidden aria-hidden="true"></div></div></div><button class="museum-control lightbox-next" type="button" aria-label="Следующее изображение">→</button></div>
     <div class="lightbox-footer"><p class="lightbox-caption"></p><div class="lightbox-thumbnails" aria-label="Фотографии подборки"></div></div>`;
-  gallery.after(dialog);
+  document.body.append(dialog);
   const enlarged = dialog.querySelector('.lightbox-image');
   const stage = dialog.querySelector('.lightbox-stage');
   const title = dialog.querySelector('h2');
   const counter = dialog.querySelector('.lightbox-counter');
   const original = dialog.querySelector('.lightbox-original');
-  original.href = initialFrames[0].link.href;
   const caption = dialog.querySelector('.lightbox-caption');
   const thumbnails = dialog.querySelector('.lightbox-thumbnails');
   const previous = dialog.querySelector('.lightbox-prev');
@@ -360,9 +371,9 @@
     setZoom(1);
     fittedWidth = 0;
     plus.disabled = true;
-    enlarged.alt = frame.image.alt;
+    enlarged.alt = frame.alt;
     enlarged.src = original.href = frame.link.href;
-    title.textContent = frame.caption?.textContent.trim() || frame.image.alt;
+    title.textContent = frame.caption?.textContent.trim() || frame.alt;
     counter.textContent = `${frame.writerName ? frame.writerName + ' · ' : ''}Кадр ${active + 1} из ${viewerFrames.length}`;
     const extension = new URL(frame.link.href).pathname.split('.').pop().toUpperCase();
     original.querySelector('span').textContent = `Оригинал ${['JPG', 'JPEG'].includes(extension) ? 'JPEG' : extension}`;
@@ -376,19 +387,19 @@
     previous.disabled = next.disabled = viewerFrames.length < 2;
     if (enlarged.complete && enlarged.naturalWidth) measure();
   }
-  function openViewer(frame, trigger) {
+  function openViewer(frame, trigger, selection = visible) {
     if (!frame) return;
     opener = trigger;
-    viewerFrames = [...visible];
+    viewerFrames = [...selection];
     thumbButtons.clear();
     thumbnails.replaceChildren();
     viewerFrames.forEach((item, index) => {
       const button = document.createElement('button');
       button.type = 'button';
       button.className = 'lightbox-thumbnail';
-      button.setAttribute('aria-label', `Кадр ${index + 1}: ${item.image.alt}`);
+      button.setAttribute('aria-label', `Кадр ${index + 1}: ${item.alt}`);
       const img = document.createElement('img');
-      img.src = item.image.dataset.previewSrc || item.image.currentSrc || item.image.src;
+      img.src = item.image?.dataset.previewSrc || item.image?.currentSrc || item.image?.src || item.link.href;
       img.alt = '';
       img.loading = 'lazy';
       button.append(img);
@@ -401,12 +412,25 @@
     measure();
     reveal(thumbButtons.get(frame), thumbnails);
   }
-  frames.forEach((frame) => frame.link.addEventListener('click', (event) => {
-    if (event.button !== 0 || event.ctrlKey || event.metaKey || event.altKey || event.shiftKey) return;
-    event.preventDefault();
-    if (archive && mode === 'filmstrip') { stageIndex = visible.indexOf(frame); updateFilm(); }
-    else openViewer(frame, frame.link);
-  }));
+  function onPhotoClick(frame, open) {
+    frame.link.addEventListener('click', (event) => {
+      if (event.defaultPrevented || event.button !== 0 || event.ctrlKey || event.metaKey || event.altKey || event.shiftKey) return;
+      event.preventDefault();
+      open();
+    });
+  }
+  for (const frame of frames) {
+    onPhotoClick(frame, () => {
+      if (mode === 'filmstrip') { stageIndex = visible.indexOf(frame); updateFilm(); }
+      else openViewer(frame, frame.link);
+    });
+  }
+  for (const group of articleGroups.values()) {
+    for (const frame of group) {
+      frame.link.setAttribute('aria-haspopup', 'dialog');
+      onPhotoClick(frame, () => openViewer(frame, frame.link, group));
+    }
+  }
   enlarged.addEventListener('load', measure);
   enlarged.addEventListener('error', () => { plus.disabled = true; caption.textContent = 'Не удалось загрузить фотографию. Попробуйте открыть оригинал.'; });
   window.addEventListener('resize', measure);
@@ -425,7 +449,7 @@
   dialog.addEventListener('keydown', (event) => {
     if (event.target.matches('select, input, textarea')) return;
     if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
-      if (stage.contains(event.target) && zoom > 1) return;
+      if (viewerFrames.length < 2 || (stage.contains(event.target) && zoom > 1)) return;
       event.preventDefault();
       show(active + (event.key === 'ArrowLeft' ? -1 : 1));
     } else if (event.key === '+' || event.key === '=') {
