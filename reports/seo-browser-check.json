@@ -1,0 +1,119 @@
+[
+  {
+    "route": "/",
+    "width": 390,
+    "status": 200,
+    "scrollWidth": 390,
+    "h1": 1,
+    "canonical": "https://ufalit.ufacsdb.ru/"
+  },
+  {
+    "route": "pages/personalities/",
+    "width": 390,
+    "status": 200,
+    "scrollWidth": 390,
+    "h1": 1,
+    "canonical": "https://ufalit.ufacsdb.ru/pages/personalities/"
+  },
+  {
+    "route": "pages/places/",
+    "width": 390,
+    "status": 200,
+    "scrollWidth": 390,
+    "h1": 1,
+    "canonical": "https://ufalit.ufacsdb.ru/pages/places/"
+  },
+  {
+    "route": "pages/reading-yanabi-shkolnik/",
+    "width": 390,
+    "status": 200,
+    "scrollWidth": 390,
+    "h1": 1,
+    "canonical": "https://ufalit.ufacsdb.ru/pages/reading-yanabi-shkolnik/"
+  },
+  {
+    "route": "pages/gallery/",
+    "width": 390,
+    "status": 200,
+    "scrollWidth": 390,
+    "h1": 1,
+    "canonical": "https://ufalit.ufacsdb.ru/pages/gallery/"
+  },
+  {
+    "route": "pages/videos/",
+    "width": 390,
+    "status": 200,
+    "scrollWidth": 390,
+    "h1": 1,
+    "canonical": "https://ufalit.ufacsdb.ru/pages/videos/"
+  },
+  {
+    "route": "pages/map/",
+    "width": 390,
+    "status": 200,
+    "scrollWidth": 390,
+    "h1": 1,
+    "canonical": "https://ufalit.ufacsdb.ru/pages/map/"
+  },
+  {
+    "route": "/",
+    "width": 1280,
+    "status": 200,
+    "scrollWidth": 1280,
+    "h1": 1,
+    "canonical": "https://ufalit.ufacsdb.ru/"
+  },
+  {
+    "route": "pages/personalities/",
+    "width": 1280,
+    "status": 200,
+    "scrollWidth": 1280,
+    "h1": 1,
+    "canonical": "https://ufalit.ufacsdb.ru/pages/personalities/"
+  },
+  {
+    "route": "pages/places/",
+    "width": 1280,
+    "status": 200,
+    "scrollWidth": 1280,
+    "h1": 1,
+    "canonical": "https://ufalit.ufacsdb.ru/pages/places/"
+  },
+  {
+    "route": "pages/reading-yanabi-shkolnik/",
+    "width": 1280,
+    "status": 200,
+    "scrollWidth": 1280,
+    "h1": 1,
+    "canonical": "https://ufalit.ufacsdb.ru/pages/reading-yanabi-shkolnik/"
+  },
+  {
+    "route": "pages/gallery/",
+    "width": 1280,
+    "status": 200,
+    "scrollWidth": 1280,
+    "h1": 1,
+    "canonical": "https://ufalit.ufacsdb.ru/pages/gallery/"
+  },
+  {
+    "route": "pages/videos/",
+    "width": 1280,
+    "status": 200,
+    "scrollWidth": 1280,
+    "h1": 1,
+    "canonical": "https://ufalit.ufacsdb.ru/pages/videos/"
+  },
+  {
+    "route": "pages/map/",
+    "width": 1280,
+    "status": 200,
+    "scrollWidth": 1280,
+    "h1": 1,
+    "canonical": "https://ufalit.ufacsdb.ru/pages/map/"
+  },
+  {
+    "scenario": "map without JavaScript",
+    "places": 68,
+    "summaryOpened": true
+  }
+]

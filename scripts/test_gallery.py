@@ -95,7 +95,7 @@ class GalleryTests(unittest.TestCase):
                 self.assertEqual(sum(tag == 'h1' for tag, _ in document.tags), 1)
                 self.assertNotIn('<!-- photos -->', html)
                 self.assertIn('gallery.css?v=2', html)
-                self.assertIn('ufalit-gallery.js?v=6', html)
+                self.assertIn('ufalit-gallery.js?v=7', html)
 
     def test_writer_cards_match_the_selected_archive_and_counts(self):
         for slug in ['gallery', *self.albums]:
@@ -161,9 +161,9 @@ class GalleryTests(unittest.TestCase):
         self.assertIn('alt="Фотография"', html)
 
     def test_article_viewer_keeps_its_styles_without_archive_controls(self):
-        source = '---\n{"title":"Статья"}\n---\n<article data-image-viewer><figure><a href="photo.jpg"><img src="photo.jpg" alt="Фото"></a></figure></article>'
+        source = '---\n{"title":"Статья","description":"Иллюстрированная тестовая статья с просмотром фотографии в общем интерфейсе галереи."}\n---\n<article data-image-viewer><figure><a href="photo.jpg"><img src="photo.jpg" alt="Фото"></a></figure></article>'
         html = render_site.render_page(source, Path('pages/article/index.html'), self.templates, self.writers)
-        self.assertIn('ufalit-gallery.js?v=6', html)
+        self.assertIn('ufalit-gallery.js?v=7', html)
         self.assertIn('gallery.css?v=2', html)
         self.assertNotIn('gallery-writers', html)
 

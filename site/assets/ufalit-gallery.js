@@ -83,13 +83,22 @@
     let selectedCount = albumCount.textContent;
     let useInitialScope = true;
     let mounted = false;
-    initialFrames.forEach((frame) => background(frame.link, frame.image.src));
+    const previewSource = frame => frame.image.dataset.previewSrc || frame.image.currentSrc || frame.image.src;
+    const previewObserver = typeof IntersectionObserver === 'function' ? new IntersectionObserver(entries => {
+      for (const entry of entries) if (entry.isIntersecting) {
+        const frame = frames.find(item => item.figure === entry.target);
+        if (frame) background(frame.link, previewSource(frame));
+        previewObserver.unobserve(entry.target);
+      }
+    }, { rootMargin: '300px' }) : null;
+    const observePreview = frame => previewObserver ? previewObserver.observe(frame.figure) : background(frame.link, previewSource(frame));
+    initialFrames.forEach(observePreview);
     function mountCatalog() {
       if (mounted || !catalogTemplate) return;
       remainingFrames.forEach((frame) => { frame.figure.hidden = true; });
       gallery.replaceChildren(...frames.map((frame) => frame.figure));
       catalogTemplate.remove();
-      remainingFrames.forEach((frame) => background(frame.link, frame.image.src));
+      remainingFrames.forEach(observePreview);
       mounted = true;
     }
     const toolbar = document.createElement('section');
@@ -127,7 +136,7 @@
     const filmLoupe = attachLoupe(film.querySelector('.gallery-film-image'), filmImage, film.querySelector('.photo-loupe'), film.querySelector('[data-film-loupe]'));
     updateFilm = () => {
       film.hidden = mode !== 'filmstrip' || !visible.length;
-      if (!visible.length) return;
+      if (mode !== 'filmstrip' || !visible.length) return;
       stageIndex = (stageIndex + visible.length) % visible.length;
       const frame = visible[stageIndex];
       filmImage.src = frame.link.href;
@@ -310,6 +319,7 @@
   const title = dialog.querySelector('h2');
   const counter = dialog.querySelector('.lightbox-counter');
   const original = dialog.querySelector('.lightbox-original');
+  original.href = initialFrames[0].link.href;
   const caption = dialog.querySelector('.lightbox-caption');
   const thumbnails = dialog.querySelector('.lightbox-thumbnails');
   const previous = dialog.querySelector('.lightbox-prev');
@@ -378,7 +388,7 @@
       button.className = 'lightbox-thumbnail';
       button.setAttribute('aria-label', `Кадр ${index + 1}: ${item.image.alt}`);
       const img = document.createElement('img');
-      img.src = item.image.src;
+      img.src = item.image.dataset.previewSrc || item.image.currentSrc || item.image.src;
       img.alt = '';
       img.loading = 'lazy';
       button.append(img);

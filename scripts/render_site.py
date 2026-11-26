@@ -10,6 +10,7 @@ from shutil import copytree
 from string import Template
 
 from email_contacts import protect_email_links
+from seo import seo_head, write_sitemap, image_dimensions
 
 ROOT = Path(__file__).resolve().parents[1]
 SITE = ROOT / "site"
@@ -41,7 +42,7 @@ TEMPLATE_NAMES = (
     "writer-profile", "directory-banner", "zoom-image", "atlas", "atlas-choice", "guide-card",
     "archive-index", "archive-collection", "archive-album", "archive-video",
     "reading-index", "reading-card", "reading-author", "reading-work", "reading-context",
-    "redirect", "gallery-writer",
+    "redirect", "gallery-writer", "metrika", "atlas-text-place",
 )
 
 
@@ -177,6 +178,10 @@ def render_gallery(page, content, slug, prefix, templates, writers, catalog_data
         heading = page["heading"]
         if not photos or slug == writers[selected["writer"]]["gallery"]:
             photos = gallery_photos(albums, gallery_descendants(albums, slug))
+    writer = writers[selected["writer"]]
+    extra += (f'<nav class="related-links" aria-label="Материалы о литераторе">'
+              f'<a href="{prefix}pages/personalities/#person-{escape(selected["writer"])}">Биография: {escape(writer["name"])}</a>'
+              f'<a href="{prefix}pages/places/#{escape(writer["place"])}">Памятные места</a></nav>')
     # Keep the source links and anchors for every related collection.
     if extra:
         extra = f'<section class="gallery-related" aria-label="Подборки фотографий">{extra}</section>'
@@ -191,6 +196,7 @@ def render_gallery(page, content, slug, prefix, templates, writers, catalog_data
     shown = {photo["id"] for photo in photos}
     pool = "\n".join(render_photo(photo, templates["photo"]) for photo in all_photos if photo["id"] not in shown)
     content = templates["gallery-album"].substitute(
+        page_heading=escape("Фотогалерея писателей Уфы" if slug == "gallery" else page["heading"]),
         heading=escape(heading), extra=extra, writers="\n".join(cards), count=photo_count(len(photos)),
         writer=escape(selected["writer"]), pool=pool,
     )
@@ -598,6 +604,7 @@ def render_page(source, relative, templates, writers, collections=None, gallery_
     section = page_section(slug) if slug else None
     style_names = list(page.get("styles", []))
     script_names = list(page.get("scripts", []))
+    ensure_asset(script_names, "ufalit-analytics.js?v=2")
     redirect_meta = ""
     if "redirect" in page:
         target = escape(page["redirect"], quote=True)
@@ -678,9 +685,9 @@ def render_page(source, relative, templates, writers, collections=None, gallery_
     if "photos" in page:
         photos = page["photos"]
         content = insert_list(content, "photos", (render_photo(photo, templates["photo"]) for photo in photos))
-        ensure_asset(script_names, "ufalit-gallery.js?v=6")
+        ensure_asset(script_names, "ufalit-gallery.js?v=7")
     elif IMAGE_VIEWER.search(content):
-        ensure_asset(script_names, "ufalit-gallery.js?v=6")
+        ensure_asset(script_names, "ufalit-gallery.js?v=7")
         ensure_asset(style_names, "gallery.css?v=2")
 
     if "tracks" in page:
@@ -716,6 +723,11 @@ def render_page(source, relative, templates, writers, collections=None, gallery_
             href=escape(atlas_detail_url(first)),
             description="".join(f"<p>{escape(text)}</p>" for text in first["paragraphs"]),
             choices="\n".join(choices),
+            text_places="\n".join(templates["atlas-text-place"].substitute(
+                title=escape(place["title"]), address=escape(place["address"]),
+                description="".join(f"<p>{escape(text)}</p>" for text in place["paragraphs"]),
+                href=escape(place["detail_url"]),
+            ) for place in places),
             count=len(places),
             places_json=json.dumps(places, ensure_ascii=False).replace("<", "\\u003c"),
         )
@@ -770,6 +782,7 @@ def render_page(source, relative, templates, writers, collections=None, gallery_
     )
     document = templates["base"].substitute(
         title=escape(page["title"]), prefix=prefix, extra_styles="\n".join(styles), redirect_meta=redirect_meta,
+        seo_head=seo_head(page, relative, content), metrika=templates["metrika"].template,
         scripts="\n".join(scripts), header=header, footer=templates["footer"].template,
         body_class=body_class,
         breadcrumbs=templates["breadcrumbs"].substitute(items=" / ".join(items)) if items else "",
@@ -778,7 +791,7 @@ def render_page(source, relative, templates, writers, collections=None, gallery_
     protected = protect_email_links(document)
     if protected != document:
         protected = protected.replace("</head>", f'<script src="{assets}ufalit-contact.js?v=1" defer></script>\n</head>', 1)
-    return protected
+    return image_dimensions(protected, relative, SITE)
 
 
 def main():
@@ -798,8 +811,10 @@ def main():
     gallery_catalog = load_gallery_catalog(writers)
     pages = [SITE / "index.html", *sorted((SITE / "pages").glob("*/index.html"))]
     generated = {}
+    metadata = {}
     for page in pages:
         relative = page.relative_to(SITE)
+        metadata[relative] = json.loads(page.read_text(encoding="utf-8").split("---", 2)[1])
         try:
             generated[relative] = render_page(page.read_bytes().decode("utf-8"), relative, templates, writers, collections, gallery_catalog)
         except (ValueError, KeyError, TypeError) as exc:
@@ -809,6 +824,7 @@ def main():
         copytree(SITE, destination)
     for relative, body in generated.items():
         (destination / relative).write_bytes(body.encode("utf-8"))
+    write_sitemap(destination, metadata)
     print(f"Built {len(generated)} pages in {destination}")
 
 

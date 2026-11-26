@@ -1,0 +1,805 @@
+[
+  {
+    "requested": "http://ajdaha2003.ya.ru/replies.xml?item_no=1406",
+    "hops": [
+      {
+        "url": "http://ajdaha2003.ya.ru/replies.xml?item_no=1406",
+        "status": 404,
+        "location": null,
+        "x_robots_tag": null
+      }
+    ],
+    "final_url": "http://ajdaha2003.ya.ru/replies.xml?item_no=1406",
+    "status": 404,
+    "bytes": 11836,
+    "title": "404",
+    "description": "Найдётся всё",
+    "canonical": [],
+    "robots": "noindex",
+    "h1": [
+      {
+        "level": 1,
+        "text": "Ошибка 404. Нет такой страницы",
+        "id": null
+      }
+    ]
+  },
+  {
+    "requested": "http://alocvet.narod.ru/",
+    "hops": [
+      {
+        "url": "http://alocvet.narod.ru/",
+        "status": 301,
+        "location": "https://alocvet.narod.ru/",
+        "x_robots_tag": null
+      },
+      {
+        "url": "https://alocvet.narod.ru/",
+        "status": 200,
+        "location": null,
+        "x_robots_tag": null
+      }
+    ],
+    "final_url": "https://alocvet.narod.ru/",
+    "status": 200,
+    "bytes": 8787,
+    "title": "Алоцвет - главная страница",
+    "description": "",
+    "canonical": [],
+    "robots": null,
+    "h1": []
+  },
+  {
+    "requested": "http://art-otkrytie.narod.ru/platonov2.htm",
+    "hops": [
+      {
+        "url": "http://art-otkrytie.narod.ru/platonov2.htm",
+        "status": 301,
+        "location": "https://art-otkrytie.narod.ru/platonov2.htm",
+        "x_robots_tag": null
+      },
+      {
+        "url": "https://art-otkrytie.narod.ru/platonov2.htm",
+        "status": 200,
+        "location": null,
+        "x_robots_tag": null
+      }
+    ],
+    "final_url": "https://art-otkrytie.narod.ru/platonov2.htm",
+    "status": 200,
+    "bytes": 357123,
+    "title": "Платонов. Чевенгур. Художественный смысл ",
+    "description": "Как ни отрицателен результат художественных испытаний Платоновым коммунизма, он квалифицировал его как аналог испытания современностью, но не будущим",
+    "canonical": [],
+    "robots": null,
+    "h1": [
+      {
+        "level": 1,
+        "text": "\nПлатонов. Чевенгур.\nХудожественный смысл.\n\n",
+        "id": null
+      }
+    ]
+  },
+  {
+    "requested": "http://bashkortostan450.ru/celebrities/writers/dovlatov/",
+    "hops": [
+      {
+        "url": "http://bashkortostan450.ru/celebrities/writers/dovlatov/",
+        "status": 301,
+        "location": "https://bashkortostan450.ru:443/celebrities/writers/dovlatov/",
+        "x_robots_tag": null
+      },
+      {
+        "url": "https://bashkortostan450.ru:443/celebrities/writers/dovlatov/",
+        "status": 404,
+        "location": null,
+        "x_robots_tag": null
+      }
+    ],
+    "final_url": "https://bashkortostan450.ru:443/celebrities/writers/dovlatov/",
+    "status": 404,
+    "bytes": 53190,
+    "title": "Страница не найдена | Вести Башкортостана",
+    "description": null,
+    "canonical": [],
+    "robots": "noindex, follow",
+    "h1": [
+      {
+        "level": 1,
+        "text": "44",
+        "id": null
+      }
+    ]
+  },
+  {
+    "requested": "http://community.livejournal.com/andrej_platonov",
+    "hops": [
+      {
+        "url": "http://community.livejournal.com/andrej_platonov",
+        "status": 307,
+        "location": "https://community.livejournal.com/andrej_platonov",
+        "x_robots_tag": null
+      },
+      {
+        "url": "https://community.livejournal.com/andrej_platonov",
+        "status": 301,
+        "location": "https://andrej-platonov.livejournal.com/",
+        "x_robots_tag": null
+      },
+      {
+        "url": "https://andrej-platonov.livejournal.com/",
+        "status": 410,
+        "location": null,
+        "x_robots_tag": null
+      }
+    ],
+    "final_url": "https://andrej-platonov.livejournal.com/",
+    "status": 410,
+    "bytes": 9040,
+    "title": "Purged Account",
+    "description": "Purged Account",
+    "canonical": [],
+    "robots": null,
+    "h1": [
+      {
+        "level": 1,
+        "text": "Purged Account",
+        "id": null
+      }
+    ]
+  },
+  {
+    "requested": "http://csdb.ufanet.ru",
+    "hops": [
+      {
+        "url": "http://csdb.ufanet.ru",
+        "status": 301,
+        "location": "https://cgdb.ufacsdb.ru/",
+        "x_robots_tag": null
+      },
+      {
+        "url": "https://cgdb.ufacsdb.ru/",
+        "status": 200,
+        "location": null,
+        "x_robots_tag": null
+      }
+    ],
+    "final_url": "https://cgdb.ufacsdb.ru/",
+    "status": 200,
+    "bytes": 73714,
+    "title": "����������� ��������� ������� ���������� ��. �.�. ������������ �. ���",
+    "description": "���� - ���������������� ������� ������� ��������� �� �.���  ��. �.�. ������������",
+    "canonical": [],
+    "robots": "index, follow",
+    "h1": []
+  },
+  {
+    "requested": "http://imwerden.de/cat/modules.php?name=books&pa=showbook&pid=263",
+    "hops": [
+      {
+        "url": "http://imwerden.de/cat/modules.php?name=books&pa=showbook&pid=263",
+        "status": 301,
+        "location": "https://imwerden.de/cat/modules.php?name=books&pa=showbook&pid=263",
+        "x_robots_tag": null
+      },
+      {
+        "url": "https://imwerden.de/cat/modules.php?name=books&pa=showbook&pid=263",
+        "status": 301,
+        "location": "https://imwerden.de/publ-263",
+        "x_robots_tag": null
+      },
+      {
+        "url": "https://imwerden.de/publ-263",
+        "status": 200,
+        "location": null,
+        "x_robots_tag": null
+      }
+    ],
+    "final_url": "https://imwerden.de/publ-263",
+    "status": 200,
+    "bytes": 21407,
+    "title": "Башкирские народные сказки : Литературная обработка А. Платонова. 1947",
+    "description": "Копия оригинальной книги. Башкирские народные сказки : Литературная обработка А. Платонова. Электронное издание в библиотеке «ImWerden»",
+    "canonical": [
+      "https://imwerden.de/publ-263"
+    ],
+    "robots": null,
+    "h1": [
+      {
+        "level": 1,
+        "text": "Башкирские народные сказки:Литературная обработка А. Платонова (1947)",
+        "id": null
+      }
+    ]
+  },
+  {
+    "requested": "http://imwerden.de/cat/modules.php?name=books&pa=showbook&pid=330",
+    "hops": [
+      {
+        "url": "http://imwerden.de/cat/modules.php?name=books&pa=showbook&pid=330",
+        "status": 301,
+        "location": "https://imwerden.de/cat/modules.php?name=books&pa=showbook&pid=330",
+        "x_robots_tag": null
+      },
+      {
+        "url": "https://imwerden.de/cat/modules.php?name=books&pa=showbook&pid=330",
+        "status": 301,
+        "location": "https://imwerden.de/publ-330",
+        "x_robots_tag": null
+      },
+      {
+        "url": "https://imwerden.de/publ-330",
+        "status": 200,
+        "location": null,
+        "x_robots_tag": null
+      }
+    ],
+    "final_url": "https://imwerden.de/publ-330",
+    "status": 200,
+    "bytes": 19937,
+    "title": "Андрей Платонович Платонов. Финист – ясный сокол. ",
+    "description": "Копия оригинальной книги. Электронное издание в библиотеке «ImWerden»",
+    "canonical": [
+      "https://imwerden.de/publ-330"
+    ],
+    "robots": null,
+    "h1": [
+      {
+        "level": 1,
+        "text": "Андрей Платонович ПлатоновФинист – ясный сокол",
+        "id": null
+      }
+    ]
+  },
+  {
+    "requested": "http://lib.ru/BRODSKIJ/br_platonov.txt_with-big-pictures.html",
+    "hops": [
+      {
+        "url": "http://lib.ru/BRODSKIJ/br_platonov.txt_with-big-pictures.html",
+        "status": 200,
+        "location": null,
+        "x_robots_tag": null
+      }
+    ],
+    "final_url": "http://lib.ru/BRODSKIJ/br_platonov.txt_with-big-pictures.html",
+    "status": 200,
+    "bytes": 16482,
+    "title": "����� ��������. ����������� � \"���������\" �.���������",
+    "description": null,
+    "canonical": [],
+    "robots": null,
+    "h1": []
+  },
+  {
+    "requested": "http://magazines.russ.ru/novyi_mi/2010/7/va8.html",
+    "hops": [
+      {
+        "url": "http://magazines.russ.ru/novyi_mi/2010/7/va8.html",
+        "status": 404,
+        "location": null,
+        "x_robots_tag": null
+      }
+    ],
+    "final_url": "http://magazines.russ.ru/novyi_mi/2010/7/va8.html",
+    "status": 404,
+    "bytes": 12668,
+    "title": "Перенаправление домена не осуществляется",
+    "description": null,
+    "canonical": [],
+    "robots": null,
+    "h1": [
+      {
+        "level": 1,
+        "text": "document.write(punycode.ToUnicode(location.hostname));",
+        "id": null
+      },
+      {
+        "level": 1,
+        "text": "Перенаправление домена не осуществляется",
+        "id": null
+      }
+    ]
+  },
+  {
+    "requested": "http://magazines.russ.ru/znamia/2007/6/vas18.html",
+    "hops": [
+      {
+        "url": "http://magazines.russ.ru/znamia/2007/6/vas18.html",
+        "status": 404,
+        "location": null,
+        "x_robots_tag": null
+      }
+    ],
+    "final_url": "http://magazines.russ.ru/znamia/2007/6/vas18.html",
+    "status": 404,
+    "bytes": 12668,
+    "title": "Перенаправление домена не осуществляется",
+    "description": null,
+    "canonical": [],
+    "robots": null,
+    "h1": [
+      {
+        "level": 1,
+        "text": "document.write(punycode.ToUnicode(location.hostname));",
+        "id": null
+      },
+      {
+        "level": 1,
+        "text": "Перенаправление домена не осуществляется",
+        "id": null
+      }
+    ]
+  },
+  {
+    "requested": "http://marsalim.ru/creation/jurnalism/memoirs/",
+    "hops": [
+      {
+        "url": "http://marsalim.ru/creation/jurnalism/memoirs/",
+        "status": 301,
+        "location": "https://marsalim.ru/creation/jurnalism/memoirs/",
+        "x_robots_tag": null
+      },
+      {
+        "url": "https://marsalim.ru/creation/jurnalism/memoirs/",
+        "status": 404,
+        "location": null,
+        "x_robots_tag": null
+      }
+    ],
+    "final_url": "https://marsalim.ru/creation/jurnalism/memoirs/",
+    "status": 404,
+    "bytes": 5308,
+    "title": "�������� �� ������� - ������� ������� - ��������-������� - marsalim.ru",
+    "description": "��������-������� ������� �������",
+    "canonical": [],
+    "robots": null,
+    "h1": [
+      {
+        "level": 1,
+        "text": "������� ������� - ��������-�������",
+        "id": null
+      }
+    ]
+  },
+  {
+    "requested": "http://memory.pvost.org/pages/amantaev.html",
+    "hops": [
+      {
+        "url": "http://memory.pvost.org/pages/amantaev.html",
+        "status": 301,
+        "location": "https://memory.pvost.org/pages/amantaev.html",
+        "x_robots_tag": null
+      },
+      {
+        "url": "https://memory.pvost.org/pages/amantaev.html",
+        "status": 200,
+        "location": null,
+        "x_robots_tag": null
+      }
+    ],
+    "final_url": "https://memory.pvost.org/pages/amantaev.html",
+    "status": 200,
+    "bytes": 15796,
+    "title": "���� � ������",
+    "description": null,
+    "canonical": [],
+    "robots": null,
+    "h1": []
+  },
+  {
+    "requested": "http://news.peoples.ru/2009/09/21/39713.shtml",
+    "hops": [
+      {
+        "url": "http://news.peoples.ru/2009/09/21/39713.shtml",
+        "status": 404,
+        "location": null,
+        "x_robots_tag": null
+      }
+    ],
+    "final_url": "http://news.peoples.ru/2009/09/21/39713.shtml",
+    "status": 404,
+    "bytes": 277,
+    "title": "404 Not Found",
+    "description": null,
+    "canonical": [],
+    "robots": null,
+    "h1": [
+      {
+        "level": 1,
+        "text": "Not Found",
+        "id": null
+      }
+    ]
+  },
+  {
+    "requested": "http://readr.ru/semen-lipkin-ghizn-i-sudba-vasiliya-grossmana.html?page=5#",
+    "hops": [],
+    "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>"
+  },
+  {
+    "requested": "http://ru.wikipedia.org/wiki/%D0%9F%D0%BB%D0%B0%D1%82%D0%BE%D0%BD%D0%BE%D0%B2,_%D0%90%D0%BD%D0%B4%D1%80%D0%B5%D0%B9_%D0%9F%D0%BB%D0%B0%D1%82%D0%BE%D0%BD%D0%BE%D0%B2%D0%B8%D1%87",
+    "hops": [
+      {
+        "url": "http://ru.wikipedia.org/wiki/%D0%9F%D0%BB%D0%B0%D1%82%D0%BE%D0%BD%D0%BE%D0%B2,_%D0%90%D0%BD%D0%B4%D1%80%D0%B5%D0%B9_%D0%9F%D0%BB%D0%B0%D1%82%D0%BE%D0%BD%D0%BE%D0%B2%D0%B8%D1%87",
+        "status": 301,
+        "location": "https://ru.wikipedia.org/wiki/%D0%9F%D0%BB%D0%B0%D1%82%D0%BE%D0%BD%D0%BE%D0%B2,_%D0%90%D0%BD%D0%B4%D1%80%D0%B5%D0%B9_%D0%9F%D0%BB%D0%B0%D1%82%D0%BE%D0%BD%D0%BE%D0%B2%D0%B8%D1%87",
+        "x_robots_tag": null
+      },
+      {
+        "url": "https://ru.wikipedia.org/wiki/%D0%9F%D0%BB%D0%B0%D1%82%D0%BE%D0%BD%D0%BE%D0%B2,_%D0%90%D0%BD%D0%B4%D1%80%D0%B5%D0%B9_%D0%9F%D0%BB%D0%B0%D1%82%D0%BE%D0%BD%D0%BE%D0%B2%D0%B8%D1%87",
+        "status": 200,
+        "location": null,
+        "x_robots_tag": null
+      }
+    ],
+    "final_url": "https://ru.wikipedia.org/wiki/%D0%9F%D0%BB%D0%B0%D1%82%D0%BE%D0%BD%D0%BE%D0%B2,_%D0%90%D0%BD%D0%B4%D1%80%D0%B5%D0%B9_%D0%9F%D0%BB%D0%B0%D1%82%D0%BE%D0%BD%D0%BE%D0%B2%D0%B8%D1%87",
+    "status": 200,
+    "bytes": 660563,
+    "title": "Платонов, Андрей Платонович — Википедия",
+    "description": null,
+    "canonical": [
+      "https://ru.wikipedia.org/wiki/%D0%9F%D0%BB%D0%B0%D1%82%D0%BE%D0%BD%D0%BE%D0%B2,_%D0%90%D0%BD%D0%B4%D1%80%D0%B5%D0%B9_%D0%9F%D0%BB%D0%B0%D1%82%D0%BE%D0%BD%D0%BE%D0%B2%D0%B8%D1%87"
+    ],
+    "robots": "max-image-preview:standard",
+    "h1": [
+      {
+        "level": 1,
+        "text": "Платонов, Андрей Платонович",
+        "id": "firstHeading"
+      }
+    ]
+  },
+  {
+    "requested": "http://school-essay.ru/analiz-sceny-raskulachivaniya-po-povesti-platonova-kotlovan.html",
+    "hops": [
+      {
+        "url": "http://school-essay.ru/analiz-sceny-raskulachivaniya-po-povesti-platonova-kotlovan.html",
+        "status": 301,
+        "location": "https://school-essay.ru/analiz-sceny-raskulachivaniya-po-povesti-platonova-kotlovan.html",
+        "x_robots_tag": null
+      },
+      {
+        "url": "https://school-essay.ru/analiz-sceny-raskulachivaniya-po-povesti-platonova-kotlovan.html",
+        "status": 301,
+        "location": "https://school-essay.com/analiz-sceny-raskulachivaniya-po-povesti-platonova-kotlovan.html",
+        "x_robots_tag": null
+      },
+      {
+        "url": "https://school-essay.com/analiz-sceny-raskulachivaniya-po-povesti-platonova-kotlovan.html",
+        "status": 200,
+        "location": null,
+        "x_robots_tag": null
+      }
+    ],
+    "final_url": "https://school-essay.com/analiz-sceny-raskulachivaniya-po-povesti-platonova-kotlovan.html",
+    "status": 200,
+    "bytes": 47322,
+    "title": "Анализ сцены раскулачивания (По повести Платонова «Котлован») - Платонов Андрей",
+    "description": "Несмотря на разнообразие тем произведений А.П. Платонова, которого волновали проблемы электрификации и коллективизации, гражданской войны и строительства коммунизма, все их объединяет стремление писателя найти путь к счастью, определить, в чем радость «человеческого сердца». Платонов решал эти вопросы, обращаясь к реалиям окружающей его жизни. Повесть «Котлован» посвящена времени индустриализации и начала коллективизации в молодой Советской стране,",
+    "canonical": [
+      "https://school-essay.com/analiz-sceny-raskulachivaniya-po-povesti-platonova-kotlovan.html"
+    ],
+    "robots": "max-snippet:-1, max-image-preview:large, max-video-preview:-1",
+    "h1": [
+      {
+        "level": 1,
+        "text": "Анализ сцены раскулачивания (По повести Платонова «Котлован»)",
+        "id": null
+      }
+    ]
+  },
+  {
+    "requested": "http://visualrian.ru/images/item/308341",
+    "hops": [
+      {
+        "url": "http://visualrian.ru/images/item/308341",
+        "status": 301,
+        "location": "https://visualrian.ru/images/item/308341",
+        "x_robots_tag": null
+      },
+      {
+        "url": "https://visualrian.ru/images/item/308341",
+        "status": 301,
+        "location": "https://riamediabank.ru//images/item/308341",
+        "x_robots_tag": null
+      },
+      {
+        "url": "https://riamediabank.ru//images/item/308341",
+        "status": 404,
+        "location": null,
+        "x_robots_tag": null
+      }
+    ],
+    "final_url": "https://riamediabank.ru//images/item/308341",
+    "status": 404,
+    "bytes": 196,
+    "title": "404 Not Found",
+    "description": null,
+    "canonical": [],
+    "robots": null,
+    "h1": [
+      {
+        "level": 1,
+        "text": "Not Found",
+        "id": null
+      }
+    ]
+  },
+  {
+    "requested": "http://www.afisha.ru/performance/78446/",
+    "hops": [
+      {
+        "url": "http://www.afisha.ru/performance/78446/",
+        "status": 301,
+        "location": "https://www.afisha.ru/performance/78446/",
+        "x_robots_tag": null
+      },
+      {
+        "url": "https://www.afisha.ru/performance/78446/",
+        "status": 301,
+        "location": "/performance/reka-potudan-78446/",
+        "x_robots_tag": null
+      },
+      {
+        "url": "https://www.afisha.ru/performance/reka-potudan-78446/",
+        "status": 200,
+        "location": null,
+        "x_robots_tag": null
+      }
+    ],
+    "final_url": "https://www.afisha.ru/performance/reka-potudan-78446/",
+    "status": 200,
+    "bytes": 354657,
+    "title": "Река Потудань - купить билет на спектакль в Москве, расписание, отзывы, постановка Студия театрального искусства – Афиша-Театры",
+    "description": "Купить билеты на спектакль Река Потудань в Москве, билеты по цене от 4500,0 руб. 28 ноября 2026 г. в 14.00, Студия театрального искусства Река Потудань, официальные электронные билеты на спектакль на сайте Afisha.ru.",
+    "canonical": [
+      "https://www.afisha.ru/performance/reka-potudan-78446/"
+    ],
+    "robots": null,
+    "h1": [
+      {
+        "level": 1,
+        "text": "Спектакль в МосквеРека Потудань",
+        "id": null
+      }
+    ]
+  },
+  {
+    "requested": "http://www.bashskazki.ru",
+    "hops": [],
+    "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>"
+  },
+  {
+    "requested": "http://www.bashvest.ru/showinf.php?id=11654",
+    "hops": [],
+    "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>"
+  },
+  {
+    "requested": "http://www.hrono.ru/proza/platonov_a/boulygine1.html",
+    "hops": [
+      {
+        "url": "http://www.hrono.ru/proza/platonov_a/boulygine1.html",
+        "status": 301,
+        "location": "https://www.hrono.ru/proza/platonov_a/boulygine1.html",
+        "x_robots_tag": null
+      },
+      {
+        "url": "https://www.hrono.ru/proza/platonov_a/boulygine1.html",
+        "status": 200,
+        "location": null,
+        "x_robots_tag": null
+      }
+    ],
+    "final_url": "https://www.hrono.ru/proza/platonov_a/boulygine1.html",
+    "status": 200,
+    "bytes": 80599,
+    "title": "(Type a title for your page here)",
+    "description": null,
+    "canonical": [],
+    "robots": null,
+    "h1": []
+  },
+  {
+    "requested": "http://www.litra.ru/composition/get/coid/00068801184864024883/woid/00038401184773070560/",
+    "hops": [
+      {
+        "url": "http://www.litra.ru/composition/get/coid/00068801184864024883/woid/00038401184773070560/",
+        "status": 301,
+        "location": "https://www.litra.ru/composition/get/coid/00068801184864024883/woid/00038401184773070560/",
+        "x_robots_tag": null
+      },
+      {
+        "url": "https://www.litra.ru/composition/get/coid/00068801184864024883/woid/00038401184773070560/",
+        "status": 200,
+        "location": null,
+        "x_robots_tag": null
+      }
+    ],
+    "final_url": "https://www.litra.ru/composition/get/coid/00068801184864024883/woid/00038401184773070560/",
+    "status": 200,
+    "bytes": 21604,
+    "title": "О чем я рассуждала, читая «Котлован» Котлован Платонов А.П. :: Litra.RU :: Только отличные сочинения",
+    "description": "Litra.RU ::О чем я рассуждала, читая «Котлован» Котлован Платонов А.П.",
+    "canonical": [],
+    "robots": null,
+    "h1": [
+      {
+        "level": 1,
+        "text": "О чем я рассуждала, читая «Котлован»",
+        "id": null
+      }
+    ]
+  },
+  {
+    "requested": "http://www.mkset.ru/news/today/9166/",
+    "hops": [
+      {
+        "url": "http://www.mkset.ru/news/today/9166/",
+        "status": 308,
+        "location": "https://mkset.ru/news/today/9166/",
+        "x_robots_tag": null
+      },
+      {
+        "url": "https://mkset.ru/news/today/9166/",
+        "status": 200,
+        "location": null,
+        "x_robots_tag": null
+      }
+    ],
+    "final_url": "https://mkset.ru/news/today/9166/",
+    "status": 200,
+    "bytes": 13602,
+    "title": "",
+    "description": null,
+    "canonical": [],
+    "robots": "noindex, noarchive",
+    "h1": []
+  },
+  {
+    "requested": "http://www.rg.ru/2010/08/06/reg-szapad/senin.html",
+    "hops": [
+      {
+        "url": "http://www.rg.ru/2010/08/06/reg-szapad/senin.html",
+        "status": 301,
+        "location": "http://rg.ru/2010/08/06/reg-szapad/senin.html",
+        "x_robots_tag": null
+      },
+      {
+        "url": "http://rg.ru/2010/08/06/reg-szapad/senin.html",
+        "status": 301,
+        "location": "https://rg.ru/2010/08/06/reg-szapad/senin.html",
+        "x_robots_tag": null
+      },
+      {
+        "url": "https://rg.ru/2010/08/06/reg-szapad/senin.html",
+        "status": 200,
+        "location": null,
+        "x_robots_tag": null
+      }
+    ],
+    "final_url": "https://rg.ru/2010/08/06/reg-szapad/senin.html",
+    "status": 200,
+    "bytes": 117544,
+    "title": "Василий Сенин: Если приду насовсем в какой-то театр, то вложу себя полностью - Российская газета",
+    "description": "7 августа в Шотландии, на Эдинбургском международном фестивале искусств Fringe состоится мировая премьера спектакля &quot;Одинокий фокстрот&quot; по рассказам Андрея Платонова",
+    "canonical": [
+      "https://rg.ru/2010/08/06/reg-szapad/senin.html"
+    ],
+    "robots": "max-snippet:-1, max-image-preview:large, max-video-preview:-1",
+    "h1": [
+      {
+        "level": 1,
+        "text": "Василий Сенин: Если приду насовсем в какой-то театр, то вложу себя полностью",
+        "id": null
+      }
+    ]
+  },
+  {
+    "requested": "http://www.school-litra.ru/view_kniga.php?id=203",
+    "hops": [
+      {
+        "url": "http://www.school-litra.ru/view_kniga.php?id=203",
+        "status": 301,
+        "location": "http://school-litra.ru/view_kniga.php?id=203",
+        "x_robots_tag": null
+      },
+      {
+        "url": "http://school-litra.ru/view_kniga.php?id=203",
+        "status": 200,
+        "location": null,
+        "x_robots_tag": null
+      }
+    ],
+    "final_url": "http://school-litra.ru/view_kniga.php?id=203",
+    "status": 200,
+    "bytes": 78174,
+    "title": "���������� ��� 5 ������. ������ - ����� ����� ����� �. �. ��������",
+    "description": "������ - ����� ����� ����� �. �. ��������",
+    "canonical": [],
+    "robots": null,
+    "h1": [
+      {
+        "level": 1,
+        "text": "��������_����������",
+        "id": null
+      }
+    ]
+  },
+  {
+    "requested": "http://www.smotr.ru/2007/2007_sovr_sharmanka.htm",
+    "hops": [
+      {
+        "url": "http://www.smotr.ru/2007/2007_sovr_sharmanka.htm",
+        "status": 200,
+        "location": null,
+        "x_robots_tag": null
+      }
+    ],
+    "final_url": "http://www.smotr.ru/2007/2007_sovr_sharmanka.htm",
+    "status": 200,
+    "bytes": 79735,
+    "title": "��������. ����� �����������. ������ � ���������. ������ � ���������. ��������",
+    "description": "��������. ����� �����������. ������ � ���������. ������ � ���������. ��������",
+    "canonical": [],
+    "robots": "index,nofollow",
+    "h1": [
+      {
+        "level": 1,
+        "text": "���������� �������� �����",
+        "id": null
+      },
+      {
+        "level": 1,
+        "text": "���� ����������� �������",
+        "id": null
+      },
+      {
+        "level": 1,
+        "text": "������-���",
+        "id": null
+      },
+      {
+        "level": 1,
+        "text": "� ������������� ����",
+        "id": null
+      }
+    ]
+  },
+  {
+    "requested": "http://www.vashdosug.ru/msk/theatre/performance/304105/",
+    "hops": [
+      {
+        "url": "http://www.vashdosug.ru/msk/theatre/performance/304105/",
+        "status": 301,
+        "location": "https://vashdosug.ru/msk/theatre/performance/304105/",
+        "x_robots_tag": null
+      },
+      {
+        "url": "https://vashdosug.ru/msk/theatre/performance/304105/",
+        "status": 301,
+        "location": "https://www.vashdosug.ru/msk/theatre/performance/304105/",
+        "x_robots_tag": null
+      },
+      {
+        "url": "https://www.vashdosug.ru/msk/theatre/performance/304105/",
+        "status": 500,
+        "location": null,
+        "x_robots_tag": null
+      }
+    ],
+    "final_url": "https://www.vashdosug.ru/msk/theatre/performance/304105/",
+    "status": 500,
+    "bytes": 3461,
+    "title": "Database Exception (#2002)",
+    "description": "Спектакль \"Река Потудань\" ((Студия театрального искусства)) в Москве: афиша, отзывы, купить билеты онлайн",
+    "canonical": [],
+    "robots": null,
+    "h1": [
+      {
+        "level": 1,
+        "text": "Ошибка 404",
+        "id": null
+      }
+    ]
+  }
+]

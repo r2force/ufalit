@@ -56,6 +56,9 @@
     const place = byId.get(id);
     if (!place) return;
     selectedId = id;
+    if ((center || fromMarker) && typeof document.dispatchEvent === 'function') {
+      document.dispatchEvent(new CustomEvent('ufalit:map-select'));
+    }
     card.hidden = false;
     atlas.querySelector('#atlas-place-title').textContent = place.title;
     atlas.querySelector('.atlas-writer').textContent = place.writer;

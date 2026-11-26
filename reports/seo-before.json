@@ -1,0 +1,2637 @@
+{
+  "site_url": "https://ufalit.ufacsdb.ru/",
+  "pages": [
+    {
+      "path": "index.html",
+      "url": "https://ufalit.ufacsdb.ru/",
+      "title": "Уфа литературная — о проекте",
+      "description": "",
+      "canonical": [],
+      "robots": "index, follow (default)",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Уфа литературная",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "О проекте «Уфа литературная»",
+          "id": null
+        }
+      ],
+      "social": {},
+      "link_count": 30,
+      "external_link_count": 1,
+      "image_count": 1,
+      "missing_alt": 0,
+      "images_without_dimensions": 0,
+      "empty_alt": 1,
+      "jsonld": [],
+      "text_characters": 2880,
+      "text_sha256": "c0000785caa66275f2776467fda239ff8cacb6c2ae761d90dc5654f5034f84b6",
+      "duplicate_ids": []
+    },
+    {
+      "path": "pages/awards/index.html",
+      "url": "https://ufalit.ufacsdb.ru/pages/awards/",
+      "title": "Конкурсы и награды — Уфа литературная",
+      "description": "",
+      "canonical": [],
+      "robots": "index, follow (default)",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Конкурсы, награды, фонды, праздники",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Аксаков Сергей Тимофеевич",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Бикбаев Баязит Гаязович",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Злобин Степан Павлович",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Мажит Гафури",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Мустай Карим",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Худайбердин Шагит Ахметович",
+          "id": null
+        }
+      ],
+      "social": {},
+      "link_count": 76,
+      "external_link_count": 1,
+      "image_count": 26,
+      "missing_alt": 0,
+      "images_without_dimensions": 0,
+      "empty_alt": 7,
+      "jsonld": [],
+      "text_characters": 31342,
+      "text_sha256": "db8f3fa3128111ab5b98ae54a1a318c0decea92c092b64db3b67efd8e7713269",
+      "duplicate_ids": []
+    },
+    {
+      "path": "pages/fund/index.html",
+      "url": "https://ufalit.ufacsdb.ru/pages/fund/",
+      "title": "Фонд личного происхождения Мустая Карима — Уфа литературная",
+      "description": "",
+      "canonical": [],
+      "robots": "index, follow (default)",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Фонд личного происхождения Мустая Карима",
+          "id": null
+        }
+      ],
+      "social": {},
+      "link_count": 21,
+      "external_link_count": 1,
+      "image_count": 1,
+      "missing_alt": 0,
+      "images_without_dimensions": 0,
+      "empty_alt": 1,
+      "jsonld": [],
+      "text_characters": 2361,
+      "text_sha256": "f3c0aaa18997ea193558c3810d6b7ae07ce49f7d3c7ff62bcc4890c19dbccc16",
+      "duplicate_ids": []
+    },
+    {
+      "path": "pages/gallery/index.html",
+      "url": "https://ufalit.ufacsdb.ru/pages/gallery/",
+      "title": "Фотогалерея — Уфа литературная",
+      "description": "",
+      "canonical": [],
+      "robots": "index, follow (default)",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Литераторы",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Аксаков Сергей Тимофеевич",
+          "id": null
+        }
+      ],
+      "social": {},
+      "link_count": 1680,
+      "external_link_count": 1,
+      "image_count": 560,
+      "missing_alt": 0,
+      "images_without_dimensions": 488,
+      "empty_alt": 18,
+      "jsonld": [],
+      "text_characters": 5353,
+      "text_sha256": "c54f84bd23e13e13a552bd1756401cd20117686edbde88d9708708839d27d9a6",
+      "duplicate_ids": []
+    },
+    {
+      "path": "pages/gallery-10/index.html",
+      "url": "https://ufalit.ufacsdb.ru/pages/gallery-10/",
+      "title": "Киекбаев — фотогалерея «Уфа литературная»",
+      "description": "",
+      "canonical": [],
+      "robots": "index, follow (default)",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Литераторы",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Киекбаев",
+          "id": null
+        }
+      ],
+      "social": {},
+      "link_count": 1680,
+      "external_link_count": 1,
+      "image_count": 560,
+      "missing_alt": 0,
+      "images_without_dimensions": 488,
+      "empty_alt": 18,
+      "jsonld": [],
+      "text_characters": 2645,
+      "text_sha256": "5321dab49b20e48d7ce2f183965e7e5f5cd7657f72e46893e36a8585d2177271",
+      "duplicate_ids": []
+    },
+    {
+      "path": "pages/gallery-11/index.html",
+      "url": "https://ufalit.ufacsdb.ru/pages/gallery-11/",
+      "title": "Киньябулатова Катиба Каримовна — фотогалерея «Уфа литературная»",
+      "description": "",
+      "canonical": [],
+      "robots": "index, follow (default)",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Литераторы",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Киньябулатова Катиба Каримовна",
+          "id": null
+        }
+      ],
+      "social": {},
+      "link_count": 1680,
+      "external_link_count": 1,
+      "image_count": 560,
+      "missing_alt": 0,
+      "images_without_dimensions": 488,
+      "empty_alt": 18,
+      "jsonld": [],
+      "text_characters": 3224,
+      "text_sha256": "b4615d79c0c3efc01807938758fbe9ff00de1f75d7f0a0f1b7e09233aade3016",
+      "duplicate_ids": []
+    },
+    {
+      "path": "pages/gallery-12/index.html",
+      "url": "https://ufalit.ufacsdb.ru/pages/gallery-12/",
+      "title": "Короленко Владимир Галактионович — фотогалерея",
+      "description": "",
+      "canonical": [],
+      "robots": "index, follow (default)",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Литераторы",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Короленко Владимир Галактионович",
+          "id": null
+        }
+      ],
+      "social": {},
+      "link_count": 1680,
+      "external_link_count": 1,
+      "image_count": 560,
+      "missing_alt": 0,
+      "images_without_dimensions": 488,
+      "empty_alt": 18,
+      "jsonld": [],
+      "text_characters": 3857,
+      "text_sha256": "11f99289a62477cb95798328df3a24c171b1a42f79bf79034782270749f0e8ca",
+      "duplicate_ids": []
+    },
+    {
+      "path": "pages/gallery-14/index.html",
+      "url": "https://ufalit.ufacsdb.ru/pages/gallery-14/",
+      "title": "Фотогалерея — Уфа литературная",
+      "description": "",
+      "canonical": [],
+      "robots": "index, follow (default)",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Литераторы",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Рахимкулов Мурат Галимович",
+          "id": null
+        }
+      ],
+      "social": {},
+      "link_count": 1680,
+      "external_link_count": 1,
+      "image_count": 560,
+      "missing_alt": 0,
+      "images_without_dimensions": 488,
+      "empty_alt": 18,
+      "jsonld": [],
+      "text_characters": 3109,
+      "text_sha256": "8c7c26e906cf1650bcb8ae951027c16897191fee80a13fd3128d72a66b7a85f2",
+      "duplicate_ids": []
+    },
+    {
+      "path": "pages/gallery-15/index.html",
+      "url": "https://ufalit.ufacsdb.ru/pages/gallery-15/",
+      "title": "Фотогалерея — Уфа литературная",
+      "description": "",
+      "canonical": [],
+      "robots": "index, follow (default)",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Литераторы",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Сотников Иван Владимирович",
+          "id": null
+        }
+      ],
+      "social": {},
+      "link_count": 1680,
+      "external_link_count": 1,
+      "image_count": 560,
+      "missing_alt": 0,
+      "images_without_dimensions": 488,
+      "empty_alt": 18,
+      "jsonld": [],
+      "text_characters": 3197,
+      "text_sha256": "095964573ebf04b361af02c17695854b004e7c40928577d0bb8e2fb666165a06",
+      "duplicate_ids": []
+    },
+    {
+      "path": "pages/gallery-17/index.html",
+      "url": "https://ufalit.ufacsdb.ru/pages/gallery-17/",
+      "title": "Фотогалерея — Уфа литературная",
+      "description": "",
+      "canonical": [],
+      "robots": "index, follow (default)",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Литераторы",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Худайбердин Шагит Ахметович",
+          "id": null
+        }
+      ],
+      "social": {},
+      "link_count": 1685,
+      "external_link_count": 1,
+      "image_count": 562,
+      "missing_alt": 0,
+      "images_without_dimensions": 488,
+      "empty_alt": 20,
+      "jsonld": [],
+      "text_characters": 4763,
+      "text_sha256": "3dffbad0c6ceee99c52156b0a53b35adc4bfe6077b53e71958e89a536b273eb5",
+      "duplicate_ids": []
+    },
+    {
+      "path": "pages/gallery-18/index.html",
+      "url": "https://ufalit.ufacsdb.ru/pages/gallery-18/",
+      "title": "Тухват Янаби — фотогалерея",
+      "description": "",
+      "canonical": [],
+      "robots": "index, follow (default)",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Литераторы",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Тухват Янаби",
+          "id": null
+        }
+      ],
+      "social": {},
+      "link_count": 1681,
+      "external_link_count": 1,
+      "image_count": 560,
+      "missing_alt": 0,
+      "images_without_dimensions": 488,
+      "empty_alt": 18,
+      "jsonld": [],
+      "text_characters": 4045,
+      "text_sha256": "3fdcc3068416524b49b534d38b3c4f6584b83cfba6bd3653f8fa64ad328249dd",
+      "duplicate_ids": []
+    },
+    {
+      "path": "pages/gallery-19/index.html",
+      "url": "https://ufalit.ufacsdb.ru/pages/gallery-19/",
+      "title": "Аксаковские праздники — фотогалерея",
+      "description": "",
+      "canonical": [],
+      "robots": "index, follow (default)",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Литераторы",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Аксаковские праздники",
+          "id": null
+        }
+      ],
+      "social": {},
+      "link_count": 1690,
+      "external_link_count": 1,
+      "image_count": 564,
+      "missing_alt": 0,
+      "images_without_dimensions": 488,
+      "empty_alt": 22,
+      "jsonld": [],
+      "text_characters": 5507,
+      "text_sha256": "679f05f7bba90304d7b68bc5d8f257965d580ee5ecdc38b0e211de9c804be074",
+      "duplicate_ids": []
+    },
+    {
+      "path": "pages/gallery-20/index.html",
+      "url": "https://ufalit.ufacsdb.ru/pages/gallery-20/",
+      "title": "Аксаков 2005 — фотогалерея",
+      "description": "",
+      "canonical": [],
+      "robots": "index, follow (default)",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Литераторы",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Аксаков 2005",
+          "id": null
+        }
+      ],
+      "social": {},
+      "link_count": 1681,
+      "external_link_count": 1,
+      "image_count": 560,
+      "missing_alt": 0,
+      "images_without_dimensions": 488,
+      "empty_alt": 18,
+      "jsonld": [],
+      "text_characters": 2427,
+      "text_sha256": "0747a99051ab69b44d94a2879043356d831dbff1d766473d441ca32063c44a86",
+      "duplicate_ids": []
+    },
+    {
+      "path": "pages/gallery-21/index.html",
+      "url": "https://ufalit.ufacsdb.ru/pages/gallery-21/",
+      "title": "Аксаков 2008 — фотогалерея",
+      "description": "",
+      "canonical": [],
+      "robots": "index, follow (default)",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Литераторы",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Аксаков 2008",
+          "id": null
+        }
+      ],
+      "social": {},
+      "link_count": 1681,
+      "external_link_count": 1,
+      "image_count": 560,
+      "missing_alt": 0,
+      "images_without_dimensions": 488,
+      "empty_alt": 18,
+      "jsonld": [],
+      "text_characters": 2542,
+      "text_sha256": "5d5a31980d295a94a9ea68521d1f6800ff323c454bab36b5869d306c362e5f1d",
+      "duplicate_ids": []
+    },
+    {
+      "path": "pages/gallery-22/index.html",
+      "url": "https://ufalit.ufacsdb.ru/pages/gallery-22/",
+      "title": "Праздник в парке Аксакова — фотогалерея",
+      "description": "",
+      "canonical": [],
+      "robots": "index, follow (default)",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Литераторы",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Праздник в парке Аксакова",
+          "id": null
+        }
+      ],
+      "social": {},
+      "link_count": 1681,
+      "external_link_count": 1,
+      "image_count": 560,
+      "missing_alt": 0,
+      "images_without_dimensions": 488,
+      "empty_alt": 18,
+      "jsonld": [],
+      "text_characters": 3024,
+      "text_sha256": "2d0ec223459dc7b90ccb6c770dd131df944e05a6574661c5d1a044a0a1403f99",
+      "duplicate_ids": []
+    },
+    {
+      "path": "pages/gallery-23/index.html",
+      "url": "https://ufalit.ufacsdb.ru/pages/gallery-23/",
+      "title": "Фотоархив Бикчентаева — фотогалерея",
+      "description": "",
+      "canonical": [],
+      "robots": "index, follow (default)",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Литераторы",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Фотоархив Бикчентаева",
+          "id": null
+        }
+      ],
+      "social": {},
+      "link_count": 1682,
+      "external_link_count": 1,
+      "image_count": 560,
+      "missing_alt": 0,
+      "images_without_dimensions": 488,
+      "empty_alt": 18,
+      "jsonld": [],
+      "text_characters": 2984,
+      "text_sha256": "5298295a9d41e178c153d2b95eec5909f09f3ec6b746135e79e28ee6d2c4c40d",
+      "duplicate_ids": []
+    },
+    {
+      "path": "pages/gallery-24/index.html",
+      "url": "https://ufalit.ufacsdb.ru/pages/gallery-24/",
+      "title": "Фото. Памятные места Бикчентаева — Уфа литературная",
+      "description": "",
+      "canonical": [],
+      "robots": "index, follow (default)",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Литераторы",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Фото. Памятные места Бикчентаева",
+          "id": null
+        }
+      ],
+      "social": {},
+      "link_count": 1681,
+      "external_link_count": 1,
+      "image_count": 560,
+      "missing_alt": 0,
+      "images_without_dimensions": 488,
+      "empty_alt": 18,
+      "jsonld": [],
+      "text_characters": 3588,
+      "text_sha256": "dde8c635e4d3bfec606c3b3b00c28d6008618aa6bf32947c6ea03f34e5e905c0",
+      "duplicate_ids": []
+    },
+    {
+      "path": "pages/gallery-25/index.html",
+      "url": "https://ufalit.ufacsdb.ru/pages/gallery-25/",
+      "title": "Афиши — Уфа литературная",
+      "description": "",
+      "canonical": [],
+      "robots": "index, follow (default)",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Литераторы",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Афиши",
+          "id": null
+        }
+      ],
+      "social": {},
+      "link_count": 1681,
+      "external_link_count": 1,
+      "image_count": 560,
+      "missing_alt": 0,
+      "images_without_dimensions": 488,
+      "empty_alt": 18,
+      "jsonld": [],
+      "text_characters": 2140,
+      "text_sha256": "9effe0b8709de007a981253b0edeb162605787f26913e60267b0e9ed04bd6808",
+      "duplicate_ids": []
+    },
+    {
+      "path": "pages/gallery-26/index.html",
+      "url": "https://ufalit.ufacsdb.ru/pages/gallery-26/",
+      "title": "Памятные места — Уфа литературная",
+      "description": "",
+      "canonical": [],
+      "robots": "index, follow (default)",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Литераторы",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Памятные места",
+          "id": null
+        }
+      ],
+      "social": {},
+      "link_count": 1684,
+      "external_link_count": 1,
+      "image_count": 560,
+      "missing_alt": 0,
+      "images_without_dimensions": 488,
+      "empty_alt": 18,
+      "jsonld": [],
+      "text_characters": 4015,
+      "text_sha256": "7f9f9c9e71ec1223fdb2ba9551d3363b4ac94894f2d2f864a315e28c854e521f",
+      "duplicate_ids": []
+    },
+    {
+      "path": "pages/gallery-27/index.html",
+      "url": "https://ufalit.ufacsdb.ru/pages/gallery-27/",
+      "title": "Семейный архив — Уфа литературная",
+      "description": "",
+      "canonical": [],
+      "robots": "index, follow (default)",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Литераторы",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Семейный архив",
+          "id": null
+        }
+      ],
+      "social": {},
+      "link_count": 1681,
+      "external_link_count": 1,
+      "image_count": 560,
+      "missing_alt": 0,
+      "images_without_dimensions": 488,
+      "empty_alt": 18,
+      "jsonld": [],
+      "text_characters": 2825,
+      "text_sha256": "24b28300b2a26f2c475fec8e778834552e80be0a2f85a32809934422048d1716",
+      "duplicate_ids": []
+    },
+    {
+      "path": "pages/gallery-28/index.html",
+      "url": "https://ufalit.ufacsdb.ru/pages/gallery-28/",
+      "title": "Современники и коллеги — Уфа литературная",
+      "description": "",
+      "canonical": [],
+      "robots": "index, follow (default)",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Литераторы",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Современники и коллеги",
+          "id": null
+        }
+      ],
+      "social": {},
+      "link_count": 1681,
+      "external_link_count": 1,
+      "image_count": 560,
+      "missing_alt": 0,
+      "images_without_dimensions": 488,
+      "empty_alt": 18,
+      "jsonld": [],
+      "text_characters": 2174,
+      "text_sha256": "0be59933a469cc3b46bd3a5409399b4ab375f9975b6ee91738cf3ac9b53d7603",
+      "duplicate_ids": []
+    },
+    {
+      "path": "pages/gallery-29/index.html",
+      "url": "https://ufalit.ufacsdb.ru/pages/gallery-29/",
+      "title": "Мемориальная доска — Уфа литературная",
+      "description": "",
+      "canonical": [],
+      "robots": "index, follow (default)",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Литераторы",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Мемориальная доска",
+          "id": null
+        }
+      ],
+      "social": {},
+      "link_count": 1682,
+      "external_link_count": 1,
+      "image_count": 560,
+      "missing_alt": 0,
+      "images_without_dimensions": 488,
+      "empty_alt": 18,
+      "jsonld": [],
+      "text_characters": 2115,
+      "text_sha256": "70d8803180f088709c2d8e637621a26d7a5dd0d78e66636d842079fbe76c9d1b",
+      "duplicate_ids": []
+    },
+    {
+      "path": "pages/gallery-30/index.html",
+      "url": "https://ufalit.ufacsdb.ru/pages/gallery-30/",
+      "title": "УМПО — Уфа литературная",
+      "description": "",
+      "canonical": [],
+      "robots": "index, follow (default)",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Литераторы",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "УМПО",
+          "id": null
+        }
+      ],
+      "social": {},
+      "link_count": 1683,
+      "external_link_count": 1,
+      "image_count": 560,
+      "missing_alt": 0,
+      "images_without_dimensions": 488,
+      "empty_alt": 18,
+      "jsonld": [],
+      "text_characters": 2421,
+      "text_sha256": "27140381cb484603a023f83b81c38f85ac7540c0b99771ef2098ccf629ef8471",
+      "duplicate_ids": []
+    },
+    {
+      "path": "pages/gallery-31/index.html",
+      "url": "https://ufalit.ufacsdb.ru/pages/gallery-31/",
+      "title": "Школа — Уфа литературная",
+      "description": "",
+      "canonical": [],
+      "robots": "index, follow (default)",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Литераторы",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Школа",
+          "id": null
+        }
+      ],
+      "social": {},
+      "link_count": 1682,
+      "external_link_count": 1,
+      "image_count": 560,
+      "missing_alt": 0,
+      "images_without_dimensions": 488,
+      "empty_alt": 18,
+      "jsonld": [],
+      "text_characters": 2772,
+      "text_sha256": "ad999fdbb5079e02b0bfe5b5f263fe1c7d29c4b20d2ebd7a5b1d100021d3ee96",
+      "duplicate_ids": []
+    },
+    {
+      "path": "pages/gallery-32/index.html",
+      "url": "https://ufalit.ufacsdb.ru/pages/gallery-32/",
+      "title": "Документы — Уфа литературная",
+      "description": "",
+      "canonical": [],
+      "robots": "index, follow (default)",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Литераторы",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Документы",
+          "id": null
+        }
+      ],
+      "social": {},
+      "link_count": 1683,
+      "external_link_count": 1,
+      "image_count": 560,
+      "missing_alt": 0,
+      "images_without_dimensions": 488,
+      "empty_alt": 18,
+      "jsonld": [],
+      "text_characters": 2665,
+      "text_sha256": "6f150a05175d6fc7935f6c02ba3a004db0f72c737588cf4947abbb97bb7e9d9b",
+      "duplicate_ids": []
+    },
+    {
+      "path": "pages/gallery-33/index.html",
+      "url": "https://ufalit.ufacsdb.ru/pages/gallery-33/",
+      "title": "Памятные места — Уфа литературная",
+      "description": "",
+      "canonical": [],
+      "robots": "index, follow (default)",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Литераторы",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Памятные места",
+          "id": null
+        }
+      ],
+      "social": {},
+      "link_count": 1681,
+      "external_link_count": 1,
+      "image_count": 560,
+      "missing_alt": 0,
+      "images_without_dimensions": 488,
+      "empty_alt": 18,
+      "jsonld": [],
+      "text_characters": 2708,
+      "text_sha256": "0dcf1c10299925a84cfff63afd5553eac4cad12832d98080b5624e37342b10ae",
+      "duplicate_ids": []
+    },
+    {
+      "path": "pages/gallery-34/index.html",
+      "url": "https://ufalit.ufacsdb.ru/pages/gallery-34/",
+      "title": "Фотоматериалы по творчеству Гафури — Уфа литературная",
+      "description": "",
+      "canonical": [],
+      "robots": "index, follow (default)",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Литераторы",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Фотоматериалы по творчеству Гафури",
+          "id": null
+        }
+      ],
+      "social": {},
+      "link_count": 1681,
+      "external_link_count": 1,
+      "image_count": 560,
+      "missing_alt": 0,
+      "images_without_dimensions": 488,
+      "empty_alt": 18,
+      "jsonld": [],
+      "text_characters": 2926,
+      "text_sha256": "fea96efda028bf0b2b9129397ef249e1a1b1fb0ab5c6127ffd829db817e20720",
+      "duplicate_ids": []
+    },
+    {
+      "path": "pages/gallery-35/index.html",
+      "url": "https://ufalit.ufacsdb.ru/pages/gallery-35/",
+      "title": "Фото памятных мест — Уфа литературная",
+      "description": "",
+      "canonical": [],
+      "robots": "index, follow (default)",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Литераторы",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Фото памятных мест",
+          "id": null
+        }
+      ],
+      "social": {},
+      "link_count": 1681,
+      "external_link_count": 1,
+      "image_count": 560,
+      "missing_alt": 0,
+      "images_without_dimensions": 488,
+      "empty_alt": 18,
+      "jsonld": [],
+      "text_characters": 3553,
+      "text_sha256": "4458d20ef069268ad6edb105ec3ff2e4b215e86d39c53468eea07eb4834a2af0",
+      "duplicate_ids": []
+    },
+    {
+      "path": "pages/gallery-36/index.html",
+      "url": "https://ufalit.ufacsdb.ru/pages/gallery-36/",
+      "title": "Фотографии — Уфа литературная",
+      "description": "",
+      "canonical": [],
+      "robots": "index, follow (default)",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Литераторы",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Фотографии",
+          "id": null
+        }
+      ],
+      "social": {},
+      "link_count": 1681,
+      "external_link_count": 1,
+      "image_count": 560,
+      "missing_alt": 0,
+      "images_without_dimensions": 488,
+      "empty_alt": 18,
+      "jsonld": [],
+      "text_characters": 3679,
+      "text_sha256": "ca2e7c4804f977313cde4ebe20f003f6c7270204ff11d63e56d0d1568000898a",
+      "duplicate_ids": []
+    },
+    {
+      "path": "pages/gallery-37/index.html",
+      "url": "https://ufalit.ufacsdb.ru/pages/gallery-37/",
+      "title": "Музей, премия — Уфа литературная",
+      "description": "",
+      "canonical": [],
+      "robots": "index, follow (default)",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Литераторы",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Музей, премия",
+          "id": null
+        }
+      ],
+      "social": {},
+      "link_count": 1681,
+      "external_link_count": 1,
+      "image_count": 560,
+      "missing_alt": 0,
+      "images_without_dimensions": 488,
+      "empty_alt": 18,
+      "jsonld": [],
+      "text_characters": 3535,
+      "text_sha256": "51464b55444a08922c9bccba0d7ff961790e2665354fccb4f18333864222ecd9",
+      "duplicate_ids": []
+    },
+    {
+      "path": "pages/gallery-38/index.html",
+      "url": "https://ufalit.ufacsdb.ru/pages/gallery-38/",
+      "title": "Экскурсия по мемориальному уголку — Уфа литературная",
+      "description": "",
+      "canonical": [],
+      "robots": "index, follow (default)",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Литераторы",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Экскурсия по мемориальному уголку",
+          "id": null
+        }
+      ],
+      "social": {},
+      "link_count": 1681,
+      "external_link_count": 1,
+      "image_count": 560,
+      "missing_alt": 0,
+      "images_without_dimensions": 488,
+      "empty_alt": 18,
+      "jsonld": [],
+      "text_characters": 3158,
+      "text_sha256": "ffd37cca59e94b6198b3382c398f362b26f6a18962ea9a2fc60367b26a824c1a",
+      "duplicate_ids": []
+    },
+    {
+      "path": "pages/gallery-39/index.html",
+      "url": "https://ufalit.ufacsdb.ru/pages/gallery-39/",
+      "title": "Шафиков Газим Газизович — Уфа литературная",
+      "description": "",
+      "canonical": [],
+      "robots": "index, follow (default)",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Литераторы",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Шафиков Газим Газизович",
+          "id": null
+        }
+      ],
+      "social": {},
+      "link_count": 1687,
+      "external_link_count": 1,
+      "image_count": 563,
+      "missing_alt": 0,
+      "images_without_dimensions": 488,
+      "empty_alt": 21,
+      "jsonld": [],
+      "text_characters": 6923,
+      "text_sha256": "506538db9eb2a6bd39e2eaa7bc313bc90e1e504d056cf92eaa11a8ac35af1ced",
+      "duplicate_ids": []
+    },
+    {
+      "path": "pages/gallery-40/index.html",
+      "url": "https://ufalit.ufacsdb.ru/pages/gallery-40/",
+      "title": "Из Литературного музея — Уфа литературная",
+      "description": "",
+      "canonical": [],
+      "robots": "index, follow (default)",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Литераторы",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Из Литературного музея",
+          "id": null
+        }
+      ],
+      "social": {},
+      "link_count": 1681,
+      "external_link_count": 1,
+      "image_count": 560,
+      "missing_alt": 0,
+      "images_without_dimensions": 488,
+      "empty_alt": 18,
+      "jsonld": [],
+      "text_characters": 4909,
+      "text_sha256": "c210d88df5c7f75461fabf2db6550f185103967d66748bfde3e80b2e962d8742",
+      "duplicate_ids": []
+    },
+    {
+      "path": "pages/gallery-41/index.html",
+      "url": "https://ufalit.ufacsdb.ru/pages/gallery-41/",
+      "title": "Семейный архив — Уфа литературная",
+      "description": "",
+      "canonical": [],
+      "robots": "index, follow (default)",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Литераторы",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Семейный архив",
+          "id": null
+        }
+      ],
+      "social": {},
+      "link_count": 1681,
+      "external_link_count": 1,
+      "image_count": 560,
+      "missing_alt": 0,
+      "images_without_dimensions": 488,
+      "empty_alt": 18,
+      "jsonld": [],
+      "text_characters": 3298,
+      "text_sha256": "f8da0a979a924d716be630671a1b4a66f31eb1197efc679e6ff2d0851e89b81c",
+      "duplicate_ids": []
+    },
+    {
+      "path": "pages/gallery-42/index.html",
+      "url": "https://ufalit.ufacsdb.ru/pages/gallery-42/",
+      "title": "Фото памятных мест — Уфа литературная",
+      "description": "",
+      "canonical": [],
+      "robots": "index, follow (default)",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Литераторы",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Фото памятных мест",
+          "id": null
+        }
+      ],
+      "social": {},
+      "link_count": 1681,
+      "external_link_count": 1,
+      "image_count": 560,
+      "missing_alt": 0,
+      "images_without_dimensions": 488,
+      "empty_alt": 18,
+      "jsonld": [],
+      "text_characters": 2606,
+      "text_sha256": "c51bc5405a31df0e2c3d176f4fc8c5c12980934ad9f79e1b9e117f39fe4656b0",
+      "duplicate_ids": []
+    },
+    {
+      "path": "pages/gallery-43/index.html",
+      "url": "https://ufalit.ufacsdb.ru/pages/gallery-43/",
+      "title": "Фото улицы Тухвата Янаби — Уфа литературная",
+      "description": "",
+      "canonical": [],
+      "robots": "index, follow (default)",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Литераторы",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Фото улицы Тухвата Янаби",
+          "id": null
+        }
+      ],
+      "social": {},
+      "link_count": 1681,
+      "external_link_count": 1,
+      "image_count": 560,
+      "missing_alt": 0,
+      "images_without_dimensions": 488,
+      "empty_alt": 18,
+      "jsonld": [],
+      "text_characters": 3527,
+      "text_sha256": "490e30df8a3aef45b2947bd9c9032a0ff7c19d3e2971aa19a9c16d860f6f6ff3",
+      "duplicate_ids": []
+    },
+    {
+      "path": "pages/gallery-5/index.html",
+      "url": "https://ufalit.ufacsdb.ru/pages/gallery-5/",
+      "title": "Бикчентаев Анвер Гадеевич — фотогалерея",
+      "description": "",
+      "canonical": [],
+      "robots": "index, follow (default)",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Литераторы",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Бикчентаев Анвер Гадеевич",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Связанные фотоподборки",
+          "id": "related-title"
+        }
+      ],
+      "social": {},
+      "link_count": 1683,
+      "external_link_count": 1,
+      "image_count": 560,
+      "missing_alt": 0,
+      "images_without_dimensions": 488,
+      "empty_alt": 18,
+      "jsonld": [],
+      "text_characters": 4677,
+      "text_sha256": "5730f7a4f36d5cb5436ff92837c816b32d67a55241cd63a588231ef1b5e07f48",
+      "duplicate_ids": []
+    },
+    {
+      "path": "pages/gallery-6/index.html",
+      "url": "https://ufalit.ufacsdb.ru/pages/gallery-6/",
+      "title": "Фотогалерея — Уфа литературная",
+      "description": "",
+      "canonical": [],
+      "robots": "index, follow (default)",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Литераторы",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Воловик Михаил Яковлевич",
+          "id": null
+        }
+      ],
+      "social": {},
+      "link_count": 1687,
+      "external_link_count": 1,
+      "image_count": 563,
+      "missing_alt": 0,
+      "images_without_dimensions": 488,
+      "empty_alt": 21,
+      "jsonld": [],
+      "text_characters": 5266,
+      "text_sha256": "5526d38a5b046ef0d979b72f52836eb297f1986c6337a08528b48753a2f790c7",
+      "duplicate_ids": []
+    },
+    {
+      "path": "pages/gallery-7/index.html",
+      "url": "https://ufalit.ufacsdb.ru/pages/gallery-7/",
+      "title": "Мажит Гафури — Фотогалерея — Уфа литературная",
+      "description": "",
+      "canonical": [],
+      "robots": "index, follow (default)",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Литераторы",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Мажит Гафури",
+          "id": null
+        }
+      ],
+      "social": {},
+      "link_count": 1684,
+      "external_link_count": 1,
+      "image_count": 562,
+      "missing_alt": 0,
+      "images_without_dimensions": 488,
+      "empty_alt": 20,
+      "jsonld": [],
+      "text_characters": 3686,
+      "text_sha256": "68e38c3f362b412736f2092553f4f9eb6ac97490e10c9867761d938e43e6bbce",
+      "duplicate_ids": []
+    },
+    {
+      "path": "pages/gallery-8/index.html",
+      "url": "https://ufalit.ufacsdb.ru/pages/gallery-8/",
+      "title": "Ибрагимов Галимджан Гирфанович — Фотогалерея — Уфа литературная",
+      "description": "",
+      "canonical": [],
+      "robots": "index, follow (default)",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Литераторы",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Ибрагимов Галимджан Гирфанович",
+          "id": null
+        }
+      ],
+      "social": {},
+      "link_count": 1680,
+      "external_link_count": 1,
+      "image_count": 560,
+      "missing_alt": 0,
+      "images_without_dimensions": 488,
+      "empty_alt": 18,
+      "jsonld": [],
+      "text_characters": 4759,
+      "text_sha256": "04eea832ba4aabf9218f6b32863c43b05a37cde0a53cd8e784b2f6fb1c695ccf",
+      "duplicate_ids": []
+    },
+    {
+      "path": "pages/gallery-9/index.html",
+      "url": "https://ufalit.ufacsdb.ru/pages/gallery-9/",
+      "title": "Фотогалерея — Уфа литературная",
+      "description": "",
+      "canonical": [],
+      "robots": "index, follow (default)",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Литераторы",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Мустай Карим",
+          "id": null
+        }
+      ],
+      "social": {},
+      "link_count": 1684,
+      "external_link_count": 1,
+      "image_count": 562,
+      "missing_alt": 0,
+      "images_without_dimensions": 488,
+      "empty_alt": 20,
+      "jsonld": [],
+      "text_characters": 5286,
+      "text_sha256": "928bfe3d48bf712bbf6ac94c82c39b6e808d0ddbab3d8f00ec8c4a689ef02721",
+      "duplicate_ids": []
+    },
+    {
+      "path": "pages/gallery-aksakov/index.html",
+      "url": "https://ufalit.ufacsdb.ru/pages/gallery-aksakov/",
+      "title": "Сергей Аксаков — фотогалерея",
+      "description": "",
+      "canonical": [],
+      "robots": "index, follow (default)",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Литераторы",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Аксаков Сергей Тимофеевич",
+          "id": null
+        }
+      ],
+      "social": {},
+      "link_count": 1681,
+      "external_link_count": 1,
+      "image_count": 560,
+      "missing_alt": 0,
+      "images_without_dimensions": 488,
+      "empty_alt": 18,
+      "jsonld": [],
+      "text_characters": 5391,
+      "text_sha256": "9eb9c1f95fb6817e80d92a78c3aac6ed7d59f12739f316dc9884bb88d8eb14da",
+      "duplicate_ids": []
+    },
+    {
+      "path": "pages/gallery-amantai/index.html",
+      "url": "https://ufalit.ufacsdb.ru/pages/gallery-amantai/",
+      "title": "Габдулла Амантай — фотогалерея",
+      "description": "",
+      "canonical": [],
+      "robots": "index, follow (default)",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Литераторы",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Амантай Габдулла",
+          "id": null
+        }
+      ],
+      "social": {},
+      "link_count": 1680,
+      "external_link_count": 1,
+      "image_count": 560,
+      "missing_alt": 0,
+      "images_without_dimensions": 488,
+      "empty_alt": 18,
+      "jsonld": [],
+      "text_characters": 4254,
+      "text_sha256": "0c80cc4717af76d1774c6bbafe70a2a1244ceea582f0885bf264822845fa6922",
+      "duplicate_ids": []
+    },
+    {
+      "path": "pages/gallery-bikbay/index.html",
+      "url": "https://ufalit.ufacsdb.ru/pages/gallery-bikbay/",
+      "title": "Баязит Бикбай — фотогалерея",
+      "description": "",
+      "canonical": [],
+      "robots": "index, follow (default)",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Литераторы",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Баязит Бикбай",
+          "id": null
+        }
+      ],
+      "social": {},
+      "link_count": 1680,
+      "external_link_count": 1,
+      "image_count": 560,
+      "missing_alt": 0,
+      "images_without_dimensions": 488,
+      "empty_alt": 18,
+      "jsonld": [],
+      "text_characters": 3498,
+      "text_sha256": "9b15349a411069f6b99c52c30f2a11fba3d2fc4ad4b6f3d94703fb3ae1e2f944",
+      "duplicate_ids": []
+    },
+    {
+      "path": "pages/gallery-uzikov/index.html",
+      "url": "https://ufalit.ufacsdb.ru/pages/gallery-uzikov/",
+      "title": "Юрий Узиков — фотогалерея",
+      "description": "",
+      "canonical": [],
+      "robots": "index, follow (default)",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Литераторы",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Юрий Узиков",
+          "id": null
+        }
+      ],
+      "social": {},
+      "link_count": 1680,
+      "external_link_count": 1,
+      "image_count": 560,
+      "missing_alt": 0,
+      "images_without_dimensions": 488,
+      "empty_alt": 18,
+      "jsonld": [],
+      "text_characters": 2377,
+      "text_sha256": "3b74ab615fd7f4f98f51f7f2ce6e7db7b3df81da060d525a2e4d2dbcd56f722b",
+      "duplicate_ids": []
+    },
+    {
+      "path": "pages/large-videos/index.html",
+      "url": "https://ufalit.ufacsdb.ru/pages/large-videos/",
+      "title": "Видеоматериалы — Уфа литературная",
+      "description": "",
+      "canonical": [],
+      "robots": "index, follow (default)",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Видеоматериалы",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Аксаков 2007",
+          "id": null
+        }
+      ],
+      "social": {},
+      "link_count": 21,
+      "external_link_count": 1,
+      "image_count": 1,
+      "missing_alt": 0,
+      "images_without_dimensions": 0,
+      "empty_alt": 1,
+      "jsonld": [],
+      "text_characters": 196,
+      "text_sha256": "8a5f0960f8414904653cc1ecba07bb6d99216afb18133ba36e8ea6fe80b09c71",
+      "duplicate_ids": []
+    },
+    {
+      "path": "pages/legends/index.html",
+      "url": "https://ufalit.ufacsdb.ru/pages/legends/",
+      "title": "Уфа в легендах и преданиях — Уфа литературная",
+      "description": "",
+      "canonical": [],
+      "robots": "index, follow (default)",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Уфа в легендах и преданиях",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Литературные памятники Уфы",
+          "id": "legend-index-title"
+        },
+        {
+          "level": 2,
+          "text": "Луна и Зухра",
+          "id": "zuhra-title"
+        },
+        {
+          "level": 3,
+          "text": "О памятнике",
+          "id": null
+        },
+        {
+          "level": 3,
+          "text": "Биография автора",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Как Салават медведя убил",
+          "id": "salavat-title"
+        },
+        {
+          "level": 3,
+          "text": "О памятнике",
+          "id": null
+        },
+        {
+          "level": 3,
+          "text": "Биография автора",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Легенда о кунице",
+          "id": "kunitsa-title"
+        },
+        {
+          "level": 3,
+          "text": "О памятнике",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Легенда о курае",
+          "id": "kurai-title"
+        },
+        {
+          "level": 3,
+          "text": "О памятнике",
+          "id": null
+        },
+        {
+          "level": 3,
+          "text": "Интервью с автором",
+          "id": null
+        }
+      ],
+      "social": {},
+      "link_count": 77,
+      "external_link_count": 1,
+      "image_count": 26,
+      "missing_alt": 0,
+      "images_without_dimensions": 0,
+      "empty_alt": 5,
+      "jsonld": [],
+      "text_characters": 14624,
+      "text_sha256": "9aa231aa0ad353c0ddc5502e874e87a79aa9795e40420c8776fdeff4ccf7e4cf",
+      "duplicate_ids": []
+    },
+    {
+      "path": "pages/map/index.html",
+      "url": "https://ufalit.ufacsdb.ru/pages/map/",
+      "title": "Литературная карта Уфы — Уфа литературная",
+      "description": "",
+      "canonical": [],
+      "robots": "index, follow (default)",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Литературная карта Уфы",
+          "id": "atlas-heading"
+        },
+        {
+          "level": 3,
+          "text": "Мемориальный Дом-музей С. Т. Аксакова",
+          "id": "atlas-place-title"
+        }
+      ],
+      "social": {},
+      "link_count": 160,
+      "external_link_count": 1,
+      "image_count": 70,
+      "missing_alt": 0,
+      "images_without_dimensions": 0,
+      "empty_alt": 69,
+      "jsonld": [],
+      "text_characters": 4043,
+      "text_sha256": "d27dc3efd7d01a2172dcd0aeb4c6bb543d99a7987db9e7fcdea8f490cba08046",
+      "duplicate_ids": []
+    },
+    {
+      "path": "pages/medal/index.html",
+      "url": "https://ufalit.ufacsdb.ru/pages/medal/",
+      "title": "Памятная медаль «Мустай Карим» — Уфа литературная",
+      "description": "",
+      "canonical": [],
+      "robots": "index, follow (default)",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Памятная медаль «Мустай Карим»",
+          "id": null
+        }
+      ],
+      "social": {},
+      "link_count": 23,
+      "external_link_count": 1,
+      "image_count": 2,
+      "missing_alt": 0,
+      "images_without_dimensions": 0,
+      "empty_alt": 1,
+      "jsonld": [],
+      "text_characters": 395,
+      "text_sha256": "77ded33ba797e6bfd94c694ab2b2cdbb1d39b73c02768563f879726663d0783c",
+      "duplicate_ids": []
+    },
+    {
+      "path": "pages/personalities/index.html",
+      "url": "https://ufalit.ufacsdb.ru/pages/personalities/",
+      "title": "Персоналии — Уфа литературная",
+      "description": "",
+      "canonical": [],
+      "robots": "index, follow (default)",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Персоналии",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Аксаков Сергей Тимофеевич",
+          "id": null
+        },
+        {
+          "level": 3,
+          "text": "Детство в Уфе и истоки творчества (1791–1820)",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Амантай Габдулла",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Баязит Бикбай",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Бикчентаев Анвер Гадеевич",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Воловик Михаил Яковлевич",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Злобин Степан Павлович",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Ибрагимов Галимджан Гирфанович",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Киекбаев Джалиль Гиниятович",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Киньябулатова Катиба Каримовна",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Короленко Владимир Галактионович",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Мажит Гафури",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Мустай Карим",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Платонов Андрей Платонович",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Рахимкулов Мурат Галимович",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Сотников Иван Владимирович",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Тухват Янаби",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Узиков Юрий Андреевич",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Худайбердин Шагит Ахметович",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Шафиков Газим Газизович",
+          "id": null
+        },
+        {
+          "level": 3,
+          "text": "ПОСВЯЩЕНИЯ",
+          "id": null
+        }
+      ],
+      "social": {},
+      "link_count": 371,
+      "external_link_count": 27,
+      "image_count": 160,
+      "missing_alt": 0,
+      "images_without_dimensions": 19,
+      "empty_alt": 156,
+      "jsonld": [],
+      "text_characters": 435798,
+      "text_sha256": "6ede698675486c727cd21d6aade2ab930bd3d4ed71755b72e4d0c36614845913",
+      "duplicate_ids": []
+    },
+    {
+      "path": "pages/places/index.html",
+      "url": "https://ufalit.ufacsdb.ru/pages/places/",
+      "title": "Памятные места Уфы — Уфа литературная",
+      "description": "",
+      "canonical": [],
+      "robots": "index, follow (default)",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Памятные места Уфы",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Аксаков Сергей Тимофеевич",
+          "id": "places-text-001"
+        },
+        {
+          "level": 2,
+          "text": "Амантай Габдулла",
+          "id": "places-text-093"
+        },
+        {
+          "level": 2,
+          "text": "Баязит Бикбай",
+          "id": "places-text-097"
+        },
+        {
+          "level": 2,
+          "text": "Бикчентаев Анвер Гадеевич",
+          "id": "places-text-113"
+        },
+        {
+          "level": 2,
+          "text": "Воловик Михаил Яковлевич",
+          "id": "places-text-194"
+        },
+        {
+          "level": 2,
+          "text": "Злобин Степан Павлович",
+          "id": "places-text-201"
+        },
+        {
+          "level": 2,
+          "text": "Ибрагимов Галимджан Гирфанович",
+          "id": "places-text-212"
+        },
+        {
+          "level": 2,
+          "text": "Киекбаев Джалиль Гиниятович",
+          "id": "places-text-222"
+        },
+        {
+          "level": 2,
+          "text": "Киньябулатова Катиба Каримовна",
+          "id": "places-text-229"
+        },
+        {
+          "level": 2,
+          "text": "Короленко Владимир Галактионович",
+          "id": "places-text-236"
+        },
+        {
+          "level": 2,
+          "text": "Мажит Гафури",
+          "id": "places-text-244"
+        },
+        {
+          "level": 2,
+          "text": "Мустай Карим",
+          "id": "places-text-281"
+        },
+        {
+          "level": 2,
+          "text": "Платонов Андрей Платонович",
+          "id": "places-text-365"
+        },
+        {
+          "level": 2,
+          "text": "Рахимкулов Мурат Галимович",
+          "id": "places-text-372"
+        },
+        {
+          "level": 2,
+          "text": "Сотников Иван Владимирович",
+          "id": "places-text-384"
+        },
+        {
+          "level": 2,
+          "text": "Тухват Янаби",
+          "id": "places-text-397"
+        },
+        {
+          "level": 2,
+          "text": "Узиков Юрий Андреевич",
+          "id": "places-text-408"
+        },
+        {
+          "level": 2,
+          "text": "Худайбердин Шагит Ахметович",
+          "id": "places-text-412"
+        },
+        {
+          "level": 2,
+          "text": "Шафиков Газим Газизович",
+          "id": "places-text-457"
+        }
+      ],
+      "social": {},
+      "link_count": 448,
+      "external_link_count": 2,
+      "image_count": 213,
+      "missing_alt": 0,
+      "images_without_dimensions": 0,
+      "empty_alt": 20,
+      "jsonld": [],
+      "text_characters": 91603,
+      "text_sha256": "7bfb217fa9732c14b243b99e138c7ec6b98bcbcf9f5210191789de89d288ea7e",
+      "duplicate_ids": []
+    },
+    {
+      "path": "pages/reading/index.html",
+      "url": "https://ufalit.ufacsdb.ru/pages/reading/",
+      "title": "Читальный зал — Уфа литературная",
+      "description": "",
+      "canonical": [],
+      "robots": "index, follow (default)",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Читальный зал",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Литераторы",
+          "id": null
+        },
+        {
+          "level": 3,
+          "text": "Аксаков Сергей Тимофеевич",
+          "id": null
+        },
+        {
+          "level": 3,
+          "text": "Тухват Янаби",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Ничего не найдено",
+          "id": null
+        }
+      ],
+      "social": {},
+      "link_count": 25,
+      "external_link_count": 1,
+      "image_count": 3,
+      "missing_alt": 0,
+      "images_without_dimensions": 0,
+      "empty_alt": 3,
+      "jsonld": [],
+      "text_characters": 619,
+      "text_sha256": "0adc4d7c955bb09c41351f5e80574ae93d16eb5fc2a33bfe0c53f8cfaa86a099",
+      "duplicate_ids": []
+    },
+    {
+      "path": "pages/reading-aksakov-childhood/index.html",
+      "url": "https://ufalit.ufacsdb.ru/pages/reading-aksakov-childhood/",
+      "title": "Аксаков, С. Т. Детские годы Багрова-внука — Уфа литературная",
+      "description": "",
+      "canonical": [],
+      "robots": "index, follow (default)",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Аксаков, С. Т. Детские годы Багрова-внука",
+          "id": null
+        }
+      ],
+      "social": {},
+      "link_count": 30,
+      "external_link_count": 1,
+      "image_count": 3,
+      "missing_alt": 0,
+      "images_without_dimensions": 0,
+      "empty_alt": 2,
+      "jsonld": [],
+      "text_characters": 10275,
+      "text_sha256": "ef857ea5a15b6187e62ff89495ec93d3934494e90d6e04bcb76b952c3f6c39c4",
+      "duplicate_ids": []
+    },
+    {
+      "path": "pages/reading-aksakov-flower/index.html",
+      "url": "https://ufalit.ufacsdb.ru/pages/reading-aksakov-flower/",
+      "title": "Аксаков, С. Т. Аленький цветочек — Уфа литературная",
+      "description": "",
+      "canonical": [],
+      "robots": "index, follow (default)",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Аксаков, С. Т. Аленький цветочек",
+          "id": null
+        }
+      ],
+      "social": {},
+      "link_count": 30,
+      "external_link_count": 1,
+      "image_count": 3,
+      "missing_alt": 0,
+      "images_without_dimensions": 0,
+      "empty_alt": 2,
+      "jsonld": [],
+      "text_characters": 4026,
+      "text_sha256": "669842c0052bba082d17931adbccf474ab95fac1bb4fddd08a52457607963d69",
+      "duplicate_ids": []
+    },
+    {
+      "path": "pages/reading-aksakov-nature/index.html",
+      "url": "https://ufalit.ufacsdb.ru/pages/reading-aksakov-nature/",
+      "title": "Аксаков, С. Т. Рассказы о родной природе — Уфа литературная",
+      "description": "",
+      "canonical": [],
+      "robots": "index, follow (default)",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Аксаков, С.Т. Рассказы о родной природе",
+          "id": null
+        }
+      ],
+      "social": {},
+      "link_count": 31,
+      "external_link_count": 1,
+      "image_count": 4,
+      "missing_alt": 0,
+      "images_without_dimensions": 0,
+      "empty_alt": 2,
+      "jsonld": [],
+      "text_characters": 1115,
+      "text_sha256": "1994758f23babb7c7fa5b3354102ea6bc236ffb07eae6c82d2300b8aeea6c96f",
+      "duplicate_ids": []
+    },
+    {
+      "path": "pages/reading-author-aksakov/index.html",
+      "url": "https://ufalit.ufacsdb.ru/pages/reading-author-aksakov/",
+      "title": "Аксаков Сергей Тимофеевич — Читальный зал",
+      "description": "",
+      "canonical": [],
+      "robots": "index, follow (default)",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Аксаков Сергей Тимофеевич",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Произведения и материалы",
+          "id": null
+        },
+        {
+          "level": 3,
+          "text": "Аленький цветочек",
+          "id": null
+        },
+        {
+          "level": 3,
+          "text": "Детские годы Багрова-внука",
+          "id": null
+        },
+        {
+          "level": 3,
+          "text": "Рассказы о родной природе",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Другие литераторы",
+          "id": null
+        }
+      ],
+      "social": {},
+      "link_count": 27,
+      "external_link_count": 1,
+      "image_count": 2,
+      "missing_alt": 0,
+      "images_without_dimensions": 0,
+      "empty_alt": 1,
+      "jsonld": [],
+      "text_characters": 590,
+      "text_sha256": "8b2dc67567a6a081d0042b2e00244a28883f61d613275f6e0b24bd28650bd146",
+      "duplicate_ids": []
+    },
+    {
+      "path": "pages/reading-author-yanabi/index.html",
+      "url": "https://ufalit.ufacsdb.ru/pages/reading-author-yanabi/",
+      "title": "Тухват Янаби — Читальный зал",
+      "description": "",
+      "canonical": [],
+      "robots": "index, follow (default)",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Тухват Янаби",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Произведения и материалы",
+          "id": null
+        },
+        {
+          "level": 3,
+          "text": "Стихотворения и басня",
+          "id": null
+        },
+        {
+          "level": 4,
+          "text": "Школьник",
+          "id": null
+        },
+        {
+          "level": 4,
+          "text": "Песня октябрёнка",
+          "id": null
+        },
+        {
+          "level": 4,
+          "text": "Школьные частушки",
+          "id": null
+        },
+        {
+          "level": 4,
+          "text": "Слон и петух",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Другие литераторы",
+          "id": null
+        }
+      ],
+      "social": {},
+      "link_count": 28,
+      "external_link_count": 1,
+      "image_count": 2,
+      "missing_alt": 0,
+      "images_without_dimensions": 0,
+      "empty_alt": 1,
+      "jsonld": [],
+      "text_characters": 938,
+      "text_sha256": "4deb7f4e95a976aa37f47b04847d99c5c27b2357cda6f213cbed3ccfbd508a7c",
+      "duplicate_ids": []
+    },
+    {
+      "path": "pages/reading-yanabi-pesnya-oktyabrenka/index.html",
+      "url": "https://ufalit.ufacsdb.ru/pages/reading-yanabi-pesnya-oktyabrenka/",
+      "title": "Песня октябрёнка — Тухват Янаби — Уфа литературная",
+      "description": "",
+      "canonical": [],
+      "robots": "index, follow (default)",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Стихотворение «Песня октябрёнка».",
+          "id": null
+        }
+      ],
+      "social": {},
+      "link_count": 28,
+      "external_link_count": 1,
+      "image_count": 2,
+      "missing_alt": 0,
+      "images_without_dimensions": 0,
+      "empty_alt": 2,
+      "jsonld": [],
+      "text_characters": 589,
+      "text_sha256": "6c8838105aecfe94040aa95e25cb91bdf81bd075557a837b063d0d9a38a4d066",
+      "duplicate_ids": []
+    },
+    {
+      "path": "pages/reading-yanabi-poems/index.html",
+      "url": "https://ufalit.ufacsdb.ru/pages/reading-yanabi-poems/",
+      "title": "Стихотворения и басня — Тухват Янаби — Уфа литературная",
+      "description": "",
+      "canonical": [],
+      "robots": "index, follow (default)",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Тухват Янаби",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Стихотворения и басня",
+          "id": null
+        },
+        {
+          "level": 3,
+          "text": "Школьник",
+          "id": null
+        },
+        {
+          "level": 3,
+          "text": "Песня октябрёнка",
+          "id": null
+        },
+        {
+          "level": 3,
+          "text": "Школьные частушки",
+          "id": null
+        },
+        {
+          "level": 3,
+          "text": "Слон и петух",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Другие литераторы",
+          "id": null
+        }
+      ],
+      "social": {},
+      "link_count": 29,
+      "external_link_count": 1,
+      "image_count": 2,
+      "missing_alt": 0,
+      "images_without_dimensions": 0,
+      "empty_alt": 1,
+      "jsonld": [],
+      "text_characters": 925,
+      "text_sha256": "c2b38e8f003149fd858dc468372bb867ce48d7df9ce3db82a689edb2e9a97164",
+      "duplicate_ids": []
+    },
+    {
+      "path": "pages/reading-yanabi-shkolnik/index.html",
+      "url": "https://ufalit.ufacsdb.ru/pages/reading-yanabi-shkolnik/",
+      "title": "Школьник — Тухват Янаби — Уфа литературная",
+      "description": "",
+      "canonical": [],
+      "robots": "index, follow (default)",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Стихотворение «Школьник».",
+          "id": null
+        }
+      ],
+      "social": {},
+      "link_count": 28,
+      "external_link_count": 1,
+      "image_count": 2,
+      "missing_alt": 0,
+      "images_without_dimensions": 0,
+      "empty_alt": 2,
+      "jsonld": [],
+      "text_characters": 484,
+      "text_sha256": "0be53abfc4f55489ebb97676d884feff1c9b92b099fc1e6d17bbfed76d8f6c45",
+      "duplicate_ids": []
+    },
+    {
+      "path": "pages/reading-yanabi-shkolnye-chastushki/index.html",
+      "url": "https://ufalit.ufacsdb.ru/pages/reading-yanabi-shkolnye-chastushki/",
+      "title": "Школьные частушки — Тухват Янаби — Уфа литературная",
+      "description": "",
+      "canonical": [],
+      "robots": "index, follow (default)",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Школьные частушки",
+          "id": null
+        }
+      ],
+      "social": {},
+      "link_count": 28,
+      "external_link_count": 1,
+      "image_count": 2,
+      "missing_alt": 0,
+      "images_without_dimensions": 0,
+      "empty_alt": 2,
+      "jsonld": [],
+      "text_characters": 450,
+      "text_sha256": "348b4c113a3949da9c5e80853820885e750f57bc486d7165e7ca56f7acc57a78",
+      "duplicate_ids": []
+    },
+    {
+      "path": "pages/reading-yanabi-slon-i-petukh/index.html",
+      "url": "https://ufalit.ufacsdb.ru/pages/reading-yanabi-slon-i-petukh/",
+      "title": "Слон и петух — Тухват Янаби — Уфа литературная",
+      "description": "",
+      "canonical": [],
+      "robots": "index, follow (default)",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Басня «Слон и петух».",
+          "id": null
+        }
+      ],
+      "social": {},
+      "link_count": 27,
+      "external_link_count": 1,
+      "image_count": 2,
+      "missing_alt": 0,
+      "images_without_dimensions": 0,
+      "empty_alt": 2,
+      "jsonld": [],
+      "text_characters": 994,
+      "text_sha256": "d96d49d92a052d5facc026e3c9033508249cd37a529bac0eecb4263a1c9cfe76",
+      "duplicate_ids": []
+    },
+    {
+      "path": "pages/stipend/index.html",
+      "url": "https://ufalit.ufacsdb.ru/pages/stipend/",
+      "title": "Стипендия имени Мустая Карима — Уфа литературная",
+      "description": "",
+      "canonical": [],
+      "robots": "index, follow (default)",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Стипендия имени Мустая Карима",
+          "id": null
+        }
+      ],
+      "social": {},
+      "link_count": 23,
+      "external_link_count": 1,
+      "image_count": 2,
+      "missing_alt": 0,
+      "images_without_dimensions": 0,
+      "empty_alt": 1,
+      "jsonld": [],
+      "text_characters": 637,
+      "text_sha256": "74dddf76e68d4fc78e76e675d60b103d5b22249d91cafa43fb1755f59b14c950",
+      "duplicate_ids": []
+    },
+    {
+      "path": "pages/video-388/index.html",
+      "url": "https://ufalit.ufacsdb.ru/pages/video-388/",
+      "title": "Злобин Степан Павлович — Видеокопилка",
+      "description": "",
+      "canonical": [],
+      "robots": "index, follow (default)",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Злобин Степан Павлович",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Видеозаписи будут добавлены позже",
+          "id": "current-video-title"
+        },
+        {
+          "level": 2,
+          "text": "Видеозаписи",
+          "id": "records-title"
+        }
+      ],
+      "social": {},
+      "link_count": 22,
+      "external_link_count": 1,
+      "image_count": 2,
+      "missing_alt": 0,
+      "images_without_dimensions": 0,
+      "empty_alt": 2,
+      "jsonld": [],
+      "text_characters": 230,
+      "text_sha256": "b6f196378bbf2fe1672d4ab6c7ef7928e47df58949de1ae65c14850027d74bec",
+      "duplicate_ids": []
+    },
+    {
+      "path": "pages/video-389/index.html",
+      "url": "https://ufalit.ufacsdb.ru/pages/video-389/",
+      "title": "Аксаков Сергей Тимофеевич — Видеокопилка",
+      "description": "",
+      "canonical": [],
+      "robots": "index, follow (default)",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Аксаков Сергей Тимофеевич",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Аксаков 2005",
+          "id": "current-video-title"
+        },
+        {
+          "level": 2,
+          "text": "Видеозаписи",
+          "id": "records-title"
+        }
+      ],
+      "social": {},
+      "link_count": 31,
+      "external_link_count": 1,
+      "image_count": 4,
+      "missing_alt": 0,
+      "images_without_dimensions": 0,
+      "empty_alt": 4,
+      "jsonld": [],
+      "text_characters": 269,
+      "text_sha256": "186e877858a93964312cdb03fec3d6d3ff62ee41c1030078856140d56c2bf790",
+      "duplicate_ids": []
+    },
+    {
+      "path": "pages/video-81/index.html",
+      "url": "https://ufalit.ufacsdb.ru/pages/video-81/",
+      "title": "Мустай Карим — Видеокопилка",
+      "description": "",
+      "canonical": [],
+      "robots": "index, follow (default)",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Мустай Карим",
+          "id": null
+        },
+        {
+          "level": 2,
+          "text": "Видео 2",
+          "id": "current-video-title"
+        },
+        {
+          "level": 2,
+          "text": "Видеозаписи",
+          "id": "records-title"
+        }
+      ],
+      "social": {},
+      "link_count": 31,
+      "external_link_count": 1,
+      "image_count": 4,
+      "missing_alt": 0,
+      "images_without_dimensions": 0,
+      "empty_alt": 4,
+      "jsonld": [],
+      "text_characters": 223,
+      "text_sha256": "d5478c8f45ad787c38068cdb13d28c718fa89a3e93852e7c13583fbd72336421",
+      "duplicate_ids": []
+    },
+    {
+      "path": "pages/videos/index.html",
+      "url": "https://ufalit.ufacsdb.ru/pages/videos/",
+      "title": "Видеокопилка — Уфа литературная",
+      "description": "",
+      "canonical": [],
+      "robots": "index, follow (default)",
+      "headings": [
+        {
+          "level": 1,
+          "text": "Видеокопилка",
+          "id": "archive-title"
+        },
+        {
+          "level": 2,
+          "text": "Имена в киноархиве",
+          "id": "collections-title"
+        },
+        {
+          "level": 3,
+          "text": "Аксаков Сергей Тимофеевич",
+          "id": null
+        },
+        {
+          "level": 3,
+          "text": "Злобин Степан Павлович",
+          "id": null
+        },
+        {
+          "level": 3,
+          "text": "Мустай Карим",
+          "id": null
+        }
+      ],
+      "social": {},
+      "link_count": 26,
+      "external_link_count": 1,
+      "image_count": 5,
+      "missing_alt": 0,
+      "images_without_dimensions": 0,
+      "empty_alt": 5,
+      "jsonld": [],
+      "text_characters": 371,
+      "text_sha256": "d021d898ab2ee6949e7cfe79e87cddcf3f4e0bd1e4c0f563e1eb15f93ba40ff2",
+      "duplicate_ids": []
+    }
+  ]
+}

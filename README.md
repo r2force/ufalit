@@ -1,6 +1,6 @@
 # Уфа литературная — статическая копия
 
-Сайт опубликован: **https://r2force.github.io/ufalit/**
+Сайт опубликован: **https://ufalit.ufacsdb.ru/**
 
 Перенос с [исходного сайта](https://ufalit.ufacsdb.ru/) и редизайн выполнены и приняты пользователем 26 ноября 2026 года. История работ сохранена в [CHANGELOG.md](CHANGELOG.md) и Git. Временные материалы переноса удалены; открытых задач этих планов нет.
 
@@ -60,7 +60,20 @@ python3 scripts/test_gallery.py
 python3 scripts/test_video_archive.py
 python3 scripts/test_reading_room.py
 node scripts/test_reading_search.js
+node scripts/test_analytics.js
+python3 scripts/render_site.py --output /tmp/ufalit-seo-preview
+python3 scripts/test_seo.py --site /tmp/ufalit-seo-preview
 ```
+
+## SEO и аналитика
+
+Основной адрес для canonical, sitemap и социальных карточек — `https://ufalit.ufacsdb.ru/`, константа `SITE_URL` в `scripts/seo.py`. Относительные ссылки также работают под `/ufalit/`. Метаданные страниц поддерживают `description`, `canonical` (абсолютный либо относительно страницы), `og_image` (от корня сайта или абсолютный), `og_type`, `robots` и `schema_type`. Не задавайте noindex или чужой canonical без документированной причины в `templates/seo-exclusions.json`. Даты lastmod не подставляются автоматически.
+
+Сборщик создаёт `sitemap.xml` из реальных конечных страниц. `site/robots.txt` предназначен для корня пользовательского домена. `templates/metrika.html` и `site/assets/ufalit-analytics.js` подключают счётчик 110934501 и события; цели надо добавить в аккаунте Метрики по [инструкции владельцу](SEO_OWNER_GUIDE.md).
+
+Большие изображения используют сохранённые WebP-превью из `site/assets/optimized/`; оригинальные src и ссылки не меняются. Для нового или заменённого снимка сначала соберите предпросмотр, затем с установленным Pillow выполните `python3 scripts/optimize_images.py --site /tmp/ufalit-seo-preview` и пересоберите в новый каталог. Скрипт не изменяет оригиналы; обычная сборка не требует Pillow. Устаревшие превью заменённого снимка нужно пересоздать до публикации.
+
+Аудит: `python3 scripts/audit_seo.py --site /tmp/ufalit-seo-preview --output /tmp/ufalit-seo-audit.json --details`. Опция `--live` проверяет публичные страницы по сети. Документы: [исходный аудит](SEO_AUDIT.md), [семантика](SEO_KEYWORDS.md), [проверки](SEO_VALIDATION.md), [продвижение](SEO_PROMOTION.md).
 
 GitHub Actions запускает эти же проверки. Push в `main` собирает артефакт; публикация выполняется только ручным запуском workflow Pages с `deploy: true`. Успешный push сам по себе не обновляет публичный сайт.
 

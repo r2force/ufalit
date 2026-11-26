@@ -63,7 +63,7 @@ class EmailContactTests(unittest.TestCase):
         templates = {name: Template((render_site.ROOT / 'templates' / f'{name}.html').read_text().strip())
                      for name in render_site.TEMPLATE_NAMES}
         templates['footer'] = Template('<footer><a href="mailto:library@example.org">library@example.org</a></footer>')
-        source = '---\n' + json.dumps({'title': 'Контакты'}) + '\n---\n<p>Библиотека</p>'
+        source = '---\n' + json.dumps({'title': 'Контакты', 'description': 'Контактная информация библиотеки для вопросов о материалах проекта и обратной связи.'}) + '\n---\n<p>Библиотека</p>'
         for relative, prefix in ((Path('index.html'), ''), (Path('pages/contacts/index.html'), '../../')):
             result = render_site.render_page(source, relative, templates, {}, [])
             self.assertNotIn('library@example.org', result)

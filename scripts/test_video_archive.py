@@ -110,7 +110,7 @@ class VideoArchiveTests(unittest.TestCase):
         self.assertNotIn('hidden', download)
 
     def test_audio_player_and_its_styles_remain_ready_for_new_tracks(self):
-        page = dict(title='Аудиозаписи', audio_studio=dict(
+        page = dict(title='Аудиозаписи', description='Тестовая подборка авторских аудиозаписей с прослушиванием и ссылкой на исходный файл.', audio_studio=dict(
             kicker='Аудиофонд', heading='Аудиозаписи', intro='Новые записи',
             voice='Авторское чтение', description=''), tracks=[
                 dict(id='track-01', title='Новая запись', src='../../assets/audio/new.ogg')])

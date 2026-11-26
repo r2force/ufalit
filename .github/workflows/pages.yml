@@ -8,6 +8,11 @@ on:
       - 'site/**'
       - 'templates/**'
       - 'scripts/render_site.py'
+      - 'scripts/seo.py'
+      - 'scripts/test_seo.py'
+      - 'scripts/audit_seo.py'
+      - 'scripts/optimize_images.py'
+      - 'scripts/test_analytics.js'
       - 'scripts/email_contacts.py'
       - 'scripts/test_email_contacts.py'
       - 'scripts/test_email_contacts.js'
@@ -69,8 +74,12 @@ jobs:
         run: python3 scripts/test_reading_room.py
       - name: Test reading search
         run: node scripts/test_reading_search.js
+      - name: Test analytics goals
+        run: node scripts/test_analytics.js
       - name: Build static pages
         run: python3 scripts/render_site.py --in-place
+      - name: Test SEO on built pages
+        run: python3 scripts/test_seo.py --site site
       - name: Configure Pages
         uses: actions/configure-pages@v6
       - name: Set artifact name

@@ -1,0 +1,6 @@
+{
+  "pages/reading-yanabi-poems/index.html": {
+    "canonical": "https://ufalit.ufacsdb.ru/pages/reading-author-yanabi/",
+    "reason": "Прежняя подборка содержит те же четыре произведения и редакционные пояснения, что и страница автора Янаби; canonical указывает на каталог автора. URL и якоря сохранены."
+  }
+}

@@ -26,7 +26,7 @@
       <div class="atlas-detail-body">
         <p class="atlas-kicker">$category</p>
         <p class="atlas-writer">$writer</p>
-        <h3 id="atlas-place-title" tabindex="-1">$title</h3>
+        <h2 id="atlas-place-title" tabindex="-1">$title</h2>
         <p class="atlas-address">$address</p>
         <div class="atlas-description" tabindex="0" aria-label="Описание места">$description<blockquote class="atlas-quote">$quote</blockquote></div>
         <a class="atlas-more" href="$href">Подробнее о месте <span aria-hidden="true">↗</span></a>
@@ -36,6 +36,7 @@
   <div class="atlas-results"><p class="atlas-count" role="status" aria-live="polite">Мест на карте: $count</p><button class="atlas-reset" type="button" hidden>Сбросить фильтры</button><button class="atlas-show-detail" type="button" hidden>К описанию места ↓</button></div>
   <p class="atlas-empty" hidden>Таких мест пока нет на карте. Попробуйте другое название или сбросьте фильтры.</p>
   <ul class="atlas-choices" aria-label="Памятные места">$choices</ul>
+  <section class="atlas-text-places" aria-labelledby="atlas-text-heading"><h2 id="atlas-text-heading">Литературные места Уфы: адреса и истории</h2>$text_places</section>
   <noscript><p>Выберите место в списке, чтобы открыть его историю. Для интерактивной карты включите JavaScript.</p></noscript>
   <script type="application/json" id="atlas-places">$places_json</script>
 </section>

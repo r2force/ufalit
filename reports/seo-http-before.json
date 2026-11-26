@@ -1,0 +1,1811 @@
+{
+  "site_url": "https://ufalit.ufacsdb.ru/",
+  "http": [
+    {
+      "requested": "https://ufalit.ufacsdb.ru/",
+      "hops": [
+        {
+          "url": "https://ufalit.ufacsdb.ru/",
+          "status": 200,
+          "location": null,
+          "x_robots_tag": null
+        }
+      ],
+      "final_url": "https://ufalit.ufacsdb.ru/",
+      "status": 200,
+      "bytes": 11904,
+      "title": "Уфа литературная — о проекте",
+      "description": null,
+      "canonical": [],
+      "robots": null,
+      "h1": [
+        {
+          "level": 1,
+          "text": "Уфа литературная",
+          "id": null
+        }
+      ]
+    },
+    {
+      "requested": "https://ufalit.ufacsdb.ru/pages/awards/",
+      "hops": [
+        {
+          "url": "https://ufalit.ufacsdb.ru/pages/awards/",
+          "status": 200,
+          "location": null,
+          "x_robots_tag": null
+        }
+      ],
+      "final_url": "https://ufalit.ufacsdb.ru/pages/awards/",
+      "status": 200,
+      "bytes": 74298,
+      "title": "Конкурсы и награды — Уфа литературная",
+      "description": null,
+      "canonical": [],
+      "robots": null,
+      "h1": [
+        {
+          "level": 1,
+          "text": "Конкурсы, награды, фонды, праздники",
+          "id": null
+        }
+      ]
+    },
+    {
+      "requested": "https://ufalit.ufacsdb.ru/pages/fund/",
+      "hops": [
+        {
+          "url": "https://ufalit.ufacsdb.ru/pages/fund/",
+          "status": 200,
+          "location": null,
+          "x_robots_tag": null
+        }
+      ],
+      "final_url": "https://ufalit.ufacsdb.ru/pages/fund/",
+      "status": 200,
+      "bytes": 6692,
+      "title": "Фонд личного происхождения Мустая Карима — Уфа литературная",
+      "description": null,
+      "canonical": [],
+      "robots": null,
+      "h1": [
+        {
+          "level": 1,
+          "text": "Фонд личного происхождения Мустая Карима",
+          "id": null
+        }
+      ]
+    },
+    {
+      "requested": "https://ufalit.ufacsdb.ru/pages/gallery/",
+      "hops": [
+        {
+          "url": "https://ufalit.ufacsdb.ru/pages/gallery/",
+          "status": 200,
+          "location": null,
+          "x_robots_tag": null
+        }
+      ],
+      "final_url": "https://ufalit.ufacsdb.ru/pages/gallery/",
+      "status": 200,
+      "bytes": 503200,
+      "title": "Фотогалерея — Уфа литературная",
+      "description": null,
+      "canonical": [],
+      "robots": null,
+      "h1": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        }
+      ]
+    },
+    {
+      "requested": "https://ufalit.ufacsdb.ru/pages/gallery-10/",
+      "hops": [
+        {
+          "url": "https://ufalit.ufacsdb.ru/pages/gallery-10/",
+          "status": 200,
+          "location": null,
+          "x_robots_tag": null
+        }
+      ],
+      "final_url": "https://ufalit.ufacsdb.ru/pages/gallery-10/",
+      "status": 200,
+      "bytes": 503187,
+      "title": "Киекбаев — фотогалерея «Уфа литературная»",
+      "description": null,
+      "canonical": [],
+      "robots": null,
+      "h1": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        }
+      ]
+    },
+    {
+      "requested": "https://ufalit.ufacsdb.ru/pages/gallery-11/",
+      "hops": [
+        {
+          "url": "https://ufalit.ufacsdb.ru/pages/gallery-11/",
+          "status": 200,
+          "location": null,
+          "x_robots_tag": null
+        }
+      ],
+      "final_url": "https://ufalit.ufacsdb.ru/pages/gallery-11/",
+      "status": 200,
+      "bytes": 503311,
+      "title": "Киньябулатова Катиба Каримовна — фотогалерея «Уфа литературная»",
+      "description": null,
+      "canonical": [],
+      "robots": null,
+      "h1": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        }
+      ]
+    },
+    {
+      "requested": "https://ufalit.ufacsdb.ru/pages/gallery-12/",
+      "hops": [
+        {
+          "url": "https://ufalit.ufacsdb.ru/pages/gallery-12/",
+          "status": 200,
+          "location": null,
+          "x_robots_tag": null
+        }
+      ],
+      "final_url": "https://ufalit.ufacsdb.ru/pages/gallery-12/",
+      "status": 200,
+      "bytes": 503291,
+      "title": "Короленко Владимир Галактионович — фотогалерея",
+      "description": null,
+      "canonical": [],
+      "robots": null,
+      "h1": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        }
+      ]
+    },
+    {
+      "requested": "https://ufalit.ufacsdb.ru/pages/gallery-14/",
+      "hops": [
+        {
+          "url": "https://ufalit.ufacsdb.ru/pages/gallery-14/",
+          "status": 200,
+          "location": null,
+          "x_robots_tag": null
+        }
+      ],
+      "final_url": "https://ufalit.ufacsdb.ru/pages/gallery-14/",
+      "status": 200,
+      "bytes": 503237,
+      "title": "Фотогалерея — Уфа литературная",
+      "description": null,
+      "canonical": [],
+      "robots": null,
+      "h1": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        }
+      ]
+    },
+    {
+      "requested": "https://ufalit.ufacsdb.ru/pages/gallery-15/",
+      "hops": [
+        {
+          "url": "https://ufalit.ufacsdb.ru/pages/gallery-15/",
+          "status": 200,
+          "location": null,
+          "x_robots_tag": null
+        }
+      ],
+      "final_url": "https://ufalit.ufacsdb.ru/pages/gallery-15/",
+      "status": 200,
+      "bytes": 503235,
+      "title": "Фотогалерея — Уфа литературная",
+      "description": null,
+      "canonical": [],
+      "robots": null,
+      "h1": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        }
+      ]
+    },
+    {
+      "requested": "https://ufalit.ufacsdb.ru/pages/gallery-17/",
+      "hops": [
+        {
+          "url": "https://ufalit.ufacsdb.ru/pages/gallery-17/",
+          "status": 200,
+          "location": null,
+          "x_robots_tag": null
+        }
+      ],
+      "final_url": "https://ufalit.ufacsdb.ru/pages/gallery-17/",
+      "status": 200,
+      "bytes": 503997,
+      "title": "Фотогалерея — Уфа литературная",
+      "description": null,
+      "canonical": [],
+      "robots": null,
+      "h1": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        }
+      ]
+    },
+    {
+      "requested": "https://ufalit.ufacsdb.ru/pages/gallery-18/",
+      "hops": [
+        {
+          "url": "https://ufalit.ufacsdb.ru/pages/gallery-18/",
+          "status": 200,
+          "location": null,
+          "x_robots_tag": null
+        }
+      ],
+      "final_url": "https://ufalit.ufacsdb.ru/pages/gallery-18/",
+      "status": 200,
+      "bytes": 503410,
+      "title": "Тухват Янаби — фотогалерея",
+      "description": null,
+      "canonical": [],
+      "robots": null,
+      "h1": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        }
+      ]
+    },
+    {
+      "requested": "https://ufalit.ufacsdb.ru/pages/gallery-19/",
+      "hops": [
+        {
+          "url": "https://ufalit.ufacsdb.ru/pages/gallery-19/",
+          "status": 200,
+          "location": null,
+          "x_robots_tag": null
+        }
+      ],
+      "final_url": "https://ufalit.ufacsdb.ru/pages/gallery-19/",
+      "status": 200,
+      "bytes": 504501,
+      "title": "Аксаковские праздники — фотогалерея",
+      "description": null,
+      "canonical": [],
+      "robots": null,
+      "h1": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        }
+      ]
+    },
+    {
+      "requested": "https://ufalit.ufacsdb.ru/pages/gallery-20/",
+      "hops": [
+        {
+          "url": "https://ufalit.ufacsdb.ru/pages/gallery-20/",
+          "status": 200,
+          "location": null,
+          "x_robots_tag": null
+        }
+      ],
+      "final_url": "https://ufalit.ufacsdb.ru/pages/gallery-20/",
+      "status": 200,
+      "bytes": 503232,
+      "title": "Аксаков 2005 — фотогалерея",
+      "description": null,
+      "canonical": [],
+      "robots": null,
+      "h1": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        }
+      ]
+    },
+    {
+      "requested": "https://ufalit.ufacsdb.ru/pages/gallery-21/",
+      "hops": [
+        {
+          "url": "https://ufalit.ufacsdb.ru/pages/gallery-21/",
+          "status": 200,
+          "location": null,
+          "x_robots_tag": null
+        }
+      ],
+      "final_url": "https://ufalit.ufacsdb.ru/pages/gallery-21/",
+      "status": 200,
+      "bytes": 503233,
+      "title": "Аксаков 2008 — фотогалерея",
+      "description": null,
+      "canonical": [],
+      "robots": null,
+      "h1": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        }
+      ]
+    },
+    {
+      "requested": "https://ufalit.ufacsdb.ru/pages/gallery-22/",
+      "hops": [
+        {
+          "url": "https://ufalit.ufacsdb.ru/pages/gallery-22/",
+          "status": 200,
+          "location": null,
+          "x_robots_tag": null
+        }
+      ],
+      "final_url": "https://ufalit.ufacsdb.ru/pages/gallery-22/",
+      "status": 200,
+      "bytes": 503317,
+      "title": "Праздник в парке Аксакова — фотогалерея",
+      "description": null,
+      "canonical": [],
+      "robots": null,
+      "h1": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        }
+      ]
+    },
+    {
+      "requested": "https://ufalit.ufacsdb.ru/pages/gallery-23/",
+      "hops": [
+        {
+          "url": "https://ufalit.ufacsdb.ru/pages/gallery-23/",
+          "status": 200,
+          "location": null,
+          "x_robots_tag": null
+        }
+      ],
+      "final_url": "https://ufalit.ufacsdb.ru/pages/gallery-23/",
+      "status": 200,
+      "bytes": 503499,
+      "title": "Фотоархив Бикчентаева — фотогалерея",
+      "description": null,
+      "canonical": [],
+      "robots": null,
+      "h1": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        }
+      ]
+    },
+    {
+      "requested": "https://ufalit.ufacsdb.ru/pages/gallery-24/",
+      "hops": [
+        {
+          "url": "https://ufalit.ufacsdb.ru/pages/gallery-24/",
+          "status": 200,
+          "location": null,
+          "x_robots_tag": null
+        }
+      ],
+      "final_url": "https://ufalit.ufacsdb.ru/pages/gallery-24/",
+      "status": 200,
+      "bytes": 503375,
+      "title": "Фото. Памятные места Бикчентаева — Уфа литературная",
+      "description": null,
+      "canonical": [],
+      "robots": null,
+      "h1": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        }
+      ]
+    },
+    {
+      "requested": "https://ufalit.ufacsdb.ru/pages/gallery-25/",
+      "hops": [
+        {
+          "url": "https://ufalit.ufacsdb.ru/pages/gallery-25/",
+          "status": 200,
+          "location": null,
+          "x_robots_tag": null
+        }
+      ],
+      "final_url": "https://ufalit.ufacsdb.ru/pages/gallery-25/",
+      "status": 200,
+      "bytes": 503218,
+      "title": "Афиши — Уфа литературная",
+      "description": null,
+      "canonical": [],
+      "robots": null,
+      "h1": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        }
+      ]
+    },
+    {
+      "requested": "https://ufalit.ufacsdb.ru/pages/gallery-26/",
+      "hops": [
+        {
+          "url": "https://ufalit.ufacsdb.ru/pages/gallery-26/",
+          "status": 200,
+          "location": null,
+          "x_robots_tag": null
+        }
+      ],
+      "final_url": "https://ufalit.ufacsdb.ru/pages/gallery-26/",
+      "status": 200,
+      "bytes": 503584,
+      "title": "Памятные места — Уфа литературная",
+      "description": null,
+      "canonical": [],
+      "robots": null,
+      "h1": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        }
+      ]
+    },
+    {
+      "requested": "https://ufalit.ufacsdb.ru/pages/gallery-27/",
+      "hops": [
+        {
+          "url": "https://ufalit.ufacsdb.ru/pages/gallery-27/",
+          "status": 200,
+          "location": null,
+          "x_robots_tag": null
+        }
+      ],
+      "final_url": "https://ufalit.ufacsdb.ru/pages/gallery-27/",
+      "status": 200,
+      "bytes": 503270,
+      "title": "Семейный архив — Уфа литературная",
+      "description": null,
+      "canonical": [],
+      "robots": null,
+      "h1": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        }
+      ]
+    },
+    {
+      "requested": "https://ufalit.ufacsdb.ru/pages/gallery-28/",
+      "hops": [
+        {
+          "url": "https://ufalit.ufacsdb.ru/pages/gallery-28/",
+          "status": 200,
+          "location": null,
+          "x_robots_tag": null
+        }
+      ],
+      "final_url": "https://ufalit.ufacsdb.ru/pages/gallery-28/",
+      "status": 200,
+      "bytes": 503314,
+      "title": "Современники и коллеги — Уфа литературная",
+      "description": null,
+      "canonical": [],
+      "robots": null,
+      "h1": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        }
+      ]
+    },
+    {
+      "requested": "https://ufalit.ufacsdb.ru/pages/gallery-29/",
+      "hops": [
+        {
+          "url": "https://ufalit.ufacsdb.ru/pages/gallery-29/",
+          "status": 200,
+          "location": null,
+          "x_robots_tag": null
+        }
+      ],
+      "final_url": "https://ufalit.ufacsdb.ru/pages/gallery-29/",
+      "status": 200,
+      "bytes": 503352,
+      "title": "Мемориальная доска — Уфа литературная",
+      "description": null,
+      "canonical": [],
+      "robots": null,
+      "h1": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        }
+      ]
+    },
+    {
+      "requested": "https://ufalit.ufacsdb.ru/pages/gallery-30/",
+      "hops": [
+        {
+          "url": "https://ufalit.ufacsdb.ru/pages/gallery-30/",
+          "status": 200,
+          "location": null,
+          "x_robots_tag": null
+        }
+      ],
+      "final_url": "https://ufalit.ufacsdb.ru/pages/gallery-30/",
+      "status": 200,
+      "bytes": 503457,
+      "title": "УМПО — Уфа литературная",
+      "description": null,
+      "canonical": [],
+      "robots": null,
+      "h1": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        }
+      ]
+    },
+    {
+      "requested": "https://ufalit.ufacsdb.ru/pages/gallery-31/",
+      "hops": [
+        {
+          "url": "https://ufalit.ufacsdb.ru/pages/gallery-31/",
+          "status": 200,
+          "location": null,
+          "x_robots_tag": null
+        }
+      ],
+      "final_url": "https://ufalit.ufacsdb.ru/pages/gallery-31/",
+      "status": 200,
+      "bytes": 503278,
+      "title": "Школа — Уфа литературная",
+      "description": null,
+      "canonical": [],
+      "robots": null,
+      "h1": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        }
+      ]
+    },
+    {
+      "requested": "https://ufalit.ufacsdb.ru/pages/gallery-32/",
+      "hops": [
+        {
+          "url": "https://ufalit.ufacsdb.ru/pages/gallery-32/",
+          "status": 200,
+          "location": null,
+          "x_robots_tag": null
+        }
+      ],
+      "final_url": "https://ufalit.ufacsdb.ru/pages/gallery-32/",
+      "status": 200,
+      "bytes": 503342,
+      "title": "Документы — Уфа литературная",
+      "description": null,
+      "canonical": [],
+      "robots": null,
+      "h1": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        }
+      ]
+    },
+    {
+      "requested": "https://ufalit.ufacsdb.ru/pages/gallery-33/",
+      "hops": [
+        {
+          "url": "https://ufalit.ufacsdb.ru/pages/gallery-33/",
+          "status": 200,
+          "location": null,
+          "x_robots_tag": null
+        }
+      ],
+      "final_url": "https://ufalit.ufacsdb.ru/pages/gallery-33/",
+      "status": 200,
+      "bytes": 503246,
+      "title": "Памятные места — Уфа литературная",
+      "description": null,
+      "canonical": [],
+      "robots": null,
+      "h1": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        }
+      ]
+    },
+    {
+      "requested": "https://ufalit.ufacsdb.ru/pages/gallery-34/",
+      "hops": [
+        {
+          "url": "https://ufalit.ufacsdb.ru/pages/gallery-34/",
+          "status": 200,
+          "location": null,
+          "x_robots_tag": null
+        }
+      ],
+      "final_url": "https://ufalit.ufacsdb.ru/pages/gallery-34/",
+      "status": 200,
+      "bytes": 503360,
+      "title": "Фотоматериалы по творчеству Гафури — Уфа литературная",
+      "description": null,
+      "canonical": [],
+      "robots": null,
+      "h1": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        }
+      ]
+    },
+    {
+      "requested": "https://ufalit.ufacsdb.ru/pages/gallery-35/",
+      "hops": [
+        {
+          "url": "https://ufalit.ufacsdb.ru/pages/gallery-35/",
+          "status": 200,
+          "location": null,
+          "x_robots_tag": null
+        }
+      ],
+      "final_url": "https://ufalit.ufacsdb.ru/pages/gallery-35/",
+      "status": 200,
+      "bytes": 503278,
+      "title": "Фото памятных мест — Уфа литературная",
+      "description": null,
+      "canonical": [],
+      "robots": null,
+      "h1": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        }
+      ]
+    },
+    {
+      "requested": "https://ufalit.ufacsdb.ru/pages/gallery-36/",
+      "hops": [
+        {
+          "url": "https://ufalit.ufacsdb.ru/pages/gallery-36/",
+          "status": 200,
+          "location": null,
+          "x_robots_tag": null
+        }
+      ],
+      "final_url": "https://ufalit.ufacsdb.ru/pages/gallery-36/",
+      "status": 200,
+      "bytes": 503224,
+      "title": "Фотографии — Уфа литературная",
+      "description": null,
+      "canonical": [],
+      "robots": null,
+      "h1": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        }
+      ]
+    },
+    {
+      "requested": "https://ufalit.ufacsdb.ru/pages/gallery-37/",
+      "hops": [
+        {
+          "url": "https://ufalit.ufacsdb.ru/pages/gallery-37/",
+          "status": 200,
+          "location": null,
+          "x_robots_tag": null
+        }
+      ],
+      "final_url": "https://ufalit.ufacsdb.ru/pages/gallery-37/",
+      "status": 200,
+      "bytes": 503272,
+      "title": "Музей, премия — Уфа литературная",
+      "description": null,
+      "canonical": [],
+      "robots": null,
+      "h1": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        }
+      ]
+    },
+    {
+      "requested": "https://ufalit.ufacsdb.ru/pages/gallery-38/",
+      "hops": [
+        {
+          "url": "https://ufalit.ufacsdb.ru/pages/gallery-38/",
+          "status": 200,
+          "location": null,
+          "x_robots_tag": null
+        }
+      ],
+      "final_url": "https://ufalit.ufacsdb.ru/pages/gallery-38/",
+      "status": 200,
+      "bytes": 503389,
+      "title": "Экскурсия по мемориальному уголку — Уфа литературная",
+      "description": null,
+      "canonical": [],
+      "robots": null,
+      "h1": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        }
+      ]
+    },
+    {
+      "requested": "https://ufalit.ufacsdb.ru/pages/gallery-39/",
+      "hops": [
+        {
+          "url": "https://ufalit.ufacsdb.ru/pages/gallery-39/",
+          "status": 200,
+          "location": null,
+          "x_robots_tag": null
+        }
+      ],
+      "final_url": "https://ufalit.ufacsdb.ru/pages/gallery-39/",
+      "status": 200,
+      "bytes": 504185,
+      "title": "Шафиков Газим Газизович — Уфа литературная",
+      "description": null,
+      "canonical": [],
+      "robots": null,
+      "h1": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        }
+      ]
+    },
+    {
+      "requested": "https://ufalit.ufacsdb.ru/pages/gallery-40/",
+      "hops": [
+        {
+          "url": "https://ufalit.ufacsdb.ru/pages/gallery-40/",
+          "status": 200,
+          "location": null,
+          "x_robots_tag": null
+        }
+      ],
+      "final_url": "https://ufalit.ufacsdb.ru/pages/gallery-40/",
+      "status": 200,
+      "bytes": 503315,
+      "title": "Из Литературного музея — Уфа литературная",
+      "description": null,
+      "canonical": [],
+      "robots": null,
+      "h1": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        }
+      ]
+    },
+    {
+      "requested": "https://ufalit.ufacsdb.ru/pages/gallery-41/",
+      "hops": [
+        {
+          "url": "https://ufalit.ufacsdb.ru/pages/gallery-41/",
+          "status": 200,
+          "location": null,
+          "x_robots_tag": null
+        }
+      ],
+      "final_url": "https://ufalit.ufacsdb.ru/pages/gallery-41/",
+      "status": 200,
+      "bytes": 503270,
+      "title": "Семейный архив — Уфа литературная",
+      "description": null,
+      "canonical": [],
+      "robots": null,
+      "h1": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        }
+      ]
+    },
+    {
+      "requested": "https://ufalit.ufacsdb.ru/pages/gallery-42/",
+      "hops": [
+        {
+          "url": "https://ufalit.ufacsdb.ru/pages/gallery-42/",
+          "status": 200,
+          "location": null,
+          "x_robots_tag": null
+        }
+      ],
+      "final_url": "https://ufalit.ufacsdb.ru/pages/gallery-42/",
+      "status": 200,
+      "bytes": 503290,
+      "title": "Фото памятных мест — Уфа литературная",
+      "description": null,
+      "canonical": [],
+      "robots": null,
+      "h1": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        }
+      ]
+    },
+    {
+      "requested": "https://ufalit.ufacsdb.ru/pages/gallery-43/",
+      "hops": [
+        {
+          "url": "https://ufalit.ufacsdb.ru/pages/gallery-43/",
+          "status": 200,
+          "location": null,
+          "x_robots_tag": null
+        }
+      ],
+      "final_url": "https://ufalit.ufacsdb.ru/pages/gallery-43/",
+      "status": 200,
+      "bytes": 503301,
+      "title": "Фото улицы Тухвата Янаби — Уфа литературная",
+      "description": null,
+      "canonical": [],
+      "robots": null,
+      "h1": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        }
+      ]
+    },
+    {
+      "requested": "https://ufalit.ufacsdb.ru/pages/gallery-5/",
+      "hops": [
+        {
+          "url": "https://ufalit.ufacsdb.ru/pages/gallery-5/",
+          "status": 200,
+          "location": null,
+          "x_robots_tag": null
+        }
+      ],
+      "final_url": "https://ufalit.ufacsdb.ru/pages/gallery-5/",
+      "status": 200,
+      "bytes": 503773,
+      "title": "Бикчентаев Анвер Гадеевич — фотогалерея",
+      "description": null,
+      "canonical": [],
+      "robots": null,
+      "h1": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        }
+      ]
+    },
+    {
+      "requested": "https://ufalit.ufacsdb.ru/pages/gallery-6/",
+      "hops": [
+        {
+          "url": "https://ufalit.ufacsdb.ru/pages/gallery-6/",
+          "status": 200,
+          "location": null,
+          "x_robots_tag": null
+        }
+      ],
+      "final_url": "https://ufalit.ufacsdb.ru/pages/gallery-6/",
+      "status": 200,
+      "bytes": 504129,
+      "title": "Фотогалерея — Уфа литературная",
+      "description": null,
+      "canonical": [],
+      "robots": null,
+      "h1": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        }
+      ]
+    },
+    {
+      "requested": "https://ufalit.ufacsdb.ru/pages/gallery-7/",
+      "hops": [
+        {
+          "url": "https://ufalit.ufacsdb.ru/pages/gallery-7/",
+          "status": 200,
+          "location": null,
+          "x_robots_tag": null
+        }
+      ],
+      "final_url": "https://ufalit.ufacsdb.ru/pages/gallery-7/",
+      "status": 200,
+      "bytes": 503830,
+      "title": "Мажит Гафури — Фотогалерея — Уфа литературная",
+      "description": null,
+      "canonical": [],
+      "robots": null,
+      "h1": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        }
+      ]
+    },
+    {
+      "requested": "https://ufalit.ufacsdb.ru/pages/gallery-8/",
+      "hops": [
+        {
+          "url": "https://ufalit.ufacsdb.ru/pages/gallery-8/",
+          "status": 200,
+          "location": null,
+          "x_robots_tag": null
+        }
+      ],
+      "final_url": "https://ufalit.ufacsdb.ru/pages/gallery-8/",
+      "status": 200,
+      "bytes": 503315,
+      "title": "Ибрагимов Галимджан Гирфанович — Фотогалерея — Уфа литературная",
+      "description": null,
+      "canonical": [],
+      "robots": null,
+      "h1": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        }
+      ]
+    },
+    {
+      "requested": "https://ufalit.ufacsdb.ru/pages/gallery-9/",
+      "hops": [
+        {
+          "url": "https://ufalit.ufacsdb.ru/pages/gallery-9/",
+          "status": 200,
+          "location": null,
+          "x_robots_tag": null
+        }
+      ],
+      "final_url": "https://ufalit.ufacsdb.ru/pages/gallery-9/",
+      "status": 200,
+      "bytes": 503780,
+      "title": "Фотогалерея — Уфа литературная",
+      "description": null,
+      "canonical": [],
+      "robots": null,
+      "h1": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        }
+      ]
+    },
+    {
+      "requested": "https://ufalit.ufacsdb.ru/pages/gallery-aksakov/",
+      "hops": [
+        {
+          "url": "https://ufalit.ufacsdb.ru/pages/gallery-aksakov/",
+          "status": 200,
+          "location": null,
+          "x_robots_tag": null
+        }
+      ],
+      "final_url": "https://ufalit.ufacsdb.ru/pages/gallery-aksakov/",
+      "status": 200,
+      "bytes": 503397,
+      "title": "Сергей Аксаков — фотогалерея",
+      "description": null,
+      "canonical": [],
+      "robots": null,
+      "h1": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        }
+      ]
+    },
+    {
+      "requested": "https://ufalit.ufacsdb.ru/pages/gallery-amantai/",
+      "hops": [
+        {
+          "url": "https://ufalit.ufacsdb.ru/pages/gallery-amantai/",
+          "status": 200,
+          "location": null,
+          "x_robots_tag": null
+        }
+      ],
+      "final_url": "https://ufalit.ufacsdb.ru/pages/gallery-amantai/",
+      "status": 200,
+      "bytes": 503196,
+      "title": "Габдулла Амантай — фотогалерея",
+      "description": null,
+      "canonical": [],
+      "robots": null,
+      "h1": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        }
+      ]
+    },
+    {
+      "requested": "https://ufalit.ufacsdb.ru/pages/gallery-bikbay/",
+      "hops": [
+        {
+          "url": "https://ufalit.ufacsdb.ru/pages/gallery-bikbay/",
+          "status": 200,
+          "location": null,
+          "x_robots_tag": null
+        }
+      ],
+      "final_url": "https://ufalit.ufacsdb.ru/pages/gallery-bikbay/",
+      "status": 200,
+      "bytes": 503177,
+      "title": "Баязит Бикбай — фотогалерея",
+      "description": null,
+      "canonical": [],
+      "robots": null,
+      "h1": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        }
+      ]
+    },
+    {
+      "requested": "https://ufalit.ufacsdb.ru/pages/gallery-uzikov/",
+      "hops": [
+        {
+          "url": "https://ufalit.ufacsdb.ru/pages/gallery-uzikov/",
+          "status": 200,
+          "location": null,
+          "x_robots_tag": null
+        }
+      ],
+      "final_url": "https://ufalit.ufacsdb.ru/pages/gallery-uzikov/",
+      "status": 200,
+      "bytes": 503164,
+      "title": "Юрий Узиков — фотогалерея",
+      "description": null,
+      "canonical": [],
+      "robots": null,
+      "h1": [
+        {
+          "level": 1,
+          "text": "Фотогалерея",
+          "id": null
+        }
+      ]
+    },
+    {
+      "requested": "https://ufalit.ufacsdb.ru/pages/large-videos/",
+      "hops": [
+        {
+          "url": "https://ufalit.ufacsdb.ru/pages/large-videos/",
+          "status": 200,
+          "location": null,
+          "x_robots_tag": null
+        }
+      ],
+      "final_url": "https://ufalit.ufacsdb.ru/pages/large-videos/",
+      "status": 200,
+      "bytes": 2841,
+      "title": "Видеоматериалы — Уфа литературная",
+      "description": null,
+      "canonical": [],
+      "robots": null,
+      "h1": [
+        {
+          "level": 1,
+          "text": "Видеоматериалы",
+          "id": null
+        }
+      ]
+    },
+    {
+      "requested": "https://ufalit.ufacsdb.ru/pages/legends/",
+      "hops": [
+        {
+          "url": "https://ufalit.ufacsdb.ru/pages/legends/",
+          "status": 200,
+          "location": null,
+          "x_robots_tag": null
+        }
+      ],
+      "final_url": "https://ufalit.ufacsdb.ru/pages/legends/",
+      "status": 200,
+      "bytes": 41484,
+      "title": "Уфа в легендах и преданиях — Уфа литературная",
+      "description": null,
+      "canonical": [],
+      "robots": null,
+      "h1": [
+        {
+          "level": 1,
+          "text": "Уфа в легендах и преданиях",
+          "id": null
+        }
+      ]
+    },
+    {
+      "requested": "https://ufalit.ufacsdb.ru/pages/map/",
+      "hops": [
+        {
+          "url": "https://ufalit.ufacsdb.ru/pages/map/",
+          "status": 200,
+          "location": null,
+          "x_robots_tag": null
+        }
+      ],
+      "final_url": "https://ufalit.ufacsdb.ru/pages/map/",
+      "status": 200,
+      "bytes": 117823,
+      "title": "Литературная карта Уфы — Уфа литературная",
+      "description": null,
+      "canonical": [],
+      "robots": null,
+      "h1": [
+        {
+          "level": 1,
+          "text": "Литературная карта Уфы",
+          "id": "atlas-heading"
+        }
+      ]
+    },
+    {
+      "requested": "https://ufalit.ufacsdb.ru/pages/medal/",
+      "hops": [
+        {
+          "url": "https://ufalit.ufacsdb.ru/pages/medal/",
+          "status": 200,
+          "location": null,
+          "x_robots_tag": null
+        }
+      ],
+      "final_url": "https://ufalit.ufacsdb.ru/pages/medal/",
+      "status": 200,
+      "bytes": 3592,
+      "title": "Памятная медаль «Мустай Карим» — Уфа литературная",
+      "description": null,
+      "canonical": [],
+      "robots": null,
+      "h1": [
+        {
+          "level": 1,
+          "text": "Памятная медаль «Мустай Карим»",
+          "id": null
+        }
+      ]
+    },
+    {
+      "requested": "https://ufalit.ufacsdb.ru/pages/personalities/",
+      "hops": [
+        {
+          "url": "https://ufalit.ufacsdb.ru/pages/personalities/",
+          "status": 200,
+          "location": null,
+          "x_robots_tag": null
+        }
+      ],
+      "final_url": "https://ufalit.ufacsdb.ru/pages/personalities/",
+      "status": 200,
+      "bytes": 866306,
+      "title": "Персоналии — Уфа литературная",
+      "description": null,
+      "canonical": [],
+      "robots": null,
+      "h1": [
+        {
+          "level": 1,
+          "text": "Персоналии",
+          "id": null
+        }
+      ]
+    },
+    {
+      "requested": "https://ufalit.ufacsdb.ru/pages/places/",
+      "hops": [
+        {
+          "url": "https://ufalit.ufacsdb.ru/pages/places/",
+          "status": 200,
+          "location": null,
+          "x_robots_tag": null
+        }
+      ],
+      "final_url": "https://ufalit.ufacsdb.ru/pages/places/",
+      "status": 200,
+      "bytes": 278634,
+      "title": "Памятные места Уфы — Уфа литературная",
+      "description": null,
+      "canonical": [],
+      "robots": null,
+      "h1": [
+        {
+          "level": 1,
+          "text": "Памятные места Уфы",
+          "id": null
+        }
+      ]
+    },
+    {
+      "requested": "https://ufalit.ufacsdb.ru/pages/reading/",
+      "hops": [
+        {
+          "url": "https://ufalit.ufacsdb.ru/pages/reading/",
+          "status": 200,
+          "location": null,
+          "x_robots_tag": null
+        }
+      ],
+      "final_url": "https://ufalit.ufacsdb.ru/pages/reading/",
+      "status": 200,
+      "bytes": 38164,
+      "title": "Читальный зал — Уфа литературная",
+      "description": null,
+      "canonical": [],
+      "robots": null,
+      "h1": [
+        {
+          "level": 1,
+          "text": "Читальный зал",
+          "id": null
+        }
+      ]
+    },
+    {
+      "requested": "https://ufalit.ufacsdb.ru/pages/reading-aksakov-childhood/",
+      "hops": [
+        {
+          "url": "https://ufalit.ufacsdb.ru/pages/reading-aksakov-childhood/",
+          "status": 200,
+          "location": null,
+          "x_robots_tag": null
+        }
+      ],
+      "final_url": "https://ufalit.ufacsdb.ru/pages/reading-aksakov-childhood/",
+      "status": 200,
+      "bytes": 22348,
+      "title": "Аксаков, С. Т. Детские годы Багрова-внука — Уфа литературная",
+      "description": null,
+      "canonical": [],
+      "robots": null,
+      "h1": [
+        {
+          "level": 1,
+          "text": "Аксаков, С. Т. Детские годы Багрова-внука",
+          "id": null
+        }
+      ]
+    },
+    {
+      "requested": "https://ufalit.ufacsdb.ru/pages/reading-aksakov-flower/",
+      "hops": [
+        {
+          "url": "https://ufalit.ufacsdb.ru/pages/reading-aksakov-flower/",
+          "status": 200,
+          "location": null,
+          "x_robots_tag": null
+        }
+      ],
+      "final_url": "https://ufalit.ufacsdb.ru/pages/reading-aksakov-flower/",
+      "status": 200,
+      "bytes": 10758,
+      "title": "Аксаков, С. Т. Аленький цветочек — Уфа литературная",
+      "description": null,
+      "canonical": [],
+      "robots": null,
+      "h1": [
+        {
+          "level": 1,
+          "text": "Аксаков, С. Т. Аленький цветочек",
+          "id": null
+        }
+      ]
+    },
+    {
+      "requested": "https://ufalit.ufacsdb.ru/pages/reading-aksakov-nature/",
+      "hops": [
+        {
+          "url": "https://ufalit.ufacsdb.ru/pages/reading-aksakov-nature/",
+          "status": 200,
+          "location": null,
+          "x_robots_tag": null
+        }
+      ],
+      "final_url": "https://ufalit.ufacsdb.ru/pages/reading-aksakov-nature/",
+      "status": 200,
+      "bytes": 5868,
+      "title": "Аксаков, С. Т. Рассказы о родной природе — Уфа литературная",
+      "description": null,
+      "canonical": [],
+      "robots": null,
+      "h1": [
+        {
+          "level": 1,
+          "text": "Аксаков, С.Т. Рассказы о родной природе",
+          "id": null
+        }
+      ]
+    },
+    {
+      "requested": "https://ufalit.ufacsdb.ru/pages/reading-author-aksakov/",
+      "hops": [
+        {
+          "url": "https://ufalit.ufacsdb.ru/pages/reading-author-aksakov/",
+          "status": 200,
+          "location": null,
+          "x_robots_tag": null
+        }
+      ],
+      "final_url": "https://ufalit.ufacsdb.ru/pages/reading-author-aksakov/",
+      "status": 200,
+      "bytes": 4655,
+      "title": "Аксаков Сергей Тимофеевич — Читальный зал",
+      "description": null,
+      "canonical": [],
+      "robots": null,
+      "h1": [
+        {
+          "level": 1,
+          "text": "Аксаков Сергей Тимофеевич",
+          "id": null
+        }
+      ]
+    },
+    {
+      "requested": "https://ufalit.ufacsdb.ru/pages/reading-author-yanabi/",
+      "hops": [
+        {
+          "url": "https://ufalit.ufacsdb.ru/pages/reading-author-yanabi/",
+          "status": 200,
+          "location": null,
+          "x_robots_tag": null
+        }
+      ],
+      "final_url": "https://ufalit.ufacsdb.ru/pages/reading-author-yanabi/",
+      "status": 200,
+      "bytes": 5702,
+      "title": "Тухват Янаби — Читальный зал",
+      "description": null,
+      "canonical": [],
+      "robots": null,
+      "h1": [
+        {
+          "level": 1,
+          "text": "Тухват Янаби",
+          "id": null
+        }
+      ]
+    },
+    {
+      "requested": "https://ufalit.ufacsdb.ru/pages/reading-yanabi-pesnya-oktyabrenka/",
+      "hops": [
+        {
+          "url": "https://ufalit.ufacsdb.ru/pages/reading-yanabi-pesnya-oktyabrenka/",
+          "status": 200,
+          "location": null,
+          "x_robots_tag": null
+        }
+      ],
+      "final_url": "https://ufalit.ufacsdb.ru/pages/reading-yanabi-pesnya-oktyabrenka/",
+      "status": 200,
+      "bytes": 4117,
+      "title": "Песня октябрёнка — Тухват Янаби — Уфа литературная",
+      "description": null,
+      "canonical": [],
+      "robots": null,
+      "h1": [
+        {
+          "level": 1,
+          "text": "Стихотворение «Песня октябрёнка».",
+          "id": null
+        }
+      ]
+    },
+    {
+      "requested": "https://ufalit.ufacsdb.ru/pages/reading-yanabi-poems/",
+      "hops": [
+        {
+          "url": "https://ufalit.ufacsdb.ru/pages/reading-yanabi-poems/",
+          "status": 200,
+          "location": null,
+          "x_robots_tag": null
+        }
+      ],
+      "final_url": "https://ufalit.ufacsdb.ru/pages/reading-yanabi-poems/",
+      "status": 200,
+      "bytes": 5659,
+      "title": "Стихотворения и басня — Тухват Янаби — Уфа литературная",
+      "description": null,
+      "canonical": [],
+      "robots": null,
+      "h1": [
+        {
+          "level": 1,
+          "text": "Тухват Янаби",
+          "id": null
+        }
+      ]
+    },
+    {
+      "requested": "https://ufalit.ufacsdb.ru/pages/reading-yanabi-shkolnik/",
+      "hops": [
+        {
+          "url": "https://ufalit.ufacsdb.ru/pages/reading-yanabi-shkolnik/",
+          "status": 200,
+          "location": null,
+          "x_robots_tag": null
+        }
+      ],
+      "final_url": "https://ufalit.ufacsdb.ru/pages/reading-yanabi-shkolnik/",
+      "status": 200,
+      "bytes": 3911,
+      "title": "Школьник — Тухват Янаби — Уфа литературная",
+      "description": null,
+      "canonical": [],
+      "robots": null,
+      "h1": [
+        {
+          "level": 1,
+          "text": "Стихотворение «Школьник».",
+          "id": null
+        }
+      ]
+    },
+    {
+      "requested": "https://ufalit.ufacsdb.ru/pages/reading-yanabi-shkolnye-chastushki/",
+      "hops": [
+        {
+          "url": "https://ufalit.ufacsdb.ru/pages/reading-yanabi-shkolnye-chastushki/",
+          "status": 200,
+          "location": null,
+          "x_robots_tag": null
+        }
+      ],
+      "final_url": "https://ufalit.ufacsdb.ru/pages/reading-yanabi-shkolnye-chastushki/",
+      "status": 200,
+      "bytes": 3856,
+      "title": "Школьные частушки — Тухват Янаби — Уфа литературная",
+      "description": null,
+      "canonical": [],
+      "robots": null,
+      "h1": [
+        {
+          "level": 1,
+          "text": "Школьные частушки",
+          "id": null
+        }
+      ]
+    },
+    {
+      "requested": "https://ufalit.ufacsdb.ru/pages/reading-yanabi-slon-i-petukh/",
+      "hops": [
+        {
+          "url": "https://ufalit.ufacsdb.ru/pages/reading-yanabi-slon-i-petukh/",
+          "status": 200,
+          "location": null,
+          "x_robots_tag": null
+        }
+      ],
+      "final_url": "https://ufalit.ufacsdb.ru/pages/reading-yanabi-slon-i-petukh/",
+      "status": 200,
+      "bytes": 4847,
+      "title": "Слон и петух — Тухват Янаби — Уфа литературная",
+      "description": null,
+      "canonical": [],
+      "robots": null,
+      "h1": [
+        {
+          "level": 1,
+          "text": "Басня «Слон и петух».",
+          "id": null
+        }
+      ]
+    },
+    {
+      "requested": "https://ufalit.ufacsdb.ru/pages/stipend/",
+      "hops": [
+        {
+          "url": "https://ufalit.ufacsdb.ru/pages/stipend/",
+          "status": 200,
+          "location": null,
+          "x_robots_tag": null
+        }
+      ],
+      "final_url": "https://ufalit.ufacsdb.ru/pages/stipend/",
+      "status": 200,
+      "bytes": 3994,
+      "title": "Стипендия имени Мустая Карима — Уфа литературная",
+      "description": null,
+      "canonical": [],
+      "robots": null,
+      "h1": [
+        {
+          "level": 1,
+          "text": "Стипендия имени Мустая Карима",
+          "id": null
+        }
+      ]
+    },
+    {
+      "requested": "https://ufalit.ufacsdb.ru/pages/video-388/",
+      "hops": [
+        {
+          "url": "https://ufalit.ufacsdb.ru/pages/video-388/",
+          "status": 200,
+          "location": null,
+          "x_robots_tag": null
+        }
+      ],
+      "final_url": "https://ufalit.ufacsdb.ru/pages/video-388/",
+      "status": 200,
+      "bytes": 4053,
+      "title": "Злобин Степан Павлович — Видеокопилка",
+      "description": null,
+      "canonical": [],
+      "robots": null,
+      "h1": [
+        {
+          "level": 1,
+          "text": "Злобин Степан Павлович",
+          "id": null
+        }
+      ]
+    },
+    {
+      "requested": "https://ufalit.ufacsdb.ru/pages/video-389/",
+      "hops": [
+        {
+          "url": "https://ufalit.ufacsdb.ru/pages/video-389/",
+          "status": 200,
+          "location": null,
+          "x_robots_tag": null
+        }
+      ],
+      "final_url": "https://ufalit.ufacsdb.ru/pages/video-389/",
+      "status": 200,
+      "bytes": 5445,
+      "title": "Аксаков Сергей Тимофеевич — Видеокопилка",
+      "description": null,
+      "canonical": [],
+      "robots": null,
+      "h1": [
+        {
+          "level": 1,
+          "text": "Аксаков Сергей Тимофеевич",
+          "id": null
+        }
+      ]
+    },
+    {
+      "requested": "https://ufalit.ufacsdb.ru/pages/video-81/",
+      "hops": [
+        {
+          "url": "https://ufalit.ufacsdb.ru/pages/video-81/",
+          "status": 200,
+          "location": null,
+          "x_robots_tag": null
+        }
+      ],
+      "final_url": "https://ufalit.ufacsdb.ru/pages/video-81/",
+      "status": 200,
+      "bytes": 5257,
+      "title": "Мустай Карим — Видеокопилка",
+      "description": null,
+      "canonical": [],
+      "robots": null,
+      "h1": [
+        {
+          "level": 1,
+          "text": "Мустай Карим",
+          "id": null
+        }
+      ]
+    },
+    {
+      "requested": "https://ufalit.ufacsdb.ru/pages/videos/",
+      "hops": [
+        {
+          "url": "https://ufalit.ufacsdb.ru/pages/videos/",
+          "status": 200,
+          "location": null,
+          "x_robots_tag": null
+        }
+      ],
+      "final_url": "https://ufalit.ufacsdb.ru/pages/videos/",
+      "status": 200,
+      "bytes": 5342,
+      "title": "Видеокопилка — Уфа литературная",
+      "description": null,
+      "canonical": [],
+      "robots": null,
+      "h1": [
+        {
+          "level": 1,
+          "text": "Видеокопилка",
+          "id": "archive-title"
+        }
+      ]
+    },
+    {
+      "requested": "https://ufalit.ufacsdb.ru/robots.txt",
+      "hops": [
+        {
+          "url": "https://ufalit.ufacsdb.ru/robots.txt",
+          "status": 404,
+          "location": null,
+          "x_robots_tag": null
+        }
+      ],
+      "final_url": "https://ufalit.ufacsdb.ru/robots.txt",
+      "status": 404,
+      "bytes": 9379,
+      "title": "Page not found · GitHub Pages",
+      "description": null,
+      "canonical": [],
+      "robots": null,
+      "h1": [
+        {
+          "level": 1,
+          "text": "404",
+          "id": null
+        }
+      ]
+    },
+    {
+      "requested": "https://ufalit.ufacsdb.ru/sitemap.xml",
+      "hops": [
+        {
+          "url": "https://ufalit.ufacsdb.ru/sitemap.xml",
+          "status": 404,
+          "location": null,
+          "x_robots_tag": null
+        }
+      ],
+      "final_url": "https://ufalit.ufacsdb.ru/sitemap.xml",
+      "status": 404,
+      "bytes": 9379,
+      "title": "Page not found · GitHub Pages",
+      "description": null,
+      "canonical": [],
+      "robots": null,
+      "h1": [
+        {
+          "level": 1,
+          "text": "404",
+          "id": null
+        }
+      ]
+    },
+    {
+      "requested": "https://r2force.github.io/robots.txt",
+      "hops": [
+        {
+          "url": "https://r2force.github.io/robots.txt",
+          "status": 404,
+          "location": null,
+          "x_robots_tag": null
+        }
+      ],
+      "final_url": "https://r2force.github.io/robots.txt",
+      "status": 404,
+      "bytes": 9115,
+      "title": "Site not found · GitHub Pages",
+      "description": null,
+      "canonical": [],
+      "robots": null,
+      "h1": [
+        {
+          "level": 1,
+          "text": "404",
+          "id": null
+        }
+      ]
+    },
+    {
+      "requested": "https://r2force.github.io/ufalit/",
+      "hops": [
+        {
+          "url": "https://r2force.github.io/ufalit/",
+          "status": 301,
+          "location": "http://ufalit.ufacsdb.ru/",
+          "x_robots_tag": null
+        },
+        {
+          "url": "http://ufalit.ufacsdb.ru/",
+          "status": 200,
+          "location": null,
+          "x_robots_tag": null
+        }
+      ],
+      "final_url": "http://ufalit.ufacsdb.ru/",
+      "status": 200,
+      "bytes": 11904,
+      "title": "Уфа литературная — о проекте",
+      "description": null,
+      "canonical": [],
+      "robots": null,
+      "h1": [
+        {
+          "level": 1,
+          "text": "Уфа литературная",
+          "id": null
+        }
+      ]
+    },
+    {
+      "requested": "https://ufalit.ufacsdb.ru/index.html",
+      "hops": [
+        {
+          "url": "https://ufalit.ufacsdb.ru/index.html",
+          "status": 200,
+          "location": null,
+          "x_robots_tag": null
+        }
+      ],
+      "final_url": "https://ufalit.ufacsdb.ru/index.html",
+      "status": 200,
+      "bytes": 11904,
+      "title": "Уфа литературная — о проекте",
+      "description": null,
+      "canonical": [],
+      "robots": null,
+      "h1": [
+        {
+          "level": 1,
+          "text": "Уфа литературная",
+          "id": null
+        }
+      ]
+    }
+  ]
+}
