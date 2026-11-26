@@ -29,7 +29,7 @@ jobs:
       - uses: actions/checkout@v6
       - uses: actions/setup-python@v6
         with:
-          python-version: '3.9'
+          python-version: '3.13'
       - name: Set isolated index cache
         run: echo "CBM_CACHE_DIR=${RUNNER_TEMP}/cbm-cache" >> "$GITHUB_ENV"
       - name: Set up index without agent CLIs and check repeated installation

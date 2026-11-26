@@ -43,6 +43,8 @@
 
 В workflow индексатора обнаружено использование `${{ runner.temp }}` на уровне `jobs.index.env`, где контекст `runner` недоступен. Предыдущий [запуск 45483394469](https://github.com/r2force/ufalit/actions/runs/45483394469) завершился ошибкой без заданий. Инициализация кеша перенесена в отдельный шаг через `RUNNER_TEMP` и `GITHUB_ENV`, в соответствии с [таблицей доступности контекстов GitHub](https://docs.github.com/en/actions/reference/workflows-and-actions/contexts#context-availability).
 
+После устранения ошибки контекста [запуск 45870354114](https://github.com/r2force/ufalit/actions/runs/45870354114) выявил следующее ограничение: `ubuntu-latest` использует Ubuntu 26.04, для которой `setup-python` не предоставляет Python 3.9. Версия Python в CI обновлена до 3.13 по [манифесту actions/python-versions](https://github.com/actions/python-versions/blob/main/versions-manifest.json). Минимальная версия локального скрипта остаётся 3.9; локальные проверки этой задачи выполнены на Python 3.9.
+
 Индекс обновлён через MCP: 900 узлов и 2010 связей на момент проверки. CLI находит `render_page` в `scripts/render_site.py`. Парсер графа сообщает ограничения для исходного HTML с JSON-параметрами (`site/index.html`, `site/pages/gallery-12/index.html`) и динамического тега `templates/reading-work.html`; для них нужно читать исходники напрямую. Это ограничение индекса, а не ошибка сборки HTML. Для работы с действующим локальным daemon используется его текущая конфигурация кеша; переопределять её при активной сессии не следует.
 
 ## Выполненные проверки
