@@ -23,6 +23,18 @@
 }
 .museum [hidden] { display: none !important; }
 .museum :focus-visible { outline: 3px solid #a0572b; outline-offset: 3px; }
+.museum .email-contact {
+  display: inline;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--accent);
+  font: inherit;
+  text-align: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.museum .site-footer .email-contact { color: inherit; }
 .museum :where([id]) { scroll-margin-top: var(--anchor-offset, 1.5rem); }
 .museum .skip { z-index: 50; }
 .museum .wrap { width: min(100% - clamp(1.5rem, 5vw, 4rem), 78rem); }

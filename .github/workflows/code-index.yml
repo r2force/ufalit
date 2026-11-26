@@ -25,13 +25,13 @@ jobs:
         os: [ubuntu-latest, macos-latest]
     runs-on: ${{ matrix.os }}
     timeout-minutes: 15
-    env:
-      CBM_CACHE_DIR: ${{ runner.temp }}/cbm-cache
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-python@v6
         with:
           python-version: '3.9'
+      - name: Set isolated index cache
+        run: echo "CBM_CACHE_DIR=${RUNNER_TEMP}/cbm-cache" >> "$GITHUB_ENV"
       - name: Set up index without agent CLIs and check repeated installation
         run: |
           python_path=$(python3 -c 'import sys; print(sys.executable)')

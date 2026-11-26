@@ -9,6 +9,8 @@ from pathlib import Path
 from shutil import copytree
 from string import Template
 
+from email_contacts import protect_email_links
+
 ROOT = Path(__file__).resolve().parents[1]
 SITE = ROOT / "site"
 LINK = re.compile(r'href="([^"]+)"')
@@ -433,7 +435,7 @@ def material_count(count):
 class ReadingText(HTMLParser):
     """Extract readable source content without HTML, scripts, or styles."""
     BREAKS = {"p", "div", "section", "article", "br", "li", "h1", "h2", "h3", "h4", "td", "tr", "figure", "figcaption"}
-    IGNORED = {"script", "style", "template"}
+    IGNORED = {"script", "style", "template", "noscript"}
 
     def __init__(self, source):
         super().__init__(convert_charrefs=True)
@@ -473,7 +475,7 @@ def reading_search_documents(collections, writers):
             tracks = " ".join(track["title"] for track in page.get("tracks", []))
             # Titles have their own search field; snippets should start in the body.
             content = re.sub(r'<h1\b[^>]*>.*?</h1>', '', content, count=1, flags=re.S)
-            text = ReadingText(content).text()
+            text = ReadingText(protect_email_links(content)).text()
             documents.append(dict(
                 title=work["title"], author=work.get("author", writer["name"]),
                 alias=" ".join([writer.get("full_name", ""), writer["name"] if "author" in work else ""]),
@@ -766,13 +768,17 @@ def render_page(source, relative, templates, writers, collections=None, gallery_
     header = templates["header"].substitute(
         prefix=prefix, navigation=render_menu(templates["navigation"].template, relative)
     )
-    return templates["base"].substitute(
+    document = templates["base"].substitute(
         title=escape(page["title"]), prefix=prefix, extra_styles="\n".join(styles), redirect_meta=redirect_meta,
         scripts="\n".join(scripts), header=header, footer=templates["footer"].template,
         body_class=body_class,
         breadcrumbs=templates["breadcrumbs"].substitute(items=" / ".join(items)) if items else "",
         intro=intro if marker else "", content=main_content if marker else content,
     )
+    protected = protect_email_links(document)
+    if protected != document:
+        protected = protected.replace("</head>", f'<script src="{assets}ufalit-contact.js?v=1" defer></script>\n</head>', 1)
+    return protected
 
 
 def main():

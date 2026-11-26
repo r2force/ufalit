@@ -38,13 +38,34 @@ GitHub Actions собирает страницы из `site/` и общих ша
 
 ```sh
 preview_dir=$(mktemp -d)
-python3 scripts/render_site.py --output "$preview_dir/site"
+python3 scripts/render_site.py --output "$preview_dir/ufalit"
 python3 -m http.server --bind 127.0.0.1 --directory "$preview_dir"
 ```
 
-Предпросмотр доступен по адресу `http://localhost:8000/site/`.
+Предпросмотр доступен по адресу `http://localhost:8000/ufalit/` — с тем же префиксом, что и GitHub Pages. `--in-place` используйте только в одноразовом CI checkout: команда перезаписывает исходники собранным HTML.
+
+Для воспроизведения видео в локальном предпросмотре нужны сами файлы Git LFS. Если checkout содержит указатели вместо MP4, загрузите записи командой `git lfs pull --include='site/assets/video/**'`. В CI это делает `actions/checkout` с `lfs: true`.
+
+Почтовые ссылки в исходниках можно записывать обычным `<a href="mailto:…">`. Общий сборщик защищает ссылки из материалов и общих шаблонов: в опубликованном HTML остаётся кнопка «Написать письмо» (либо исходная подпись без адреса) и закодированный адрес; почтовая программа открывается по нажатию. Параметры письма сохраняются. Адреса также исключаются из текста поискового индекса. Без JavaScript выводится пояснение. Защита затрудняет простой сбор адресов из HTML; боты, исполняющие JavaScript, и читатели открытого репозитория могут восстановить адрес. Сейчас почтовых ссылок в материалах нет.
+
+## Проверки
+
+После изменений общего сборщика выполните весь набор и сборку предпросмотра:
+
+```sh
+python3 scripts/test_email_contacts.py
+node scripts/test_email_contacts.js
+node scripts/test_home_map.js
+python3 scripts/test_gallery.py
+python3 scripts/test_video_archive.py
+python3 scripts/test_reading_room.py
+node scripts/test_reading_search.js
+```
+
+GitHub Actions запускает эти же проверки. Push в `main` собирает артефакт; публикация выполняется только ручным запуском workflow Pages с `deploy: true`. Успешный push сам по себе не обновляет публичный сайт.
 
 - [Инструкции агенту](AGENTS.md)
+- [Состояние планов и результаты проверки](migration/STATUS.md)
 
 ## Индекс кода для AI-агентов
 
