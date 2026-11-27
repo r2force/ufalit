@@ -557,6 +557,33 @@ class ReadingText(HTMLParser):
         return re.sub(r"\s+", " ", "".join(self.parts)).strip()
 
 
+def work_meta_items(work, writer):
+    if not any(work.get(field) for field in ("translator", "year", "show_meta")):
+        return []
+    items = [("Автор", work.get("author", writer["name"]), "")]
+    if work.get("translator"):
+        items.append(("Перевод", work["translator"], ""))
+    if work.get("year"):
+        items.append(("Год публикации", work["year"], "library-work-year"))
+    return items
+
+
+def work_caption_text(work, writer):
+    return ". ".join(f"{label}: {value}" for label, value, _ in work_meta_items(work, writer))
+
+
+def render_work_meta(work, writer, *, extra_class="", attrs=""):
+    items = work_meta_items(work, writer)
+    if not items:
+        return ""
+    classes = " ".join(part for part in ("library-work-meta", extra_class) if part)
+    rows = "".join(
+        f'<div><dt>{escape(label)}:</dt> <dd' + (f' class="{value_class}"' if value_class else '') + f'>{escape(value)}</dd></div>'
+        for label, value, value_class in items
+    )
+    return f'<dl class="{classes}"{attrs}>{rows}</dl>'
+
+
 def reading_search_documents(collections, writers):
     documents = []
     for collection in collections:
@@ -573,7 +600,7 @@ def reading_search_documents(collections, writers):
             documents.append(dict(
                 title=work["title"], author=work.get("author", writer["name"]),
                 alias=" ".join([writer.get("full_name", ""), writer["name"] if "author" in work else ""]),
-                kind=work["kind"], description=work["description"],
+                kind=work["kind"], description=work["description"] or work_caption_text(work, writer),
                 href=f'../{work["slug"]}/', text=" ".join(part for part in (text, tracks) if part),
             ))
     return documents
@@ -628,9 +655,11 @@ def render_reading_room(page, content, slug, templates, writers, collections, pr
                 if group != current_group:
                     finish_group()
                     rows, current_group = [], group
+                description = f'<p>{escape(work["description"])}</p>' if work.get("description") else ""
                 rows.append(templates["reading-work"].substitute(
                     title=escape(work["title"]), kind=escape(work["kind"]),
-                    description=escape(work["description"]), href=f'../{escape(work["slug"])}/',
+                    description=description, meta=render_work_meta(work, writers[key]),
+                    href=f'../{escape(work["slug"])}/',
                     action="Слушать" if work["kind"] == "Аудиозаписи" else "Открыть" if work["kind"] == "О книге" else "Читать",
                     title_tag="h4" if group else "h3",
                     id=escape(work.get("legacy_anchor", work["slug"]) if legacy else work["slug"]),
@@ -672,6 +701,12 @@ def render_reading_room(page, content, slug, templates, writers, collections, pr
                 {"label": writers[key]["name"], "href": author_url(key)}, work["title"],
             ]
             content = READER_ARTICLE.sub(lambda match: match[0] + ' data-reading-work', content, count=1)
+            meta = render_work_meta(work, writers[key], extra_class="reader-work-meta", attrs=" data-work-meta")
+            if meta:
+                if "</h1>" in content:
+                    content = content.replace("</h1>", "</h1>\n" + meta, 1)
+                else:
+                    content = re.sub(r'(<article\b[^>]*>)', lambda match: match[1] + "\n" + meta, content, count=1)
             following = collection["works"][number + 1:number + 2]
             next_link = (f'<a href="../{escape(following[0]["slug"])}/">Далее: {escape(following[0]["title"])}</a>'
                          if following else '')
@@ -746,7 +781,7 @@ def render_page(source, relative, templates, writers, collections=None, gallery_
 
     if is_reading_room:
         content = render_reading_room(page, content, slug, templates, writers, collections, prefix)
-        ensure_asset(style_names, "reading-room.css?v=4")
+        ensure_asset(style_names, "reading-room.css?v=5")
         if "reading_author" in page or "reading_group" in page:
             ensure_asset(style_names, "illustrations.css?v=3")
         if page.get("reading_index"):

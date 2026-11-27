@@ -25,6 +25,8 @@ assert.equal(find('Янаби Хулиганов несуществующеес�
 assert.equal(find('"учимся прилежно"')[0].document.href, school);
 assert.equal(find('«прилежно учимся»').length, 0);
 assert.equal(find('ПЕСНЯ ОКТЯБРЕНКА')[0].document.href, '../reading-yanabi-pesnya-oktyabrenka/');
+assert.equal(find('Гильманова Насырова 1928').length, 4);
+assert.equal(find('Амирова').length, 4);
 for (const query of ['Мустай Карим', 'Киекбаев', 'Бикчентаев', 'Газим Шафиков', '"Цветы на камне"']) {
   assert.equal(find(query).length, 0, query);
 }
