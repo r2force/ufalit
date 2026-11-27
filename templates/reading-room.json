@@ -31,6 +31,9 @@
         "slug": "reading-yanabi-shkolnik",
         "title": "Школьник",
         "kind": "Стихотворение",
+        "author": "Тухват Янаби",
+        "translator": "Гильманова Альбина, Насырова Диана (школа № 60, рук. Г. М. Амирова)",
+        "year": "1928–1934 гг.",
         "description": "",
         "group": "reading-yanabi-poems"
       },
@@ -38,6 +41,9 @@
         "slug": "reading-yanabi-pesnya-oktyabrenka",
         "title": "Песня октябрёнка",
         "kind": "Стихотворение",
+        "author": "Тухват Янаби",
+        "translator": "Гильманова Альбина, Насырова Диана (школа № 60, рук. Г. М. Амирова)",
+        "year": "1928–1934 гг.",
         "description": "",
         "group": "reading-yanabi-poems"
       },
@@ -45,6 +51,9 @@
         "slug": "reading-yanabi-shkolnye-chastushki",
         "title": "Школьные частушки",
         "kind": "Стихотворение",
+        "author": "Тухват Янаби",
+        "translator": "Гильманова Альбина, Насырова Диана (школа № 60, рук. Г. М. Амирова)",
+        "year": "1928–1934 гг.",
         "description": "",
         "group": "reading-yanabi-poems"
       },
@@ -52,6 +61,9 @@
         "slug": "reading-yanabi-slon-i-petukh",
         "title": "Слон и петух",
         "kind": "Басня",
+        "author": "Тухват Янаби",
+        "translator": "Гильманова Альбина, Насырова Диана (школа № 60, рук. Г. М. Амирова)",
+        "year": "1928–1934 гг.",
         "description": "",
         "group": "reading-yanabi-poems"
       }

@@ -87,7 +87,8 @@ class ReadingRoomTests(unittest.TestCase):
                     if '<article' in source:
                         original = source[source.index('<article'):source.index('</article>')]
                         result = html[html.index('<article'):html.index('</article>')]
-                        self.assertEqual(''.join(Document(original).text), ''.join(Document(result).text))
+                        without_meta = re.sub(r'<dl\b[^>]*\bdata-work-meta\b[^>]*>.*?</dl>\s*', '', result, count=1, flags=re.S)
+                        self.assertEqual(''.join(Document(original).text), ''.join(Document(without_meta).text))
                         self.assertIn('data-reading-work', result)
                     self.assertIn(f'href="../reading-author-{collection["writer"]}/"', html)
                     self.assertIn('aria-current="location">Читальный зал', html)
@@ -180,6 +181,40 @@ class ReadingRoomTests(unittest.TestCase):
                         self.assertIn(f'href="../{work["slug"]}/"', html)
                         if 'legacy_anchor' in work:
                             self.assertIn(f'id="{work["legacy_anchor"]}"', html)
+
+    def test_yanabi_work_captions_on_shelf_and_work_pages(self):
+        collection = next(item for item in self.collections if item['writer'] == 'yanabi')
+        expected_parts = (
+            'Автор:',
+            'Тухват Янаби',
+            'Перевод:',
+            'Гильманова Альбина, Насырова Диана (школа № 60, рук. Г. М. Амирова)',
+            'Год публикации:',
+            '1928–1934 гг.',
+        )
+        for slug in ('reading-author-yanabi', 'reading-yanabi-poems'):
+            _, html = self.render(slug)
+            self.assertNotIn('<p></p>', html)
+            blocks = re.findall(r'<dl class="library-work-meta">.*?</dl>', html, re.S)
+            self.assertEqual(len(blocks), len(collection['works']), slug)
+            for block in blocks:
+                for part in expected_parts:
+                    self.assertIn(part, block, (slug, part))
+
+        for work in collection['works']:
+            with self.subTest(work=work['slug']):
+                source, html = self.render(work['slug'])
+                self.assertNotIn('data-work-meta', source)
+                article = html[html.index('<article'):html.index('</article>')]
+                self.assertIn('class="library-work-meta reader-work-meta" data-work-meta', article)
+                self.assertLess(article.index('</h1>'), article.index('data-work-meta'))
+                for part in expected_parts:
+                    self.assertIn(part, article)
+
+        _, aksakov_shelf = self.render('reading-author-aksakov')
+        self.assertNotIn('library-work-meta', aksakov_shelf)
+        self.assertEqual(render_site.work_caption_text({'year': '1930 г.'}, {'name': 'Автор'}),
+                         'Автор: Автор. Год публикации: 1930 г.')
 
 
     def test_removed_reading_pages_and_crosslinks_are_absent(self):
